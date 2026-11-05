@@ -48,3 +48,6 @@ next-env.d.ts
 /test-results/
 /playwright-report/
 /data/build/
+/e2e.db*
+/dev.db*
+!.env.example

@@ -18,7 +18,7 @@ import {
   SubjectHero,
 } from "./subject-sections";
 import { meaningFeedback, readingFeedback, validateMeaning, validateReading, type Feedback, type TypoTolerance } from "@/domain/answers";
-import { requiredQuestions, type QuestionType } from "@/domain/srs";
+import { requiredQuestions, stableFraction, type QuestionType } from "@/domain/srs";
 import { completeLessonsAction } from "@/app/(app)/lessons/actions";
 import type { SubjectCardDTO } from "@/server/study/subjects";
 import { cn } from "@/lib/utils";
@@ -226,6 +226,7 @@ function LessonQuiz({
 }) {
   const initial = useMemo<QuizItem[]>(() => {
     const items: QuizItem[] = [];
+    const seed = cards.map((c) => c.id).join(",");
     for (const c of cards) {
       const req = requiredQuestions(c.type, c.readings.some((r) => r.isAccepted));
       const ordered = readingFirst ? [...req].reverse() : req;
@@ -233,7 +234,8 @@ function LessonQuiz({
     }
     // Mescola mantenendo l'ordine relativo delle domande di uno stesso soggetto.
     return items
-      .map((it, i) => ({ it, r: Math.random() + (it.q === (readingFirst ? "meaning" : "reading") ? 0.5 : 0) + i * 0.0001 }))
+      // Mescolamento deterministico (puro): seme derivato dagli id del gruppo.
+      .map((it, i) => ({ it, r: stableFraction(`${seed}:${it.key}`) + (it.q === (readingFirst ? "meaning" : "reading") ? 0.5 : 0) + i * 0.0001 }))
       .sort((a, b) => a.r - b.r)
       .map((x) => x.it);
   }, [cards, readingFirst]);
@@ -304,7 +306,7 @@ function LessonQuiz({
       </div>
       <Card className="overflow-hidden">
         <div className="py-10 text-center">
-          <div className="kanji-display text-7xl sm:text-8xl" lang="ja">
+          <div className="kanji-display text-7xl sm:text-8xl" lang="ja" data-subject-id={current.card.id} data-question={current.q}>
             {current.card.characters}
           </div>
         </div>

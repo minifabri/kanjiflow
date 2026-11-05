@@ -55,12 +55,10 @@ function buildAsks(items: QueueItem[], priority: "balanced" | "meaning_first" | 
 
 export function ReviewSession({
   initial,
-  typoTolerance: _typo,
   questionPriority,
   showRomajiHints,
 }: {
   initial: SessionState;
-  typoTolerance: string;
   questionPriority: "balanced" | "meaning_first" | "reading_first";
   showRomajiHints: boolean;
 }) {
@@ -79,7 +77,7 @@ export function ReviewSession({
   const [lastTransition, setLastTransition] = useState<{ up: boolean; label: string } | null>(null);
   const [finished, setFinished] = useState(false);
   const [inputKey, setInputKey] = useState(0);
-  const shownAt = useRef(Date.now());
+  const shownAt = useRef(0);
   const touched = useRef(new Set<string>());
 
   const current = asks[0];
@@ -106,23 +104,17 @@ export function ReviewSession({
   const advance = useCallback(() => {
     if (!current || !result) return;
     const wrong = result.verdict === "incorrect" && !result.overridden;
-    setAsks((prev) => {
-      const rest = prev.slice(1);
-      let next = wrong ? (() => {
-        const copy = [...rest];
-        copy.splice(Math.min(copy.length, 3 + Math.floor(Math.random() * 5)), 0, current);
-        return copy;
-      })() : rest;
-      if (wrapUp) next = next.filter((a) => touched.current.has(a.subjectId));
-      if (next.length === 0) startBusy(loadMore);
-      return next;
-    });
+    let next = asks.slice(1);
+    if (wrong) next.splice(Math.min(next.length, 3 + Math.floor(Math.random() * 5)), 0, current);
+    if (wrapUp) next = next.filter((a) => touched.current.has(a.subjectId));
+    setAsks(next);
+    if (next.length === 0) startBusy(loadMore);
     setResult(null);
     setRetryFeedback(null);
     setShowInfo(false);
     setLastTransition(null);
     setInputKey((k) => k + 1);
-  }, [current, result, wrapUp, loadMore]);
+  }, [asks, current, result, wrapUp, loadMore]);
 
   const applyResult = useCallback(
     (subjectId: string, q: QuestionType, r: { completed: SubmitResult["completed"]; pending: QuestionType[] }, correct: boolean) => {
@@ -146,8 +138,8 @@ export function ReviewSession({
   );
 
   const onSubmit = (answer: string) => {
-    if (!current || !item || busy) return;
     if (result) return advance();
+    if (!current || !item || busy) return;
     setError(null);
     const clientAttemptId = newId();
     const responseTimeMs = Math.min(30 * 60_000, Date.now() - shownAt.current);
@@ -199,7 +191,14 @@ export function ReviewSession({
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (!result) return;
-      if (e.key === "Enter") return; // gestito dal form
+      if (e.key === "Enter") {
+        // Nel campo risposta è gestito dal form, sui pulsanti dal click nativo; altrove (es. dopo una correzione) avanza.
+        const t = e.target as HTMLElement | null;
+        if (t instanceof HTMLInputElement || t instanceof HTMLButtonElement || t instanceof HTMLAnchorElement) return;
+        e.preventDefault();
+        advance();
+        return;
+      }
       const k = e.key.toLowerCase();
       if (k === "f" || k === "i") {
         e.preventDefault();
@@ -285,7 +284,12 @@ export function ReviewSession({
       {current && item ? (
         <Card className="overflow-hidden">
           <div className="relative py-10 text-center sm:py-14">
-            <div className={cn("kanji-display", item.card.characters.length > 3 ? "text-6xl sm:text-7xl" : "text-8xl sm:text-9xl")} lang="ja">
+            <div
+              className={cn("kanji-display", item.card.characters.length > 3 ? "text-6xl sm:text-7xl" : "text-8xl sm:text-9xl")}
+              lang="ja"
+              data-subject-id={item.card.id}
+              data-question={current.q}
+            >
               {item.card.characters}
             </div>
             {lastTransition && (

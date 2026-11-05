@@ -3,7 +3,7 @@
 import bcrypt from "bcryptjs";
 import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
-import { SESSION_COOKIE, SESSION_MAX_AGE_S, authMode, createSessionToken } from "@/server/auth/session";
+import { SESSION_COOKIE, SESSION_MAX_AGE_S, authMode, createSessionToken, passwordHash } from "@/server/auth/session";
 
 export type LoginState = { error: string } | null;
 
@@ -18,7 +18,7 @@ export async function loginAction(_prev: LoginState, formData: FormData): Promis
     return { error: `Troppi tentativi. Riprova tra ${Math.ceil((f.until - Date.now()) / 1000)} secondi.` };
   }
   const password = String(formData.get("password") ?? "");
-  const ok = password.length > 0 && password.length <= 200 && (await bcrypt.compare(password, process.env.APP_PASSWORD_HASH!));
+  const ok = password.length > 0 && password.length <= 200 && (await bcrypt.compare(password, passwordHash()!));
   if (!ok) {
     const count = (f?.count ?? 0) + 1;
     failures.set(ip, { count, until: count >= 5 ? Date.now() + Math.min(15 * 60_000, 2 ** (count - 5) * 30_000) : 0 });

@@ -165,10 +165,10 @@ export default async function DashboardPage() {
       </Card>
 
       <div className="flex flex-col gap-2 pb-2 sm:flex-row">
-        <Button asChild size="lg" className="flex-1" disabled={d.lessons.allowance === 0}>
+        <Button asChild size="lg" className="sm:flex-1" disabled={d.lessons.allowance === 0}>
           <Link href="/lessons">Inizia le lezioni</Link>
         </Button>
-        <Button asChild size="lg" variant="secondary" className="flex-1">
+        <Button asChild size="lg" variant="secondary" className="sm:flex-1">
           <Link href="/reviews">Inizia i ripassi</Link>
         </Button>
       </div>

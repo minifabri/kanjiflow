@@ -1,7 +1,6 @@
 "use server";
 
 import { z } from "zod";
-import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { getStudyContext } from "@/server/study/context";
 import {
@@ -31,8 +30,8 @@ export async function refreshSessionAction(sessionId: string) {
 
 export async function finishSessionAction(sessionId: string) {
   const ctx = await getStudyContext();
+  // Nessun revalidatePath: rigenererebbe /reviews e smonterebbe il riepilogo. Le pagine sono comunque dinamiche.
   await finishSession(ctx, z.string().min(1).parse(sessionId));
-  revalidatePath("/");
 }
 
 const extraSchema = z.object({

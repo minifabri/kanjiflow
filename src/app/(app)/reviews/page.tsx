@@ -44,7 +44,6 @@ export default async function ReviewsPage({ searchParams }: PageProps<"/reviews"
   return (
     <ReviewSession
       initial={state}
-      typoTolerance={ctx.settings.typoTolerance}
       questionPriority={ctx.settings.questionPriority as "balanced" | "meaning_first" | "reading_first"}
       showRomajiHints={ctx.settings.showRomajiHints}
     />

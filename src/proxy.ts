@@ -10,7 +10,7 @@ export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
   if (mode === "misconfigured") {
     return new NextResponse(
-      "KanjiFlow: autenticazione non configurata. Imposta APP_PASSWORD_HASH e SESSION_SECRET (≥ 32 caratteri).",
+      "KanjiFlow: autenticazione non configurata. Imposta APP_PASSWORD_HASH_B64 (npm run auth:hash) e SESSION_SECRET (≥ 32 caratteri).",
       { status: 503, headers: { "content-type": "text/plain; charset=utf-8" } },
     );
   }

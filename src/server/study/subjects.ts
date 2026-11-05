@@ -115,7 +115,13 @@ export async function loadSubjectCards(ids: string[], userId: string, opts: { us
         usedIn: r.usedIn
           .map((u) => u.parent)
           .sort((a, b) => a.lessonOrder - b.lessonOrder)
-          .map(({ lessonOrder: _lo, readings, ...p }) => ({ ...p, type: p.type as SubjectType, reading: readings[0]?.reading ?? null })),
+          .map((p) => ({
+            id: p.id,
+            type: p.type as SubjectType,
+            characters: p.characters,
+            primaryMeaning: p.primaryMeaning,
+            reading: p.readings[0]?.reading ?? null,
+          })),
         examples: r.examples.map((e) => ({
           japaneseText: e.japaneseText,
           translatedText: e.translatedText,
