@@ -1,0 +1,77 @@
+{
+  "$comment": "Fonti pinnate. Aggiornare la versione qui e rieseguire `npm run content:fetch && npm run content:build`. EDRDG richiede aggiornamenti regolari: vedi DATA_LICENSES.md.",
+  "sources": [
+    {
+      "key": "kanjidic2",
+      "name": "KANJIDIC2 (EDRDG) via jmdict-simplified",
+      "url": "https://www.edrdg.org/wiki/index.php/KANJIDIC_Project",
+      "license": "CC BY-SA 4.0",
+      "attribution": "This application uses the KANJIDIC2 dictionary file. This file is the property of the Electronic Dictionary Research and Development Group, and is used in conformance with the Group's licence.",
+      "version": "3.6.2+20260810124713",
+      "download": "https://github.com/scriptin/jmdict-simplified/releases/download/3.6.2%2B20260810124713/kanjidic2-en-3.6.2%2B20260810124713.json.zip",
+      "file": "kanjidic2-en.json.zip"
+    },
+    {
+      "key": "jmdict",
+      "name": "JMdict (EDRDG) via jmdict-simplified, solo voci comuni",
+      "url": "https://www.edrdg.org/wiki/index.php/JMdict-EDICT_Dictionary_Project",
+      "license": "CC BY-SA 4.0",
+      "attribution": "This application uses the JMdict dictionary file. This file is the property of the Electronic Dictionary Research and Development Group, and is used in conformance with the Group's licence.",
+      "version": "3.6.2+20260810124713",
+      "download": "https://github.com/scriptin/jmdict-simplified/releases/download/3.6.2%2B20260810124713/jmdict-eng-common-3.6.2%2B20260810124713.json.zip",
+      "file": "jmdict-eng-common.json.zip"
+    },
+    {
+      "key": "jmdict-examples",
+      "name": "Frasi d'esempio Tatoeba collegate a JMdict (via jmdict-simplified)",
+      "url": "https://tatoeba.org",
+      "license": "CC BY 2.0 FR",
+      "attribution": "Example sentences from the Tatoeba Project (tatoeba.org), licensed CC BY 2.0 FR, as linked in JMdict.",
+      "version": "3.6.2+20260810124713",
+      "download": "https://github.com/scriptin/jmdict-simplified/releases/download/3.6.2%2B20260810124713/jmdict-examples-eng-3.6.2%2B20260810124713.json.zip",
+      "file": "jmdict-examples-eng.json.zip"
+    },
+    {
+      "key": "kradfile",
+      "name": "KRADFILE (EDRDG) via jmdict-simplified",
+      "url": "https://www.edrdg.org/krad/kradinf.html",
+      "license": "CC BY-SA 4.0 (EDRDG licence)",
+      "attribution": "This application uses the KRADFILE/RADKFILE files. These files are the property of the Electronic Dictionary Research and Development Group, and are used in conformance with the Group's licence.",
+      "version": "3.6.2+20260810124713",
+      "download": "https://github.com/scriptin/jmdict-simplified/releases/download/3.6.2%2B20260810124713/kradfile-3.6.2%2B20260810124713.json.zip",
+      "file": "kradfile.json.zip"
+    },
+    {
+      "key": "jlpt-kanji-waller",
+      "name": "Livelli JLPT dei kanji (liste non ufficiali di Jonathan Waller, via davidluzgouveia/kanji-data)",
+      "url": "http://www.tanos.co.uk/jlpt/",
+      "license": "MIT (kanji-data); liste originali di J. Waller con attribuzione",
+      "attribution": "JLPT kanji levels from Jonathan Waller's JLPT Resources (tanos.co.uk), as compiled in davidluzgouveia/kanji-data. Non è una classificazione ufficiale JLPT. Dal file viene usato SOLO il campo jlpt_new: ogni altro contenuto (inclusi i dati WaniKani) è ignorato.",
+      "version": "00fd7079c3890f430759536f91aa5e854ec0ca4f",
+      "download": "https://raw.githubusercontent.com/davidluzgouveia/kanji-data/00fd7079c3890f430759536f91aa5e854ec0ca4f/kanji.json",
+      "file": "kanji-data.json"
+    },
+    {
+      "key": "jlpt-vocab-open-anki",
+      "name": "Liste vocabolario JLPT N5–N3 (Open Anki JLPT Decks, derivate dalle liste di J. Waller)",
+      "url": "https://github.com/jamsinclair/open-anki-jlpt-decks",
+      "license": "MIT",
+      "attribution": "JLPT vocabulary lists from jamsinclair/open-anki-jlpt-decks (MIT). Non è una classificazione ufficiale JLPT.",
+      "version": "1ad66734417aca9dbcca6b2d5ee440cb13ab3ba0",
+      "download": [
+        "https://raw.githubusercontent.com/jamsinclair/open-anki-jlpt-decks/1ad66734417aca9dbcca6b2d5ee440cb13ab3ba0/src/n5.csv",
+        "https://raw.githubusercontent.com/jamsinclair/open-anki-jlpt-decks/1ad66734417aca9dbcca6b2d5ee440cb13ab3ba0/src/n4.csv",
+        "https://raw.githubusercontent.com/jamsinclair/open-anki-jlpt-decks/1ad66734417aca9dbcca6b2d5ee440cb13ab3ba0/src/n3.csv"
+      ],
+      "file": ["vocab-n5.csv", "vocab-n4.csv", "vocab-n3.csv"]
+    },
+    {
+      "key": "kanjiflow-generated",
+      "name": "Contenuti generati KanjiFlow (traduzioni italiane, nomi dei radicali, mnemonici)",
+      "url": null,
+      "license": "CC BY-SA 4.0 (opera derivata)",
+      "attribution": "Traduzioni italiane e testi didattici generati per KanjiFlow a partire dalle glosse inglesi delle fonti EDRDG. Non verificati da un madrelingua: modificabili dall'utente.",
+      "version": "2026.11.1"
+    }
+  ]
+}

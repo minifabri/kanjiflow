@@ -47,3 +47,4 @@ next-env.d.ts
 /data/raw/
 /test-results/
 /playwright-report/
+/data/build/

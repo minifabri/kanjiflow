@@ -1,0 +1,195 @@
+# Componenti grafici (KRADFILE) usati dai kanji N5–N3, con nomi italiani GENERATI per KanjiFlow.
+# I nomi sono etichette didattiche, non traduzioni ufficiali; dove un componente è anche un kanji,
+# il nome segue il suo significato. KRADFILE usa alcuni kanji come "segnaposto" per forme di radicale:
+# la seconda colonna indica la forma da mostrare (es. 化 → 亻, 汁 → 氵).
+# Formato: carattere KRADFILE<TAB>forma visualizzata<TAB>nome|nomi alternativi accettati
+王	王	re|sovrano
+囗	囗	recinto|cornice
+丶	丶	goccia|punto
+ノ	ノ	tratto obliquo|scivolata
+一	一	uno|terreno|linea
+干	干	asciutto|secco
+乞	𠂉	cappello|elmo
+木	木	albero|legno
+｜	｜	asta|barra|linea verticale
+口	口	bocca
+山	山	montagna
+凵	凵	contenitore|ciotola aperta
+二	二	due
+寸	寸	pollice|misura
+土	土	terra|suolo
+日	日	sole|giorno
+彳	彳	passo|incedere|andatura
+目	目	occhio
+儿	儿	gambe|piedi
+夂	夂	inverno|andare lento
+幺	幺	filo sottile|piccolo
+刈	刂	coltello|lama
+月	月	luna|carne|mese
+并	丷	corna|antenne
+門	門	cancello|porta
+卜	卜	divinazione|bacchetta
+田	田	risaia|campo
+个	𠆢	tetto|ombrello
+ハ	ハ	otto|ventaglio|divisione
+子	子	bambino|figlio
+尚	⺌	piccole scintille|piccolo
+冖	冖	coperchio|copertura
+亠	亠	cappello|copricapo
+冂	冂	scatola aperta|cornice
+夕	夕	sera
+米	米	riso
+气	气	vapore|aria|respiro
+乙	乙	gancio|secondo
+匕	匕	cucchiaio
+言	言	dire|parola
+舌	舌	lingua
+爿	爿	tavola divisa|letto
+十	十	dieci|croce
+白	白	bianco
+聿	聿	pennello
+力	力	forza
+雨	雨	pioggia
+父	父	padre
+五	五	cinque
+耳	耳	orecchio
+化	亻	persona (a sinistra)|persona
+亅	亅	uncino|gancio verticale
+母	母	madre
+毋	毋	non fare|divieto
+大	大	grande
+士	士	samurai|guerriero|studioso
+又	又	di nuovo|mano destra
+工	工	lavorazione|artigianato
+厶	厶	privato|io
+ヨ	ヨ	scopa|setola
+礼	礻	altare|divinità
+癶	癶	piedi divaricati|partenza
+老	耂	vecchio|anziano
+也	也	anche|inoltre
+羊	羊	pecora
+耒	耒	aratro
+斤	斤	ascia|scure
+辛	辛	piccante|amaro
+立	立	stare in piedi
+勿	勿	non|bandiera
+貝	貝	conchiglia|denaro
+廾	廾	mani giunte
+弋	弋	freccia con laccio|dardo
+里	里	villaggio|paese
+小	小	piccolo
+込	⻌	strada|cammino|movimento
+用	用	usare
+マ	マ	sgabello|ma
+疋	疋	stoffa|tessuto
+頁	頁	pagina|testa
+音	音	suono
+心	心	cuore
+广	广	tettoia|riparo
+弓	弓	arco
+虫	虫	insetto
+扎	扌	mano (a sinistra)|mano
+矛	矛	lancia|alabarda
+人	人	persona
+宀	宀	tetto
+豕	豕	maiale
+止	止	fermare|stop
+女	女	donna
+阡	⻖	collina (a sinistra)|collina
+元	元	origine|inizio
+攵	攵	colpire|bastone
+勹	勹	avvolgere|involucro
+汁	氵	acqua (a sinistra)|acqua|gocce
+矢	矢	freccia
+自	自	sé|naso
+首	首	collo|testa
+隹	隹	uccello antico|uccello
+牛	牛	mucca|bue
+歹	歹	osso|morte
+禾	禾	grano|cereale
+車	車	carro|veicolo
+糸	糸	filo
+斗	斗	mestolo|misura
+廴	廴	passo lungo|incedere
+穴	穴	buco|caverna
+刀	刀	spada|coltello
+石	石	pietra
+九	九	nove
+冫	冫	ghiaccio
+走	走	correre
+已	已	serpente|già
+疔	疒	malattia
+方	方	direzione|bandiera
+金	金	oro|metallo
+艮	艮	ostinato|fermo
+見	見	vedere
+馬	馬	cavallo
+杰	灬	fuoco (in basso)|fiamme
+艾	⺾	erba|pianta
+匚	匚	scatola|baule
+竹	竹	bambù
+巾	巾	panno|stoffa
+欠	欠	sbadiglio|mancare
+至	至	arrivare|culmine
+几	几	tavolino|panca
+氏	氏	clan|famiglia
+食	食	mangiare|cibo
+尸	尸	corpo|cadavere
+巴	巴	vortice|serpente
+火	火	fuoco
+羽	羽	piume|ali
+卩	卩	sigillo|inginocchiato
+厂	厂	scogliera|dirupo
+免	免	scusa|esenzione
+戈	戈	alabarda|lancia
+手	手	mano
+文	文	scrittura|frase
+邦	⻏	villaggio (a destra)|città
+ユ	ユ	gancio|yu
+衣	衣	abito|veste
+生	生	vita|nascita
+忙	忄	cuore (a sinistra)|sentimento
+西	西	ovest
+甘	甘	dolce
+爪	爪	artiglio|unghia
+斉	斉	uguale|uniforme
+角	角	corno|angolo
+示	示	mostrare|altare
+彡	彡	pelo|capelli|tre tratti
+水	水	acqua
+戸	戸	porta|uscio
+冊	冊	volume|libro
+青	青	blu|verde
+殳	殳	arma|bastone
+谷	谷	valle
+買	罒	rete|occhio orizzontale
+川	川	fiume
+犬	犬	cane
+韋	韋	cuoio conciato|pelle
+釆	釆	distinguere|seme
+行	行	andare|incrocio
+酉	酉	brocca|sake
+世	世	mondo|generazione
+豆	豆	fagiolo
+亡	亡	morto|perire
+黄	黄	giallo
+井	井	pozzo
+足	足	piede|gamba
+皮	皮	pelle
+舛	舛	contrasto|piedi opposti
+無	無	nulla|niente
+滴	啇	radice|base
+入	入	entrare
+舟	舟	barca
+非	非	non|sbagliato
+色	色	colore
+彑	彑	testa di maiale|muso
+皿	皿	piatto|ciotola
+及	及	raggiungere|estendere
+比	比	confrontare|paragonare
+鳥	鳥	uccello
+長	長	lungo
+髟	髟	capelli lunghi|chioma
+革	革	cuoio|pelle conciata
+禹	禸	impronta|orma
+犯	犭	animale (a sinistra)|bestia|cane
