@@ -89,7 +89,10 @@ def gen(dialect):
     for name in order:
         for kind,fs in indexes(name):
             suffix='key' if kind=='unique' else 'idx'
-            sql.append('-- CreateIndex\nCREATE %sINDEX "%s_%s_%s" ON "%s"(%s);'%('UNIQUE ' if kind=='unique' else '',name,'_'.join(fs),suffix,name,q(fs)))
+            base='%s_%s'%(name,'_'.join(fs))
+            # PostgreSQL limita gli identificatori a 63 caratteri: Prisma tronca la parte dei campi e mantiene il suffisso.
+            if dialect=='postgresql' and len(base)+len(suffix)+1>63: base=base[:63-len(suffix)-1]
+            sql.append('-- CreateIndex\nCREATE %sINDEX "%s_%s" ON "%s"(%s);'%('UNIQUE ' if kind=='unique' else '',base,suffix,name,q(fs)))
     sql+=fks
     return '\n\n'.join(sql)+'\n'
 for dialect,path in (('sqlite',sys.argv[2]),('postgresql',sys.argv[3])):

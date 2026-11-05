@@ -298,7 +298,7 @@ CREATE UNIQUE INDEX "StudyCollection_userId_name_key" ON "StudyCollection"("user
 CREATE UNIQUE INDEX "SubjectClassification_subjectId_classificationSystem_key" ON "SubjectClassification"("subjectId", "classificationSystem");
 
 -- CreateIndex
-CREATE INDEX "SubjectClassification_classificationSystem_classificationValue_idx" ON "SubjectClassification"("classificationSystem", "classificationValue");
+CREATE INDEX "SubjectClassification_classificationSystem_classificationVa_idx" ON "SubjectClassification"("classificationSystem", "classificationValue");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "UserSubjectProgress_userId_subjectId_key" ON "UserSubjectProgress"("userId", "subjectId");
