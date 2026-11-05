@@ -12,5 +12,7 @@ export default defineConfig({
   },
   datasource: {
     url: process.env.DATABASE_URL ?? "file:./dev.db",
+    // Usato solo da `prisma migrate diff/dev` su PostgreSQL (CI e sviluppo).
+    ...(process.env.SHADOW_DATABASE_URL ? { shadowDatabaseUrl: process.env.SHADOW_DATABASE_URL } : {}),
   },
 });

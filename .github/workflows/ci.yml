@@ -23,9 +23,9 @@ jobs:
         run: |
           npm run db:pg:schema
           git diff --exit-code prisma/postgres/schema.prisma
-          DATABASE_PROVIDER=postgresql npx prisma migrate diff --from-migrations prisma/postgres/migrations --to-schema prisma/postgres/schema.prisma --exit-code --shadow-database-url "$PG_URL"
+          DATABASE_PROVIDER=postgresql npx prisma migrate diff --from-migrations prisma/postgres/migrations --to-schema prisma/postgres/schema.prisma --exit-code
         env:
-          PG_URL: postgresql://postgres:postgres@localhost:5432/shadow
+          SHADOW_DATABASE_URL: postgresql://postgres:postgres@localhost:5432/shadow
       - run: npm run typecheck
       - run: npm run lint
       - run: npm test
