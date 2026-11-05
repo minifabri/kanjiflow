@@ -39,3 +39,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# KanjiFlow
+/src/generated/
+*.db
+*.db-journal
+/data/raw/
+/test-results/
+/playwright-report/

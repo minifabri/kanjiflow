@@ -1,0 +1,16 @@
+import "dotenv/config";
+import { defineConfig } from "prisma/config";
+
+// DATABASE_PROVIDER=postgresql usa lo schema generato in prisma/postgres/.
+const isPg = process.env.DATABASE_PROVIDER === "postgresql";
+
+export default defineConfig({
+  schema: isPg ? "prisma/postgres/schema.prisma" : "prisma/schema.prisma",
+  migrations: {
+    path: isPg ? "prisma/postgres/migrations" : "prisma/migrations",
+    seed: "tsx scripts/seed.ts",
+  },
+  datasource: {
+    url: process.env.DATABASE_URL ?? "file:./dev.db",
+  },
+});
