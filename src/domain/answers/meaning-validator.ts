@@ -32,7 +32,7 @@ export interface MeaningQuestion {
   meanings: readonly ExpectedMeaning[];
   typoTolerance: TypoTolerance;
   /** Significati normalizzati di altri soggetti, per bloccare correzioni semanticamente sbagliate. */
-  otherSubjectMeanings?: ReadonlySet<string>;
+  otherSubjectMeanings?: { has(value: string): boolean };
 }
 
 const LEADING_ARTICLE = /^(?:(?:il|lo|la|i|gli|le|un|uno|una|the|a|an)\s+|(?:l|un)')/u;

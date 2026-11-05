@@ -254,6 +254,7 @@ model ReviewSession {
   startedAt   DateTime  @default(now())
   completedAt DateTime?
   status      String    @default("active") // active | completed | abandoned
+  config      String? // JSON: per lo studio extra, l'elenco fisso dei soggetti (ripresa deterministica)
 
   user        User               @relation(fields: [userId], references: [id], onDelete: Cascade)
   attempts    ReviewAttempt[]

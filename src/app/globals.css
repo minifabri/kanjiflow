@@ -1,26 +1,122 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "@fontsource-variable/inter";
+@import "@fontsource/noto-sans-jp/400.css";
+@import "@fontsource/noto-sans-jp/500.css";
+@import "@fontsource/noto-sans-jp/700.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/*
+ * Design system KanjiFlow
+ * Scuro di default, accenti lavanda/viola, oro solo per traguardi.
+ * Tutti i colori passano da token: il tema chiaro ridefinisce solo i token.
+ */
+:root,
+[data-theme="dark"] {
+  --kf-bg: #101014;
+  --kf-surface: #1b1b24;
+  --kf-elevated: #262633;
+  --kf-border: #2e2e3d;
+  --kf-primary: #a78bfa;
+  --kf-primary-strong: #8b6cf0;
+  --kf-secondary: #c4b5fd;
+  --kf-gold: #d4af70;
+  --kf-text: #f5f3ff;
+  --kf-muted: #a1a1aa;
+  --kf-error: #f87171;
+  --kf-success: #4ade80;
+  --kf-on-primary: #14101f;
+  --kf-ring: #c4b5fd;
+  color-scheme: dark;
+}
+
+[data-theme="light"] {
+  --kf-bg: #f7f6fb;
+  --kf-surface: #ffffff;
+  --kf-elevated: #efedf7;
+  --kf-border: #dedbea;
+  --kf-primary: #6d4fd8;
+  --kf-primary-strong: #5a3dc4;
+  --kf-secondary: #7c66d9;
+  --kf-gold: #9a7330;
+  --kf-text: #17151f;
+  --kf-muted: #5e5c6a;
+  --kf-error: #c62828;
+  --kf-success: #1d7a3e;
+  --kf-on-primary: #ffffff;
+  --kf-ring: #6d4fd8;
+  color-scheme: light;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background: var(--kf-bg);
+  --color-surface: var(--kf-surface);
+  --color-elevated: var(--kf-elevated);
+  --color-border: var(--kf-border);
+  --color-primary: var(--kf-primary);
+  --color-primary-strong: var(--kf-primary-strong);
+  --color-secondary: var(--kf-secondary);
+  --color-gold: var(--kf-gold);
+  --color-foreground: var(--kf-text);
+  --color-muted: var(--kf-muted);
+  --color-error: var(--kf-error);
+  --color-success: var(--kf-success);
+  --color-on-primary: var(--kf-on-primary);
+  --color-ring: var(--kf-ring);
+
+  --font-sans: "Inter Variable", "Noto Sans JP", system-ui, sans-serif;
+  --font-jp: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", sans-serif;
+
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.25rem;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: "cv11", "ss01";
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-ring);
+    outline-offset: 2px;
+  }
+  ::selection {
+    background: color-mix(in oklab, var(--color-primary) 35%, transparent);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@utility jp {
+  font-family: var(--font-jp);
+  font-feature-settings: normal;
+}
+
+/* Kanji in grande: peso medio per tratti distinguibili, niente legature. */
+@utility kanji-display {
+  font-family: var(--font-jp);
+  font-weight: 500;
+  line-height: 1.1;
+  font-feature-settings: normal;
+  font-kerning: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
