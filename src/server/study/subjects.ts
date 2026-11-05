@@ -21,6 +21,7 @@ export interface ComponentDTO {
   type: SubjectType;
   characters: string;
   primaryMeaning: string;
+  reading?: string | null;
 }
 export interface ExampleDTO {
   japaneseText: string;
@@ -60,7 +61,18 @@ export async function loadSubjectCards(ids: string[], userId: string, opts: { us
       components: { include: { component: { select: { id: true, type: true, characters: true, primaryMeaning: true } } } },
       usedIn: {
         take: opts.usedInLimit ?? 12,
-        include: { parent: { select: { id: true, type: true, characters: true, primaryMeaning: true, lessonOrder: true } } },
+        include: {
+          parent: {
+            select: {
+              id: true,
+              type: true,
+              characters: true,
+              primaryMeaning: true,
+              lessonOrder: true,
+              readings: { where: { isPrimary: true }, take: 1, select: { reading: true } },
+            },
+          },
+        },
       },
       examples: { include: { source: { select: { name: true } } } },
       mnemonics: { where: { OR: [{ userId: null }, { userId }] } },
@@ -103,7 +115,7 @@ export async function loadSubjectCards(ids: string[], userId: string, opts: { us
         usedIn: r.usedIn
           .map((u) => u.parent)
           .sort((a, b) => a.lessonOrder - b.lessonOrder)
-          .map(({ lessonOrder: _lo, ...p }) => ({ ...p, type: p.type as SubjectType })),
+          .map(({ lessonOrder: _lo, readings, ...p }) => ({ ...p, type: p.type as SubjectType, reading: readings[0]?.reading ?? null })),
         examples: r.examples.map((e) => ({
           japaneseText: e.japaneseText,
           translatedText: e.translatedText,

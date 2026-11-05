@@ -28,6 +28,8 @@
   --kf-success: #4ade80;
   --kf-on-primary: #14101f;
   --kf-ring: #c4b5fd;
+  --kf-radical: #7dd3fc;
+  --kf-vocab: #f0abfc;
   color-scheme: dark;
 }
 
@@ -46,6 +48,8 @@
   --kf-success: #1d7a3e;
   --kf-on-primary: #ffffff;
   --kf-ring: #6d4fd8;
+  --kf-radical: #0369a1;
+  --kf-vocab: #a21caf;
   color-scheme: light;
 }
 
@@ -64,6 +68,8 @@
   --color-success: var(--kf-success);
   --color-on-primary: var(--kf-on-primary);
   --color-ring: var(--kf-ring);
+  --color-radical: var(--kf-radical);
+  --color-vocab: var(--kf-vocab);
 
   --font-sans: "Inter Variable", "Noto Sans JP", system-ui, sans-serif;
   --font-jp: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", sans-serif;
