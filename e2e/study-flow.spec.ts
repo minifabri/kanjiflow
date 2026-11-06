@@ -34,11 +34,14 @@ test.describe.serial("percorso di studio completo", () => {
     await page.goto("/lessons");
     await page.getByRole("link", { name: "Inizia le lezioni" }).first().click();
     await expect(page).toHaveURL(/lessons\/session/);
-    // Scorre tutte le sezioni con la tastiera fino al quiz.
+    // Scorre tutte le sezioni con la tastiera fino al quiz, controllando che compaiano i mnemonici generati.
+    let sawMnemonic = false;
     for (let i = 0; i < 60; i++) {
       if (await page.getByText("Quiz di acquisizione").isVisible()) break;
+      if (!sawMnemonic && (await page.getByText("(generato)").first().isVisible())) sawMnemonic = true;
       await page.keyboard.press("ArrowRight");
     }
+    expect(sawMnemonic).toBe(true);
     await expect(page.getByText("Quiz di acquisizione")).toBeVisible();
     // Risponde correttamente a ogni domanda leggendo i dati dal database di test.
     for (let i = 0; i < 40; i++) {
@@ -97,6 +100,14 @@ test.describe.serial("percorso di studio completo", () => {
     );
     expect(dupes).toHaveLength(0);
     expect(Number(overrides!.c)).toBe(1);
+  });
+
+  test("scheda di un kanji N3: letture con audio e mnemonici generati", async ({ page }) => {
+    const [row] = await query<{ id: string }>(`SELECT id FROM "Subject" WHERE slug = $1`, ["kanji:政"]);
+    await page.goto(`/subjects/${row!.id}`);
+    await expect(page.getByRole("button", { name: /Ascolta la pronuncia/ }).first()).toBeVisible();
+    await expect(page.getByText("SEI", { exact: true }).first()).toBeVisible();
+    await expect(page.getByText("(generato)").first()).toBeVisible();
   });
 
   test("@mobile la dashboard è utilizzabile su telefono", async ({ page }) => {

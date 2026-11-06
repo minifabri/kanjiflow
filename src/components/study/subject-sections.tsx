@@ -3,6 +3,8 @@ import Link from "next/link";
 import { Badge } from "@/components/ui/misc";
 import { cn } from "@/lib/utils";
 import type { SubjectCardDTO, ComponentDTO } from "@/server/study/subjects";
+import { SpeakButton } from "./speak-button";
+import { speakableReading } from "@/lib/speech-text";
 
 export const TYPE_LABEL = { radical: "Radicale", kanji: "Kanji", vocabulary: "Vocabolo" } as const;
 
@@ -130,7 +132,10 @@ export function ReadingSection({ card }: { card: SubjectCardDTO }) {
     return (
       <section className="space-y-2">
         <h3 className="text-xs font-medium uppercase tracking-wider text-muted">Lettura</h3>
-        <p className="jp text-3xl">{primary.map((r) => r.reading).join("、")}</p>
+        <div className="flex items-center gap-2">
+          <p className="jp text-3xl">{primary.map((r) => r.reading).join("、")}</p>
+          <SpeakButton text={primary[0]?.reading ?? ""} />
+        </div>
         {others.length > 0 && <p className="jp text-sm text-muted">Accettate anche: {others.map((r) => r.reading).join("、")}</p>}
         <p className="text-xs text-muted">La lettura del vocabolo può differire da quelle dei singoli kanji (rendaku, letture speciali).</p>
       </section>
@@ -143,8 +148,8 @@ export function ReadingSection({ card }: { card: SubjectCardDTO }) {
     <section className="space-y-3">
       <h3 className="text-xs font-medium uppercase tracking-wider text-muted">Letture</h3>
       <div className="grid gap-3 sm:grid-cols-2">
-        <ReadingGroup title="On'yomi (lettura sino-giapponese)" active={primaryType === "onyomi"} items={on.map((r) => ({ text: toKatakana(r.reading), primary: r.isPrimary }))} />
-        <ReadingGroup title="Kun'yomi (lettura giapponese)" active={primaryType === "kunyomi"} items={kun.map((r) => ({ text: displayKunyomi(r.reading), primary: r.isPrimary }))} />
+        <ReadingGroup title="On'yomi (lettura sino-giapponese)" active={primaryType === "onyomi"} items={on.map((r) => ({ text: toKatakana(r.reading), speak: r.reading, primary: r.isPrimary }))} />
+        <ReadingGroup title="Kun'yomi (lettura giapponese)" active={primaryType === "kunyomi"} items={kun.map((r) => ({ text: displayKunyomi(r.reading), speak: speakableReading(r.reading), primary: r.isPrimary }))} />
       </div>
       {primaryType && (
         <p className="text-xs text-muted">
@@ -156,7 +161,7 @@ export function ReadingSection({ card }: { card: SubjectCardDTO }) {
   );
 }
 
-function ReadingGroup({ title, items, active }: { title: string; items: { text: string; primary: boolean }[]; active: boolean }) {
+function ReadingGroup({ title, items, active }: { title: string; items: { text: string; speak: string; primary: boolean }[]; active: boolean }) {
   return (
     <div className={cn("rounded-md border border-border/60 p-3", active && "border-primary/50")}>
       <p className="mb-1.5 text-[11px] text-muted">{title}</p>
@@ -165,8 +170,9 @@ function ReadingGroup({ title, items, active }: { title: string; items: { text: 
       ) : (
         <p className="jp flex flex-wrap gap-x-3 gap-y-1 text-lg">
           {items.map((i, idx) => (
-            <span key={idx} className={cn(i.primary ? "text-foreground" : "text-muted")}>
+            <span key={idx} className={cn("inline-flex items-center", i.primary ? "text-foreground" : "text-muted")}>
               {i.text}
+              {i.primary && <SpeakButton text={i.speak} size="sm" />}
             </span>
           ))}
         </p>
@@ -185,8 +191,12 @@ export function MnemonicSection({ card, type }: { card: SubjectCardDTO; type: "m
       <h3 className="text-xs font-medium uppercase tracking-wider text-muted">Mnemonico {type === "meaning" ? "del significato" : "della lettura"}</h3>
       {shown ? (
         <p className="text-sm leading-relaxed">
-          {shown.content}
-          {!shown.isUser && <span className="ml-2 text-[11px] text-muted">(generato)</span>}
+          <RichText text={shown.content} />
+          {!shown.isUser && (
+            <span className="ml-2 text-[11px] text-muted" title="Testo generato da KanjiFlow: puoi sostituirlo con un mnemonico tuo dalla scheda del soggetto">
+              (generato)
+            </span>
+          )}
         </p>
       ) : (
         <p className="text-sm text-muted">
@@ -198,6 +208,24 @@ export function MnemonicSection({ card, type }: { card: SubjectCardDTO; type: "m
         </p>
       )}
     </section>
+  );
+}
+
+/** Markup minimo dei testi generati: **grassetto**. Niente HTML: il testo resta testo. */
+export function RichText({ text }: { text: string }) {
+  const parts = text.split(/\*\*(.+?)\*\*/g);
+  return (
+    <>
+      {parts.map((p, i) =>
+        i % 2 === 1 ? (
+          <strong key={i} className="font-semibold text-secondary">
+            {p}
+          </strong>
+        ) : (
+          p
+        ),
+      )}
+    </>
   );
 }
 
@@ -241,9 +269,12 @@ export function ExamplesSection({ card }: { card: SubjectCardDTO }) {
       <ul className="space-y-3">
         {card.examples.map((e, i) => (
           <li key={i} className="rounded-md bg-elevated/50 p-3">
-            <p className="jp text-base leading-relaxed" lang="ja">
-              {highlight(e.japaneseText, card.characters)}
-            </p>
+            <div className="flex items-start justify-between gap-2">
+              <p className="jp text-base leading-relaxed" lang="ja">
+                {highlight(e.japaneseText, card.characters)}
+              </p>
+              <SpeakButton text={e.japaneseText} size="sm" label="Ascolta la frase" className="shrink-0" />
+            </div>
             <p className="mt-1 text-sm text-muted">
               {e.translatedText}
               <span className="ml-2 text-[11px] opacity-80">

@@ -11,6 +11,8 @@ import { AnswerInput, type AnswerState } from "./answer-input";
 import { QuestionBanner } from "./question-banner";
 import { MeaningSection, ReadingSection, MnemonicSection, RelatedSection } from "./subject-sections";
 import { feedbackColor } from "./lesson-session";
+import { SpeakButton, speak, useAutoplayAudio } from "./speak-button";
+import { speakableReading } from "@/lib/speech-text";
 import { stageLabel, type QuestionType, type SrsStage } from "@/domain/srs";
 import type { Feedback } from "@/domain/answers";
 import type { QueueItem, SessionState, SubmitResult } from "@/server/study/reviews";
@@ -28,6 +30,8 @@ interface Result {
   attemptId: string | null;
   completed: SubmitResult["completed"];
   overridden?: boolean;
+  /** La lettura di questo elemento non è più da chiedere: si può ascoltare senza rivelare la risposta. */
+  readingDone: boolean;
 }
 
 function newId() {
@@ -77,6 +81,7 @@ export function ReviewSession({
   const [lastTransition, setLastTransition] = useState<{ up: boolean; label: string } | null>(null);
   const [finished, setFinished] = useState(false);
   const [inputKey, setInputKey] = useState(0);
+  const [autoplay, setAutoplay] = useAutoplayAudio();
   const shownAt = useRef(0);
   const touched = useRef(new Set<string>());
 
@@ -160,9 +165,12 @@ export function ReviewSession({
         }
         touched.current.add(current.subjectId);
         setStats((s) => ({ ...s, correct: s.correct + (r.verdict === "correct" ? 1 : 0), incorrect: s.incorrect + (r.verdict === "incorrect" ? 1 : 0) }));
-        setResult({ verdict: r.verdict, feedback: r.feedback, attemptId: r.attemptId, completed: r.completed });
+        const readingDone = current.q === "reading" || !r.pending.includes("reading");
+        setResult({ verdict: r.verdict, feedback: r.feedback, attemptId: r.attemptId, completed: r.completed, readingDone });
         applyResult(current.subjectId, current.q, r, r.verdict === "correct");
         if (r.verdict === "incorrect") setShowInfo(true);
+        // Mai prima della risposta alla lettura: l'audio la suggerirebbe.
+        if (autoplay && readingDone && item.card.type !== "radical") speak(primaryReadingText(item.card));
       } catch (e) {
         setError(e instanceof Error ? e.message : "Invio non riuscito: riprova (la risposta non verrà duplicata).");
       }
@@ -188,6 +196,9 @@ export function ReviewSession({
     });
   };
 
+  // Dopo una domanda di significato la lettura è ancora da chiedere: niente audio finché non arriva.
+  const canListen = !!result && !!item && item.card.type !== "radical" && result.readingDone;
+
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (!result) return;
@@ -203,6 +214,9 @@ export function ReviewSession({
       if (k === "f" || k === "i") {
         e.preventDefault();
         setShowInfo((v) => !v);
+      } else if (k === "p" && canListen) {
+        e.preventDefault();
+        speak(primaryReadingText(item!.card));
       } else if (k === "o" && result.verdict === "incorrect" && !result.overridden) {
         e.preventDefault();
         doOverride(false);
@@ -318,6 +332,7 @@ export function ReviewSession({
 
             {result && (
               <div className="flex flex-wrap items-center justify-center gap-2">
+                {canListen && <SpeakButton text={primaryReadingText(item.card)} size="sm" label="Ascolta la pronuncia (P)" />}
                 <Button variant="secondary" size="sm" onClick={() => setShowInfo((v) => !v)} aria-expanded={showInfo}>
                   <Info aria-hidden /> Dettagli <Kbd className="ml-1">F</Kbd>
                 </Button>
@@ -370,10 +385,19 @@ export function ReviewSession({
           <Pause className="size-3.5" aria-hidden />
           {wrapUp ? "Chiusura: finisco solo gli elementi iniziati" : "Termina dopo quelli iniziati"}
         </button>
+        <label className="inline-flex cursor-pointer items-center gap-1.5 rounded-md px-2 py-1 hover:bg-elevated">
+          <input type="checkbox" checked={autoplay} onChange={(e) => setAutoplay(e.target.checked)} className="accent-primary" />
+          Audio automatico
+        </label>
         <span className="hidden sm:inline">
-          <Kbd>Invio</Kbd> conferma · <Kbd>F</Kbd> dettagli
+          <Kbd>Invio</Kbd> conferma · <Kbd>F</Kbd> dettagli · <Kbd>P</Kbd> ascolta
         </span>
       </div>
     </div>
   );
+}
+
+function primaryReadingText(card: { readings: { reading: string; isPrimary: boolean }[] }) {
+  const r = card.readings.find((x) => x.isPrimary) ?? card.readings[0];
+  return r ? speakableReading(r.reading) : "";
 }

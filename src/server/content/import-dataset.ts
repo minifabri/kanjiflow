@@ -3,7 +3,7 @@
  *
  * Garanzie:
  * - i soggetti sono identificati dallo slug stabile → nessun duplicato, progresso preservato;
- * - si sostituiscono solo i contenuti di origine "dictionary"/"generated";
+ * - si sostituiscono solo i contenuti di origine "dictionary"/"generated" (mnemonici generati inclusi);
  *   sinonimi, mnemonici e note dell'utente (righe con userId) non vengono mai toccati;
  * - i soggetti assenti dal nuovo dataset non vengono cancellati (il loro storico resta valido).
  */
@@ -121,6 +121,13 @@ export async function importDataset(prisma: PrismaClient, raw: unknown, log: (m:
               externalId: e.externalId,
               verified: e.verified,
             })),
+          ),
+        });
+        // Mnemonici generati: si sostituiscono; quelli dell'utente (userId, sourceType "user") restano intatti.
+        await tx.mnemonic.deleteMany({ where: { subjectId: { in: ids }, userId: null, sourceType: "generated" } });
+        await tx.mnemonic.createMany({
+          data: todo.flatMap((s) =>
+            s.mnemonics.map((m) => ({ subjectId: idOf(s), mnemonicType: m.type, language: m.language, content: m.content, sourceType: "generated" })),
           ),
         });
         await tx.subjectClassification.deleteMany({ where: { subjectId: { in: ids }, classificationSystem: { in: classificationSystems } } });

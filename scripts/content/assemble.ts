@@ -9,6 +9,7 @@ import path from "node:path";
 import { datasetSchema, type Dataset, type DatasetSubject } from "../../src/domain/content/dataset";
 import { BUILD_DIR, CURATED_DIR, DATA_DIR, loadSources, readJson } from "./paths";
 import type { BaseKanji, BaseRadical, BaseVocab } from "./build-base";
+import { vocabMnemonics, type MnemonicKanji } from "../../src/domain/content/vocab-mnemonic";
 
 function readTsv(file: string): Map<string, string[]> {
   const map = new Map<string, string[]>();
@@ -54,6 +55,14 @@ function main() {
   const itKanji = readTsv("kanji.tsv");
   const itRad = readTsv("radicals.tsv");
   const itVocab = readTsv("vocab.tsv");
+  const kanjiMnemonics = readTsv("mnemonics-kanji.tsv");
+  const kanjiInfo = new Map<string, MnemonicKanji>(
+    base.kanji.map((k) => [
+      k.char,
+      { onyomi: k.onyomi, kunyomi: k.kunyomi, primaryReadings: k.primaryReadings, meaning: splitMeanings(itKanji.get(k.char)?.[0])[0]! },
+    ]),
+  );
+  for (const k of kanjiMnemonics.keys()) if (!kanjiInfo.has(k)) throw new Error(`mnemonics-kanji.tsv: kanji non nel dataset ${k}`);
   const sources = loadSources();
   const generated = sources.find((s) => s.key === "kanjiflow-generated")!;
 
@@ -79,6 +88,7 @@ function main() {
       components: [],
       classifications: [],
       examples: [],
+      mnemonics: [],
     });
   }
 
@@ -108,6 +118,16 @@ function main() {
         ...(k.grade ? [{ system: "jouyou-grade", value: String(k.grade), sourceKey: "kanjidic2", confidence: "official" as const }] : []),
       ],
       examples: [],
+      mnemonics: (() => {
+        const row = kanjiMnemonics.get(k.char);
+        if (!row) return [];
+        const [meaning, reading] = row;
+        if (!meaning?.trim() || !reading?.trim()) throw new Error(`mnemonics-kanji.tsv: riga incompleta per ${k.char}`);
+        return [
+          { type: "meaning" as const, language: "it" as const, content: meaning.trim() },
+          { type: "reading" as const, language: "it" as const, content: reading.trim() },
+        ];
+      })(),
     });
   }
 
@@ -138,6 +158,13 @@ function main() {
         externalId: e.tatoebaId,
         verified: true, // traduzione inglese della fonte Tatoeba, non generata
       })),
+      mnemonics: (() => {
+        const m = vocabMnemonics(v.written, v.readings[0]!, it[0]!, kanjiInfo);
+        return [
+          { type: "meaning" as const, language: "it" as const, content: m.meaning },
+          { type: "reading" as const, language: "it" as const, content: m.reading },
+        ];
+      })(),
     });
   }
 
@@ -156,7 +183,8 @@ function main() {
   const out = path.join(outDir, "kanjiflow-n5-n3.json");
   writeFileSync(out, JSON.stringify(dataset));
   const count = (t: string) => dataset.subjects.filter((s) => s.type === t).length;
-  console.log(`✓ ${path.relative(process.cwd(), out)} — v${dataset.version}: ${count("radical")} radicali, ${count("kanji")} kanji, ${count("vocabulary")} vocaboli`);
+  const mn = dataset.subjects.filter((s) => s.mnemonics.length > 0).length;
+  console.log(`✓ ${path.relative(process.cwd(), out)} — v${dataset.version}: ${count("radical")} radicali, ${count("kanji")} kanji, ${count("vocabulary")} vocaboli, ${mn} con mnemonici`);
 }
 
 main();

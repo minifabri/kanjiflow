@@ -34,6 +34,12 @@ export const datasetClassificationSchema = z.object({
   confidence: z.enum(["official", "community", "derived"]),
 });
 
+export const datasetMnemonicSchema = z.object({
+  type: z.enum(["meaning", "reading"]),
+  language: z.enum(["it"]),
+  content: z.string().min(1),
+});
+
 export const datasetSubjectSchema = z.object({
   slug: z.string().min(3),
   type: z.enum(SUBJECT_TYPES),
@@ -49,6 +55,8 @@ export const datasetSubjectSchema = z.object({
   components: z.array(z.string()),
   classifications: z.array(datasetClassificationSchema),
   examples: z.array(datasetExampleSchema),
+  /** Mnemonici generati da KanjiFlow (mai quelli dell'utente). Facoltativo per compatibilità con dataset precedenti. */
+  mnemonics: z.array(datasetMnemonicSchema).default([]),
 });
 
 export const datasetSourceSchema = z.object({

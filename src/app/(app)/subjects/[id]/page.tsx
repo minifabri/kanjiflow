@@ -94,7 +94,12 @@ export default async function SubjectPage({ params }: PageProps<"/subjects/[id]"
         <CardContent className="space-y-6">
           <MnemonicSection card={card} type="meaning" />
           <MnemonicEditor subjectId={card.id} type="meaning" initial={userMn("meaning")} />
-          {card.type !== "radical" && <MnemonicEditor subjectId={card.id} type="reading" initial={userMn("reading")} />}
+          {card.type !== "radical" && (
+            <>
+              <MnemonicSection card={card} type="reading" />
+              <MnemonicEditor subjectId={card.id} type="reading" initial={userMn("reading")} />
+            </>
+          )}
           <div className="space-y-2">
             <p className="text-xs text-muted">Sinonimi personali (accettati nelle risposte, mai sovrascritti dagli aggiornamenti del dataset)</p>
             <SynonymEditor subjectId={card.id} userSynonyms={userSynonyms} />
