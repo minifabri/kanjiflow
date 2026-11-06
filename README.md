@@ -13,13 +13,17 @@ npm run dev                 # http://localhost:3000 → configurazione iniziale
 
 Al primo accesso si apre la configurazione iniziale: obiettivo, percorso, kanji N5/N4 già noti (mantenuti in ripasso o bruciati), test di posizionamento facoltativo e selezione dei kanji N3 da saltare.
 
-## Deploy online (password singola)
+## Deploy online (attuale)
 
-1. `npm run auth:hash -- "una-password-lunga"` → copia `APP_PASSWORD_HASH_B64` e `SESSION_SECRET` nelle variabili d'ambiente.
-   L'hash è in base64 perché il caricatore di variabili di Next.js espande i `$` dell'hash bcrypt e lo corromperebbe.
-2. Database PostgreSQL (es. Supabase): imposta `DATABASE_PROVIDER=postgresql` e `DATABASE_URL`, poi
-   `npm run db:pg:generate && npm run db:pg:deploy && npm run db:seed`.
-3. In produzione, senza hash valido o segreto l'app risponde 503 a ogni richiesta (fail closed).
+- **App**: Vercel, progetto `kanjiflow`, funzioni a Francoforte (`fra1`). Ogni push su `main` fa un deploy di produzione.
+- **Database**: PostgreSQL su Neon (piano gratuito, Francoforte), collegato al progetto dal pannello Vercel → Storage.
+  Vercel fornisce `DATABASE_URL` (pooler, usato dall'app) e `DATABASE_URL_UNPOOLED` (diretta, usata da migrazioni e import).
+- **Build** (`npm run vercel-build`): `prisma migrate deploy` → import idempotente del dataset → `next build`.
+- **Variabili impostate a mano**: `DATABASE_PROVIDER=postgresql`, `APP_PASSWORD_HASH_B64`, `SESSION_SECRET`.
+
+Per cambiare la password: `npm run auth:hash -- "nuova-password-lunga"`, sostituisci i due valori nelle variabili del progetto Vercel e rifai il deploy.
+L'hash è in base64 perché il caricatore di variabili di Next.js espande i `$` di un hash bcrypt in chiaro.
+In produzione, senza hash valido o segreto l'app risponde 503 a ogni richiesta (fail closed).
 
 ## Script
 
