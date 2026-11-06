@@ -18,6 +18,8 @@ export interface ImportReport {
 }
 
 const BATCH = 150;
+// Su un database remoto un lotto richiede centinaia di query: il timeout predefinito (5 s) non basta.
+const TX_OPTIONS = { timeout: 120_000, maxWait: 30_000 };
 
 export async function importDataset(prisma: PrismaClient, raw: unknown, log: (m: string) => void = () => {}): Promise<ImportReport> {
   const dataset: Dataset = datasetSchema.parse(raw);
@@ -117,7 +119,7 @@ export async function importDataset(prisma: PrismaClient, raw: unknown, log: (m:
           });
         }
       }
-    });
+    }, TX_OPTIONS);
     log(`  soggetti ${Math.min(i + BATCH, dataset.subjects.length)}/${dataset.subjects.length}`);
   }
 
@@ -140,7 +142,7 @@ export async function importDataset(prisma: PrismaClient, raw: unknown, log: (m:
           });
         }
       }
-    });
+    }, TX_OPTIONS);
   }
 
   return report;

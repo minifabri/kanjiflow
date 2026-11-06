@@ -34,6 +34,7 @@ export default defineConfig({
     timeout: 180_000,
     env: {
       DATABASE_URL: DB,
+      DATABASE_PROVIDER: DB.startsWith("postgres") ? "postgresql" : "",
       APP_PASSWORD_HASH_B64: HASH_B64,
       SESSION_SECRET: "e2e-session-secret-e2e-session-secret",
       E2E_SKIP_MIGRATE: process.env.E2E_SKIP_MIGRATE ?? "",

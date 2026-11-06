@@ -12,6 +12,9 @@ import { importDataset } from "../src/server/content/import-dataset";
 import { ensureSingleUser } from "../src/server/user";
 
 async function main() {
+  // Import massivo: meglio la connessione diretta del pooler, se disponibile (Neon su Vercel).
+  const direct = process.env.DATABASE_URL_UNPOOLED ?? process.env.POSTGRES_URL_NON_POOLING;
+  if (direct && process.env.DATABASE_PROVIDER === "postgresql") process.env.DATABASE_URL = direct;
   const prisma = new PrismaClient({ adapter: createAdapter() });
   try {
     const file = path.resolve(__dirname, "../data/dataset/kanjiflow-n5-n3.json");

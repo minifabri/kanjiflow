@@ -11,7 +11,8 @@ export default defineConfig({
     seed: "tsx scripts/seed.ts",
   },
   datasource: {
-    url: process.env.DATABASE_URL ?? "file:./dev.db",
+    // Le migrazioni usano la connessione diretta (non quella del pooler) quando disponibile, es. Neon su Vercel.
+    url: process.env.DATABASE_URL_UNPOOLED ?? process.env.POSTGRES_URL_NON_POOLING ?? process.env.DATABASE_URL ?? "file:./dev.db",
     // Usato solo da `prisma migrate diff/dev` su PostgreSQL (CI e sviluppo).
     ...(process.env.SHADOW_DATABASE_URL ? { shadowDatabaseUrl: process.env.SHADOW_DATABASE_URL } : {}),
   },

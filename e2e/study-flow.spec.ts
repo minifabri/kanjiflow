@@ -1,26 +1,18 @@
 import { expect, test } from "@playwright/test";
-import Database from "better-sqlite3";
-import path from "node:path";
-
-const dbFile = path.resolve((process.env.E2E_DATABASE_URL ?? "file:./e2e.db").slice(5));
+import { query } from "./db";
 
 /** Rende scaduti tutti gli elementi in Apprendista (simula il passare delle 4 ore). */
-function makeReviewsDue() {
-  const db = new Database(dbFile);
-  db.prepare(`UPDATE "UserSubjectProgress" SET "nextReviewAt" = ? WHERE "srsStage" BETWEEN 1 AND 4`).run(Date.now() - 60_000);
-  db.close();
+async function makeReviewsDue() {
+  await query(`UPDATE "UserSubjectProgress" SET "nextReviewAt" = $1 WHERE "srsStage" BETWEEN 1 AND 4`, [new Date(Date.now() - 60_000)]);
 }
 
-function answersFor(subjectId: string) {
-  const db = new Database(dbFile);
-  const s = db.prepare(`SELECT id, type, primaryMeaning FROM "Subject" WHERE id = ?`).get(subjectId) as
-    | { id: string; type: string; primaryMeaning: string }
-    | undefined;
-  const reading = s
-    ? (db.prepare(`SELECT reading FROM "SubjectReading" WHERE subjectId = ? AND isPrimary = 1 LIMIT 1`).get(s.id) as { reading: string } | undefined)
-    : undefined;
-  db.close();
-  return { meaning: s?.primaryMeaning ?? "", reading: reading?.reading.split(".").join("") ?? "" };
+async function answersFor(subjectId: string) {
+  const [s] = await query<{ primaryMeaning: string }>(`SELECT "primaryMeaning" FROM "Subject" WHERE "id" = $1`, [subjectId]);
+  const [r] = await query<{ reading: string }>(
+    `SELECT "reading" FROM "SubjectReading" WHERE "subjectId" = $1 AND "isPrimary" = $2 LIMIT 1`,
+    [subjectId, true],
+  );
+  return { meaning: s?.primaryMeaning ?? "", reading: r?.reading.split(".").join("") ?? "" };
 }
 
 test.describe.serial("percorso di studio completo", () => {
@@ -53,7 +45,7 @@ test.describe.serial("percorso di studio completo", () => {
       if (await page.getByRole("button", { name: "Completa le lezioni" }).isVisible()) break;
       const card = page.locator("[data-subject-id]");
       const isReading = (await card.getAttribute("data-question")) === "reading";
-      const { meaning, reading } = answersFor((await card.getAttribute("data-subject-id"))!);
+      const { meaning, reading } = await answersFor((await card.getAttribute("data-subject-id"))!);
       const input = page.locator("#answer");
       await input.fill(isReading ? reading : meaning);
       await input.press("Enter");
@@ -64,7 +56,7 @@ test.describe.serial("percorso di studio completo", () => {
   });
 
   test("ripassi: risposta sbagliata, correzione manuale tracciata, completamento atomico", async ({ page }) => {
-    makeReviewsDue();
+    await makeReviewsDue();
     await page.goto("/reviews");
     const input = page.locator("#answer");
     await expect(input).toBeVisible();
@@ -88,7 +80,7 @@ test.describe.serial("percorso di studio completo", () => {
       }
       const card = page.locator("[data-subject-id]");
       const reading = (await card.getAttribute("data-question")) === "reading";
-      const data = answersFor((await card.getAttribute("data-subject-id"))!);
+      const data = await answersFor((await card.getAttribute("data-subject-id"))!);
       await input.fill(reading ? data.reading : data.meaning);
       await input.press("Enter");
       await expect(page.locator("#answer[readonly]")).toBeVisible();
@@ -96,12 +88,15 @@ test.describe.serial("percorso di studio completo", () => {
     }
     await expect(page.getByRole("heading", { name: "Ripassi completati" })).toBeVisible();
 
-    const db = new Database(dbFile);
-    const dupes = db.prepare(`SELECT sessionId, subjectId, COUNT(*) c FROM "ReviewTransition" GROUP BY sessionId, subjectId HAVING c > 1`).all();
-    const overrides = db.prepare(`SELECT COUNT(*) c FROM "ReviewAttempt" WHERE overridden = 1 AND outcome = 'override'`).get() as { c: number };
-    db.close();
+    const dupes = await query(
+      `SELECT "sessionId", "subjectId", COUNT(*) AS c FROM "ReviewTransition" GROUP BY "sessionId", "subjectId" HAVING COUNT(*) > 1`,
+    );
+    const [overrides] = await query<{ c: number | string }>(
+      `SELECT COUNT(*) AS c FROM "ReviewAttempt" WHERE "overridden" = $1 AND "outcome" = 'override'`,
+      [true],
+    );
     expect(dupes).toHaveLength(0);
-    expect(overrides.c).toBe(1);
+    expect(Number(overrides!.c)).toBe(1);
   });
 
   test("@mobile la dashboard è utilizzabile su telefono", async ({ page }) => {
