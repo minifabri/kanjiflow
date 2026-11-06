@@ -16,8 +16,9 @@ export async function proxy(request: NextRequest) {
   }
   if (PUBLIC_PATHS.some((p) => pathname === p || pathname.startsWith(`${p}/`))) return NextResponse.next();
 
-  const ok = await verifySessionToken(request.cookies.get(SESSION_COOKIE)?.value);
-  if (ok) return NextResponse.next();
+  // Qui solo la firma: account disattivati o password cambiate vengono respinti da getStudyContext.
+  const claims = await verifySessionToken(request.cookies.get(SESSION_COOKIE)?.value);
+  if (claims) return NextResponse.next();
 
   if (pathname.startsWith("/api/")) {
     return NextResponse.json({ error: "Non autenticato" }, { status: 401 });

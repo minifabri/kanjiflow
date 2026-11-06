@@ -11,8 +11,12 @@ export function LoginForm({ next }: { next: string }) {
     <form action={action} className="space-y-4 rounded-lg border border-border/60 bg-surface p-5">
       <input type="hidden" name="next" value={next} />
       <div className="space-y-1.5">
+        <Label htmlFor="username">Nome utente</Label>
+        <Input id="username" name="username" key={state?.username ?? ""} defaultValue={state?.username ?? ""} autoComplete="username" autoCapitalize="none" autoCorrect="off" spellCheck={false} autoFocus={!state?.username} required />
+      </div>
+      <div className="space-y-1.5">
         <Label htmlFor="password">Password</Label>
-        <Input id="password" name="password" type="password" autoComplete="current-password" autoFocus required />
+        <Input id="password" name="password" type="password" autoComplete="current-password" autoFocus={!!state?.username} required />
       </div>
       {state?.error && (
         <p className="text-sm text-error" role="alert">

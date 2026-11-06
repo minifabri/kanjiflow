@@ -17,8 +17,16 @@ model User {
   id                String   @id @default(cuid())
   displayName       String
   interfaceLanguage String   @default("it")
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime @updatedAt
+  /// Nome di accesso (minuscolo). Null solo per l'utente locale senza autenticazione.
+  username          String?   @unique
+  passwordHash      String?
+  role              String    @default("member") // admin | member
+  disabledAt        DateTime?
+  /// Incrementato a ogni cambio password o disattivazione: invalida le sessioni aperte.
+  sessionVersion    Int       @default(0)
+  lastLoginAt       DateTime?
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
 
   settings     UserSettings?
   progress     UserSubjectProgress[]
@@ -118,7 +126,8 @@ model SubjectMeaning {
   subject Subject @relation(fields: [subjectId], references: [id], onDelete: Cascade)
   user    User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@unique([subjectId, language, meaning, origin])
+  // userId nella chiave: due utenti possono aggiungere lo stesso sinonimo personale.
+  @@unique([subjectId, language, meaning, origin, userId])
   @@index([meaning])
 }
 

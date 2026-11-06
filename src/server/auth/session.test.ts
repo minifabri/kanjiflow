@@ -24,3 +24,26 @@ describe("configurazione autenticazione", () => {
     expect(authMode(env)).toBe("misconfigured");
   });
 });
+
+describe("token di sessione", () => {
+  it("porta utente e versione, e rifiuta firme diverse e i vecchi token a utente unico", async () => {
+    process.env.SESSION_SECRET = "s".repeat(40);
+    const { createSessionToken, verifySessionToken } = await import("./session");
+    const { SignJWT } = await import("jose");
+    const t = await createSessionToken({ userId: "u1", version: 3 });
+    expect(await verifySessionToken(t)).toEqual({ userId: "u1", version: 3 });
+    expect(await verifySessionToken(t.slice(0, -2) + "xx")).toBeNull();
+    const legacy = await new SignJWT({ sub: "owner" }).setProtectedHeader({ alg: "HS256" }).sign(new TextEncoder().encode(process.env.SESSION_SECRET));
+    expect(await verifySessionToken(legacy)).toBeNull();
+    process.env.SESSION_SECRET = "t".repeat(40);
+    expect(await verifySessionToken(t)).toBeNull();
+  });
+
+  it("valida i nomi utente", async () => {
+    const { USERNAME_RE, normalizeUsername } = await import("./session");
+    expect(USERNAME_RE.test(normalizeUsername(" Marco.R "))).toBe(true);
+    expect(USERNAME_RE.test("a")).toBe(false);
+    expect(USERNAME_RE.test("ma rco")).toBe(false);
+    expect(USERNAME_RE.test("-marco")).toBe(false);
+  });
+});

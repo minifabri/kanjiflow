@@ -25,7 +25,7 @@ export default async function DashboardPage() {
   const ctx = await getStudyContext();
   const now = new Date();
   const d = await getDashboard(ctx, now);
-  const n3Pct = pct(d.n3.kanjiPassed, d.n3.kanjiTotal);
+  const bandPct = pct(d.band.kanjiPassed, d.band.kanjiTotal);
   const acc = pct(d.accuracyToday.correct, d.accuracyToday.total);
 
   return (
@@ -59,12 +59,12 @@ export default async function DashboardPage() {
       <Card>
         <CardContent className="pt-4 sm:pt-5">
           <div className="flex items-baseline justify-between">
-            <h2 className="text-[15px] font-medium">Progressione N3</h2>
-            <span className="text-lg font-medium tabular-nums text-secondary">{n3Pct}%</span>
+            <h2 className="text-[15px] font-medium">Progressione {d.band.name}</h2>
+            <span className="text-lg font-medium tabular-nums text-secondary">{bandPct}%</span>
           </div>
-          <Progress value={n3Pct} className="mt-3" aria-label="Kanji N3 superati" />
+          <Progress value={bandPct} className="mt-3" aria-label={`Kanji ${d.band.name} superati`} />
           <p className="mt-2.5 text-xs text-muted">
-            {d.n3.kanjiPassed} di {d.n3.kanjiTotal} kanji N3 a Guru o oltre · vocaboli N3 {d.n3.vocabPassed}/{d.n3.vocabTotal}
+            {d.band.kanjiPassed} di {d.band.kanjiTotal} kanji {d.band.name} a Guru o oltre · vocaboli {d.band.name} {d.band.vocabPassed}/{d.band.vocabTotal}
             <span className="ml-1 opacity-80">(liste non ufficiali)</span>
           </p>
         </CardContent>

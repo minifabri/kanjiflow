@@ -53,7 +53,13 @@ export default async function JlptPage() {
           <Card key={b.band} className={b.band === ctx.settings.targetJlpt ? "border-primary/50" : undefined}>
             <CardHeader>
               <CardTitle className="text-base">{b.band}</CardTitle>
-              <CardDescription>{b.band === ctx.settings.targetJlpt ? "Obiettivo attuale" : "Fascia di mantenimento"}</CardDescription>
+              <CardDescription>
+                {b.band === ctx.settings.targetJlpt
+                  ? "Obiettivo attuale"
+                  : Number(b.band.slice(1)) < Number(ctx.settings.targetJlpt.slice(1))
+                    ? "Livello successivo"
+                    : "Fascia di mantenimento"}
+              </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <BandRow label="Kanji" {...b.kanji} />

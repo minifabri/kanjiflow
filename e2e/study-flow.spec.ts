@@ -110,6 +110,42 @@ test.describe.serial("percorso di studio completo", () => {
     await expect(page.getByText("(generato)").first()).toBeVisible();
   });
 
+  test("account: l'amministratore crea un amico, che ha progressi separati e nessun accesso alla gestione", async ({ page, browser }) => {
+    await page.goto("/settings/accounts");
+    await page.getByLabel("Nome utente").fill("amico");
+    await page.getByLabel("Nome visualizzato").fill("Amico");
+    await page.getByRole("button", { name: "Crea account" }).click();
+    const password = (await page.getByTestId("new-password").textContent())!.trim();
+    expect(password.length).toBeGreaterThanOrEqual(10);
+    await expect(page.getByRole("list").getByText("amico", { exact: true })).toBeVisible();
+
+    const ctx = await browser.newContext({ storageState: { cookies: [], origins: [] } });
+    const friend = await ctx.newPage();
+    await friend.goto("/");
+    await friend.getByLabel("Nome utente").fill("Amico"); // il nome utente non distingue maiuscole
+    await friend.getByLabel("Password").fill(password);
+    await friend.getByRole("button", { name: "Entra" }).click();
+    // Nuovo account: configurazione iniziale propria, niente progressi dell'amministratore.
+    await expect(friend).toHaveURL(/onboarding/);
+    const [admin] = await query<{ id: string }>(`SELECT id FROM "User" WHERE username = $1`, ["admin"]);
+    const [buddy] = await query<{ id: string }>(`SELECT id FROM "User" WHERE username = $1`, ["amico"]);
+    const count = async (id: string) =>
+      Number((await query<{ n: number | string }>(`SELECT COUNT(*) AS n FROM "UserSubjectProgress" WHERE "userId" = $1`, [id]))[0]!.n);
+    expect(await count(admin!.id)).toBeGreaterThan(0);
+    expect(await count(buddy!.id)).toBe(0);
+    await friend.goto("/settings/accounts");
+    await expect(friend).not.toHaveURL(/settings\/accounts/);
+
+    // Disattivato dall'amministratore: la sessione aperta decade subito.
+    await page.reload();
+    const row = page.locator("li", { hasText: "amico" });
+    await row.getByRole("button", { name: "Disattiva" }).click();
+    await expect(row.getByText("disattivato", { exact: true })).toBeVisible();
+    await friend.goto("/");
+    await expect(friend).toHaveURL(/login/);
+    await ctx.close();
+  });
+
   test("@mobile la dashboard è utilizzabile su telefono", async ({ page }) => {
     await page.goto("/");
     await expect(page.getByRole("navigation", { name: "Navigazione principale" }).last()).toBeVisible();

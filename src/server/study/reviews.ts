@@ -195,8 +195,8 @@ export async function submitAnswer(ctx: StudyContext, raw: unknown, now = new Da
   let verdict: MeaningVerdict | ReadingVerdict;
   let feedback: Feedback;
   if (input.questionType === "meaning") {
-    const index = await meaningIndex();
-    const others = { has: (v: string) => !!index.get(v) && !index.get(v)!.has(subject.id) };
+    const index = await meaningIndex(ctx.userId);
+    const others = { has: (v: string) => index.has(v, subject.id) };
     const mv = validateMeaning(input.answer, {
       meanings: subject.meanings,
       typoTolerance: ctx.settings.typoTolerance as TypoTolerance,
@@ -336,7 +336,13 @@ export async function overrideAttempt(ctx: StudyContext, attemptId: string, addA
     if (addAsSynonym && attempt.questionType === "meaning" && attempt.normalizedAnswer) {
       await tx.subjectMeaning.upsert({
         where: {
-          subjectId_language_meaning_origin: { subjectId: attempt.subjectId, language: "it", meaning: attempt.normalizedAnswer, origin: "user" },
+          subjectId_language_meaning_origin_userId: {
+            subjectId: attempt.subjectId,
+            language: "it",
+            meaning: attempt.normalizedAnswer,
+            origin: "user",
+            userId: ctx.userId,
+          },
         },
         create: {
           subjectId: attempt.subjectId,

@@ -60,7 +60,7 @@ export async function addSynonym(ctx: StudyContext, subjectId: string, meaning: 
   const m = meaning.trim().toLocaleLowerCase("it").slice(0, 80);
   if (!m) return;
   await prisma.subjectMeaning.upsert({
-    where: { subjectId_language_meaning_origin: { subjectId, language: "it", meaning: m, origin: "user" } },
+    where: { subjectId_language_meaning_origin_userId: { subjectId, language: "it", meaning: m, origin: "user", userId: ctx.userId } },
     create: { subjectId, userId: ctx.userId, language: "it", meaning: m, isPrimary: false, isAccepted: true, origin: "user", position: 999 },
     update: { isAccepted: true },
   });

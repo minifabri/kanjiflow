@@ -38,7 +38,7 @@ function isActive(pathname: string, href: string) {
   return href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
 }
 
-export function AppShell({ children, badge }: { children: React.ReactNode; badge: string }) {
+export function AppShell({ children, badge, userName }: { children: React.ReactNode; badge: string; userName?: string | null }) {
   const pathname = usePathname();
   return (
     <div className="flex min-h-dvh">
@@ -72,8 +72,13 @@ export function AppShell({ children, badge }: { children: React.ReactNode; badge
             );
           })}
         </nav>
-        <div className="px-3 pt-4">
+        <div className="flex flex-col items-start gap-2 px-3 pt-4">
           <span className="rounded-full border border-border px-2.5 py-1 text-xs text-muted">{badge}</span>
+          {userName && (
+            <Link href="/settings#account" className="truncate text-xs text-muted hover:text-foreground" title="Il tuo account">
+              {userName}
+            </Link>
+          )}
         </div>
       </aside>
 

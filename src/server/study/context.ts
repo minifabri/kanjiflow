@@ -1,28 +1,31 @@
 import "server-only";
 import { prisma } from "@/server/db";
-import { ensureSingleUser } from "@/server/user";
+import { currentUser } from "@/server/auth/current-user";
 import { resolveSrsConfig, type SrsConfig } from "@/domain/srs";
 import { parseJson } from "@/domain/settings";
 import type { UserSettings } from "@/generated/prisma/client";
 
 export interface StudyContext {
   userId: string;
+  username: string | null;
+  role: string;
   displayName: string;
   settings: UserSettings;
   srs: SrsConfig;
   timeZone: string;
 }
 
-/** Contesto dell'utente unico. L'accesso è già filtrato dal proxy di autenticazione. */
+/** Contesto dell'utente della richiesta: ogni lettura e scrittura di progressi passa da qui. */
 export async function getStudyContext(): Promise<StudyContext> {
-  const userId = await ensureSingleUser(prisma);
+  const me = await currentUser();
+  const userId = me.id;
   const user = await prisma.user.findUniqueOrThrow({ where: { id: userId }, include: { settings: true } });
-  const settings = user.settings!;
+  const settings = user.settings ?? (await prisma.userSettings.create({ data: { userId } }));
   let srs: SrsConfig;
   try {
     srs = resolveSrsConfig(parseJson(settings.srsConfiguration));
   } catch {
     srs = resolveSrsConfig({});
   }
-  return { userId, displayName: user.displayName, settings, srs, timeZone: settings.timezone || "Europe/Rome" };
+  return { userId, username: me.username, role: me.role, displayName: user.displayName, settings, srs, timeZone: settings.timezone || "Europe/Rome" };
 }

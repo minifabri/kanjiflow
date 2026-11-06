@@ -84,10 +84,10 @@ describe("vocabMnemonics", () => {
 describe("dataset versionato", () => {
   const dataset = datasetSchema.parse(JSON.parse(readFileSync(path.join(process.cwd(), "data/dataset/kanjiflow-n5-n3.json"), "utf8")));
 
-  it("ogni kanji N3 ha un mnemonico di significato e uno di lettura che cita la lettura studiata", () => {
+  it("ogni kanji N4 e N3 ha un mnemonico di significato e uno di lettura che cita la lettura studiata", () => {
     const toKata = (s: string) => [...s].map((c) => (c >= "ぁ" && c <= "ゖ" ? String.fromCodePoint(c.codePointAt(0)! + 0x60) : c)).join("");
-    const n3 = dataset.subjects.filter((s) => s.type === "kanji" && s.classifications.some((c) => c.system === "jlpt-waller" && c.value === "N3"));
-    expect(n3.length).toBeGreaterThan(300);
+    const n3 = dataset.subjects.filter((s) => s.type === "kanji" && s.classifications.some((c) => c.system === "jlpt-waller" && (c.value === "N3" || c.value === "N4")));
+    expect(n3.length).toBeGreaterThan(500);
     for (const s of n3) {
       const reading = s.mnemonics.find((m) => m.type === "reading")?.content ?? "";
       expect(s.mnemonics.find((m) => m.type === "meaning"), s.characters).toBeDefined();

@@ -9,7 +9,7 @@ import path from "node:path";
 import { PrismaClient } from "../src/generated/prisma/client";
 import { createAdapter } from "../src/server/db-adapter";
 import { importDataset } from "../src/server/content/import-dataset";
-import { ensureSingleUser } from "../src/server/user";
+import { ensureOwner } from "../src/server/user";
 
 async function main() {
   // Import massivo: meglio la connessione diretta del pooler, se disponibile (Neon su Vercel).
@@ -20,7 +20,7 @@ async function main() {
     const file = path.resolve(__dirname, "../data/dataset/kanjiflow-n5-n3.json");
     const started = Date.now();
     const report = await importDataset(prisma, JSON.parse(readFileSync(file, "utf8")), console.log);
-    const userId = await ensureSingleUser(prisma);
+    const userId = await ensureOwner(prisma);
     console.log(
       `✓ dataset v${report.version}: ${report.created} creati, ${report.updated} aggiornati, ${report.unchanged} invariati (${((Date.now() - started) / 1000).toFixed(1)}s) · utente ${userId}`,
     );

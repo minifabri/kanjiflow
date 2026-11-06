@@ -29,7 +29,11 @@ export interface PlacementKanji {
   readings: ExpectedReading[];
 }
 
-const STEPS = ["Obiettivo", "Già conosciuti", "Test di posizionamento", "Kanji N3", "Riepilogo"] as const;
+type Band = "N5" | "N4" | "N3";
+const BANDS: Band[] = ["N5", "N4", "N3"];
+const stepsFor = (band: Band) => ["Obiettivo", "Già conosciuti", "Test di posizionamento", `Kanji ${band}`, "Riepilogo"];
+/** Fasce sotto l'obiettivo: proposte come "già conosciute". */
+const bandsBelow = (band: Band) => BANDS.slice(0, BANDS.indexOf(band));
 const PLACEMENT_SIZE = 12;
 
 export function OnboardingWizard({
@@ -51,7 +55,10 @@ export function OnboardingWizard({
   const [targetJlpt, setTargetJlpt] = useState<"N5" | "N4" | "N3" | "N2" | "N1">("N3");
   const [studyPath, setStudyPath] = useState<"jlpt" | "guided" | "custom">("jlpt");
   const [dailyLessonLimit, setDailyLessonLimit] = useState(15);
-  const [knownBands, setKnownBands] = useState<Array<"N5" | "N4">>(["N5", "N4"]);
+  const [knownBands, setKnownBands] = useState<Band[]>(["N5", "N4"]);
+  // N2/N1 non sono ancora nel dataset: per lo studio vale la fascia più alta disponibile.
+  const band: Band = targetJlpt === "N5" || targetJlpt === "N4" ? targetJlpt : "N3";
+  const STEPS = stepsFor(band);
   const [knownMode, setKnownMode] = useState<"maintain" | "burn">("maintain");
   const [known, setKnown] = useState<Set<string>>(new Set());
   const [pasted, setPasted] = useState("");
@@ -60,12 +67,12 @@ export function OnboardingWizard({
   const [error, setError] = useState<string | null>(null);
   const [pending, startTransition] = useTransition();
 
-  const n3 = useMemo(() => kanji.filter((k) => k.band === "N3"), [kanji]);
+  const bandKanji = useMemo(() => kanji.filter((k) => k.band === band), [kanji, band]);
   const sample = useMemo(() => {
-    // Campione stabile per la sessione: un kanji ogni n, per coprire l'intera lista N3 (ordinata per frequenza).
-    const step = Math.max(1, Math.floor(n3.length / PLACEMENT_SIZE));
-    return n3.filter((_, i) => i % step === Math.floor(step / 2)).slice(0, PLACEMENT_SIZE);
-  }, [n3]);
+    // Campione stabile per la sessione: un kanji ogni n, per coprire l'intera lista della fascia (ordinata per frequenza).
+    const step = Math.max(1, Math.floor(bandKanji.length / PLACEMENT_SIZE));
+    return bandKanji.filter((_, i) => i % step === Math.floor(step / 2)).slice(0, PLACEMENT_SIZE);
+  }, [bandKanji]);
 
   const toggleKnown = (id: string) =>
     setKnown((prev) => {
@@ -139,7 +146,18 @@ export function OnboardingWizard({
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="space-y-2">
                 <Label htmlFor="target">Livello obiettivo</Label>
-                <NativeSelect id="target" value={targetJlpt} onChange={(e) => setTargetJlpt(e.target.value as typeof targetJlpt)}>
+                <NativeSelect
+                  id="target"
+                  value={targetJlpt}
+                  onChange={(e) => {
+                    const t = e.target.value as typeof targetJlpt;
+                    setTargetJlpt(t);
+                    const b: Band = t === "N5" || t === "N4" ? t : "N3";
+                    setKnownBands(bandsBelow(b));
+                    setPlacementResults([]);
+                    setKnown(new Set());
+                  }}
+                >
                   <option value="N3">N3</option>
                   <option value="N4">N4</option>
                   <option value="N5">N5</option>
@@ -155,7 +173,7 @@ export function OnboardingWizard({
               <legend className="mb-2 text-sm font-medium">Percorso</legend>
               {(
                 [
-                  ["jlpt", "Percorso JLPT", "Kanji della fascia obiettivo subito disponibili; i vocaboli si sbloccano quando ne conosci i kanji. Consigliato per N3."],
+                  ["jlpt", "Percorso JLPT", "Kanji della fascia obiettivo subito disponibili; i vocaboli si sbloccano quando ne conosci i kanji. Consigliato."],
                   ["guided", "Percorso guidato", "Radicali → kanji → vocaboli, con prerequisiti: più lento, più strutturato."],
                   ["custom", "Percorso personalizzato", "Studi solo le raccolte che crei tu."],
                 ] as const
@@ -187,7 +205,8 @@ export function OnboardingWizard({
               Le fasce N5/N4 seguono liste della community (J. Waller), non un elenco ufficiale JLPT: il JLPT non pubblica liste di kanji dal 2010.
             </p>
             <div className="space-y-2">
-              {(["N5", "N4"] as const).map((band) => (
+              {bandsBelow(band).length === 0 && <p className="text-sm text-muted">Obiettivo N5: si parte da zero, nessuna fascia da segnare come nota.</p>}
+              {bandsBelow(band).map((band) => (
                 <label key={band} className="flex cursor-pointer items-center gap-3 rounded-md border border-border p-3 hover:bg-elevated/50">
                   <input
                     type="checkbox"
@@ -260,6 +279,7 @@ export function OnboardingWizard({
 
       {step === 2 && (
         <Placement
+          band={band}
           sample={sample}
           results={placementResults}
           onDone={(results) => {
@@ -274,13 +294,13 @@ export function OnboardingWizard({
           <CardContent className="space-y-4 pt-5">
             <div className="flex flex-wrap items-end justify-between gap-3">
               <div>
-                <h1 className="text-xl font-medium">Kanji N3 che conosci già</h1>
+                <h1 className="text-xl font-medium">Kanji {band} che conosci già</h1>
                 <p className="mt-1 text-sm text-muted">Tocca per selezionare quelli da saltare. Quelli del test sono già selezionati.</p>
               </div>
-              <Badge variant="primary">{[...known].filter((id) => n3.some((k) => k.id === id)).length} selezionati</Badge>
+              <Badge variant="primary">{[...known].filter((id) => bandKanji.some((k) => k.id === id)).length} selezionati</Badge>
             </div>
-            <div className="grid grid-cols-6 gap-1.5 sm:grid-cols-10 md:grid-cols-12" role="group" aria-label="Kanji N3">
-              {n3.map((k) => {
+            <div className="grid grid-cols-6 gap-1.5 sm:grid-cols-10 md:grid-cols-12" role="group" aria-label={`Kanji ${band}`}>
+              {bandKanji.map((k) => {
                 const on = known.has(k.id);
                 return (
                   <button
@@ -345,10 +365,12 @@ export function OnboardingWizard({
 }
 
 function Placement({
+  band,
   sample,
   results,
   onDone,
 }: {
+  band: Band;
   sample: PlacementKanji[];
   results: { id: string; ok: boolean }[];
   onDone: (r: { id: string; ok: boolean }[]) => void;
@@ -368,7 +390,7 @@ function Placement({
           <h1 className="text-xl font-medium">Risultato del test</h1>
           <p className="text-sm">
             Hai riconosciuto <strong>{ok}</strong> kanji su {results.length} (significato e lettura).
-            {` Stima indicativa: circa il ${Math.round((ok / results.length) * 100)}% dei kanji N3.`}
+            {` Stima indicativa: circa il ${Math.round((ok / results.length) * 100)}% dei kanji ${band}.`}
           </p>
           <p className="text-xs text-muted">I kanji riconosciuti sono stati preselezionati nel passaggio successivo, dove puoi correggere la scelta.</p>
         </CardContent>
@@ -422,7 +444,7 @@ function Placement({
             {index + 1}/{sample.length}
           </span>
         </div>
-        <p className="text-sm text-muted">Un campione di kanji N3 dal più al meno frequente. Rispondi come in un ripasso, oppure premi «Non lo so».</p>
+        <p className="text-sm text-muted">Un campione di kanji {band} dal più al meno frequente. Rispondi come in un ripasso, oppure premi «Non lo so».</p>
         <div className="kanji-display py-6 text-center text-7xl sm:text-8xl">{k.characters}</div>
         <AnswerInput
           key={`${k.id}-${phase}`}

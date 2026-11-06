@@ -21,9 +21,15 @@ Al primo accesso si apre la configurazione iniziale: obiettivo, percorso, kanji 
 - **Build** (`npm run vercel-build`): `prisma migrate deploy` → import idempotente del dataset → `next build`.
 - **Variabili impostate a mano**: `DATABASE_PROVIDER=postgresql`, `APP_PASSWORD_HASH_B64`, `SESSION_SECRET`.
 
-Per cambiare la password: `npm run auth:hash -- "nuova-password-lunga"`, sostituisci i due valori nelle variabili del progetto Vercel e rifai il deploy.
+### Account
+
+Ogni persona ha il suo account (nome utente + password) e progressi, note, sinonimi e mnemonici personali separati; i contenuti del dataset sono condivisi.
+Non c'è registrazione aperta: l'amministratore crea gli account in **Impostazioni → Account e amici**, ottiene una password temporanea da comunicare e può reimpostarla o disattivare l'account (le sessioni aperte decadono subito, grazie a `sessionVersion`).
+Ognuno cambia la propria password in Impostazioni.
+
+L'amministratore è il primo utente (nome utente `admin`): al primo avvio la sua password viene copiata da `APP_PASSWORD_HASH_B64`, così chi usava l'accesso a password singola entra con la stessa password e ritrova i suoi progressi. Dopo, la password vive nel database.
 L'hash è in base64 perché il caricatore di variabili di Next.js espande i `$` di un hash bcrypt in chiaro.
-In produzione, senza hash valido o segreto l'app risponde 503 a ogni richiesta (fail closed).
+In produzione, senza `APP_PASSWORD_HASH_B64` valido e `SESSION_SECRET` l'app risponde 503 a ogni richiesta (fail closed).
 
 ## Script
 
@@ -67,12 +73,12 @@ Un ripasso si chiude solo quando tutte le domande richieste hanno avuto risposta
 
 ## Stato della prima milestone
 
-Funzionante: dashboard con dati reali, lezioni con quiz di acquisizione, ripassi da tastiera, onboarding N3 con test di posizionamento e importazione di kanji noti, esplora e scheda soggetto (stato, storico, sospendi/reimposta/ristudia, note, mnemonici e sinonimi personali), progressi per fascia JLPT, studio extra senza effetti sullo SRS, impostazioni (inclusi intervalli SRS), login a password singola, PWA installabile.
+Funzionante: dashboard con dati reali, lezioni con quiz di acquisizione, ripassi da tastiera, onboarding N3 con test di posizionamento e importazione di kanji noti, esplora e scheda soggetto (stato, storico, sospendi/reimposta/ristudia, note, mnemonici e sinonimi personali), progressi per fascia JLPT, studio extra senza effetti sullo SRS, impostazioni (inclusi intervalli SRS), account multipli con gestione da parte dell'amministratore, PWA installabile.
 
 Lettura ad alta voce: pulsante 🔊 su letture e frasi d'esempio, con la sintesi vocale giapponese del dispositivo (Web Speech API, si legge sempre il kana). Nei ripassi l'audio compare solo dopo la domanda di lettura, per non suggerire la risposta; tasto `P`, audio automatico opzionale (preferenza per dispositivo). Se il dispositivo non ha una voce giapponese il pulsante è disattivato.
 
 Mnemonici generati (modificabili, sostituiti da quelli personali):
-- **kanji N3**: storie originali in italiano per significato e lettura in `data/curated/it/mnemonics-kanji.tsv`, con parole chiave ricorrenti per i suoni (セイ → SEI, カン → CANE…). Un test verifica che ogni lettura mnemonica citi la lettura studiata.
+- **kanji N4 e N3**: storie originali in italiano per significato e lettura in `data/curated/it/mnemonics-kanji.tsv`, con parole chiave ricorrenti per i suoni (セイ → SEI, カン → CANE…). Un test verifica che ogni lettura mnemonica citi la lettura studiata.
 - **vocaboli**: spiegazione automatica (`src/domain/content/vocab-mnemonic.ts`) dei kanji componenti e di come se ne ricava la pronuncia, con rendaku, っ, h→p e okurigana; se la lettura non deriva dalle letture di dizionario (今日, 大人…) lo dice invece di inventare un legame.
 
-Non ancora: mnemonici per i kanji N5/N4 e i radicali, pagina statistiche, raccolte personalizzate, import/export e backup, interfaccia in inglese, notifiche. La PWA non funziona offline per lezioni e ripassi: mostra una pagina offline.
+Non ancora: mnemonici per i kanji N5 e i radicali, pagina statistiche, raccolte personalizzate, import/export e backup, interfaccia in inglese, notifiche. La PWA non funziona offline per lezioni e ripassi: mostra una pagina offline.

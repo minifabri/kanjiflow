@@ -5,6 +5,8 @@ import { SettingsForm } from "./settings-form";
 import { DEFAULT_INTERVALS_MS, REVIEWABLE_STAGES, stageLabel } from "@/domain/srs";
 import { parseJson } from "@/domain/settings";
 import { authMode } from "@/server/auth/session";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ChangePasswordForm } from "./account-forms";
 
 export const metadata = { title: "Impostazioni" };
 
@@ -22,7 +24,12 @@ export default async function SettingsPage() {
     <div className="mx-auto max-w-3xl space-y-5">
       <header className="flex flex-wrap items-end justify-between gap-3">
         <h1 className="text-2xl font-semibold">Impostazioni</h1>
-        <div className="flex gap-4 text-sm">
+        <div className="flex flex-wrap gap-4 text-sm">
+          {ctx.role === "admin" && (
+            <Link href="/settings/accounts" className="text-secondary hover:underline">
+              Account e amici
+            </Link>
+          )}
           <Link href="/settings/data" className="text-secondary hover:underline">
             Dati e fonti
           </Link>
@@ -52,9 +59,20 @@ export default async function SettingsPage() {
         intervals={intervals}
       />
       {authMode() === "enabled" && (
-        <form action="/api/auth/logout" method="post" className="text-right">
-          <button className="text-sm text-muted hover:text-foreground">Esci</button>
-        </form>
+        <Card id="account">
+          <CardHeader>
+            <CardTitle>Il tuo account</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-5">
+            <p className="text-sm">
+              Nome utente: <span className="font-mono">{ctx.username}</span>
+            </p>
+            <ChangePasswordForm />
+            <form action="/api/auth/logout" method="post" className="border-t border-border/60 pt-4">
+              <button className="text-sm text-muted hover:text-foreground">Esci</button>
+            </form>
+          </CardContent>
+        </Card>
       )}
     </div>
   );

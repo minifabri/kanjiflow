@@ -135,21 +135,37 @@ export async function loadSubjectCards(ids: string[], userId: string, opts: { us
     });
 }
 
-/** Significati normalizzati di tutti i soggetti (per la protezione semantica dei refusi). */
+/**
+ * Significati normalizzati di tutti i soggetti (per la protezione semantica dei refusi):
+ * quelli del dataset, condivisi e in cache, più i sinonimi personali del solo utente indicato.
+ */
 let meaningIndexCache: { at: number; set: Map<string, Set<string>> } | null = null;
-export async function meaningIndex(): Promise<Map<string, Set<string>>> {
-  if (meaningIndexCache && Date.now() - meaningIndexCache.at < 10 * 60_000) return meaningIndexCache.set;
-  const rows = await prisma.subjectMeaning.findMany({ where: { isAccepted: true }, select: { subjectId: true, meaning: true } });
+export async function meaningIndex(userId: string): Promise<{ has(meaning: string, exceptSubjectId: string): boolean }> {
   const { normalizeMeaning } = await import("@/domain/answers");
-  const map = new Map<string, Set<string>>();
-  for (const r of rows) {
-    const n = normalizeMeaning(r.meaning);
-    const set = map.get(n) ?? new Set<string>();
-    set.add(r.subjectId);
-    map.set(n, set);
+  if (!meaningIndexCache || Date.now() - meaningIndexCache.at > 10 * 60_000) {
+    const rows = await prisma.subjectMeaning.findMany({ where: { isAccepted: true, userId: null }, select: { subjectId: true, meaning: true } });
+    const map = new Map<string, Set<string>>();
+    for (const r of rows) {
+      const n = normalizeMeaning(r.meaning);
+      const set = map.get(n) ?? new Set<string>();
+      set.add(r.subjectId);
+      map.set(n, set);
+    }
+    meaningIndexCache = { at: Date.now(), set: map };
   }
-  meaningIndexCache = { at: Date.now(), set: map };
-  return map;
+  const shared = meaningIndexCache.set;
+  const own = new Map<string, Set<string>>();
+  for (const r of await prisma.subjectMeaning.findMany({ where: { isAccepted: true, userId }, select: { subjectId: true, meaning: true } })) {
+    const n = normalizeMeaning(r.meaning);
+    own.set(n, (own.get(n) ?? new Set<string>()).add(r.subjectId));
+  }
+  // Come prima: è "di un altro soggetto" solo se non appartiene anche a questo.
+  return {
+    has: (m, id) => {
+      const ids = new Set([...(shared.get(m) ?? []), ...(own.get(m) ?? [])]);
+      return ids.size > 0 && !ids.has(id);
+    },
+  };
 }
 
 export function invalidateMeaningIndex() {

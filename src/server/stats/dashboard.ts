@@ -16,7 +16,8 @@ export interface DashboardData {
   accuracyToday: { correct: number; total: number };
   streak: number;
   learnedKanji: number;
-  n3: { kanjiPassed: number; kanjiTotal: number; vocabPassed: number; vocabTotal: number };
+  /** Fascia JLPT obiettivo (N2/N1 non sono ancora nel dataset: si mostra N3). */
+  band: { name: string; kanjiPassed: number; kanjiTotal: number; vocabPassed: number; vocabTotal: number };
   forecastHourly: { label: string; count: number }[];
   forecastDaily: { label: string; count: number }[];
   heatmap: { date: string; count: number }[];
@@ -34,8 +35,9 @@ export async function getDashboard(ctx: StudyContext, now = new Date()): Promise
   const todayStart = startOfLocalDay(now, tz);
   const todayKey = localDateKey(now, tz);
   const heatStartKey = addDaysKey(todayKey, -7 * 26 + 1);
+  const targetBand = ["N5", "N4", "N3"].includes(ctx.settings.targetJlpt) ? ctx.settings.targetJlpt : "N3";
 
-  const [progress, lessonInfo, dueNow, todayAttempts, activityDays, n3Subjects, kanjiOrder] = await Promise.all([
+  const [progress, lessonInfo, dueNow, todayAttempts, activityDays, bandSubjects, kanjiOrder] = await Promise.all([
     prisma.userSubjectProgress.findMany({
       where: { userId: ctx.userId },
       select: {
@@ -63,7 +65,7 @@ export async function getDashboard(ctx: StudyContext, now = new Date()): Promise
       _count: { _all: true },
     }),
     prisma.subjectClassification.findMany({
-      where: { classificationValue: "N3", classificationSystem: { in: ["jlpt-waller", "jlpt-open-anki"] } },
+      where: { classificationValue: targetBand, classificationSystem: { in: ["jlpt-waller", "jlpt-open-anki"] } },
       select: { subjectId: true, subject: { select: { type: true } } },
     }),
     prisma.subject.findMany({ where: { type: "kanji" }, orderBy: { lessonOrder: "asc" }, select: { id: true } }),
@@ -107,8 +109,8 @@ export async function getDashboard(ctx: StudyContext, now = new Date()): Promise
   };
 
   const learnedKanji = progress.filter((p) => p.subject.type === "kanji" && passed(p.subjectId)).length;
-  const n3Kanji = n3Subjects.filter((s) => s.subject.type === "kanji");
-  const n3Vocab = n3Subjects.filter((s) => s.subject.type === "vocabulary");
+  const bandKanji = bandSubjects.filter((s) => s.subject.type === "kanji");
+  const bandVocab = bandSubjects.filter((s) => s.subject.type === "vocabulary");
 
   // Livelli: blocchi di 20 kanji nell'ordine di studio; si passa al successivo al 90% superato.
   const totalLevels = Math.ceil(kanjiOrder.length / LEVEL_SIZE);
@@ -176,11 +178,12 @@ export async function getDashboard(ctx: StudyContext, now = new Date()): Promise
     accuracyToday: { correct: todayAttempts.filter((a) => a.isCorrect).length, total: todayAttempts.length },
     streak: currentStreak(days, todayKey),
     learnedKanji,
-    n3: {
-      kanjiPassed: n3Kanji.filter((s) => passed(s.subjectId)).length,
-      kanjiTotal: n3Kanji.length,
-      vocabPassed: n3Vocab.filter((s) => passed(s.subjectId)).length,
-      vocabTotal: n3Vocab.length,
+    band: {
+      name: targetBand,
+      kanjiPassed: bandKanji.filter((s) => passed(s.subjectId)).length,
+      kanjiTotal: bandKanji.length,
+      vocabPassed: bandVocab.filter((s) => passed(s.subjectId)).length,
+      vocabTotal: bandVocab.length,
     },
     forecastHourly,
     forecastDaily,

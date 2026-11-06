@@ -1,7 +1,9 @@
 /**
- * Autenticazione a password singola (deploy privato, un solo utente).
+ * Autenticazione per account (pochi utenti invitati dall'amministratore, nessuna registrazione aperta).
  *
- * - APP_PASSWORD_HASH_B64: hash bcrypt della password, codificato in base64 (`npm run auth:hash -- "la-tua-password"`).
+ * - Ogni utente ha nome di accesso e password (hash bcrypt nel database).
+ * - APP_PASSWORD_HASH_B64: password iniziale dell'amministratore, copiata nel suo account al primo avvio
+ *   (`npm run auth:hash -- "la-tua-password"`). Serve anche da interruttore: senza, in produzione l'app è chiusa.
  *   Il base64 evita che il caricatore di variabili di Next.js espanda i "$" dell'hash bcrypt (lo corromperebbe).
  *   È accettato anche APP_PASSWORD_HASH in chiaro, ma solo se i "$" sono preceduti da "\".
  * - SESSION_SECRET: segreto ≥ 32 caratteri per firmare il cookie di sessione (JWT HS256).
@@ -38,20 +40,34 @@ function secretKey() {
   return new TextEncoder().encode(process.env.SESSION_SECRET ?? "");
 }
 
-export async function createSessionToken(): Promise<string> {
-  return new SignJWT({ sub: "owner" })
+export interface SessionClaims {
+  userId: string;
+  version: number;
+}
+
+export async function createSessionToken(claims: SessionClaims): Promise<string> {
+  return new SignJWT({ v: claims.version })
     .setProtectedHeader({ alg: "HS256" })
+    .setSubject(claims.userId)
     .setIssuedAt()
     .setExpirationTime(`${SESSION_MAX_AGE_S}s`)
     .sign(secretKey());
 }
 
-export async function verifySessionToken(token: string | undefined): Promise<boolean> {
-  if (!token) return false;
+/** Verifica solo firma e scadenza; disattivazione e cambio password si controllano sul database (sessionVersion). */
+export async function verifySessionToken(token: string | undefined): Promise<SessionClaims | null> {
+  if (!token) return null;
   try {
     const { payload } = await jwtVerify(token, secretKey(), { algorithms: ["HS256"] });
-    return payload.sub === "owner";
+    if (typeof payload.sub !== "string" || !payload.sub || payload.sub === "owner" || typeof payload.v !== "number") return null;
+    return { userId: payload.sub, version: payload.v };
   } catch {
-    return false;
+    return null;
   }
 }
+
+export const USERNAME_RE = /^[a-z0-9][a-z0-9._-]{1,31}$/;
+export function normalizeUsername(raw: string) {
+  return raw.trim().toLowerCase();
+}
+export const MIN_PASSWORD_LENGTH = 10;

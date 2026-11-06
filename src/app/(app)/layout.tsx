@@ -5,5 +5,5 @@ import { getStudyContext } from "@/server/study/context";
 export default async function AppLayout({ children }: LayoutProps<"/">) {
   const ctx = await getStudyContext();
   if (!ctx.settings.onboardingCompletedAt) redirect("/onboarding");
-  return <AppShell badge={`JLPT ${ctx.settings.targetJlpt}`}>{children}</AppShell>;
+  return <AppShell badge={`JLPT ${ctx.settings.targetJlpt}`} userName={ctx.username ? `${ctx.displayName} · ${ctx.username}` : null}>{children}</AppShell>;
 }
