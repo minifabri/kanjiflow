@@ -69,7 +69,8 @@ Un ripasso si chiude solo quando tutte le domande richieste hanno avuto risposta
 ### Validazione delle risposte
 
 - Lettura: romaji convertito in hiragana durante la digitazione (convenzioni IME per ん/nn/n'), input IME passato invariato, NFKC, katakana→hiragana, ー espanso coerentemente. `こうこう` ≠ `こおこお`. Suggerimenti per kana piccoli, っ, vocali lunghe e segni sonori; "riprova" senza penalità per letture valide del tipo sbagliato e per `n` ambigua in romaji.
-- Significato: maiuscole, spazi, articoli e punteggiatura finale ignorati; accenti mancanti accettati ma segnalati; refusi tollerati in base alla lunghezza, **mai** se la risposta è il significato di un altro elemento.
+- Significato: maiuscole, spazi, articoli e punteggiatura finale ignorati; accenti mancanti accettati ma segnalati; errori di dita (tasto vicino sulla tastiera, lettere scambiate, doppia in più o in meno) accettati da 3 lettere in su, anche sulla prima lettera; altri refusi tollerati in base alla lunghezza; **mai** se la risposta è il significato di un altro elemento.
+- All'Invio la "n" finale ancora in romaji diventa ん (come con un IME); dopo un "riprova" il testo resta nel campo e il campo resta a fuoco.
 
 ## Stato della prima milestone
 

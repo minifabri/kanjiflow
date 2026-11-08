@@ -159,8 +159,8 @@ export function ReviewSession({
           responseTimeMs,
         });
         if (r.verdict === "retry") {
+          // Nessun punteggio: il testo resta nel campo, a fuoco, pronto da correggere.
           setRetryFeedback(r.feedback);
-          setInputKey((k) => k + 1);
           return;
         }
         touched.current.add(current.subjectId);
@@ -321,7 +321,7 @@ export function ReviewSession({
           </div>
           <QuestionBanner type={item.card.type} question={current.q} />
           <CardContent className="space-y-3 py-5">
-            <AnswerInput key={`${current.subjectId}-${current.q}-${inputKey}`} mode={current.q} onSubmit={onSubmit} state={answerState} disabled={busy && !result} />
+            <AnswerInput key={`${current.subjectId}-${current.q}-${inputKey}`} mode={current.q} onSubmit={onSubmit} state={answerState} busy={busy && !result} />
             {showRomajiHints && current.q === "reading" && !result && (
               <p className="text-center text-xs text-muted">Scrivi in romaji (es. &quot;shiki&quot;, &quot;gakkou&quot;, &quot;n&apos;&quot; per ん davanti a vocale).</p>
             )}

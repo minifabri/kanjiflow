@@ -40,6 +40,12 @@ describe("normalizeReadingInput", () => {
     expect(normalizeReadingInput("コーヒー").normalized).toBe("こおひい");
     expect(normalizeReadingInput("koohii").normalized).toBe("こおひい");
   });
+  it("completa il romaji rimasto in sospeso dopo i kana (\"n\" finale non ancora convertita)", () => {
+    expect(normalizeReadingInput("かn").normalized).toBe("かん");
+    expect(normalizeReadingInput("しんぶn").normalized).toBe("しんぶん");
+    expect(normalizeReadingInput("かnじ").normalized).toBe("かんじ");
+    expect(normalizeReadingInput("かny").normalized).not.toMatch(/^[ぁ-ゖ]+$/); // incompleto: resta da correggere
+  });
   it("normalizza Unicode (forma decomposta)", () => {
     expect(normalizeReadingInput("が").normalized).toBe("が");
   });
@@ -157,11 +163,28 @@ describe("validateMeaning", () => {
     expect(validateMeaning("conoscenza", { ...base, typoTolerance: "off" }).verdict).toBe("correct");
     expect(validateMeaning("conosceza", { ...base, typoTolerance: "off" }).verdict).toBe("incorrect");
   });
-  it("parole corte: nessuna tolleranza in modalità conservativa", () => {
+  it("parole corte: in modalità conservativa solo errori di dita, non lettere qualsiasi", () => {
     const q = { meanings: [m("caldo", true)], typoTolerance: "conservative" as const };
     expect(validateMeaning("caldi", q).verdict).toBe("correct"); // 5 lettere → 1 refuso
     const short = { meanings: [m("sole", true)], typoTolerance: "conservative" as const };
-    expect(validateMeaning("sale", short).verdict).toBe("incorrect");
+    expect(validateMeaning("sale", short).verdict).toBe("incorrect"); // a e o non sono vicine: parola diversa
+    expect(validateMeaning("sile", short)).toMatchObject({ verdict: "correct", outcome: "typo" }); // i accanto a o
+    expect(validateMeaning("sxle", short).verdict).toBe("incorrect"); // x lontana da o
+  });
+  it("errori di dita: tasto vicino, lettere scambiate, doppie, anche sulla prima lettera", () => {
+    const q = (w: string, t: "conservative" | "off" = "conservative") => ({ meanings: [m(w, true)], typoTolerance: t });
+    expect(validateMeaning("mnao", q("mano")).verdict).toBe("correct"); // scambio
+    expect(validateMeaning("nano", q("mano")).verdict).toBe("correct"); // n accanto a m, prima lettera
+    expect(validateMeaning("rosa", q("eosa")).verdict).toBe("correct");
+    expect(validateMeaning("cappello", q("capello")).verdict).toBe("correct"); // doppia in più
+    expect(validateMeaning("gato", q("gatto")).verdict).toBe("correct"); // doppia in meno
+    expect(validateMeaning("caner", q("cane")).verdict).toBe("correct"); // r premuta insieme alla e
+    expect(validateMeaning("vino", q("mano")).verdict).toBe("incorrect");
+    expect(validateMeaning("mnao", q("mano", "off")).verdict).toBe("incorrect");
+  });
+  it("errori di dita: mai se la parola scritta è il significato di un altro elemento", () => {
+    const q = { meanings: [m("mano", true)], typoTolerance: "conservative" as const, otherSubjectMeanings: new Set(["nano"]) };
+    expect(validateMeaning("nano", q)).toMatchObject({ verdict: "incorrect", outcome: "other_subject" });
   });
   it("protezione semantica: un significato di un altro soggetto non è un refuso", () => {
     const q = { meanings: [m("caldo", true)], typoTolerance: "lenient" as const, otherSubjectMeanings: new Set(["calvo"]) };

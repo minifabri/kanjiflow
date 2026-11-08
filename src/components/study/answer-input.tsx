@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { toHiragana } from "wanakana";
+import { romajiToHiragana } from "@/domain/answers";
 import { cn } from "@/lib/utils";
 
 export type AnswerState = "idle" | "correct" | "incorrect" | "warning";
@@ -10,20 +11,23 @@ export type AnswerState = "idle" | "correct" | "incorrect" | "warning";
  * Campo risposta da tastiera.
  * - Lettura: il romaji viene convertito in hiragana mentre si scrive (convenzione IME: "n" finale resta
  *   in attesa finché non è chiaro se è ん); l'input da IME giapponese passa invariato durante la composizione.
- * - Invio conferma; quando la risposta è già valutata, Invio passa avanti (gestito dal genitore).
+ * - Invio conferma: prima completa la conversione (la "n" finale diventa ん, come con un IME).
+ * - Durante l'invio il campo resta attivo e a fuoco (solo in sola lettura); dopo un "riprova" il testo resta lì da correggere.
+ * - Quando la risposta è già valutata, Invio passa avanti (gestito dal genitore).
  */
 export function AnswerInput({
   mode,
   onSubmit,
   state = "idle",
-  disabled,
+  busy,
   autoFocus = true,
   placeholder,
 }: {
   mode: "meaning" | "reading";
   onSubmit: (value: string) => void;
   state?: AnswerState;
-  disabled?: boolean;
+  /** Invio in corso: il campo non accetta modifiche ma non perde il fuoco. */
+  busy?: boolean;
   autoFocus?: boolean;
   placeholder?: string;
 }) {
@@ -36,8 +40,8 @@ export function AnswerInput({
   }, [autoFocus, mode]);
 
   useEffect(() => {
-    if (state === "idle") ref.current?.focus();
-  }, [state]);
+    if (state === "idle" && !busy) ref.current?.focus();
+  }, [state, busy]);
 
   const convert = (raw: string) => (mode === "reading" ? toHiragana(raw, { IMEMode: true }) : raw);
 
@@ -45,8 +49,12 @@ export function AnswerInput({
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        if (composing.current) return;
-        onSubmit(value);
+        if (composing.current || busy) return;
+        // Completa la conversione del romaji rimasto in sospeso (es. "かn" → "かん").
+        // (Con la risposta già valutata il genitore usa Invio per passare avanti: il testo non si tocca.)
+        const final = state === "idle" && mode === "reading" && /[a-z]/i.test(value) ? romajiToHiragana(value) : value;
+        if (final !== value) setValue(final);
+        onSubmit(final);
       }}
     >
       <label className="sr-only" htmlFor="answer">
@@ -56,8 +64,8 @@ export function AnswerInput({
         id="answer"
         ref={ref}
         value={value}
-        disabled={disabled}
-        readOnly={state !== "idle"}
+        readOnly={state !== "idle" || busy}
+        aria-busy={busy || undefined}
         onCompositionStart={() => (composing.current = true)}
         onCompositionEnd={(e) => {
           composing.current = false;

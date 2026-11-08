@@ -27,3 +27,56 @@ export function editDistance(a: string, b: string, max = Infinity): number {
   }
   return d[rows - 1]![cols - 1]!;
 }
+
+// Tastiera QWERTY (layout italiano: stesse lettere). Vicine = adiacenti in orizzontale o in diagonale.
+const ROWS = ["qwertyuiop", "asdfghjkl", "zxcvbnm"];
+const NEIGHBORS = new Map<string, Set<string>>();
+for (let r = 0; r < ROWS.length; r++) {
+  for (let c = 0; c < ROWS[r]!.length; c++) {
+    const ch = ROWS[r]![c]!;
+    const set = new Set<string>();
+    for (const [dr, dcs] of [
+      [0, [-1, 1]],
+      [-1, [0, 1]],
+      [1, [-1, 0]],
+    ] as const) {
+      const row = ROWS[r + dr];
+      if (!row) continue;
+      for (const dc of dcs) {
+        const n = row[c + dc];
+        if (n) set.add(n);
+      }
+    }
+    NEIGHBORS.set(ch, set);
+  }
+}
+const near = (a: string, b: string) => NEIGHBORS.get(a)?.has(b) ?? false;
+
+/**
+ * Vero se `typed` differisce da `target` per un solo "errore di dita" tipico:
+ * lettera vicina sulla tastiera, due lettere adiacenti scambiate, lettera doppia in più o in meno,
+ * lettera in più vicina a quella accanto. Errori di questo tipo raramente producono un'altra parola voluta.
+ */
+export function isKeyboardSlip(typed: string, target: string): boolean {
+  const a = [...typed];
+  const b = [...target];
+  if (a.join("") === b.join("")) return false;
+  if (a.length === b.length) {
+    const diff = a.map((ch, i) => (ch !== b[i] ? i : -1)).filter((i) => i >= 0);
+    if (diff.length === 1) return near(a[diff[0]!]!, b[diff[0]!]!);
+    if (diff.length === 2 && diff[1] === diff[0]! + 1) return a[diff[0]!] === b[diff[1]!] && a[diff[1]!] === b[diff[0]!];
+    return false;
+  }
+  // Una lettera in più (typed) o in meno: si riconduce al caso "in più" scambiando i ruoli.
+  const [long, short] = a.length === b.length + 1 ? [a, b] : b.length === a.length + 1 ? [b, a] : [null, null];
+  if (!long || !short) return false;
+  for (let i = 0; i < long.length; i++) {
+    if ([...long.slice(0, i), ...long.slice(i + 1)].join("") !== short.join("")) continue;
+    const extra = long[i]!;
+    const prev = long[i - 1];
+    const next = long[i + 1];
+    if (extra === prev || extra === next) return true; // doppia in più / in meno
+    if ((prev && near(extra, prev)) || (next && near(extra, next))) return true; // tasto vicino premuto insieme
+  }
+  return false;
+}

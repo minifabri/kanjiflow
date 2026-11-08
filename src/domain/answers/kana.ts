@@ -90,7 +90,9 @@ export function romajiToHiragana(raw: string): string {
 export function normalizeReadingInput(raw: string): { normalized: string; wasRomaji: boolean } {
   const trimmed = raw.normalize("NFKC").trim();
   const wasRomaji = looksLikeRomaji(trimmed);
-  const kana = wasRomaji ? romajiToHiragana(trimmed) : trimmed.replace(/\s+/g, "");
+  // Kana e romaji misti ("かn", l'ultima lettera non ancora convertita durante la digitazione): si completa la conversione.
+  const mixed = !wasRomaji && /[a-z]/i.test(trimmed) && /[\u3040-\u30ff]/.test(trimmed);
+  const kana = wasRomaji || mixed ? romajiToHiragana(trimmed) : trimmed.replace(/\s+/g, "");
   return { normalized: expandChoonpu(katakanaToHiragana(kana)), wasRomaji };
 }
 

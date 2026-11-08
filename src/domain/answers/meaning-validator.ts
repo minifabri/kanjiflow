@@ -7,11 +7,13 @@
  *
  * Tolleranza:
  * - accenti: una risposta che differisce solo per gli accenti è accettata ma segnalata;
+ * - errori di dita (tasto vicino, lettere scambiate, doppia in più/in meno) accettati da 3 lettere in su,
+ *   anche sulla prima lettera, se la tolleranza non è disattivata;
  * - refusi (Damerau-Levenshtein) secondo la soglia configurata, MAI quando la risposta
  *   coincide con il significato di un altro soggetto (protezione semantica: "calvo" non diventa "caldo").
  * - i significati esplicitamente non accettati (blacklist) sono sempre rifiutati.
  */
-import { editDistance } from "./distance";
+import { editDistance, isKeyboardSlip } from "./distance";
 
 export type TypoTolerance = "off" | "conservative" | "lenient";
 
@@ -123,6 +125,11 @@ export function validateMeaning(rawAnswer: string, q: MeaningQuestion): MeaningV
   for (const m of accepted) {
     for (const v of meaningVariants(m.meaning)) {
       const target = stripAccents(v);
+      // 5a. Errori di dita: credibili anche su parole corte e sulla prima lettera.
+      if (q.typoTolerance !== "off" && [...target].length >= 3 && answerNoAccents.some((a) => isKeyboardSlip(a, target))) {
+        best = { matched: m.meaning, distance: 1 };
+        continue;
+      }
       const max = typoThreshold([...target].length, q.typoTolerance);
       if (max === 0) continue;
       for (const a of answerNoAccents) {

@@ -1,3 +1,5 @@
+import { toRomaji } from "wanakana";
+import { normalizeStoredReading } from "../src/domain/answers/kana";
 import { expect, test } from "@playwright/test";
 import { query } from "./db";
 
@@ -59,10 +61,20 @@ test.describe.serial("percorso di studio completo", () => {
   });
 
   test("ripassi: risposta sbagliata, correzione manuale tracciata, completamento atomico", async ({ page }) => {
+    test.setTimeout(60_000); // digitazione reale carattere per carattere
     await makeReviewsDue();
     await page.goto("/reviews");
     const input = page.locator("#answer");
     await expect(input).toBeVisible();
+
+    // Un "riprova" (lettura con caratteri non kana) non cancella il testo e non toglie il fuoco.
+    if ((await page.locator("[data-subject-id]").getAttribute("data-question")) === "reading") {
+      await input.fill("か1");
+      await input.press("Enter");
+      await expect(page.getByText(/kana o romaji/)).toBeVisible();
+      await expect(input).toHaveValue("か1");
+      await expect(input).toBeFocused();
+    }
 
     // Prima risposta volutamente sbagliata (significato o lettura).
     const isReading = (await page.locator("[data-subject-id]").getAttribute("data-question")) === "reading";
@@ -84,9 +96,16 @@ test.describe.serial("percorso di studio completo", () => {
       const card = page.locator("[data-subject-id]");
       const reading = (await card.getAttribute("data-question")) === "reading";
       const data = await answersFor((await card.getAttribute("data-subject-id"))!);
-      await input.fill(reading ? data.reading : data.meaning);
+      if (reading) {
+        // Digitazione reale in romaji: con le letture che finiscono in ん la "n" resta in sospeso fino all'Invio.
+        await input.pressSequentially(toRomaji(normalizeStoredReading(data.reading)));
+      } else {
+        await input.fill(data.meaning);
+      }
       await input.press("Enter");
-      await expect(page.locator("#answer[readonly]")).toBeVisible();
+      await expect(page.locator("#answer[readonly]:not([aria-busy])")).toBeVisible();
+      await expect(page.getByText(/^Sbagliato/)).toHaveCount(0);
+      await expect(input).toBeFocused();
       await input.press("Enter");
     }
     await expect(page.getByRole("heading", { name: "Ripassi completati" })).toBeVisible();
