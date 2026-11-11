@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BookOpen, Flame, RefreshCw, Target } from "lucide-react";
+import { BookOpen, BookText, Flame, RefreshCw, Target } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/misc";
@@ -8,6 +8,8 @@ import { Heatmap } from "@/components/dashboard/heatmap";
 import { getStudyContext } from "@/server/study/context";
 import { getDashboard } from "@/server/stats/dashboard";
 import { localDateKey } from "@/domain/time";
+import { plainText } from "@/domain/reading/markup";
+import { listPassages, readingOverview } from "@/server/reading/passages";
 
 export const metadata = { title: "Dashboard" };
 
@@ -24,7 +26,8 @@ const pct = (a: number, b: number) => (b === 0 ? 0 : Math.round((a / b) * 100));
 export default async function DashboardPage() {
   const ctx = await getStudyContext();
   const now = new Date();
-  const d = await getDashboard(ctx, now);
+  const [d, passages] = await Promise.all([getDashboard(ctx, now), listPassages(ctx)]);
+  const reading = readingOverview(passages);
   const bandPct = pct(d.band.kanjiPassed, d.band.kanjiTotal);
   const acc = pct(d.accuracyToday.correct, d.accuracyToday.total);
 
@@ -55,6 +58,35 @@ export default async function DashboardPage() {
           </span>
         </Link>
       </section>
+
+      {reading.total > 0 && (
+        <Link
+          href={reading.suggested ? `/reading/${reading.suggested.slug}` : "/reading"}
+          className="group flex items-center gap-4 rounded-lg border border-border/60 bg-surface p-4 transition-colors hover:border-primary/50 sm:p-5"
+        >
+          <span className="grid size-10 shrink-0 place-items-center rounded-md bg-primary/15 text-primary">
+            <BookText className="size-5" aria-hidden />
+          </span>
+          <span className="min-w-0 flex-1">
+            <span className="block text-xs text-muted">
+              Lettura · {reading.read} di {reading.total} brani letti
+            </span>
+            {reading.suggested ? (
+              <>
+                <span className="jp mt-0.5 block truncate text-[15px] font-medium" lang="ja">
+                  {plainText(reading.suggested.title)}
+                </span>
+                <span className="block truncate text-xs text-muted">
+                  {reading.suggested.level} · conosci il {reading.suggested.readability.percent}% dei kanji di questo brano
+                </span>
+              </>
+            ) : (
+              <span className="mt-0.5 block text-[15px] font-medium">Hai letto tutti i brani: rileggili in modalità esame</span>
+            )}
+          </span>
+          <span className="hidden shrink-0 text-xs text-secondary group-hover:underline sm:inline">Leggi →</span>
+        </Link>
+      )}
 
       <Card>
         <CardContent className="pt-4 sm:pt-5">

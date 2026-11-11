@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import {
   BarChart3,
   BookOpen,
+  BookText,
   Compass,
   FolderHeart,
   GraduationCap,
@@ -27,6 +28,7 @@ const NAV: NavItem[] = [
   { href: "/", label: "Dashboard", icon: LayoutDashboard, mobile: true },
   { href: "/lessons", label: "Lezioni", icon: BookOpen, mobile: true },
   { href: "/reviews", label: "Ripassi", icon: RefreshCw, mobile: true },
+  { href: "/reading", label: "Lettura", icon: BookText, mobile: true },
   { href: "/subjects", label: "Esplora", icon: Compass, mobile: true },
   { href: "/jlpt", label: "JLPT", icon: GraduationCap },
   { href: "/statistics", label: "Statistiche", icon: BarChart3 },
@@ -99,7 +101,7 @@ export function AppShell({ children, badge, userName }: { children: React.ReactN
         {/* Barra di navigazione inferiore (mobile) */}
         <nav
           aria-label="Navigazione principale"
-          className="fixed inset-x-0 bottom-0 z-30 grid grid-cols-5 border-t border-border/60 bg-surface/95 pb-[env(safe-area-inset-bottom)] backdrop-blur md:hidden"
+          className="fixed inset-x-0 bottom-0 z-30 grid grid-cols-6 border-t border-border/60 bg-surface/95 pb-[env(safe-area-inset-bottom)] backdrop-blur md:hidden"
         >
           {NAV.filter((n) => n.mobile).map((item) => {
             const active = isActive(pathname, item.href);
@@ -108,10 +110,10 @@ export function AppShell({ children, badge, userName }: { children: React.ReactN
                 key={item.href}
                 href={item.href}
                 aria-current={active ? "page" : undefined}
-                className={cn("flex min-h-14 flex-col items-center justify-center gap-1 text-[11px] text-muted", active && "text-foreground")}
+                className={cn("flex min-h-14 min-w-0 flex-col items-center justify-center gap-1 text-[10px] text-muted", active && "text-foreground")}
               >
                 <item.icon className={cn("size-5", active && "text-primary")} aria-hidden />
-                {item.label}
+                <span className="max-w-full truncate px-0.5">{item.label}</span>
               </Link>
             );
           })}

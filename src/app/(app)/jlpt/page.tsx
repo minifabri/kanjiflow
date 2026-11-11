@@ -5,12 +5,13 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Progress } from "@/components/ui/misc";
 import { isPassedProgress } from "@/domain/curriculum/lesson-queue";
 import { ExtraStudyForm } from "@/components/study/extra-study-form";
+import { listPassages, readingOverview } from "@/server/reading/passages";
 
 export const metadata = { title: "Progressi JLPT" };
 
 export default async function JlptPage() {
   const ctx = await getStudyContext();
-  const [classes, progress] = await Promise.all([
+  const [classes, progress, passages] = await Promise.all([
     prisma.subjectClassification.findMany({
       where: { classificationSystem: { in: ["jlpt-waller", "jlpt-open-anki"] } },
       select: { subjectId: true, classificationValue: true, subject: { select: { type: true } } },
@@ -19,7 +20,9 @@ export default async function JlptPage() {
       where: { userId: ctx.userId },
       select: { subjectId: true, srsStage: true, markedKnownAt: true, suspendedAt: true },
     }),
+    listPassages(ctx),
   ]);
+  const reading = readingOverview(passages).byLevel;
   const pmap = new Map(progress.map((p) => [p.subjectId, p]));
   const bands = ["N5", "N4", "N3"].map((band) => {
     const row = (type: string) => {
@@ -64,6 +67,7 @@ export default async function JlptPage() {
             <CardContent className="space-y-4">
               <BandRow label="Kanji" {...b.kanji} />
               <BandRow label="Vocaboli" {...b.vocab} />
+              {reading[b.band] && <ReadingRow band={b.band} {...reading[b.band]!} />}
               <Link href={`/subjects?band=${b.band}&type=kanji&stage=none`} className="block text-xs text-secondary hover:underline">
                 Kanji {b.band} non ancora studiati →
               </Link>
@@ -72,6 +76,23 @@ export default async function JlptPage() {
         ))}
       </div>
       <ExtraStudyForm />
+    </div>
+  );
+}
+
+function ReadingRow({ band, total, read }: { band: string; total: number; read: number }) {
+  const pct = total ? Math.round((read / total) * 100) : 0;
+  return (
+    <div>
+      <div className="flex items-baseline justify-between text-sm">
+        <Link href={`/reading?level=${band}`} className="hover:underline">
+          Lettura
+        </Link>
+        <span className="tabular-nums text-muted">
+          {read}/{total} brani
+        </span>
+      </div>
+      <Progress value={pct} className="mt-1.5" aria-label={`Lettura ${band}: ${pct}% dei brani letti`} />
     </div>
   );
 }

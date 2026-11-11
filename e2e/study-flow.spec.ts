@@ -165,10 +165,89 @@ test.describe.serial("percorso di studio completo", () => {
     await ctx.close();
   });
 
+  test("lettura: furigana adattivo, scheda al tocco, correzione sul server e kanji mancanti in cima alle lezioni", async ({ page }) => {
+    await page.goto("/reading");
+    await expect(page.getByRole("heading", { name: "Lettura", level: 1 })).toBeVisible();
+    await expect(page.getByText("Consigliato per te")).toBeVisible();
+    await page.goto("/reading/n3-kissaten-no-arubaito");
+
+    // I kanji N5/N4 sono noti dall'onboarding: niente furigana su 大学, furigana su 失敗 (kanji N3 non ancora studiati).
+    const word = (base: string) => page.getByRole("button", { name: `${base}, apri la scheda` }).first();
+    await expect(word("大学").locator("rt")).toHaveCount(0);
+    await expect(word("失敗").locator("rt")).toHaveText("しっぱい");
+    await page.getByRole("button", { name: "Sempre" }).click();
+    await expect(word("大学").locator("rt")).toHaveText("だいがく");
+    await page.getByRole("button", { name: "Mai" }).click();
+    await expect(word("失敗").locator("rt")).toHaveCount(0);
+    await page.getByRole("button", { name: "Adattivo" }).click();
+
+    // Scheda della parola: vocabolo e kanji collegati, con lo stato SRS.
+    await word("失敗").click();
+    const panel = page.getByRole("complementary", { name: "Scheda di 失敗" });
+    await expect(panel.getByText("Non ancora studiato").first()).toBeVisible();
+    await expect(panel.getByRole("link")).toHaveCount(3);
+    await page.keyboard.press("Escape");
+    await expect(panel).toHaveCount(0);
+
+    // Le soluzioni non sono nella pagina: le legge il test dal database e il server corregge.
+    const answers = await query<{ answerIndex: number }>(
+      `SELECT q."answerIndex" AS "answerIndex" FROM "ReadingQuestion" q JOIN "ReadingPassage" p ON p."id" = q."passageId" WHERE p."slug" = $1 ORDER BY q."position"`,
+      ["n3-kissaten-no-arubaito"],
+    );
+    expect(answers).toHaveLength(3);
+    const submit = page.getByRole("button", { name: "Controlla le risposte" });
+    await expect(submit).toBeDisabled();
+    const sets = page.locator("fieldset");
+    for (const [i, a] of answers.entries()) {
+      // L'ultima risposta è volutamente sbagliata.
+      const pick = i === answers.length - 1 ? (Number(a.answerIndex) + 1) % 4 : Number(a.answerIndex);
+      await sets.nth(i).locator("label").nth(pick).click();
+    }
+    await submit.click();
+    await expect(page.getByRole("status")).toHaveText("2 su 3 risposte corrette");
+    await expect(page.getByText("Non corretto.")).toHaveCount(1);
+    await expect(page.getByRole("heading", { name: "Traduzione" })).toBeVisible();
+    const [attempt] = await query<{ correctCount: number; totalCount: number; mode: string; lookups: string }>(
+      `SELECT "correctCount", "totalCount", "mode", "lookups" FROM "ReadingAttempt"`,
+    );
+    expect(attempt).toMatchObject({ correctCount: 2, totalCount: 3, mode: "study" });
+    expect(JSON.parse(attempt!.lookups)).toHaveLength(3);
+
+    // I kanji che mancano per leggere il brano passano in cima alla coda delle lezioni.
+    const [target] = await query<{ id: string }>(`SELECT "id" FROM "Subject" WHERE "slug" = $1`, ["kanji:敗"]);
+    await page.getByRole("button", { name: "Studiali per primi" }).click();
+    await expect(page.getByText("In cima alla coda.")).toBeVisible();
+    await page.goto("/lessons");
+    const queue = page.locator("ul").filter({ has: page.locator(`a[href="/lessons/${target!.id}"]`) }).first();
+    const firstHrefs = await queue.locator("a").evaluateAll((links) => links.slice(0, 12).map((l) => l.getAttribute("href")));
+    expect(firstHrefs).toContain(`/lessons/${target!.id}`);
+
+    // La scheda del kanji rimanda ai testi in cui compare; l'elenco segna il brano come letto.
+    await page.goto(`/subjects/${target!.id}`);
+    await expect(page.getByRole("heading", { name: "Compare in questi testi" })).toBeVisible();
+    await expect(page.locator('a[href="/reading/n3-kissaten-no-arubaito"]')).toContainText("letto");
+  });
+
+  test("lettura in modalità esame: senza furigana né schede fino alla consegna", async ({ page }) => {
+    await page.goto("/reading/n3-higaeri-tsuaa?mode=exam");
+    await expect(page.getByRole("timer")).toBeVisible();
+    await expect(page.locator("rt")).toHaveCount(0);
+    await expect(page.getByRole("button", { name: /apri la scheda/ })).toHaveCount(0);
+    const sets = page.locator("fieldset");
+    await sets.nth(0).locator("label").nth(1).click();
+    await sets.nth(1).locator("label").nth(3).click();
+    await page.getByRole("button", { name: "Controlla le risposte" }).click();
+    await expect(page.getByRole("status")).toHaveText("2 su 2 risposte corrette");
+    await expect(page.getByRole("button", { name: /apri la scheda/ }).first()).toBeVisible();
+    const modes = await query<{ mode: string }>(`SELECT "mode" FROM "ReadingAttempt" ORDER BY "completedAt"`);
+    expect(modes.map((m) => m.mode)).toEqual(["study", "exam"]);
+  });
+
   test("@mobile la dashboard è utilizzabile su telefono", async ({ page }) => {
     await page.goto("/");
     await expect(page.getByRole("navigation", { name: "Navigazione principale" }).last()).toBeVisible();
     await expect(page.getByText("Ripassi disponibili")).toBeVisible();
+    await expect(page.getByRole("navigation", { name: "Navigazione principale" }).last().getByRole("link", { name: "Lettura" })).toBeVisible();
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth);
     expect(overflow).toBe(false);
   });

@@ -1,6 +1,6 @@
 # KanjiFlow
 
-Piattaforma personale di studio dei kanji con ripetizione dilazionata, interfaccia in italiano e focus JLPT N3.
+Piattaforma personale di studio dei kanji con ripetizione dilazionata, interfaccia in italiano e focus JLPT N3. Attorno ai kanji, che restano il centro, c'è la lettura (読解) in stile JLPT, collegata ai progressi sui kanji.
 
 ## Avvio rapido (locale, SQLite)
 
@@ -35,11 +35,11 @@ In produzione, senza `APP_PASSWORD_HASH_B64` valido e `SESSION_SECRET` l'app ris
 
 | Comando | Cosa fa |
 |---|---|
-| `npm test` | Test unitari (motore SRS, validatori, coda lezioni, date, auth) |
-| `npm run test:e2e` | Playwright: onboarding → lezioni → ripassi con correzione manuale → mobile |
+| `npm test` | Test unitari (motore SRS, validatori, coda lezioni, lettura, date, auth) |
+| `npm run test:e2e` | Playwright: onboarding → lezioni → ripassi con correzione manuale → lettura → mobile |
 | `npm run typecheck` / `npm run lint` | Controlli statici |
 | `npm run content:fetch` / `content:build` | Scarica le fonti pinnate e ricostruisce `data/dataset/kanjiflow-n5-n3.json` |
-| `npm run db:seed` | Import idempotente del dataset (non tocca progressi, note, sinonimi e mnemonici personali) |
+| `npm run db:seed` | Import idempotente del dataset e dei brani di lettura (non tocca progressi, tentativi, note, sinonimi e mnemonici personali) |
 
 ## Architettura
 
@@ -48,11 +48,12 @@ src/domain/        logica pura, senza React né database (testata con Vitest)
   srs/             macchina a stati, intervalli configurabili, politica di regressione
   answers/         romaji→kana, normalizzazione, validatori di lettura e significato, feedback
   curriculum/      coda lezioni per i percorsi guidato / JLPT / personalizzato
+  reading/         markup dei brani, collegamento ai soggetti, leggibilità e furigana adattivo
 src/server/        accesso ai dati (Prisma), transazioni, servizi di studio e statistiche
 src/app/           route App Router e server action (sottili: validano con Zod e delegano)
 src/components/    UI (componenti stile shadcn/ui scritti a mano, Tailwind v4)
 scripts/content/   pipeline dati riproducibile
-data/              fonti pinnate, traduzioni italiane curate (TSV), dataset versionato
+data/              fonti pinnate, traduzioni italiane curate (TSV), dataset versionato, brani di lettura
 ```
 
 ### Motore SRS
@@ -72,6 +73,26 @@ Un ripasso si chiude solo quando tutte le domande richieste hanno avuto risposta
 - Significato: maiuscole, spazi, articoli e punteggiatura finale ignorati; accenti mancanti accettati ma segnalati; errori di dita (tasto vicino sulla tastiera, lettere scambiate, doppia in più o in meno) accettati da 3 lettere in su, anche sulla prima lettera; altri refusi tollerati in base alla lunghezza; **mai** se la risposta è il significato di un altro elemento.
 - All'Invio la "n" finale ancora in romaji diventa ん (come con un IME); dopo un "riprova" il testo resta nel campo e il campo resta a fuoco.
 
+### Lettura (読解)
+
+30 brani originali (10 N4 di riscaldamento, 20 N3) nei tre formati JLPT: brano breve, brano medio, ricerca di informazioni. Ogni brano ha domande a scelta multipla in giapponese, spiegazione e traduzione in italiano.
+
+**Legame con i kanji**
+- *Furigana adattivo*: compare solo sulle parole che contengono un kanji non ancora a Guru (o fuori dal percorso N5–N3). Si può forzare "sempre" o "mai"; l'impostazione "Mostra furigana" decide il valore iniziale.
+- *Scheda al tocco*: ogni parola annotata apre vocabolo e kanji collegati con il loro stadio SRS.
+- *Leggibilità*: ogni brano mostra la percentuale di kanji conosciuti; l'elenco propone prima i brani non letti più leggibili e segnala quelli che contengono kanji sbagliati spesso nei ripassi.
+- *Kanji mancanti*: i kanji del brano non ancora studiati si mettono in cima alla coda delle lezioni con un pulsante (tabella `LessonPriority`, vale in ogni percorso).
+- *Dalla scheda del kanji*: sezione "Compare in questi testi".
+- Leggere **non modifica mai gli stadi SRS**: un kanji noto consultato durante la lettura viene solo segnalato a fine brano.
+
+**Modalità esame** (`?mode=exam`): tempo indicativo per formato, niente furigana né schede fino alla consegna.
+
+**Correzione**: le soluzioni non vengono mai inviate alla pagina; la server action corregge, salva il tentativo (`ReadingAttempt`) e solo allora restituisce soluzioni, spiegazioni e traduzione.
+
+**Scrivere un brano** (`data/curated/reading/*.json`, poi `npm run db:seed`): il testo usa il markup `{漢字|かんじ}`; ogni kanji deve essere annotato (lo verifica un test). Le parole composte vanno in un'unica annotazione (`{図書館|としょかん}`), l'okurigana resta fuori (`{食|た}べる`). All'import ogni annotazione viene collegata ai kanji e, senza analizzatore morfologico, al vocabolo: per corrispondenza esatta o dal tema per verbi e aggettivi (`src/domain/reading/linking.ts`). Per le forme irregolari si dichiara la forma di dizionario: `{来|き|来る}ます`.
+
+I brani sono stati scritti per KanjiFlow, non provengono da prove ufficiali e non sono stati rivisti da un madrelingua.
+
 ## Stato della prima milestone
 
 Funzionante: dashboard con dati reali, lezioni con quiz di acquisizione, ripassi da tastiera, onboarding N3 con test di posizionamento e importazione di kanji noti, esplora e scheda soggetto (stato, storico, sospendi/reimposta/ristudia, note, mnemonici e sinonimi personali), progressi per fascia JLPT, studio extra senza effetti sullo SRS, impostazioni (inclusi intervalli SRS), account multipli con gestione da parte dell'amministratore, PWA installabile.
@@ -82,4 +103,4 @@ Mnemonici generati (modificabili, sostituiti da quelli personali):
 - **kanji N4 e N3**: storie originali in italiano per significato e lettura in `data/curated/it/mnemonics-kanji.tsv`, con parole chiave ricorrenti per i suoni (セイ → SEI, カン → CANE…). Un test verifica che ogni lettura mnemonica citi la lettura studiata.
 - **vocaboli**: spiegazione automatica (`src/domain/content/vocab-mnemonic.ts`) dei kanji componenti e di come se ne ricava la pronuncia, con rendaku, っ, h→p e okurigana; se la lettura non deriva dalle letture di dizionario (今日, 大人…) lo dice invece di inventare un legame.
 
-Non ancora: mnemonici per i kanji N5 e i radicali, pagina statistiche, raccolte personalizzate, import/export e backup, interfaccia in inglese, notifiche. La PWA non funziona offline per lezioni e ripassi: mostra una pagina offline.
+Non ancora: grammatica (文法, prossima milestone), mnemonici per i kanji N5 e i radicali, pagina statistiche, raccolte personalizzate, import/export e backup, interfaccia in inglese, notifiche. La PWA non funziona offline per lezioni e ripassi: mostra una pagina offline.
