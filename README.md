@@ -72,6 +72,13 @@ Un ripasso si chiude solo quando tutte le domande richieste hanno avuto risposta
 - Significato: maiuscole, spazi, articoli e punteggiatura finale ignorati; accenti mancanti accettati ma segnalati; errori di dita (tasto vicino sulla tastiera, lettere scambiate, doppia in più o in meno) accettati da 3 lettere in su, anche sulla prima lettera; altri refusi tollerati in base alla lunghezza; **mai** se la risposta è il significato di un altro elemento.
 - All'Invio la "n" finale ancora in romaji diventa ん (come con un IME); dopo un "riprova" il testo resta nel campo e il campo resta a fuoco.
 
+### Stimoli
+
+In cima alla dashboard c'è una micro-domanda a scelta multipla (un tocco, o i tasti 1–4): una nuova per ogni fascia della giornata (mattina, pomeriggio, sera), più altre a richiesta. Cinque tipi: significato, lettura, «quale kanji significa…», parola da completare, frase da completare; dopo la risposta compaiono il mnemonico e una curiosità presa dai dati del soggetto.
+
+- La scelta privilegia errori recenti negli stimoli, punti deboli, elementi appena imparati o prossimi al ripasso (`src/domain/spark/spark.ts`, puro e testato); è deterministica per fascia, quindi ricaricando la domanda non cambia.
+- Le risposte sono registrate come `StudyActivity` (`spark_correct` / `spark_incorrect`): **non modificano lo SRS**, la serie di studio né la heatmap.
+
 ## Stato della prima milestone
 
 Funzionante: dashboard con dati reali, lezioni con quiz di acquisizione, ripassi da tastiera, onboarding N3 con test di posizionamento e importazione di kanji noti, esplora e scheda soggetto (stato, storico, sospendi/reimposta/ristudia, note, mnemonici e sinonimi personali), progressi per fascia JLPT, studio extra senza effetti sullo SRS, impostazioni (inclusi intervalli SRS), account multipli con gestione da parte dell'amministratore, PWA installabile.
