@@ -1,0 +1,395 @@
+{
+  "format": "kanjiflow-grammar/1",
+  "points": [
+    {
+      "slug": "n3-you-ni-suru",
+      "level": "N3",
+      "title": "〜ようにする",
+      "meaning": "cercare di, fare in modo di",
+      "structure": "verbo (forma del dizionario / forma in ない) + ようにする",
+      "explanation": "Indica lo sforzo di fare (o non fare) qualcosa con regolarità. 〜ようにしている descrive un'abitudine che ci si impegna a mantenere; 〜ようにしてください è una richiesta gentile di fare attenzione.",
+      "examples": [
+        { "ja": "{毎日|まいにち}{野菜|やさい}を{食|た}べるようにしています。", "it": "Cerco di mangiare verdura ogni giorno." },
+        { "ja": "{夜|よる}{遅|おそ}くまで{起|お}きないようにします。", "it": "Cercherò di non restare sveglio fino a tardi." }
+      ],
+      "exercises": [
+        {
+          "kind": "choice",
+          "prompt": "{健康|けんこう}のために、エレベーターを（　）ようにしています。",
+          "choices": ["{使|つか}わなくて", "{使|つか}わなかった", "{使|つか}わない", "{使|つか}わず"],
+          "answer": 2,
+          "it": "Per la salute cerco di non usare l'ascensore.",
+          "explanation": "Davanti a ようにする va la forma in ない (o quella del dizionario): 使わない."
+        },
+        {
+          "kind": "choice",
+          "prompt": "{忘|わす}れないように、{大切|たいせつ}なことはメモ（　）。",
+          "choices": ["するようにしています", "したことがあります", "するところでした", "しそうにしています"],
+          "answer": 0,
+          "it": "Per non dimenticare, cerco sempre di annotare le cose importanti.",
+          "explanation": "Un'abitudine mantenuta con impegno: するようにしています."
+        },
+        {
+          "kind": "order",
+          "before": "{約束|やくそく}の{時間|じかん}に",
+          "pieces": ["{遅|おく}れない", "ように", "して", "ください"],
+          "star": 1,
+          "after": "。",
+          "it": "Faccia in modo di non arrivare in ritardo all'ora dell'appuntamento.",
+          "explanation": "遅れない + ように + してください."
+        }
+      ]
+    },
+    {
+      "slug": "n3-you-ni-naru",
+      "level": "N3",
+      "title": "〜ようになる",
+      "meaning": "arrivare a, cominciare a (cambiamento)",
+      "structure": "verbo (forma del dizionario / potenziale) + ようになる. Al negativo: 〜なくなる",
+      "explanation": "Descrive un cambiamento graduale: qualcosa che prima non si faceva o non si sapeva fare, e ora sì. Con la forma potenziale indica una capacità acquisita.",
+      "examples": [
+        { "ja": "{日本語|にほんご}の{新聞|しんぶん}が{読|よ}めるようになりました。", "it": "Ormai riesco a leggere i giornali in giapponese." },
+        { "ja": "{最近|さいきん}、{早|はや}く{起|お}きるようになりました。", "it": "Ultimamente ho preso ad alzarmi presto." }
+      ],
+      "exercises": [
+        {
+          "kind": "choice",
+          "prompt": "{練習|れんしゅう}して、やっと{泳|およ}げる（　）。",
+          "choices": ["ようにしました", "ようになりました", "ことにしました", "ことがありました"],
+          "answer": 1,
+          "it": "A forza di esercitarmi, finalmente ho imparato a nuotare.",
+          "explanation": "Una capacità acquisita (泳げる) è un cambiamento: ようになりました."
+        },
+        {
+          "kind": "choice",
+          "prompt": "{子|こ}どもが{生|う}まれてから、{夫|おっと}は{料理|りょうり}を（　）ようになった。",
+          "choices": ["した", "して", "しよう", "する"],
+          "answer": 3,
+          "it": "Da quando è nato nostro figlio, mio marito ha cominciato a cucinare.",
+          "explanation": "ようになる vuole la forma del dizionario: する."
+        },
+        {
+          "kind": "order",
+          "before": "カラオケで",
+          "pieces": ["{日本語|にほんご}の", "{歌|うた}が", "{歌|うた}える", "ように"],
+          "star": 2,
+          "after": "なりました。",
+          "it": "Al karaoke ormai riesco a cantare canzoni in giapponese.",
+          "explanation": "日本語の歌が + 歌える (potenziale) + ようになりました."
+        }
+      ]
+    },
+    {
+      "slug": "n3-koto-ni-suru",
+      "level": "N3",
+      "title": "〜ことにする",
+      "meaning": "decidere di (decisione propria)",
+      "structure": "verbo (forma del dizionario / forma in ない) + ことにする",
+      "explanation": "Chi parla ha preso la decisione da sé. 〜ことにした è la decisione appena presa; 〜ことにしている indica una regola personale che si segue da tempo.",
+      "examples": [
+        { "ja": "{来月|らいげつ}、{会社|かいしゃ}をやめることにしました。", "it": "Ho deciso di lasciare l'azienda il mese prossimo." },
+        { "ja": "{夜|よる}はコーヒーを{飲|の}まないことにしています。", "it": "Per regola, la sera non bevo caffè." }
+      ],
+      "exercises": [
+        {
+          "kind": "choice",
+          "prompt": "{自分|じぶん}でいろいろ{考|かんが}えて、{大学院|だいがくいん}に{進|すす}む（　）。",
+          "choices": ["ことになりました", "ようになりました", "ことにしました", "ことがありました"],
+          "answer": 2,
+          "it": "Dopo averci riflettuto a lungo per conto mio, ho deciso di proseguire con la specialistica.",
+          "explanation": "自分で考えて: la decisione è di chi parla, quindi ことにしました. ことになりました indica una decisione venuta da fuori."
+        },
+        {
+          "kind": "choice",
+          "prompt": "{健康|けんこう}のため、{毎朝|まいあさ}{三十分|さんじゅっぷん}{歩|ある}く（　）。",
+          "choices": ["ことにしています", "ことになります", "ところにしています", "はずにしています"],
+          "answer": 0,
+          "it": "Per la salute mi sono dato la regola di camminare mezz'ora ogni mattina.",
+          "explanation": "Una regola personale mantenuta nel tempo: ことにしています."
+        },
+        {
+          "kind": "order",
+          "before": "{今年|ことし}の{夏休|なつやす}みは",
+          "pieces": ["どこへも", "{行|い}かない", "ことに", "し"],
+          "star": 2,
+          "after": "ました。",
+          "it": "Ho deciso che quest'estate, in vacanza, non andrò da nessuna parte.",
+          "explanation": "どこへも行かない + ことに + しました."
+        }
+      ]
+    },
+    {
+      "slug": "n3-koto-ni-naru",
+      "level": "N3",
+      "title": "〜ことになる",
+      "meaning": "viene deciso che (decisione esterna)",
+      "structure": "verbo (forma del dizionario / forma in ない) + ことになる",
+      "explanation": "La decisione non dipende da chi parla: l'ha presa l'azienda, la scuola, le circostanze. 〜ことになっている indica una regola o un programma già stabilito.",
+      "examples": [
+        { "ja": "{来月|らいげつ}、{大阪|おおさか}に{転勤|てんきん}することになりました。", "it": "È stato deciso che il mese prossimo mi trasferiscono a Osaka." },
+        { "ja": "この{部屋|へや}では{靴|くつ}をぬぐことになっています。", "it": "In questa stanza la regola è togliersi le scarpe." }
+      ],
+      "exercises": [
+        {
+          "kind": "choice",
+          "prompt": "{会社|かいしゃ}の{都合|つごう}で、{来年|らいねん}から{東京|とうきょう}で{働|はたら}く（　）。",
+          "choices": ["ことにしました", "ことになりました", "ようにしました", "ことがあります"],
+          "answer": 1,
+          "it": "Per esigenze dell'azienda, dall'anno prossimo lavorerò a Tokyo.",
+          "explanation": "会社の都合で: decide l'azienda, non chi parla. ことになりました."
+        },
+        {
+          "kind": "choice",
+          "prompt": "この{学校|がっこう}では、{授業中|じゅぎょうちゅう}にスマホを{使|つか}ってはいけない（　）。",
+          "choices": ["ことにしています", "ことがなっています", "ところになっています", "ことになっています"],
+          "answer": 3,
+          "it": "In questa scuola la regola è che durante le lezioni non si usa lo smartphone.",
+          "explanation": "Una regola stabilita dalla scuola: ことになっています."
+        },
+        {
+          "kind": "order",
+          "before": "{話|はな}し{合|あ}いの{結果|けっか}、",
+          "pieces": ["{旅行|りょこう}は", "{中止|ちゅうし}する", "ことに", "なり"],
+          "star": 1,
+          "after": "ました。",
+          "it": "Dopo averne discusso, si è deciso di annullare il viaggio.",
+          "explanation": "旅行は + 中止する + ことに + なりました."
+        }
+      ]
+    },
+    {
+      "slug": "n3-tame-ni",
+      "level": "N3",
+      "title": "〜ために",
+      "meaning": "per, allo scopo di / a causa di",
+      "structure": "scopo: verbo (forma del dizionario) o nome + の + ために. Causa: forma piana o nome + の + ために",
+      "explanation": "Come scopo richiede un'azione volontaria e lo stesso soggetto nelle due parti. Come causa è più formale di から e ので e spesso introduce un risultato negativo.",
+      "examples": [
+        { "ja": "{家|いえ}を{買|か}うために、お{金|かね}をためています。", "it": "Sto mettendo da parte i soldi per comprare casa." },
+        { "ja": "{大雪|おおゆき}のために、{電車|でんしゃ}が{止|と}まりました。", "it": "A causa della forte nevicata i treni si sono fermati." }
+      ],
+      "exercises": [
+        {
+          "kind": "choice",
+          "prompt": "{日本|にほん}の{会社|かいしゃ}で（　）ために、{日本語|にほんご}を{勉強|べんきょう}しています。",
+          "choices": ["{働|はたら}ける", "{働|はたら}く", "{働|はたら}いて", "{働|はたら}こう"],
+          "answer": 1,
+          "it": "Studio giapponese per lavorare in un'azienda giapponese.",
+          "explanation": "ために di scopo vuole un verbo volontario alla forma del dizionario: 働く. Con il potenziale (働ける) si userebbe ように."
+        },
+        {
+          "kind": "choice",
+          "prompt": "{事故|じこ}（　）、{道|みち}がこんでいます。",
+          "choices": ["ために", "なために", "のために", "にために"],
+          "answer": 2,
+          "it": "A causa di un incidente la strada è intasata.",
+          "explanation": "Tra un nome e ために serve の: 事故のために."
+        },
+        {
+          "kind": "order",
+          "before": "",
+          "pieces": ["{大学|だいがく}の", "{試験|しけん}に", "{合格|ごうかく}する", "ために"],
+          "star": 3,
+          "after": "、{毎日|まいにち}{勉強|べんきょう}しています。",
+          "it": "Studio ogni giorno per superare l'esame di ammissione all'università.",
+          "explanation": "大学の試験に + 合格する + ために."
+        }
+      ]
+    },
+    {
+      "slug": "n3-you-ni-mokuteki",
+      "level": "N3",
+      "title": "〜ように",
+      "meaning": "affinché, in modo che",
+      "structure": "verbo (potenziale / forma in ない / verbo non volontario) + ように",
+      "explanation": "Indica lo scopo quando il risultato non si controlla direttamente: poter fare, non dimenticare, sentirsi, capirsi. Con un'azione volontaria dello stesso soggetto si usa ために.",
+      "examples": [
+        { "ja": "みんなに{聞|き}こえるように、{大|おお}きい{声|こえ}で{話|はな}します。", "it": "Parlo a voce alta in modo che tutti sentano." },
+        { "ja": "かぜをひかないように、{気|き}をつけてください。", "it": "Stia attento a non prendere il raffreddore." }
+      ],
+      "exercises": [
+        {
+          "kind": "choice",
+          "prompt": "{子|こ}どもにも{読|よ}める（　）、ひらがなで{書|か}きました。",
+          "choices": ["ために", "ように", "ことに", "ところに"],
+          "answer": 1,
+          "it": "L'ho scritto in hiragana in modo che lo possano leggere anche i bambini.",
+          "explanation": "Con il potenziale (読める) lo scopo si esprime con ように, non con ために."
+        },
+        {
+          "kind": "choice",
+          "prompt": "{約束|やくそく}を（　）ように、カレンダーに{書|か}いておきます。",
+          "choices": ["{忘|わす}れる", "{忘|わす}れて", "{忘|わす}れなくて", "{忘|わす}れない"],
+          "answer": 3,
+          "it": "Segno l'appuntamento sul calendario per non dimenticarlo.",
+          "explanation": "Lo scopo è evitare qualcosa: forma in ない + ように."
+        },
+        {
+          "kind": "order",
+          "before": "",
+          "pieces": ["{後|うし}ろの", "{人|ひと}にも", "{見|み}える", "ように"],
+          "star": 2,
+          "after": "、{字|じ}を{大|おお}きく{書|か}きます。",
+          "it": "Scrivo in grande in modo che vedano anche quelli in fondo.",
+          "explanation": "後ろの人にも + 見える + ように."
+        }
+      ]
+    },
+    {
+      "slug": "n3-hazu-da",
+      "level": "N3",
+      "title": "〜はずだ",
+      "meaning": "dovrebbe, è logico che",
+      "structure": "forma piana + はずだ (aggettivo in な + な, nome + の). Negativo forte: 〜はずがない",
+      "explanation": "Una convinzione di chi parla fondata su un motivo: un fatto noto, un calcolo, un ricordo. 〜はずがない nega con forza: «non è possibile che».",
+      "examples": [
+        { "ja": "{彼|かれ}は{昨日|きのう}{出発|しゅっぱつ}したから、もう{着|つ}いているはずです。", "it": "È partito ieri, quindi dovrebbe essere già arrivato." },
+        { "ja": "あのまじめな{人|ひと}がうそをつくはずがありません。", "it": "Non è possibile che una persona seria come lui dica bugie." }
+      ],
+      "exercises": [
+        {
+          "kind": "choice",
+          "prompt": "{山田|やまだ}さんは{十年|じゅうねん}もアメリカに{住|す}んでいたから、{英語|えいご}が{上手|じょうず}な（　）。",
+          "choices": ["はずです", "ことです", "つもりです", "ところです"],
+          "answer": 0,
+          "it": "Yamada ha vissuto dieci anni in America, quindi dovrebbe parlare bene l'inglese.",
+          "explanation": "Una deduzione da un fatto noto (から): はずです."
+        },
+        {
+          "kind": "choice",
+          "prompt": "{店|みせ}は{九時|くじ}に{開|あ}く（　）のに、まだ{閉|し}まっています。",
+          "choices": ["つもりな", "ことな", "はずな", "ためな"],
+          "answer": 2,
+          "it": "Il negozio dovrebbe aprire alle nove, eppure è ancora chiuso.",
+          "explanation": "Ciò che ci si aspettava non è avvenuto: はずなのに. つもり esprime l'intenzione di una persona, non di un negozio."
+        },
+        {
+          "kind": "order",
+          "before": "{彼女|かのじょ}が",
+          "pieces": ["そんな", "ことを", "{言|い}う", "はずが"],
+          "star": 2,
+          "after": "ありません。",
+          "it": "Non è possibile che lei dica una cosa simile.",
+          "explanation": "そんなことを + 言う + はずがありません."
+        }
+      ]
+    },
+    {
+      "slug": "n3-wake-dewa-nai",
+      "level": "N3",
+      "title": "〜わけではない",
+      "meaning": "non è che, non significa che",
+      "structure": "forma piana + わけではない (aggettivo in な + な, nome + の oppure という)",
+      "explanation": "Nega solo in parte, o corregge una conclusione che l'altro potrebbe trarre. Spesso seguita da が o けど e dalla spiegazione vera.",
+      "examples": [
+        { "ja": "{肉|にく}が{嫌|きら}いなわけではありませんが、あまり{食|た}べません。", "it": "Non è che la carne non mi piaccia, ma ne mangio poca." },
+        { "ja": "{高|たか}い{物|もの}がいつもいいというわけではない。", "it": "Non è detto che le cose care siano sempre buone." }
+      ],
+      "exercises": [
+        {
+          "kind": "choice",
+          "prompt": "{日本|にほん}に{住|す}んでいれば、だれでも{日本語|にほんご}が{上手|じょうず}になる（　）。",
+          "choices": ["はずになる", "わけではない", "わけにはいかない", "ことにする"],
+          "answer": 1,
+          "it": "Non è che chiunque viva in Giappone diventi bravo in giapponese.",
+          "explanation": "Si nega una conclusione troppo generale: わけではない."
+        },
+        {
+          "kind": "choice",
+          "prompt": "A「{料理|りょうり}はしないんですか。」B「（　）んですが、{時間|じかん}がなくて…。」",
+          "choices": ["できるわけにはいかない", "できないことにする", "できないはずがない", "できないわけではない"],
+          "answer": 3,
+          "it": "A: «Non cucina?» B: «Non è che non sappia farlo, è che non ho tempo…»",
+          "explanation": "Si corregge ciò che l'altro potrebbe pensare: できないわけではない."
+        },
+        {
+          "kind": "order",
+          "before": "お{金|かね}が",
+          "pieces": ["あれば", "{幸|しあわ}せに", "なれる", "という"],
+          "star": 1,
+          "after": "わけではない。",
+          "it": "Non è che basti avere soldi per essere felici.",
+          "explanation": "あれば + 幸せになれる + という + わけではない."
+        }
+      ]
+    },
+    {
+      "slug": "n3-wake-niwa-ikanai",
+      "level": "N3",
+      "title": "〜わけにはいかない",
+      "meaning": "non posso (non sarebbe giusto)",
+      "structure": "verbo (forma del dizionario) + わけにはいかない. Con la forma in ない: «non posso non», devo",
+      "explanation": "L'impedimento non è fisico ma sociale o morale: dovere, responsabilità, buone maniere. 〜ないわけにはいかない esprime un obbligo a cui non ci si può sottrarre.",
+      "examples": [
+        { "ja": "{大切|たいせつ}な{会議|かいぎ}があるので、{休|やす}むわけにはいきません。", "it": "C'è una riunione importante, non posso assentarmi." },
+        { "ja": "{約束|やくそく}したから、{行|い}かないわけにはいかない。", "it": "L'ho promesso: non posso non andare." }
+      ],
+      "exercises": [
+        {
+          "kind": "choice",
+          "prompt": "{明日|あした}は{試験|しけん}だから、{今夜|こんや}は{遊|あそ}びに{行|い}く（　）。",
+          "choices": ["わけではない", "ようになる", "ことがある", "わけにはいかない"],
+          "answer": 3,
+          "it": "Domani ho l'esame, stasera non posso uscire a divertirmi.",
+          "explanation": "La responsabilità (l'esame) lo impedisce: わけにはいかない."
+        },
+        {
+          "kind": "choice",
+          "prompt": "{社長|しゃちょう}に{頼|たの}まれた{仕事|しごと}だから、（　）わけにはいかない。",
+          "choices": ["{断|ことわ}る", "{断|ことわ}って", "{断|ことわ}った", "{断|ことわ}り"],
+          "answer": 0,
+          "it": "È un lavoro che mi ha chiesto il presidente: non posso rifiutare.",
+          "explanation": "わけにはいかない segue la forma del dizionario: 断る."
+        },
+        {
+          "kind": "order",
+          "before": "{自分|じぶん}で{始|はじ}めた{仕事|しごと}だから、",
+          "pieces": ["{途中|とちゅう}で", "やめる", "わけには", "いき"],
+          "star": 2,
+          "after": "ません。",
+          "it": "È un lavoro che ho cominciato io: non posso lasciarlo a metà.",
+          "explanation": "途中で + やめる + わけには + いきません."
+        }
+      ]
+    },
+    {
+      "slug": "n3-ta-bakari",
+      "level": "N3",
+      "title": "〜たばかり",
+      "meaning": "aver appena",
+      "structure": "verbo (forma in た) + ばかりだ; davanti a un nome: ばかりの",
+      "explanation": "Chi parla sente che è passato poco tempo, anche se oggettivamente possono essere giorni o mesi. 〜たところ, invece, indica l'istante immediatamente successivo.",
+      "examples": [
+        { "ja": "{日本|にほん}に{来|き|来る}たばかりで、まだ{何|なに}も{分|わ}かりません。", "it": "Sono appena arrivato in Giappone e non capisco ancora niente." },
+        { "ja": "さっき{食|た}べたばかりなのに、もうおなかがすきました。", "it": "Ho appena mangiato, eppure ho già fame." }
+      ],
+      "exercises": [
+        {
+          "kind": "choice",
+          "prompt": "この{時計|とけい}は{先週|せんしゅう}（　）ばかりなのに、もう{壊|こわ}れてしまった。",
+          "choices": ["{買|か}う", "{買|か}って", "{買|か}った", "{買|か}い"],
+          "answer": 2,
+          "it": "Questo orologio l'ho comprato solo la settimana scorsa e si è già rotto.",
+          "explanation": "«Aver appena» vuole la forma in た: 買ったばかり."
+        },
+        {
+          "kind": "choice",
+          "prompt": "{入社|にゅうしゃ}した（　）ので、まだ{仕事|しごと}に{慣|な}れていません。",
+          "choices": ["ばかりの", "ばかりな", "ばかりで", "ばかりに"],
+          "answer": 1,
+          "it": "Sono appena entrato in azienda, quindi non mi sono ancora abituato al lavoro.",
+          "explanation": "ばかり si comporta come un nome: davanti a ので prende な, ばかりなので."
+        },
+        {
+          "kind": "order",
+          "before": "",
+          "pieces": ["{習|なら}った", "ばかりの", "{言葉|ことば}を", "{使|つか}って"],
+          "star": 1,
+          "after": "みました。",
+          "it": "Ho provato a usare una parola appena imparata.",
+          "explanation": "習ったばかりの qualifica 言葉; poi 使ってみました."
+        }
+      ]
+    }
+  ]
+}

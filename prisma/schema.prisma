@@ -38,12 +38,15 @@ model User {
   mnemonics        Mnemonic[]
   userMeanings     SubjectMeaning[]
   readingAttempts  ReadingAttempt[]
+  grammarProgress  UserGrammarProgress[]
+  grammarAttempts  GrammarAttempt[]
   lessonPriorities LessonPriority[]
 }
 
 model UserSettings {
   userId                  String    @id
   dailyLessonLimit        Int       @default(15)
+  dailyGrammarLessons     Int       @default(3)
   lessonBatchSize         Int       @default(5)
   maxApprenticeItems      Int       @default(120)
   studyPath               String    @default("jlpt") // guided | jlpt | custom
@@ -336,7 +339,7 @@ model UserNote {
 model StudyActivity {
   id           String   @id @default(cuid())
   userId       String
-  activityType String // lesson_completed | review_completed | marked_known | resurrected | reset | suspended | reading_completed
+  activityType String // lesson_completed | review_completed | marked_known | resurrected | reset | suspended | reading_completed | grammar_lesson | grammar_review
   subjectId    String?
   localDate    String // AAAA-MM-GG nel fuso dell'utente, per heatmap e streak
   timestamp    DateTime @default(now())
@@ -430,4 +433,88 @@ model LessonPriority {
   subject Subject @relation(fields: [subjectId], references: [id], onDelete: Cascade)
 
   @@id([userId, subjectId])
+}
+
+// --- Grammatica (文法) --------------------------------------------------------
+// Punti grammaticali ed esercizi originali versionati in data/curated/grammar/ e importati dal seed.
+// Lo SRS usa lo stesso motore dei kanji ma tabelle proprie: la coda dei ripassi kanji non cambia.
+
+model GrammarPoint {
+  id             String   @id @default(cuid())
+  slug           String   @unique // stabile tra import: "n3-you-ni-suru"
+  level          String // N4 | N3
+  position       Int // ordine di studio
+  title          String // JSON: segmenti, es. 〜ようにする
+  meaning        String // italiano, breve
+  structure      String // JSON: segmenti, come si forma
+  explanation    String // italiano
+  examples       String // JSON: [{ ja: segmenti, it }]
+  contentVersion String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  exercises GrammarExercise[]
+  progress  UserGrammarProgress[]
+  attempts  GrammarAttempt[]
+
+  @@index([level, position])
+}
+
+model GrammarExercise {
+  id          String @id @default(cuid())
+  pointId     String
+  position    Int
+  kind        String // choice (scelta della forma) | order (riordino ★)
+  prompt      String // JSON: segmenti, con lo spazio vuoto o le quattro caselle
+  choices     String // JSON: array di segmenti, una voce per risposta
+  answerIndex Int
+  solution    String // JSON: segmenti della frase completa
+  translation String // italiano, della frase completa
+  explanation String // italiano
+
+  point    GrammarPoint     @relation(fields: [pointId], references: [id], onDelete: Cascade)
+  attempts GrammarAttempt[]
+
+  @@unique([pointId, position])
+}
+
+model UserGrammarProgress {
+  id                String    @id @default(cuid())
+  userId            String
+  pointId           String
+  srsStage          Int // 1-8 apprendimento; 9 = bruciato (stessi stadi dei kanji)
+  lessonCompletedAt DateTime
+  nextReviewAt      DateTime?
+  burnedAt          DateTime?
+  markedKnownAt     DateTime?
+  correctCount      Int       @default(0)
+  incorrectCount    Int       @default(0)
+  updatedAt         DateTime  @updatedAt
+
+  user  User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  point GrammarPoint @relation(fields: [pointId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, pointId])
+  @@index([userId, nextReviewAt])
+}
+
+model GrammarAttempt {
+  id              String   @id @default(cuid())
+  clientAttemptId String   @unique // idempotenza: un doppio invio non vale due risposte
+  userId          String
+  pointId         String
+  exerciseId      String?
+  mode            String // lesson | review | practice
+  chosenIndex     Int
+  isCorrect       Boolean
+  previousStage   Int? // valorizzati solo quando la risposta ha cambiato lo stadio
+  nextStage       Int?
+  attemptedAt     DateTime @default(now())
+
+  user     User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  point    GrammarPoint     @relation(fields: [pointId], references: [id], onDelete: Cascade)
+  exercise GrammarExercise? @relation(fields: [exerciseId], references: [id], onDelete: SetNull)
+
+  @@index([userId, attemptedAt])
+  @@index([userId, pointId])
 }

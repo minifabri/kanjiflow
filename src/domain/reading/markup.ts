@@ -77,3 +77,10 @@ export function kanaText(segments: readonly Segment[]): string {
 export function charCount(paragraphs: readonly (readonly Segment[])[]): number {
   return paragraphs.reduce((n, p) => n + plainText(p).replace(/\s/g, "").length, 0);
 }
+
+/** Id dei soggetti kanji collegati a uno o più gruppi di segmenti, senza ripetizioni. */
+export function kanjiIdsOf(groups: readonly (readonly Segment[])[]): string[] {
+  const ids = new Set<string>();
+  for (const g of groups) for (const s of g) if (isRuby(s)) for (const id of s.k ?? []) ids.add(id);
+  return [...ids];
+}

@@ -3,6 +3,7 @@ import { z } from "zod";
 
 export const settingsSchema = z.object({
   dailyLessonLimit: z.coerce.number().int().min(0).max(200),
+  dailyGrammarLessons: z.coerce.number().int().min(0).max(20),
   lessonBatchSize: z.coerce.number().int().min(1).max(20),
   maxApprenticeItems: z.coerce.number().int().min(10).max(1000),
   studyPath: z.enum(["guided", "jlpt", "custom"]),

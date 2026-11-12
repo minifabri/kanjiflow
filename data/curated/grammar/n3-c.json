@@ -1,0 +1,395 @@
+{
+  "format": "kanjiflow-grammar/1",
+  "points": [
+    {
+      "slug": "n3-okage-de",
+      "level": "N3",
+      "title": "〜おかげで",
+      "meaning": "grazie a (risultato positivo)",
+      "structure": "forma piana, aggettivo in な + な, oppure nome + の + おかげで",
+      "explanation": "Attribuisce un buon risultato a qualcuno o qualcosa, con riconoscenza. Per un risultato negativo si usa せいで.",
+      "examples": [
+        { "ja": "{先生|せんせい}のおかげで、{試験|しけん}に{合格|ごうかく}できました。", "it": "Grazie al professore sono riuscito a superare l'esame." },
+        { "ja": "{薬|くすり}を{飲|の}んだおかげで、{熱|ねつ}が{下|さ}がりました。", "it": "Grazie alla medicina la febbre è scesa." }
+      ],
+      "exercises": [
+        {
+          "kind": "choice",
+          "prompt": "{友達|ともだち}が{手伝|てつだ}ってくれた（　）、{仕事|しごと}が{早|はや}く{終|お}わった。",
+          "choices": ["せいで", "おかげで", "くせに", "わりに"],
+          "answer": 1,
+          "it": "Grazie all'aiuto di un amico il lavoro è finito presto.",
+          "explanation": "Il risultato è positivo e c'è gratitudine (てくれた): おかげで."
+        },
+        {
+          "kind": "choice",
+          "prompt": "みなさん（　）おかげで、{楽|たの}しい{旅行|りょこう}になりました。",
+          "choices": ["な", "が", "に", "の"],
+          "answer": 3,
+          "it": "Grazie a tutti voi è stato un viaggio piacevole.",
+          "explanation": "Tra un nome e おかげで serve の: みなさんのおかげで."
+        },
+        {
+          "kind": "order",
+          "before": "{毎日|まいにち}",
+          "pieces": ["{練習|れんしゅう}した", "おかげで", "{上手|じょうず}に", "{話|はな}せる"],
+          "star": 1,
+          "after": "ようになりました。",
+          "it": "Grazie all'esercizio quotidiano ormai riesco a parlare bene.",
+          "explanation": "練習した + おかげで, poi il risultato: 上手に話せるようになりました."
+        }
+      ]
+    },
+    {
+      "slug": "n3-sei-de",
+      "level": "N3",
+      "title": "〜せいで",
+      "meaning": "per colpa di (risultato negativo)",
+      "structure": "forma piana, aggettivo in な + な, oppure nome + の + せいで. Con か (せいか): «forse perché»",
+      "explanation": "Attribuisce un risultato sgradito a una causa, spesso con tono di rimprovero. 〜せいか indica una causa di cui non si è sicuri.",
+      "examples": [
+        { "ja": "{雨|あめ}のせいで、{試合|しあい}が{中止|ちゅうし}になりました。", "it": "Per colpa della pioggia la partita è stata annullata." },
+        { "ja": "{夜|よる}{遅|おそ}くまで{起|お}きていたせいで、{朝|あさ}{起|お}きられなかった。", "it": "Per essere rimasto sveglio fino a tardi, la mattina non sono riuscito ad alzarmi." }
+      ],
+      "exercises": [
+        {
+          "kind": "choice",
+          "prompt": "{電車|でんしゃ}が{遅|おく}れた（　）、{会議|かいぎ}に{間|ま}に{合|あ}わなかった。",
+          "choices": ["おかげで", "せいで", "くせに", "ように"],
+          "answer": 1,
+          "it": "Per colpa del ritardo del treno non sono arrivato in tempo alla riunione.",
+          "explanation": "Il risultato è negativo (間に合わなかった): せいで."
+        },
+        {
+          "kind": "choice",
+          "prompt": "{暑|あつ}さ（　）、{食欲|しょくよく}がありません。",
+          "choices": ["なせいか", "せいか", "のせいか", "でせいか"],
+          "answer": 2,
+          "it": "Sarà per il caldo, ma non ho appetito.",
+          "explanation": "Dopo un nome serve の: 暑さのせいか («forse per il caldo»)."
+        },
+        {
+          "kind": "order",
+          "before": "{弟|おとうと}が",
+          "pieces": ["うるさい", "せいで", "{勉強|べんきょう}に", "{集中|しゅうちゅう}"],
+          "star": 0,
+          "after": "できません。",
+          "it": "Per colpa di mio fratello che fa chiasso non riesco a concentrarmi sullo studio.",
+          "explanation": "うるさい + せいで, poi 勉強に集中できません."
+        }
+      ]
+    },
+    {
+      "slug": "n3-kuse-ni",
+      "level": "N3",
+      "title": "〜くせに",
+      "meaning": "pur essendo, nonostante (con critica)",
+      "structure": "forma piana, aggettivo in な + な, oppure nome + の + くせに",
+      "explanation": "Come のに, ma con un tono di critica o disprezzo verso la persona di cui si parla. Il soggetto delle due parti è lo stesso. Non si usa con i superiori.",
+      "examples": [
+        { "ja": "{知|し}っているくせに、{教|おし}えてくれない。", "it": "Lo sa benissimo, eppure non me lo dice." },
+        { "ja": "{彼|かれ}は{学生|がくせい}のくせに、{高|たか}い{車|くるま}に{乗|の}っている。", "it": "Pur essendo uno studente, va in giro con una macchina costosa." }
+      ],
+      "exercises": [
+        {
+          "kind": "choice",
+          "prompt": "{自分|じぶん}ではできない（　）、{人|ひと}に{文句|もんく}ばかり{言|い}う。",
+          "choices": ["おかげで", "ために", "たびに", "くせに"],
+          "answer": 3,
+          "it": "Lui per primo non ne è capace, eppure non fa che lamentarsi degli altri.",
+          "explanation": "Una contraddizione criticata da chi parla: くせに."
+        },
+        {
+          "kind": "choice",
+          "prompt": "{弟|おとうと}は{子|こ}ども（　）くせに、{大人|おとな}のようなことを{言|い}う。",
+          "choices": ["の", "な", "だ", "で"],
+          "answer": 0,
+          "it": "Mio fratello, pur essendo un bambino, parla come un adulto.",
+          "explanation": "Tra un nome e くせに serve の: 子どものくせに."
+        },
+        {
+          "kind": "order",
+          "before": "{兄|あに}は",
+          "pieces": ["{料理|りょうり}が", "{下手|へた}な", "くせに", "{人|ひと}の"],
+          "star": 2,
+          "after": "{料理|りょうり}に{文句|もんく}を{言|い}う。",
+          "it": "Mio fratello, pur cucinando male, critica i piatti degli altri.",
+          "explanation": "料理が下手な + くせに, poi 人の料理に文句を言う."
+        }
+      ]
+    },
+    {
+      "slug": "n3-ba-hodo",
+      "level": "N3",
+      "title": "〜ば〜ほど",
+      "meaning": "più… più…",
+      "structure": "verbo (forma in ば) + lo stesso verbo (forma del dizionario) + ほど. Aggettivi in い: 〜ければ〜いほど. Aggettivi in な: 〜なら〜なほど",
+      "explanation": "Al crescere della prima cosa cresce anche la seconda. La parola viene ripetuta due volte: prima al condizionale, poi davanti a ほど.",
+      "examples": [
+        { "ja": "{練習|れんしゅう}すればするほど、{上手|じょうず}になります。", "it": "Più ci si esercita, più si diventa bravi." },
+        { "ja": "{駅|えき}に{近|ちか}ければ{近|ちか}いほど、{家賃|やちん}が{高|たか}い。", "it": "Più si è vicini alla stazione, più l'affitto è alto." }
+      ],
+      "exercises": [
+        {
+          "kind": "choice",
+          "prompt": "この{本|ほん}は{読|よ}めば（　）ほど、おもしろくなる。",
+          "choices": ["{読|よ}んだ", "{読|よ}む", "{読|よ}め", "{読|よ}んで"],
+          "answer": 1,
+          "it": "Questo libro, più lo si legge, più diventa interessante.",
+          "explanation": "Dopo la forma in ば si ripete il verbo alla forma del dizionario: 読めば読むほど."
+        },
+        {
+          "kind": "choice",
+          "prompt": "{荷物|にもつ}は（　）{軽|かる}いほどいい。",
+          "choices": ["{軽|かる}くて", "{軽|かる}いので", "{軽|かる}ければ", "{軽|かる}くても"],
+          "answer": 2,
+          "it": "I bagagli, più sono leggeri, meglio è.",
+          "explanation": "Aggettivo in い al condizionale: 軽ければ軽いほど."
+        },
+        {
+          "kind": "order",
+          "before": "{外国語|がいこくご}は",
+          "pieces": ["{使|つか}えば", "{使|つか}う", "ほど", "{上手|じょうず}に"],
+          "star": 1,
+          "after": "なります。",
+          "it": "Una lingua straniera, più la si usa, più si migliora.",
+          "explanation": "使えば + 使う + ほど, poi 上手になります."
+        }
+      ]
+    },
+    {
+      "slug": "n3-sae-ba",
+      "level": "N3",
+      "title": "〜さえ〜ば",
+      "meaning": "basta che, purché",
+      "structure": "nome + さえ + verbo o aggettivo (forma in ば). Con un verbo: tema della forma in ます + さえすれば",
+      "explanation": "Indica l'unica condizione necessaria: se c'è quella, il resto non conta.",
+      "examples": [
+        { "ja": "お{金|かね}さえあれば、{何|なん}でも{買|か}えると{思|おも}っていた。", "it": "Pensavo che bastasse avere i soldi per poter comprare qualsiasi cosa." },
+        { "ja": "この{薬|くすり}を{飲|の}みさえすれば、すぐ{治|なお}ります。", "it": "Basta prendere questa medicina e si guarisce subito." }
+      ],
+      "exercises": [
+        {
+          "kind": "choice",
+          "prompt": "{時間|じかん}（　）あれば、{旅行|りょこう}に{行|い}きたい。",
+          "choices": ["ほど", "まで", "さえ", "とか"],
+          "answer": 2,
+          "it": "Se solo avessi tempo, vorrei fare un viaggio.",
+          "explanation": "L'unica condizione che manca è il tempo: 時間さえあれば."
+        },
+        {
+          "kind": "choice",
+          "prompt": "あなたさえ（　）、{私|わたし}は{何|なに}もいりません。",
+          "choices": ["いて", "いるのに", "いても", "いれば"],
+          "answer": 3,
+          "it": "Mi basta che ci sia tu: non ho bisogno di nient'altro.",
+          "explanation": "さえ richiede il condizionale in ば: いれば."
+        },
+        {
+          "kind": "order",
+          "before": "この{仕事|しごと}は",
+          "pieces": ["やる", "{気|き}", "さえ", "あれば"],
+          "star": 2,
+          "after": "、だれでもできます。",
+          "it": "Questo lavoro lo può fare chiunque, basta averne la voglia.",
+          "explanation": "やる気 + さえ + あれば."
+        }
+      ]
+    },
+    {
+      "slug": "n3-dake-de-naku",
+      "level": "N3",
+      "title": "〜だけでなく",
+      "meaning": "non solo… ma anche",
+      "structure": "forma piana oppure nome + だけでなく、〜も",
+      "explanation": "Aggiunge un secondo elemento al primo; nella seconda parte c'è quasi sempre も. Nel parlato si dice anche だけじゃなくて.",
+      "examples": [
+        { "ja": "{彼女|かのじょ}は{英語|えいご}だけでなく、フランス{語|ご}も{話|はな}せます。", "it": "Lei parla non solo inglese ma anche francese." },
+        { "ja": "この{店|みせ}は{安|やす}いだけでなく、{味|あじ}もいい。", "it": "Questo locale non è solo economico: si mangia anche bene." }
+      ],
+      "exercises": [
+        {
+          "kind": "choice",
+          "prompt": "この{公園|こうえん}は{子|こ}ども（　）、{大人|おとな}にも{人気|にんき}がある。",
+          "choices": ["だけなので", "だけでなく", "だけなのに", "だけでは"],
+          "answer": 1,
+          "it": "Questo parco piace non solo ai bambini ma anche agli adulti.",
+          "explanation": "La seconda parte aggiunge un elemento con も: だけでなく."
+        },
+        {
+          "kind": "choice",
+          "prompt": "{彼|かれ}は{歌|うた}が{上手|じょうず}な（　）、ダンスもできる。",
+          "choices": ["だけでなく", "だけなく", "だけじゃ", "だけにも"],
+          "answer": 0,
+          "it": "Non solo canta bene: sa anche ballare.",
+          "explanation": "La forma corretta è だけでなく, con で."
+        },
+        {
+          "kind": "order",
+          "before": "{肉|にく}",
+          "pieces": ["だけで", "なく", "{野菜|やさい}も", "{食|た}べた"],
+          "star": 1,
+          "after": "ほうがいいですよ。",
+          "it": "È meglio mangiare non solo carne ma anche verdura.",
+          "explanation": "肉だけで + なく, poi 野菜も食べたほうがいい."
+        }
+      ]
+    },
+    {
+      "slug": "n3-rashii",
+      "level": "N3",
+      "title": "〜らしい",
+      "meaning": "pare che / tipico di",
+      "structure": "forma piana oppure nome + らしい",
+      "explanation": "Primo uso: una supposizione basata su ciò che si è sentito o letto. Secondo uso, dopo un nome: avere le qualità tipiche di quella cosa (春らしい, «proprio primaverile»). Si coniuga come un aggettivo in い.",
+      "examples": [
+        { "ja": "{天気予報|てんきよほう}によると、{明日|あした}は{雪|ゆき}が{降|ふ}るらしい。", "it": "Secondo le previsioni, pare che domani nevichi." },
+        { "ja": "{今日|きょう}は{春|はる}らしい{暖|あたた}かい{日|ひ}です。", "it": "Oggi è una giornata mite, proprio primaverile." }
+      ],
+      "exercises": [
+        {
+          "kind": "choice",
+          "prompt": "うわさでは、あの{二人|ふたり}は{来月|らいげつ}{結婚|けっこん}する（　）。",
+          "choices": ["ばかりだ", "ことにする", "らしい", "ようにする"],
+          "answer": 2,
+          "it": "Si dice in giro che quei due si sposino il mese prossimo.",
+          "explanation": "Un'informazione sentita da altri (うわさでは): らしい."
+        },
+        {
+          "kind": "choice",
+          "prompt": "{泣|な}くなんて、いつも{元気|げんき}な{彼|かれ}（　）ないね。",
+          "choices": ["らしい", "らしく", "らしくて", "らしいで"],
+          "answer": 1,
+          "it": "Piangere… non è da lui, che è sempre così allegro.",
+          "explanation": "らしい si coniuga come un aggettivo in い: al negativo らしくない."
+        },
+        {
+          "kind": "order",
+          "before": "{今日|きょう}は",
+          "pieces": ["{本当|ほんとう}に", "{夏|なつ}", "らしい", "{天気|てんき}"],
+          "star": 2,
+          "after": "ですね。",
+          "it": "Oggi è un tempo davvero estivo.",
+          "explanation": "本当に + 夏らしい, che qualifica 天気."
+        }
+      ]
+    },
+    {
+      "slug": "n3-te-hoshii",
+      "level": "N3",
+      "title": "〜てほしい",
+      "meaning": "vorrei che (qualcuno) facesse",
+      "structure": "persona + に + verbo (forma in て) + ほしい. Al negativo: 〜ないでほしい",
+      "explanation": "Esprime il desiderio che un'altra persona faccia qualcosa. La persona a cui ci si rivolge prende に. Con i superiori è troppo diretto: si preferisce 〜ていただきたい.",
+      "examples": [
+        { "ja": "もっとゆっくり{話|はな}してほしいです。", "it": "Vorrei che parlasse più lentamente." },
+        { "ja": "{親|おや}には{長生|ながい}きしてほしい。", "it": "Vorrei che i miei genitori vivessero a lungo." }
+      ],
+      "exercises": [
+        {
+          "kind": "choice",
+          "prompt": "すみませんが、{窓|まど}を（　）ほしいんですが。",
+          "choices": ["{閉|し}め", "{閉|し}める", "{閉|し}めた", "{閉|し}めて"],
+          "answer": 3,
+          "it": "Mi scusi, vorrei che chiudesse la finestra.",
+          "explanation": "ほしい segue la forma in て: 閉めてほしい."
+        },
+        {
+          "kind": "choice",
+          "prompt": "ここではたばこを（　）ほしい。",
+          "choices": ["{吸|す}わないで", "{吸|す}わなくて", "{吸|す}わない", "{吸|す}わず"],
+          "answer": 0,
+          "it": "Vorrei che qui non si fumasse.",
+          "explanation": "Al negativo si usa ないで, non なくて: 吸わないでほしい."
+        },
+        {
+          "kind": "order",
+          "before": "{子|こ}どもには",
+          "pieces": ["{自分|じぶん}の", "{好|す}きな", "{道|みち}を", "{進|すす}んで"],
+          "star": 3,
+          "after": "ほしい。",
+          "it": "Vorrei che mio figlio seguisse la strada che preferisce.",
+          "explanation": "自分の好きな道を + 進んで + ほしい."
+        }
+      ]
+    },
+    {
+      "slug": "n3-beki-da",
+      "level": "N3",
+      "title": "〜べきだ",
+      "meaning": "si dovrebbe, è giusto",
+      "structure": "verbo (forma del dizionario) + べきだ (する → すべきだ oppure するべきだ). Al negativo: 〜べきではない",
+      "explanation": "Il giudizio di chi parla su ciò che è giusto fare. Non si usa per obblighi di legge o regolamenti, e il negativo si forma su べき, non sul verbo.",
+      "examples": [
+        { "ja": "{約束|やくそく}は{守|まも}るべきだ。", "it": "Le promesse vanno mantenute." },
+        { "ja": "{人|ひと}の{悪口|わるぐち}を{言|い}うべきではない。", "it": "Non si dovrebbe parlare male degli altri." }
+      ],
+      "exercises": [
+        {
+          "kind": "choice",
+          "prompt": "{借|か}りたお{金|かね}は、すぐに（　）べきだ。",
+          "choices": ["{返|かえ}して", "{返|かえ}す", "{返|かえ}した", "{返|かえ}そう"],
+          "answer": 1,
+          "it": "I soldi presi in prestito vanno restituiti subito.",
+          "explanation": "べきだ segue la forma del dizionario: 返す."
+        },
+        {
+          "kind": "choice",
+          "prompt": "{体|からだ}の{調子|ちょうし}が{悪|わる}いときは、{無理|むり}を（　）。",
+          "choices": ["しないべきだ", "するべきない", "するべきではない", "しべきではない"],
+          "answer": 2,
+          "it": "Quando non si sta bene non bisogna strafare.",
+          "explanation": "Il negativo si forma su べき: するべきではない. La forma «しないべきだ» non esiste."
+        },
+        {
+          "kind": "order",
+          "before": "{約束|やくそく}した",
+          "pieces": ["こと", "は", "{守|まも}る", "べき"],
+          "star": 2,
+          "after": "だと{思|おも}います。",
+          "it": "Penso che ciò che si è promesso vada mantenuto.",
+          "explanation": "約束したことは + 守る + べきだ."
+        }
+      ]
+    },
+    {
+      "slug": "n3-kawari-ni",
+      "level": "N3",
+      "title": "〜かわりに",
+      "meaning": "al posto di / in cambio, d'altra parte",
+      "structure": "verbo (forma piana) oppure nome + の + かわりに",
+      "explanation": "Tre usi: fare una cosa invece di un'altra, agire al posto di qualcuno, oppure bilanciare un lato con un altro (un difetto compensato da un pregio, un favore ricambiato).",
+      "examples": [
+        { "ja": "{部長|ぶちょう}のかわりに、{私|わたし}が{会議|かいぎ}に{出|で}ます。", "it": "Alla riunione vado io al posto del direttore." },
+        { "ja": "{日本語|にほんご}を{教|おし}えてもらうかわりに、{英語|えいご}を{教|おし}えます。", "it": "In cambio delle lezioni di giapponese, io insegno inglese." }
+      ],
+      "exercises": [
+        {
+          "kind": "choice",
+          "prompt": "{今日|きょう}は{雨|あめ}なので、{公園|こうえん}へ{行|い}く（　）、{家|いえ}で{映画|えいが}を{見|み}ました。",
+          "choices": ["おかげで", "たびに", "かわりに", "くせに"],
+          "answer": 2,
+          "it": "Oggi pioveva, quindi invece di andare al parco ho guardato un film a casa.",
+          "explanation": "Una cosa fatta invece di un'altra: かわりに."
+        },
+        {
+          "kind": "choice",
+          "prompt": "{母|はは}（　）かわりに、{私|わたし}が{晩|ばん}ご{飯|はん}を{作|つく}りました。",
+          "choices": ["な", "の", "が", "を"],
+          "answer": 1,
+          "it": "Ho preparato io la cena al posto di mia madre.",
+          "explanation": "Tra un nome e かわりに serve の: 母のかわりに."
+        },
+        {
+          "kind": "order",
+          "before": "この{部屋|へや}は",
+          "pieces": ["{駅|えき}から", "{遠|とお}い", "かわりに", "{家賃|やちん}が"],
+          "star": 2,
+          "after": "{安|やす}いです。",
+          "it": "Questa stanza è lontana dalla stazione, ma in compenso l'affitto è basso.",
+          "explanation": "駅から遠い + かわりに, poi il lato positivo: 家賃が安い."
+        }
+      ]
+    }
+  ]
+}

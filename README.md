@@ -1,6 +1,6 @@
 # KanjiFlow
 
-Piattaforma personale di studio dei kanji con ripetizione dilazionata, interfaccia in italiano e focus JLPT N3. Attorno ai kanji, che restano il centro, c'è la lettura (読解) in stile JLPT, collegata ai progressi sui kanji.
+Piattaforma personale di studio dei kanji con ripetizione dilazionata, interfaccia in italiano e focus JLPT N3. Attorno ai kanji, che restano il centro, ci sono la lettura (読解) e la grammatica (文法) in stile JLPT, collegate ai progressi sui kanji.
 
 ## Avvio rapido (locale, SQLite)
 
@@ -35,11 +35,11 @@ In produzione, senza `APP_PASSWORD_HASH_B64` valido e `SESSION_SECRET` l'app ris
 
 | Comando | Cosa fa |
 |---|---|
-| `npm test` | Test unitari (motore SRS, validatori, coda lezioni, lettura, date, auth) |
-| `npm run test:e2e` | Playwright: onboarding → lezioni → ripassi con correzione manuale → lettura → mobile |
+| `npm test` | Test unitari (motore SRS, validatori, coda lezioni, lettura, grammatica, date, auth) |
+| `npm run test:e2e` | Playwright: onboarding → lezioni → ripassi con correzione manuale → lettura → grammatica → mobile |
 | `npm run typecheck` / `npm run lint` | Controlli statici |
 | `npm run content:fetch` / `content:build` | Scarica le fonti pinnate e ricostruisce `data/dataset/kanjiflow-n5-n3.json` |
-| `npm run db:seed` | Import idempotente del dataset e dei brani di lettura (non tocca progressi, tentativi, note, sinonimi e mnemonici personali) |
+| `npm run db:seed` | Import idempotente del dataset, dei brani di lettura e della grammatica (non tocca progressi, tentativi, note, sinonimi e mnemonici personali) |
 
 ## Architettura
 
@@ -49,11 +49,12 @@ src/domain/        logica pura, senza React né database (testata con Vitest)
   answers/         romaji→kana, normalizzazione, validatori di lettura e significato, feedback
   curriculum/      coda lezioni per i percorsi guidato / JLPT / personalizzato
   reading/         markup dei brani, collegamento ai soggetti, leggibilità e furigana adattivo
+  grammar/         formato dei punti grammaticali e costruzione degli esercizi
 src/server/        accesso ai dati (Prisma), transazioni, servizi di studio e statistiche
 src/app/           route App Router e server action (sottili: validano con Zod e delegano)
 src/components/    UI (componenti stile shadcn/ui scritti a mano, Tailwind v4)
 scripts/content/   pipeline dati riproducibile
-data/              fonti pinnate, traduzioni italiane curate (TSV), dataset versionato, brani di lettura
+data/              fonti pinnate, traduzioni italiane curate (TSV), dataset versionato, brani di lettura, grammatica
 ```
 
 ### Motore SRS
@@ -93,6 +94,24 @@ Un ripasso si chiude solo quando tutte le domande richieste hanno avuto risposta
 
 I brani sono stati scritti per KanjiFlow, non provengono da prove ufficiali e non sono stati rivisti da un madrelingua.
 
+### Grammatica (文法)
+
+40 punti grammaticali originali (10 N4 di riscaldamento, 30 N3), ognuno con scheda in italiano (significato, formazione, uso, due esempi con audio) e tre esercizi nei formati JLPT: due di scelta della forma (文法形式の判断) e uno di riordino con la ★ (文の組み立て). Manca ancora il terzo formato, il testo con più spazi vuoti (文章の文法).
+
+**SRS in una coda separata**: stessi stadi, intervalli e regola di regressione dei kanji (`src/domain/srs`), ma tabelle proprie (`UserGrammarProgress`, `GrammarAttempt`): il contatore e la coda dei ripassi kanji non cambiano.
+- *Lezione*: scheda, poi un esercizio. Con la risposta corretta il punto entra ad Apprendista 1; con quella sbagliata torna in fondo alla sessione con la scheda e un altro esercizio. Limite giornaliero in Impostazioni (predefinito 3 punti nuovi al giorno); l'ordine è N4, poi N3.
+- *Ripasso*: un esercizio per punto in scadenza, a rotazione (quello visto meno di recente). Giusto = uno stadio in più; sbagliato = regressione del motore SRS con un errore.
+- *Pratica libera* dalla scheda del punto: non modifica lo stadio.
+- *La conosco già*: porta il punto a Maestro con il ripasso distribuito nel mese, come per i kanji noti; *Togli dai ripassi* lo riporta tra i punti nuovi.
+
+**Correzione**: come per la lettura, le soluzioni non sono nella pagina. La server action corregge e aggiorna lo SRS nella stessa transazione; ogni risposta ha un `clientAttemptId`, quindi un doppio invio non conta due volte. Un ripasso vale solo se il punto è davvero in scadenza.
+
+**Legame con i kanji**: esempi ed esercizi usano lo stesso markup dei brani e lo stesso furigana adattivo.
+
+**Scrivere un punto** (`data/curated/grammar/*.json`, poi `npm run db:seed`): negli esercizi a scelta la frase contiene un solo segnaposto `（　）`; in quelli di riordino si scrivono i quattro pezzi nell'ordine giusto e la posizione della ★, e l'import li mescola in modo deterministico. I pezzi devono avere un solo ordine possibile: meglio catene in cui ogni pezzo dipende dal precedente che due complementi scambiabili.
+
+Schede ed esercizi sono stati scritti per KanjiFlow, non provengono da prove ufficiali e non sono stati rivisti da un madrelingua.
+
 ## Stato della prima milestone
 
 Funzionante: dashboard con dati reali, lezioni con quiz di acquisizione, ripassi da tastiera, onboarding N3 con test di posizionamento e importazione di kanji noti, esplora e scheda soggetto (stato, storico, sospendi/reimposta/ristudia, note, mnemonici e sinonimi personali), progressi per fascia JLPT, studio extra senza effetti sullo SRS, impostazioni (inclusi intervalli SRS), account multipli con gestione da parte dell'amministratore, PWA installabile.
@@ -103,4 +122,4 @@ Mnemonici generati (modificabili, sostituiti da quelli personali):
 - **kanji N4 e N3**: storie originali in italiano per significato e lettura in `data/curated/it/mnemonics-kanji.tsv`, con parole chiave ricorrenti per i suoni (セイ → SEI, カン → CANE…). Un test verifica che ogni lettura mnemonica citi la lettura studiata.
 - **vocaboli**: spiegazione automatica (`src/domain/content/vocab-mnemonic.ts`) dei kanji componenti e di come se ne ricava la pronuncia, con rendaku, っ, h→p e okurigana; se la lettura non deriva dalle letture di dizionario (今日, 大人…) lo dice invece di inventare un legame.
 
-Non ancora: grammatica (文法, prossima milestone), mnemonici per i kanji N5 e i radicali, pagina statistiche, raccolte personalizzate, import/export e backup, interfaccia in inglese, notifiche. La PWA non funziona offline per lezioni e ripassi: mostra una pagina offline.
+Non ancora: esercizi di grammatica su testo (文章の文法), mnemonici per i kanji N5 e i radicali, pagina statistiche, raccolte personalizzate, import/export e backup, interfaccia in inglese, notifiche. La PWA non funziona offline per lezioni e ripassi: mostra una pagina offline.

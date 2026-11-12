@@ -12,12 +12,13 @@ KanjiFlow non contiene contenuti di WaniKani. Tutti i dati provengono da fonti l
 | Open Anki JLPT Decks | Fascia JLPT **non ufficiale** dei vocaboli N5–N3 | MIT |
 | KanjiFlow (generato) | Significati italiani, nomi italiani dei componenti | CC BY-SA 4.0 (opera derivata) |
 | KanjiFlow (brani di lettura) | Brani N4/N3 in stile JLPT con domande, traduzioni e spiegazioni (`data/curated/reading/`) | CC BY-SA 4.0 (opera originale) |
+| KanjiFlow (grammatica) | Schede dei punti grammaticali N4/N3, esempi ed esercizi in stile JLPT (`data/curated/grammar/`) | CC BY-SA 4.0 (opera originale) |
 
 Note importanti:
 
 - **Il JLPT non pubblica elenchi ufficiali** di kanji o vocaboli dal 2010. Le fasce N5/N4/N3 sono liste della community e nel database hanno `confidence = community`.
 - **I significati italiani sono generati** traducendo le glosse inglesi: ogni riga ha `origin = generated` e `verified = false`. Le glosse inglesi originali restano accettate come risposte.
-- **I brani di lettura sono originali**: non provengono da prove JLPT ufficiali (protette da copyright) e non sono stati rivisti da un madrelingua.
+- **I brani di lettura e la grammatica sono originali**: non provengono da prove JLPT ufficiali (protette da copyright) e non sono stati rivisti da un madrelingua.
 - Il file `kanji-data` include anche dati WaniKani: lo script di build **ne legge solo il campo `jlpt_new`**, tutto il resto viene ignorato.
 - La licenza EDRDG chiede di **aggiornare regolarmente** i dati: aggiorna le versioni in `data/sources.json` ed esegui `npm run content:fetch && npm run content:build`, poi `npm run db:seed`.
 - Attribuzioni visibili nell'app in **Impostazioni → Dati e fonti**.

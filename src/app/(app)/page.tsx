@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BookOpen, BookText, Flame, RefreshCw, Target } from "lucide-react";
+import { BookOpen, BookText, Flame, Languages, RefreshCw, Target } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/misc";
@@ -10,6 +10,7 @@ import { getDashboard } from "@/server/stats/dashboard";
 import { localDateKey } from "@/domain/time";
 import { plainText } from "@/domain/reading/markup";
 import { listPassages, readingOverview } from "@/server/reading/passages";
+import { getGrammarOverview } from "@/server/grammar/points";
 
 export const metadata = { title: "Dashboard" };
 
@@ -26,7 +27,8 @@ const pct = (a: number, b: number) => (b === 0 ? 0 : Math.round((a / b) * 100));
 export default async function DashboardPage() {
   const ctx = await getStudyContext();
   const now = new Date();
-  const [d, passages] = await Promise.all([getDashboard(ctx, now), listPassages(ctx)]);
+  const [d, passages, grammar] = await Promise.all([getDashboard(ctx, now), listPassages(ctx), getGrammarOverview(ctx, now)]);
+  const grammarHref = grammar.dueCount > 0 ? "/grammar/session?mode=review" : grammar.nextLessons.length > 0 ? "/grammar/session?mode=lesson" : "/grammar";
   const reading = readingOverview(passages);
   const bandPct = pct(d.band.kanjiPassed, d.band.kanjiTotal);
   const acc = pct(d.accuracyToday.correct, d.accuracyToday.total);
@@ -58,6 +60,29 @@ export default async function DashboardPage() {
           </span>
         </Link>
       </section>
+
+      {grammar.points.length > 0 && (
+        <Link href={grammarHref} className="group flex items-center gap-4 rounded-lg border border-border/60 bg-surface p-4 transition-colors hover:border-primary/50 sm:p-5">
+          <span className="grid size-10 shrink-0 place-items-center rounded-md bg-primary/15 text-primary">
+            <Languages className="size-5" aria-hidden />
+          </span>
+          <span className="min-w-0 flex-1">
+            <span className="block text-xs text-muted">Grammatica</span>
+            <span className="mt-0.5 block text-[15px] font-medium">
+              {grammar.dueCount} {grammar.dueCount === 1 ? "ripasso" : "ripassi"} · {grammar.nextLessons.length}{" "}
+              {grammar.nextLessons.length === 1 ? "punto nuovo" : "punti nuovi"}
+            </span>
+            <span className="block truncate text-xs text-muted">
+              {grammar.dueCount > 0
+                ? "Ripassa i punti in scadenza"
+                : grammar.nextLessons[0]
+                  ? `Prossimo: ${plainText(grammar.nextLessons[0].title)} (${grammar.nextLessons[0].meaning})`
+                  : "Niente in scadenza: sfoglia le schede"}
+            </span>
+          </span>
+          <span className="hidden shrink-0 text-xs text-secondary group-hover:underline sm:inline">Apri →</span>
+        </Link>
+      )}
 
       {reading.total > 0 && (
         <Link
@@ -204,6 +229,18 @@ export default async function DashboardPage() {
           <Link href="/reviews">Inizia i ripassi</Link>
         </Button>
       </div>
+      <nav aria-label="Altre sezioni" className="flex flex-wrap gap-2 md:hidden">
+        {[
+          ["/subjects", "Esplora"],
+          ["/jlpt", "JLPT"],
+          ["/statistics", "Statistiche"],
+          ["/collections", "Raccolte"],
+        ].map(([href, label]) => (
+          <Link key={href} href={href!} className="rounded-full border border-border px-3 py-1.5 text-xs text-muted hover:text-foreground">
+            {label}
+          </Link>
+        ))}
+      </nav>
     </div>
   );
 }

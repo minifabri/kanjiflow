@@ -3,6 +3,7 @@
  * "Conosciuto" ha lo stesso significato che nel resto dell'app: Guru o oltre, oppure segnato come noto.
  */
 import { isPassedProgress, type ProgressInfo } from "../curriculum/lesson-queue";
+import { kanjiOf, type RubySegment } from "./markup";
 
 export type KanjiState = "known" | "learning" | "new";
 export type FuriganaMode = "adaptive" | "always" | "never";
@@ -41,4 +42,14 @@ export function showFurigana(mode: FuriganaMode, states: readonly KanjiState[], 
   if (mode === "always") return true;
   if (mode === "never") return false;
   return states.length < kanjiInWord || states.some((s) => s !== "known");
+}
+
+/** Regola parola per parola da passare a RubyText, dati gli stati dei kanji dell'utente. */
+export function furiganaRule(mode: FuriganaMode, states: Readonly<Record<string, KanjiState>>): (segment: RubySegment) => boolean {
+  return (segment) =>
+    showFurigana(
+      mode,
+      (segment.k ?? []).map((id) => states[id] ?? "new"),
+      kanjiOf(segment.b).length,
+    );
 }

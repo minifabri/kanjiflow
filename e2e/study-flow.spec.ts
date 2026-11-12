@@ -243,11 +243,92 @@ test.describe.serial("percorso di studio completo", () => {
     expect(modes.map((m) => m.mode)).toEqual(["study", "exam"]);
   });
 
+  test("grammatica: lezioni con scheda ed esercizio, poi ripassi SRS in una coda separata", async ({ page }) => {
+    /** Risponde all'esercizio mostrato leggendo la soluzione dal database (la pagina non la contiene). */
+    const answerCurrent = async (correct: boolean) => {
+      const id = await page.getByTestId("grammar-prompt").getAttribute("data-exercise");
+      const [row] = await query<{ answerIndex: number }>(`SELECT "answerIndex" FROM "GrammarExercise" WHERE "id" = $1`, [id!]);
+      const index = correct ? Number(row!.answerIndex) : (Number(row!.answerIndex) + 1) % 4;
+      await page.getByRole("group", { name: "Risposte" }).getByRole("button").nth(index).click();
+      await expect(page.getByRole("status")).toContainText(correct ? "Corretto" : "Non corretto");
+    };
+    const stages = async () =>
+      (await query<{ srsStage: number }>(`SELECT "srsStage" FROM "UserGrammarProgress" ORDER BY "srsStage"`)).map((r) => Number(r.srsStage));
+    const kanjiDueBefore = await query(`SELECT "id" FROM "UserSubjectProgress" WHERE "nextReviewAt" <= $1`, [new Date()]);
+
+    await page.goto("/grammar");
+    await expect(page.getByRole("heading", { name: "Grammatica", level: 1 })).toBeVisible();
+    await page.getByRole("link", { name: "Studia i punti nuovi" }).click();
+    await expect(page).toHaveURL(/grammar\/session\?mode=lesson/);
+
+    // Primo punto (N4 prima di N3): scheda, poi esercizio superato → entra nei ripassi.
+    await expect(page.getByText("〜たことがある").first()).toBeVisible();
+    await expect(page.getByText("Come si forma")).toBeVisible();
+    await page.keyboard.press("Enter");
+    await answerCurrent(true);
+    await expect(page.getByRole("status")).toContainText("Entra nei ripassi: Apprendista 1");
+    await page.keyboard.press("Enter");
+
+    // Secondo punto sbagliato: non entra nei ripassi e torna in fondo alla sessione con un altro esercizio.
+    await page.getByRole("button", { name: "Ho capito, mettimi alla prova" }).click();
+    const firstTry = await page.getByTestId("grammar-prompt").getAttribute("data-exercise");
+    await answerCurrent(false);
+    await page.getByRole("button", { name: "Avanti" }).click();
+    expect(await stages()).toEqual([1]);
+
+    await page.keyboard.press("Enter");
+    await answerCurrent(true);
+    await page.keyboard.press("Enter");
+
+    await expect(page.getByText("Come si forma")).toBeVisible();
+    await page.keyboard.press("Enter");
+    expect(await page.getByTestId("grammar-prompt").getAttribute("data-exercise")).not.toBe(firstTry);
+    await answerCurrent(true);
+    await page.keyboard.press("Enter");
+    await expect(page.getByRole("heading", { name: "Sessione completata" })).toBeVisible();
+    expect(await stages()).toEqual([1, 1, 1]);
+
+    // Limite giornaliero raggiunto; i ripassi arrivano alla scadenza.
+    await page.goto("/grammar");
+    await expect(page.getByText("Limite di oggi raggiunto")).toBeVisible();
+    await expect(page.getByText("Nessun punto in scadenza.")).toBeVisible();
+    await query(`UPDATE "UserGrammarProgress" SET "nextReviewAt" = $1`, [new Date(Date.now() - 60_000)]);
+    await page.reload();
+    await page.getByRole("link", { name: "Inizia i ripassi" }).click();
+    await answerCurrent(true);
+    await expect(page.getByRole("status")).toContainText("Apprendista 1 → Apprendista 2");
+    await page.keyboard.press("Enter");
+    await answerCurrent(false);
+    await page.keyboard.press("Enter");
+    await answerCurrent(true);
+    await page.keyboard.press("Enter");
+    await expect(page.getByRole("status")).toHaveText("2 su 3 risposte corrette.");
+    expect(await stages()).toEqual([1, 2, 2]);
+
+    // La pratica libera non tocca lo SRS, e i ripassi dei kanji non sono cambiati.
+    await page.goto("/grammar/n4-ta-koto-ga-aru");
+    await page.getByRole("link", { name: /Esercitati/ }).click();
+    await answerCurrent(false);
+    expect(await stages()).toEqual([1, 2, 2]);
+    const kanjiDueAfter = await query(`SELECT "id" FROM "UserSubjectProgress" WHERE "nextReviewAt" <= $1`, [new Date()]);
+    expect(kanjiDueAfter.length).toBe(kanjiDueBefore.length);
+    const modes = await query<{ mode: string; n: number | string }>(`SELECT "mode", COUNT(*) AS n FROM "GrammarAttempt" GROUP BY "mode" ORDER BY "mode"`);
+    expect(modes.map((m) => [m.mode, Number(m.n)])).toEqual([
+      ["lesson", 4],
+      ["practice", 1],
+      ["review", 3],
+    ]);
+  });
+
   test("@mobile la dashboard è utilizzabile su telefono", async ({ page }) => {
     await page.goto("/");
     await expect(page.getByRole("navigation", { name: "Navigazione principale" }).last()).toBeVisible();
     await expect(page.getByText("Ripassi disponibili")).toBeVisible();
     await expect(page.getByRole("navigation", { name: "Navigazione principale" }).last().getByRole("link", { name: "Lettura" })).toBeVisible();
+    await expect(page.getByRole("navigation", { name: "Navigazione principale" }).last().getByRole("link", { name: "Grammatica" })).toBeVisible();
+    // Su telefono Esplora, JLPT, statistiche e raccolte si raggiungono dalla dashboard (su desktop sono nella barra laterale).
+    const phone = (page.viewportSize()?.width ?? 1280) < 768;
+    await expect(page.getByRole("navigation", { name: "Altre sezioni" }).getByRole("link", { name: "Esplora" })).toBeVisible({ visible: phone });
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth);
     expect(overflow).toBe(false);
   });

@@ -1,0 +1,395 @@
+{
+  "format": "kanjiflow-grammar/1",
+  "points": [
+    {
+      "slug": "n3-tokoro-da",
+      "level": "N3",
+      "title": "〜ところだ",
+      "meaning": "stare per / stare facendo / aver appena",
+      "structure": "verbo (forma del dizionario) + ところだ: sto per. Verbo (ている) + ところだ: sto facendo. Verbo (forma in た) + ところだ: ho appena",
+      "explanation": "Colloca l'azione in un momento preciso: subito prima, durante o subito dopo. Si accompagna spesso a これから, 今 e ちょうど.",
+      "examples": [
+        { "ja": "これから{出|で}かけるところです。", "it": "Sto per uscire." },
+        { "ja": "{今|いま}、ご{飯|はん}を{作|つく}っているところです。", "it": "In questo momento sto preparando da mangiare." }
+      ],
+      "exercises": [
+        {
+          "kind": "choice",
+          "prompt": "A「もしもし、{今|いま}どこ？」B「ちょうど{駅|えき}に（　）ところだよ。」",
+          "choices": ["{着|つ}いて", "{着|つ}いた", "{着|つ}き", "{着|つ}こう"],
+          "answer": 1,
+          "it": "A: «Pronto, dove sei?» B: «Sono arrivato proprio adesso alla stazione.»",
+          "explanation": "ちょうど + forma in た + ところ: l'azione si è appena conclusa."
+        },
+        {
+          "kind": "choice",
+          "prompt": "{今|いま}{調|しら}べて（　）ですから、もう{少|すこ}し{待|ま}ってください。",
+          "choices": ["いたばかり", "あるはず", "いるところ", "おくこと"],
+          "answer": 2,
+          "it": "Sto controllando proprio adesso, aspetti ancora un momento.",
+          "explanation": "Un'azione in corso in questo istante: ているところ."
+        },
+        {
+          "kind": "order",
+          "before": "ちょうど{今|いま}、",
+          "pieces": ["{晩|ばん}ご{飯|はん}を", "{食|た}べ{終|お}わった", "ところ", "です"],
+          "star": 1,
+          "after": "。",
+          "it": "Ho finito di cenare proprio adesso.",
+          "explanation": "晩ご飯を + 食べ終わった + ところです."
+        }
+      ]
+    },
+    {
+      "slug": "n3-uchi-ni",
+      "level": "N3",
+      "title": "〜うちに",
+      "meaning": "finché, prima che cambi / mentre",
+      "structure": "verbo (forma del dizionario / ている / forma in ない), aggettivo, oppure nome + の + うちに",
+      "explanation": "Primo uso: fare qualcosa finché dura una condizione, prima che sia troppo tardi. Secondo uso (con ている): mentre si fa una cosa avviene un cambiamento non previsto.",
+      "examples": [
+        { "ja": "{熱|あつ}いうちに{食|た}べてください。", "it": "Mangi finché è caldo." },
+        { "ja": "{忘|わす}れないうちに、メモしておきます。", "it": "Me lo annoto prima di dimenticarlo." }
+      ],
+      "exercises": [
+        {
+          "kind": "choice",
+          "prompt": "{暗|くら}く（　）うちに、{家|いえ}に{帰|かえ}りましょう。",
+          "choices": ["なる", "ならない", "なった", "なって"],
+          "answer": 1,
+          "it": "Torniamo a casa prima che faccia buio.",
+          "explanation": "«Prima che» si rende con la forma in ない + うちに: 暗くならないうちに."
+        },
+        {
+          "kind": "choice",
+          "prompt": "{若|わか}い（　）、いろいろな{国|くに}へ{行|い}ってみたい。",
+          "choices": ["ところに", "ばかりに", "とおりに", "うちに"],
+          "answer": 3,
+          "it": "Finché sono giovane vorrei visitare tanti Paesi.",
+          "explanation": "Finché dura una condizione (essere giovani): うちに."
+        },
+        {
+          "kind": "order",
+          "before": "{本|ほん}を",
+          "pieces": ["{読|よ}んで", "いる", "うちに", "{眠|ねむ}く"],
+          "star": 2,
+          "after": "なってしまいました。",
+          "it": "Mentre leggevo un libro mi è venuto sonno.",
+          "explanation": "読んでいる + うちに, poi il cambiamento: 眠くなってしまいました."
+        }
+      ]
+    },
+    {
+      "slug": "n3-aida-ni",
+      "level": "N3",
+      "title": "〜{間|あいだ}に",
+      "meaning": "mentre, durante (un fatto dentro un periodo)",
+      "structure": "verbo (ている / forma del dizionario) oppure nome + の + {間|あいだ}に",
+      "explanation": "Con に un fatto puntuale avviene in un momento del periodo. Senza に (〜間) l'azione dura per tutto il periodo.",
+      "examples": [
+        { "ja": "{留守|るす}の{間|あいだ}に、{荷物|にもつ}が{届|とど}きました。", "it": "Mentre ero fuori casa è arrivato un pacco." },
+        { "ja": "{子|こ}どもが{寝|ね}ている{間|あいだ}に、{洗濯|せんたく}をします。", "it": "Faccio il bucato mentre il bambino dorme." }
+      ],
+      "exercises": [
+        {
+          "kind": "choice",
+          "prompt": "{私|わたし}が{出|で}かけている（　）、{友達|ともだち}が{来|き|来る}たようです。",
+          "choices": ["{間|あいだ}に", "{間|あいだ}", "うちで", "ながら"],
+          "answer": 0,
+          "it": "Pare che mentre ero fuori sia passato un amico.",
+          "explanation": "La visita è un fatto puntuale dentro il periodo: 間に, con に."
+        },
+        {
+          "kind": "choice",
+          "prompt": "{夏休|なつやす}みの（　）、ずっと{祖母|そぼ}の{家|いえ}にいました。",
+          "choices": ["{間|あいだ}に", "うちに", "{間|あいだ}", "ところ"],
+          "answer": 2,
+          "it": "Per tutte le vacanze estive sono stato a casa della nonna.",
+          "explanation": "ずっと indica che l'azione dura per tutto il periodo: 間, senza に."
+        },
+        {
+          "kind": "order",
+          "before": "{日本|にほん}に",
+          "pieces": ["いる", "{間|あいだ}に", "{一度|いちど}", "{行|い}って"],
+          "star": 1,
+          "after": "みたい{所|ところ}があります。",
+          "it": "C'è un posto dove vorrei andare almeno una volta mentre sono in Giappone.",
+          "explanation": "日本にいる + 間に + 一度行ってみたい, che qualifica 所."
+        }
+      ]
+    },
+    {
+      "slug": "n3-tabi-ni",
+      "level": "N3",
+      "title": "〜たびに",
+      "meaning": "ogni volta che",
+      "structure": "verbo (forma del dizionario) oppure nome + の + たびに",
+      "explanation": "Ogni volta che si verifica la prima cosa, immancabilmente succede anche la seconda. Non si usa per fatti scontati o per abitudini quotidiane banali.",
+      "examples": [
+        { "ja": "この{歌|うた}を{聞|き}くたびに、{学生時代|がくせいじだい}を{思|おも}い{出|だ}します。", "it": "Ogni volta che sento questa canzone mi tornano in mente gli anni da studente." },
+        { "ja": "{父|ちち}は{旅行|りょこう}のたびに、お{土産|みやげ}を{買|か}ってきます。", "it": "A ogni viaggio mio padre torna con dei regali." }
+      ],
+      "exercises": [
+        {
+          "kind": "choice",
+          "prompt": "{彼|かれ}は{会|あ}う（　）、{違|ちが}う{服|ふく}を{着|き}ている。",
+          "choices": ["うちに", "ところに", "たびに", "ばかりに"],
+          "answer": 2,
+          "it": "Ogni volta che lo incontro indossa un vestito diverso.",
+          "explanation": "Una cosa che si ripete a ogni incontro: たびに."
+        },
+        {
+          "kind": "choice",
+          "prompt": "{引|ひ}っ{越|こ}し（　）たびに、{物|もの}が{少|すく}なくなる。",
+          "choices": ["な", "の", "を", "に"],
+          "answer": 1,
+          "it": "A ogni trasloco le mie cose diminuiscono.",
+          "explanation": "Tra un nome e たびに serve の: 引っ越しのたびに."
+        },
+        {
+          "kind": "order",
+          "before": "この{写真|しゃしん}を",
+          "pieces": ["{見|み}る", "たびに", "{家族|かぞく}の", "ことを"],
+          "star": 0,
+          "after": "{思|おも}い{出|だ}します。",
+          "it": "Ogni volta che guardo questa foto penso alla mia famiglia.",
+          "explanation": "写真を + 見る + たびに, poi 家族のことを思い出します."
+        }
+      ]
+    },
+    {
+      "slug": "n3-toshite",
+      "level": "N3",
+      "title": "〜として",
+      "meaning": "in qualità di, come",
+      "structure": "nome + として (anche としては, としても); davanti a un nome: としての",
+      "explanation": "Indica il ruolo, la funzione o la categoria con cui qualcuno agisce o qualcosa viene considerato.",
+      "examples": [
+        { "ja": "{彼|かれ}は{医者|いしゃ}として{働|はたら}いています。", "it": "Lavora come medico." },
+        { "ja": "{留学生|りゅうがくせい}として{日本|にほん}に{来|き|来る}ました。", "it": "Sono venuto in Giappone come studente straniero." }
+      ],
+      "exercises": [
+        {
+          "kind": "choice",
+          "prompt": "{京都|きょうと}は{古|ふる}い{町|まち}（　）{有名|ゆうめい}です。",
+          "choices": ["にとって", "について", "によって", "として"],
+          "answer": 3,
+          "it": "Kyoto è famosa come città antica.",
+          "explanation": "La categoria per cui è nota: 古い町として."
+        },
+        {
+          "kind": "choice",
+          "prompt": "{私|わたし}は{趣味|しゅみ}（　）{絵|え}をかいています。",
+          "choices": ["にとって", "として", "に{対|たい}して", "に{比|くら}べて"],
+          "answer": 1,
+          "it": "Dipingo per hobby.",
+          "explanation": "La funzione che ha l'attività: 趣味として."
+        },
+        {
+          "kind": "order",
+          "before": "{彼女|かのじょ}は",
+          "pieces": ["{日本語|にほんご}の", "{教師|きょうし}", "として", "{働|はたら}いて"],
+          "star": 2,
+          "after": "います。",
+          "it": "Lei lavora come insegnante di giapponese.",
+          "explanation": "日本語の教師 + として + 働いています."
+        }
+      ]
+    },
+    {
+      "slug": "n3-ni-totte",
+      "level": "N3",
+      "title": "〜にとって",
+      "meaning": "per (dal punto di vista di)",
+      "structure": "nome (persona o gruppo) + にとって (anche にとっては, にとっても)",
+      "explanation": "Introduce il punto di vista da cui si dà un giudizio: per questo è seguita da valutazioni come 大切だ, 難しい, 必要だ. Non si usa con azioni o atteggiamenti rivolti a qualcuno (lì serve に対して).",
+      "examples": [
+        { "ja": "{私|わたし}にとって、{家族|かぞく}が{一番|いちばん}{大切|たいせつ}です。", "it": "Per me la famiglia è la cosa più importante." },
+        { "ja": "{外国人|がいこくじん}にとって、{漢字|かんじ}は{難|むずか}しい。", "it": "Per gli stranieri i kanji sono difficili." }
+      ],
+      "exercises": [
+        {
+          "kind": "choice",
+          "prompt": "{子|こ}ども（　）、{遊|あそ}びは{大切|たいせつ}な{勉強|べんきょう}だ。",
+          "choices": ["にとって", "に{対|たい}して", "として", "によって"],
+          "answer": 0,
+          "it": "Per i bambini il gioco è un modo importante di imparare.",
+          "explanation": "Un giudizio (大切な勉強だ) dal punto di vista dei bambini: にとって."
+        },
+        {
+          "kind": "choice",
+          "prompt": "この{問題|もんだい}は{私|わたし}（　）{難|むずか}しすぎます。",
+          "choices": ["について", "によって", "にとって", "にしたがって"],
+          "answer": 2,
+          "it": "Questo problema per me è troppo difficile.",
+          "explanation": "Il punto di vista di chi giudica difficile: 私にとって."
+        },
+        {
+          "kind": "order",
+          "before": "",
+          "pieces": ["{学生|がくせい}に", "とって", "{一番|いちばん}", "{大切|たいせつ}な"],
+          "star": 1,
+          "after": "ことは{何|なん}でしょうか。",
+          "it": "Qual è la cosa più importante per uno studente?",
+          "explanation": "学生に + とって + 一番大切な, che qualifica こと."
+        }
+      ]
+    },
+    {
+      "slug": "n3-ni-taishite",
+      "level": "N3",
+      "title": "〜に{対|たい}して",
+      "meaning": "nei confronti di, verso / in contrasto con",
+      "structure": "nome + に{対|たい}して; davanti a un nome: に{対|たい}する",
+      "explanation": "Indica il destinatario di un'azione, di un atteggiamento o di un sentimento. Dopo una frase con の può anche contrapporre due cose.",
+      "examples": [
+        { "ja": "{先生|せんせい}に{対|たい}して、そんな{言|い}い{方|かた}をしてはいけません。", "it": "Con un insegnante non ci si esprime in quel modo." },
+        { "ja": "{兄|あに}が{静|しず}かなのに{対|たい}して、{弟|おとうと}はよく{話|はな}す。", "it": "Mentre il fratello maggiore è tranquillo, il minore parla molto." }
+      ],
+      "exercises": [
+        {
+          "kind": "choice",
+          "prompt": "お{客|きゃく}さん（　）、{失礼|しつれい}なことを{言|い}ってはいけない。",
+          "choices": ["にとって", "に{対|たい}して", "として", "によって"],
+          "answer": 1,
+          "it": "Ai clienti non si devono dire cose scortesi.",
+          "explanation": "Il destinatario di un comportamento: に対して."
+        },
+        {
+          "kind": "choice",
+          "prompt": "{彼|かれ}の{意見|いけん}（　）{反対|はんたい}の{人|ひと}も{多|おお}い。",
+          "choices": ["にとって", "として", "に{比|くら}べて", "に{対|たい}して"],
+          "answer": 3,
+          "it": "Sono in molti anche a essere contrari alla sua opinione.",
+          "explanation": "L'oggetto verso cui si è contrari: 意見に対して."
+        },
+        {
+          "kind": "order",
+          "before": "この{質問|しつもん}に",
+          "pieces": ["{対|たい}する", "{答|こた}えは", "まだ", "{出|で}て"],
+          "star": 0,
+          "after": "いません。",
+          "it": "A questa domanda non c'è ancora una risposta.",
+          "explanation": "質問に + 対する qualifica 答え; poi まだ出ていません."
+        }
+      ]
+    },
+    {
+      "slug": "n3-ni-tsuite",
+      "level": "N3",
+      "title": "〜について",
+      "meaning": "riguardo a, su",
+      "structure": "nome + について (anche については, についても); davanti a un nome: についての",
+      "explanation": "Indica l'argomento di cui si parla, si scrive, si pensa o si fa ricerca.",
+      "examples": [
+        { "ja": "{日本|にほん}の{文化|ぶんか}について{調|しら}べています。", "it": "Sto facendo ricerche sulla cultura giapponese." },
+        { "ja": "この{件|けん}については、{後|あと}で{連絡|れんらく}します。", "it": "Su questa questione la contatterò più tardi." }
+      ],
+      "exercises": [
+        {
+          "kind": "choice",
+          "prompt": "{将来|しょうらい}の{仕事|しごと}（　）、{両親|りょうしん}と{話|はな}し{合|あ}った。",
+          "choices": ["にとって", "として", "について", "に{比|くら}べて"],
+          "answer": 2,
+          "it": "Ho discusso con i miei genitori del mio futuro lavoro.",
+          "explanation": "L'argomento della discussione: について."
+        },
+        {
+          "kind": "choice",
+          "prompt": "これは{日本|にほん}の{歴史|れきし}（　）{本|ほん}です。",
+          "choices": ["について", "についての", "についた", "についてな"],
+          "answer": 1,
+          "it": "Questo è un libro sulla storia del Giappone.",
+          "explanation": "Davanti a un nome (本) serve la forma con の: についての."
+        },
+        {
+          "kind": "order",
+          "before": "{明日|あした}の",
+          "pieces": ["{会議|かいぎ}で", "{新|あたら}しい", "{計画|けいかく}に", "ついて"],
+          "star": 2,
+          "after": "{説明|せつめい}します。",
+          "it": "Nella riunione di domani illustrerò il nuovo progetto.",
+          "explanation": "明日の会議で + 新しい計画に + ついて + 説明します."
+        }
+      ]
+    },
+    {
+      "slug": "n3-ni-yotte",
+      "level": "N3",
+      "title": "〜によって",
+      "meaning": "a seconda di / per mezzo di / da (agente)",
+      "structure": "nome + によって; davanti a un nome: による",
+      "explanation": "Ha più usi: una differenza che dipende da qualcosa (a seconda di), il mezzo o la causa, e l'autore di un'azione al passivo, soprattutto per opere e scoperte.",
+      "examples": [
+        { "ja": "{国|くに}によって、{習慣|しゅうかん}が{違|ちが}います。", "it": "Le usanze cambiano a seconda del Paese." },
+        { "ja": "この{小説|しょうせつ}は{有名|ゆうめい}な{作家|さっか}によって{書|か}かれました。", "it": "Questo romanzo è stato scritto da un autore famoso." }
+      ],
+      "exercises": [
+        {
+          "kind": "choice",
+          "prompt": "{人|ひと}（　）{考|かんが}え{方|かた}はいろいろだ。",
+          "choices": ["にとって", "によって", "について", "として"],
+          "answer": 1,
+          "it": "Il modo di pensare varia da persona a persona.",
+          "explanation": "Una differenza che dipende da qualcosa (いろいろだ): によって."
+        },
+        {
+          "kind": "choice",
+          "prompt": "この{建物|たてもの}は{有名|ゆうめい}な{建築家|けんちくか}（　）{設計|せっけい}された。",
+          "choices": ["について", "に{対|たい}して", "にとって", "によって"],
+          "answer": 3,
+          "it": "Questo edificio è stato progettato da un architetto famoso.",
+          "explanation": "L'autore di un'opera in una frase passiva: によって."
+        },
+        {
+          "kind": "order",
+          "before": "",
+          "pieces": ["{天気|てんき}に", "よって", "{出発|しゅっぱつ}の", "{時間|じかん}が"],
+          "star": 2,
+          "after": "{変|か}わることがあります。",
+          "it": "L'orario di partenza può cambiare a seconda del tempo.",
+          "explanation": "天気に + よって, poi 出発の時間が変わる."
+        }
+      ]
+    },
+    {
+      "slug": "n3-ni-kurabete",
+      "level": "N3",
+      "title": "〜に{比|くら}べて",
+      "meaning": "rispetto a, in confronto a",
+      "structure": "nome + に{比|くら}べて oppure に{比|くら}べると",
+      "explanation": "Prende un termine di paragone e dice in che cosa l'altro è diverso. Più esplicito di より.",
+      "examples": [
+        { "ja": "{去年|きょねん}に{比|くら}べて、{今年|ことし}は{雨|あめ}が{多|おお}い。", "it": "Rispetto all'anno scorso, quest'anno piove di più." },
+        { "ja": "{東京|とうきょう}に{比|くら}べると、この{町|まち}は{静|しず}かです。", "it": "In confronto a Tokyo questa città è tranquilla." }
+      ],
+      "exercises": [
+        {
+          "kind": "choice",
+          "prompt": "{兄|あに}（　）、{弟|おとうと}のほうが{背|せ}が{高|たか}い。",
+          "choices": ["にとって", "について", "に{比|くら}べて", "として"],
+          "answer": 2,
+          "it": "Rispetto al fratello maggiore, il minore è più alto.",
+          "explanation": "Un confronto tra due persone (のほうが): に比べて."
+        },
+        {
+          "kind": "choice",
+          "prompt": "{十年前|じゅうねんまえ}に{比|くら}べる（　）、{物|もの}の{値段|ねだん}がずいぶん{上|あ}がった。",
+          "choices": ["と", "て", "に", "で"],
+          "answer": 0,
+          "it": "In confronto a dieci anni fa i prezzi sono saliti parecchio.",
+          "explanation": "Dopo la forma del dizionario 比べる si usa と: に比べると."
+        },
+        {
+          "kind": "order",
+          "before": "{今年|ことし}の{冬|ふゆ}は",
+          "pieces": ["{去年|きょねん}の", "{冬|ふゆ}に", "{比|くら}べて", "ずっと"],
+          "star": 2,
+          "after": "{暖|あたた}かい。",
+          "it": "L'inverno di quest'anno è molto più mite di quello dell'anno scorso.",
+          "explanation": "去年の冬に + 比べて + ずっと暖かい."
+        }
+      ]
+    }
+  ]
+}
