@@ -32,6 +32,36 @@ test.describe.serial("percorso di studio completo", () => {
     await expect(page.getByText("Progressione N3")).toBeVisible();
   });
 
+  test("stimolo: una domanda a un tocco in cima alla dashboard", async ({ page }) => {
+    await page.goto("/");
+    const card = page.getByRole("region", { name: /Stimolo/ });
+    const options = card.getByRole("list", { name: "Risposte possibili" }).getByRole("button");
+    await expect(options).toHaveCount(4);
+    const prompt = await card.locator("p").first().textContent();
+
+    // Ricaricando, la domanda della fascia resta la stessa finché non si risponde.
+    await page.reload();
+    await expect(card.locator("p").first()).toHaveText(prompt ?? "");
+    await page.waitForLoadState("networkidle"); // i pulsanti rispondono solo a pagina idratata
+
+    await options.first().click();
+    await expect(card.getByText(/Esatto!|Non proprio/)).toBeVisible();
+    await expect(card.getByRole("link", { name: "Apri la scheda" })).toBeVisible();
+    await expect(card.getByText(/oggi [01]\/1/)).toBeVisible();
+
+    await card.getByRole("button", { name: "Un'altra domanda" }).click();
+    await expect(options.first()).toBeEnabled();
+    await page.keyboard.press("2");
+    await expect(card.getByText(/oggi [0-2]\/2/)).toBeVisible();
+
+    // Lo stimolo non conta come ripasso e, una volta fatto, la scheda si riduce a un invito.
+    await page.reload();
+    await expect(card.getByText(/Fatto\. Il prossimo ti aspetta/)).toBeVisible();
+    await expect(card.getByRole("button", { name: "Un'altra domanda" })).toBeVisible();
+    const [row] = await query<{ n: number | string }>(`SELECT COUNT(*) AS n FROM "ReviewAttempt"`);
+    expect(Number(row?.n)).toBe(0);
+  });
+
   test("lezioni: studio, quiz di acquisizione e completamento", async ({ page }) => {
     await page.goto("/lessons");
     await page.getByRole("link", { name: "Inizia le lezioni" }).first().click();
@@ -66,6 +96,8 @@ test.describe.serial("percorso di studio completo", () => {
     await page.goto("/reviews");
     const input = page.locator("#answer");
     await expect(input).toBeVisible();
+    // L'ordine delle domande è casuale e viene rimescolato all'idratazione: si aspetta che la pagina sia ferma.
+    await page.waitForLoadState("networkidle");
 
     // Un "riprova" (lettura con caratteri non kana) non cancella il testo e non toglie il fuoco.
     if ((await page.locator("[data-subject-id]").getAttribute("data-question")) === "reading") {

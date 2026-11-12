@@ -31,7 +31,9 @@ jobs:
       - run: npm test
       - run: npx prisma migrate deploy && npm run db:seed
       - run: npm run build
-      - run: npx playwright install --with-deps chromium
+      # Senza --with-deps: le librerie di Chromium sono già nell'immagine del runner e l'app porta i propri font;
+      # apt servirebbe solo per font di sistema aggiuntivi e rende il job dipendente dai mirror Ubuntu.
+      - run: npx playwright install chromium
       - run: npm run test:e2e
     services:
       postgres:

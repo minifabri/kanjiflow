@@ -5,8 +5,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/misc";
 import { ForecastChart } from "@/components/dashboard/forecast-chart";
 import { Heatmap } from "@/components/dashboard/heatmap";
+import { SparkCard } from "@/components/dashboard/spark-card";
 import { getStudyContext } from "@/server/study/context";
 import { getDashboard } from "@/server/stats/dashboard";
+import { getSparkState } from "@/server/study/spark";
 import { localDateKey } from "@/domain/time";
 import { plainText } from "@/domain/reading/markup";
 import { listPassages, readingOverview } from "@/server/reading/passages";
@@ -27,7 +29,12 @@ const pct = (a: number, b: number) => (b === 0 ? 0 : Math.round((a / b) * 100));
 export default async function DashboardPage() {
   const ctx = await getStudyContext();
   const now = new Date();
-  const [d, passages, grammar] = await Promise.all([getDashboard(ctx, now), listPassages(ctx), getGrammarOverview(ctx, now)]);
+  const [d, spark, passages, grammar] = await Promise.all([
+    getDashboard(ctx, now),
+    getSparkState(ctx, now),
+    listPassages(ctx),
+    getGrammarOverview(ctx, now),
+  ]);
   const grammarHref = grammar.dueCount > 0 ? "/grammar/session?mode=review" : grammar.nextLessons.length > 0 ? "/grammar/session?mode=lesson" : "/grammar";
   const reading = readingOverview(passages);
   const bandPct = pct(d.band.kanjiPassed, d.band.kanjiTotal);
@@ -41,6 +48,8 @@ export default async function DashboardPage() {
         </h1>
         <p className="mt-1.5 text-sm text-muted">Continua il tuo percorso verso {ctx.settings.targetJlpt}.</p>
       </section>
+
+      <SparkCard initial={spark} />
 
       <section className="grid grid-cols-2 gap-3" aria-label="Azioni principali">
         <Link href="/lessons" className="group rounded-lg border border-border/60 bg-surface p-4 transition-colors hover:border-primary/50 sm:p-5">
