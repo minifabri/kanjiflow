@@ -1,0 +1,279 @@
+{
+  "format": "kanjiflow-reading/1",
+  "passages": [
+    {
+      "slug": "n3-densha-no-denwa",
+      "level": "N3",
+      "format": "short",
+      "title": "{電車|でんしゃ}の{中|なか}の{電話|でんわ}",
+      "titleIt": "Le telefonate in treno",
+      "body": [
+        "{電車|でんしゃ}の{中|なか}で{電話|でんわ}をしている{人|ひと}を{見|み}ると、{多|おお}くの{日本人|にほんじん}は{迷惑|めいわく}だと{感|かん}じるそうだ。しかし、{友達|ともだち}{同士|どうし}が{大|おお}きな{声|こえ}で{話|はな}していても、それほど{気|き}にならないという{人|ひと}は{多|おお}い。{声|こえ}の{大|おお}きさは{同|おな}じなのに、なぜだろうか。ある{研究|けんきゅう}によると、{電話|でんわ}の{場合|ばあい}は{会話|かいわ}の{半分|はんぶん}しか{聞|き}こえないため、{聞|き}いている{人|ひと}は{残|のこ}りの{半分|はんぶん}を{想像|そうぞう}してしまい、それで{疲|つか}れるのだという。"
+      ],
+      "translation": [
+        "Pare che molti giapponesi trovino fastidioso vedere qualcuno che telefona in treno. Eppure sono in tanti a dire che due amici che parlano ad alta voce non danno altrettanto fastidio. Il volume è lo stesso: perché allora? Secondo una ricerca, di una telefonata si sente solo metà della conversazione, e chi ascolta finisce per immaginare l'altra metà: è questo a stancare."
+      ],
+      "questions": [
+        {
+          "prompt": "{電車|でんしゃ}の{中|なか}の{電話|でんわ}が{迷惑|めいわく}だと{感|かん}じられるのは、なぜだと{言|い}っているか。",
+          "choices": [
+            "{電話|でんわ}の{声|こえ}は{友達|ともだち}{同士|どうし}の{会話|かいわ}より{大|おお}きいから",
+            "{電話|でんわ}をしている{人|ひと}が{疲|つか}れているように{見|み}えるから",
+            "{会話|かいわ}の{半分|はんぶん}しか{聞|き}こえず、{残|のこ}りを{想像|そうぞう}して{疲|つか}れるから",
+            "{電車|でんしゃ}の{中|なか}では{話|はな}してはいけないと{決|き}まっているから"
+          ],
+          "answer": 2,
+          "explanation": "Il testo esclude il volume («声の大きさは同じなのに») e riporta la spiegazione della ricerca: «会話の半分しか聞こえないため…残りの半分を想像してしまい、それで疲れる»."
+        }
+      ]
+    },
+    {
+      "slug": "n3-kaigi-no-memo",
+      "level": "N3",
+      "format": "short",
+      "title": "{会議|かいぎ}の{変更|へんこう}",
+      "titleIt": "Cambio di programma per la riunione",
+      "body": [
+        "{山本|やまもと}さん\nお{疲|つか}れ{様|さま}です。{明日|あした}の{会議|かいぎ}についてお{知|し}らせします。",
+        "{部長|ぶちょう}の{都合|つごう}で、{開始|かいし}{時間|じかん}が{午後|ごご}{二時|にじ}から{三時|さんじ}に{変更|へんこう}になりました。{場所|ばしょ}も{三階|さんがい}の{会議室|かいぎしつ}ではなく、{五階|ごかい}の{第二|だいに}{会議室|かいぎしつ}になります。",
+        "{資料|しりょう}は{十部|じゅうぶ}{必要|ひつよう}です。{申|もう}し{訳|わけ}ありませんが、{会議|かいぎ}の{前|まえ}に{準備|じゅんび}しておいていただけますか。{私|わたし}は{午前中|ごぜんちゅう}{外出|がいしゅつ}しますので、{何|なに}かあれば、メールでご{連絡|れんらく}ください。",
+        "{木村|きむら}"
+      ],
+      "translation": [
+        "Yamamoto,\nbuon lavoro. Ti informo sulla riunione di domani.",
+        "Per esigenze del direttore, l'inizio è stato spostato dalle 14 alle 15. Cambia anche il luogo: non la sala riunioni del terzo piano ma la sala riunioni 2 del quinto.",
+        "Servono dieci copie del materiale. Mi dispiace disturbarti, ma potresti prepararle prima della riunione? Io in mattinata sarò fuori ufficio: se c'è qualcosa, scrivimi per mail.",
+        "Kimura"
+      ],
+      "questions": [
+        {
+          "prompt": "{山本|やまもと}さんは、このメモを{読|よ}んで{何|なに}をしなければならないか。",
+          "choices": [
+            "{部長|ぶちょう}に{時間|じかん}の{変更|へんこう}を{知|し}らせる。",
+            "{会議|かいぎ}の{前|まえ}に{資料|しりょう}を{十部|じゅうぶ}{準備|じゅんび}する。",
+            "{午前中|ごぜんちゅう}に{木村|きむら}さんに{電話|でんわ}する。",
+            "{三階|さんがい}の{会議室|かいぎしつ}を{予約|よやく}する。"
+          ],
+          "answer": 1,
+          "explanation": "L'unica richiesta è «会議の前に準備しておいていただけますか», riferita alle dieci copie. Il cambio d'orario dipende dal direttore, che quindi lo conosce già; il contatto con Kimura è per mail e solo se serve."
+        }
+      ]
+    },
+    {
+      "slug": "n3-hitori-gurashi",
+      "level": "N3",
+      "format": "short",
+      "title": "{一人|ひとり}{暮|ぐ}らしと{料理|りょうり}",
+      "titleIt": "Vivere da soli e cucinare",
+      "body": [
+        "{大学|だいがく}に{入|はい}って{一人|ひとり}{暮|ぐ}らしを{始|はじ}めたころ、{私|わたし}はほとんど{料理|りょうり}をしなかった。コンビニの{弁当|べんとう}のほうが{楽|らく}だし、{一人分|ひとりぶん}だけ{作|つく}るのはかえって{高|たか}くつくと{思|おも}っていたからだ。ところが、{半年|はんとし}ほどたったころ{体|からだ}の{調子|ちょうし}が{悪|わる}くなり、{医者|いしゃ}に{食事|しょくじ}を{見直|みなお}すように{言|い}われた。それから{少|すこ}しずつ{自分|じぶん}で{作|つく}るようになった。{今|いま}では、{週末|しゅうまつ}にまとめて{作|つく}っておけば、{時間|じかん}もお{金|かね}もそれほどかからないことが{分|わ}かり、{料理|りょうり}が{楽|たの}しみになっている。"
+      ],
+      "translation": [
+        "Quando, entrato all'università, ho cominciato a vivere da solo, non cucinavo quasi mai. I pasti pronti del konbini erano più comodi e pensavo che cucinare per una persona sola finisse per costare di più. Dopo circa sei mesi, però, ho cominciato a non stare bene e il medico mi ha detto di rivedere la mia alimentazione. Da allora ho iniziato poco a poco a cucinare. Adesso ho capito che, preparando tutto insieme nel fine settimana, non servono poi tanto tempo né tanti soldi, e cucinare è diventato un piacere."
+      ],
+      "questions": [
+        {
+          "prompt": "「{私|わたし}」が{料理|りょうり}をするようになったきっかけは{何|なに}か。",
+          "choices": [
+            "コンビニの{弁当|べんとう}が{高|たか}くなったこと",
+            "{週末|しゅうまつ}に{時間|じかん}ができたこと",
+            "{料理|りょうり}が{楽|たの}しいと{友達|ともだち}に{聞|き}いたこと",
+            "{体|からだ}の{調子|ちょうし}が{悪|わる}くなり、{医者|いしゃ}に{注意|ちゅうい}されたこと"
+          ],
+          "answer": 3,
+          "explanation": "«ところが» introduce la svolta: il malessere e il consiglio del medico, seguiti da «それから…作るようになった». Risparmio di tempo e piacere sono ciò che ha scoperto dopo, non il motivo iniziale."
+        }
+      ]
+    },
+    {
+      "slug": "n3-konbini",
+      "level": "N3",
+      "format": "short",
+      "title": "コンビニの{役割|やくわり}",
+      "titleIt": "Il ruolo dei konbini",
+      "body": [
+        "{日本|にほん}のコンビニは、{物|もの}を{売|う}るだけの{店|みせ}ではなくなっている。{電気代|でんきだい}や{税金|ぜいきん}を{払|はら}ったり、{荷物|にもつ}を{送|おく}ったり、{銀行|ぎんこう}のようにお{金|かね}を{引|ひ}き{出|だ}したりすることもできる。{最近|さいきん}は、お{年寄|としよ}りの{家|いえ}に{商品|しょうひん}を{届|とど}けるサービスを{始|はじ}めた{店|みせ}もある。{若|わか}い{人|ひと}が{減|へ}り、{一人|ひとり}で{暮|く}らすお{年寄|としよ}りが{増|ふ}えている{地方|ちほう}では、コンビニが{生活|せいかつ}を{支|ささ}える{大切|たいせつ}な{場所|ばしょ}になりつつある。"
+      ],
+      "translation": [
+        "I konbini giapponesi non sono più negozi che si limitano a vendere merce. Ci si può pagare la bolletta della luce o le tasse, spedire pacchi, prelevare denaro come in banca. Di recente alcuni hanno avviato anche un servizio di consegna a domicilio per gli anziani. Nelle zone di provincia, dove i giovani diminuiscono e aumentano gli anziani che vivono soli, il konbini sta diventando un luogo importante che sostiene la vita quotidiana."
+      ],
+      "questions": [
+        {
+          "prompt": "この{文章|ぶんしょう}で{一番|いちばん}{言|い}いたいことは{何|なに}か。",
+          "choices": [
+            "コンビニは{買|か}い{物|もの}{以外|いがい}でも、{生活|せいかつ}を{支|ささ}える{場所|ばしょ}になってきている。",
+            "コンビニでは{銀行|ぎんこう}より{簡単|かんたん}にお{金|かね}を{引|ひ}き{出|だ}せる。",
+            "{地方|ちほう}では{若|わか}い{人|ひと}が{減|へ}って、コンビニも{少|すく}なくなっている。",
+            "お{年寄|としよ}りはコンビニのサービスをあまり{利用|りよう}していない。"
+          ],
+          "answer": 0,
+          "explanation": "La prima frase («物を売るだけの店ではなくなっている») e l'ultima («生活を支える大切な場所になりつつある») dicono la stessa cosa: gli esempi in mezzo servono a sostenerla."
+        }
+      ]
+    },
+    {
+      "slug": "n3-wasuremono",
+      "level": "N3",
+      "format": "short",
+      "title": "{忘|わす}れ{物|もの}",
+      "titleIt": "L'oggetto dimenticato",
+      "body": [
+        "{先日|せんじつ}、{電車|でんしゃ}の{中|なか}にかばんを{忘|わす}れてしまった。{中|なか}には{財布|さいふ}も{入|はい}っていたので、もう{戻|もど}ってこないだろうと{思|おも}いながら、{駅員|えきいん}に{相談|そうだん}した。すると、{次|つぎ}の{日|ひ}に{連絡|れんらく}があり、{終点|しゅうてん}の{駅|えき}に{届|とど}いていると{言|い}われた。{受|う}け{取|と}りに{行|い}くと、お{金|かね}もそのまま{残|のこ}っていた。{届|とど}けてくれた{人|ひと}の{名前|なまえ}は{分|わ}からないそうだ。お{礼|れい}を{言|い}うことはできないが、{今度|こんど}は{私|わたし}がだれかの{忘|わす}れ{物|もの}を{届|とど}けようと{思|おも}う。"
+      ],
+      "translation": [
+        "L'altro giorno ho dimenticato la borsa in treno. Dentro c'era anche il portafoglio, e pensando che ormai non l'avrei più rivista ne ho parlato con un addetto della stazione. Il giorno dopo mi hanno contattato: era stata consegnata alla stazione del capolinea. Quando sono andato a ritirarla, c'erano ancora tutti i soldi. Pare che non si sappia il nome di chi l'ha consegnata. Non posso ringraziarlo, ma la prossima volta sarò io a consegnare l'oggetto smarrito di qualcun altro."
+      ],
+      "questions": [
+        {
+          "prompt": "「{私|わたし}」は、これからどうしようと{思|おも}っているか。",
+          "choices": [
+            "{届|とど}けてくれた{人|ひと}を{探|さが}して、お{礼|れい}を{言|い}う。",
+            "{電車|でんしゃ}に{乗|の}るときは{財布|さいふ}を{持|も}たないようにする。",
+            "だれかの{忘|わす}れ{物|もの}を{見|み}つけたら、{届|とど}ける。",
+            "{駅員|えきいん}にもう{一度|いちど}{相談|そうだん}する。"
+          ],
+          "answer": 2,
+          "explanation": "L'ultima frase esprime l'intenzione con la forma volitiva + と思う: «今度は私がだれかの忘れ物を届けようと思う». Ringraziare è dichiarato impossibile («お礼を言うことはできないが»)."
+        }
+      ]
+    },
+    {
+      "slug": "n3-asa-no-ichijikan",
+      "level": "N3",
+      "format": "short",
+      "title": "{朝|あさ}の{一時間|いちじかん}",
+      "titleIt": "Un'ora al mattino",
+      "body": [
+        "{以前|いぜん}の{私|わたし}は{夜|よる}{遅|おそ}くまで{起|お}きていて、{朝|あさ}は{出|で}かける{直前|ちょくぜん}まで{寝|ね}ていた。しかし、{仕事|しごと}が{忙|いそが}しくなり、{夜|よる}は{疲|つか}れて{何|なに}もできなくなったので、{思|おも}い{切|き}って{一時間|いちじかん}{早|はや}く{起|お}きることにした。{最初|さいしょ}の{一週間|いっしゅうかん}は{眠|ねむ}くてつらかったが、{慣|な}れてくると、{朝|あさ}の{静|しず}かな{時間|じかん}は{夜|よる}の{二倍|にばい}も{集中|しゅうちゅう}できることに{気|き}がついた。{今|いま}では{朝|あさ}の{一時間|いちじかん}が、{一日|いちにち}の{中|なか}で{最|もっと}も{大切|たいせつ}な{時間|じかん}だ。"
+      ],
+      "translation": [
+        "Una volta restavo sveglio fino a tardi e la mattina dormivo fino all'ultimo momento prima di uscire. Poi il lavoro è aumentato e la sera ero troppo stanco per fare qualsiasi cosa, così ho preso la decisione di alzarmi un'ora prima. La prima settimana avevo sonno ed è stata dura, ma abituandomi mi sono accorto che nelle ore tranquille del mattino riesco a concentrarmi il doppio rispetto alla sera. Oggi quell'ora del mattino è il momento più importante della mia giornata."
+      ],
+      "questions": [
+        {
+          "prompt": "「{私|わたし}」が{早|はや}く{起|お}きるようになったのはなぜか。",
+          "choices": [
+            "{朝|あさ}のほうが{集中|しゅうちゅう}できると{知|し}っていたから",
+            "{夜|よる}は{疲|つか}れて{何|なに}もできなくなったから",
+            "{会社|かいしゃ}の{始|はじ}まる{時間|じかん}が{早|はや}くなったから",
+            "{夜|よる}{遅|おそ}くまで{仕事|しごと}をするようになったから"
+          ],
+          "answer": 1,
+          "explanation": "Il motivo è introdotto da ので: «夜は疲れて何もできなくなったので、…早く起きることにした». Che al mattino ci si concentri meglio l'ha scoperto dopo («気がついた»), non lo sapeva prima."
+        }
+      ]
+    },
+    {
+      "slug": "n3-orei-no-meeru",
+      "level": "N3",
+      "format": "short",
+      "title": "お{礼|れい}のメール",
+      "titleIt": "Una mail di ringraziamento",
+      "body": [
+        "{小林|こばやし}{先生|せんせい}\nごぶさたしております。{三年前|さんねんまえ}に{卒業|そつぎょう}したグエンです。",
+        "{先日|せんじつ}は、{就職|しゅうしょく}のお{祝|いわ}いに{辞書|じしょ}を{送|おく}ってくださり、ありがとうございました。{来月|らいげつ}から{東京|とうきょう}の{旅行|りょこう}{会社|がいしゃ}で{働|はたら}くことになりました。{最初|さいしょ}は{国内|こくない}{旅行|りょこう}の{案内|あんない}を{担当|たんとう}しますが、いつか{自分|じぶん}の{国|くに}と{日本|にほん}をつなぐ{仕事|しごと}がしたいと{考|かんが}えています。",
+        "{仕事|しごと}に{慣|な}れましたら、{一度|いちど}ごあいさつに{伺|うかが}います。お{体|からだ}を{大切|たいせつ}になさってください。"
+      ],
+      "translation": [
+        "Professor Kobayashi,\nè da molto che non mi faccio sentire. Sono Nguyen, diplomato tre anni fa.",
+        "La ringrazio per avermi mandato l'altro giorno un dizionario come regalo per la mia assunzione. Dal mese prossimo lavorerò in un'agenzia di viaggi di Tokyo. All'inizio mi occuperò di accompagnare viaggi in Giappone, ma un giorno vorrei fare un lavoro che colleghi il mio Paese e il Giappone.",
+        "Quando mi sarò ambientato nel lavoro verrò a salutarla. Abbia cura di sé."
+      ],
+      "questions": [
+        {
+          "prompt": "グエンさんは{何|なん}のためにこのメールを{書|か}いたか。",
+          "choices": [
+            "{先生|せんせい}に{仕事|しごと}を{紹介|しょうかい}してもらうため",
+            "{先生|せんせい}を{旅行|りょこう}に{案内|あんない}するため",
+            "{卒業|そつぎょう}したことを{知|し}らせるため",
+            "お{祝|いわ}いのお{礼|れい}を{言|い}い、{就職|しゅうしょく}について{知|し}らせるため"
+          ],
+          "answer": 3,
+          "explanation": "Il cuore della mail è «辞書を送ってくださり、ありがとうございました», seguito dalle notizie sul nuovo lavoro. Il diploma risale a tre anni fa e il lavoro l'ha già trovato."
+        }
+      ]
+    },
+    {
+      "slug": "n3-kotoba-no-oboekata",
+      "level": "N3",
+      "format": "short",
+      "title": "{言葉|ことば}の{覚|おぼ}え{方|かた}",
+      "titleIt": "Come si imparano le parole",
+      "body": [
+        "{外国語|がいこくご}の{単語|たんご}を{覚|おぼ}えるとき、{単語|たんご}と{意味|いみ}だけを{並|なら}べた{表|ひょう}を{何度|なんど}も{見|み}る{人|ひと}は{多|おお}い。だが、この{方法|ほうほう}で{覚|おぼ}えた{言葉|ことば}は{忘|わす}れやすいと{言|い}われている。{一方|いっぽう}、{文章|ぶんしょう}の{中|なか}で{出会|であ}った{言葉|ことば}は、{前後|ぜんご}の{内容|ないよう}や、そのとき{感|かん}じたことといっしょに{記憶|きおく}に{残|のこ}る。{時間|じかん}はかかるが、{結局|けっきょく}は{読|よ}みながら{覚|おぼ}えるほうが{近道|ちかみち}なのかもしれない。"
+      ],
+      "translation": [
+        "Per imparare i vocaboli di una lingua straniera molti riguardano più e più volte una tabella con le parole e i loro significati. Si dice però che le parole imparate così si dimentichino facilmente. Le parole incontrate dentro un testo, invece, restano in memoria insieme a ciò che c'era prima e dopo e a quello che si è provato in quel momento. Richiede tempo, ma forse alla fine imparare leggendo è la via più breve."
+      ],
+      "questions": [
+        {
+          "prompt": "この{文章|ぶんしょう}を{書|か}いた{人|ひと}の{考|かんが}えに{合|あ}うものはどれか。",
+          "choices": [
+            "{単語|たんご}の{表|ひょう}を{何度|なんど}も{見|み}るのが{一番|いちばん}{早|はや}い{方法|ほうほう}だ。",
+            "{文章|ぶんしょう}を{読|よ}みながら{覚|おぼ}えた{言葉|ことば}のほうが{忘|わす}れにくい。",
+            "{時間|じかん}がかかる{方法|ほうほう}は{選|えら}ばないほうがいい。",
+            "{外国語|がいこくご}の{単語|たんご}は{意味|いみ}だけ{覚|おぼ}えれば{十分|じゅうぶん}だ。"
+          ],
+          "answer": 1,
+          "explanation": "«一方» contrappone i due metodi: le parole della tabella «忘れやすい», quelle incontrate nei testi «記憶に残る». La conclusione («読みながら覚えるほうが近道») accetta che serva più tempo."
+        }
+      ]
+    },
+    {
+      "slug": "n3-gomi-no-dashikata",
+      "level": "N3",
+      "format": "short",
+      "title": "ごみの{出|だ}し{方|かた}",
+      "titleIt": "Come si buttano i rifiuti",
+      "body": [
+        "{住民|じゅうみん}のみなさまへ\n{来月|らいげつ}から、ごみの{出|だ}し{方|かた}が{変|か}わります。",
+        "これまで{燃|も}えるごみは{月曜日|げつようび}と{木曜日|もくようび}でしたが、{来月|らいげつ}からは{火曜日|かようび}と{金曜日|きんようび}になります。びん・かんは{今|いま}までどおり{第二|だいに}・{第四|だいよん}{水曜日|すいようび}です。",
+        "ごみは{当日|とうじつ}の{朝|あさ}{八時|はちじ}までに{出|だ}してください。{前|まえ}の{晩|ばん}に{出|だ}すと、{鳥|とり}や{猫|ねこ}に{荒|あ}らされることがありますので、ご{協力|きょうりょく}をお{願|ねが}いします。"
+      ],
+      "translation": [
+        "Ai residenti\nDal mese prossimo cambia il modo di conferire i rifiuti.",
+        "Finora i rifiuti combustibili si buttavano il lunedì e il giovedì; dal mese prossimo il martedì e il venerdì. Bottiglie e lattine restano come adesso: secondo e quarto mercoledì del mese.",
+        "Portate fuori i rifiuti entro le 8 del mattino del giorno stesso. Se li si mette fuori la sera prima, capita che uccelli e gatti li disperdano: contiamo sulla vostra collaborazione."
+      ],
+      "questions": [
+        {
+          "prompt": "{来月|らいげつ}から、{燃|も}えるごみはいつ{出|だ}せばよいか。",
+          "choices": [
+            "{月曜日|げつようび}と{木曜日|もくようび}の{朝|あさ}{八時|はちじ}まで",
+            "{火曜日|かようび}と{金曜日|きんようび}の{前|まえ}の{晩|ばん}",
+            "{火曜日|かようび}と{金曜日|きんようび}の{朝|あさ}{八時|はちじ}まで",
+            "{第二|だいに}・{第四|だいよん}{水曜日|すいようび}の{朝|あさ}"
+          ],
+          "answer": 2,
+          "explanation": "Servono due informazioni: i nuovi giorni («火曜日と金曜日になります») e l'orario («当日の朝八時までに»). La sera prima è proprio ciò che l'avviso chiede di evitare."
+        }
+      ]
+    },
+    {
+      "slug": "n3-ame-no-hi",
+      "level": "N3",
+      "format": "short",
+      "title": "{雨|あめ}の{日|ひ}",
+      "titleIt": "I giorni di pioggia",
+      "body": [
+        "{子|こ}どものころ、{雨|あめ}の{日|ひ}が{嫌|きら}いだった。{外|そと}で{遊|あそ}べないし、{服|ふく}も{靴|くつ}もぬれてしまうからだ。ところが{最近|さいきん}、{雨|あめ}の{日|ひ}も{悪|わる}くないと{思|おも}うようになった。{雨|あめ}の{音|おと}を{聞|き}きながら{本|ほん}を{読|よ}んでいると、{不思議|ふしぎ}と{気持|きも}ちが{落|お}ち{着|つ}くのだ。{晴|は}れた{日|ひ}には「{出|で}かけなければもったいない」と{思|おも}ってしまうが、{雨|あめ}なら{家|いえ}でゆっくりしていても、だれにも{何|なに}も{言|い}われない。{雨|あめ}は、{休|やす}んでもいいという{合図|あいず}なのかもしれない。"
+      ],
+      "translation": [
+        "Da bambino odiavo i giorni di pioggia: non si poteva giocare fuori e vestiti e scarpe si bagnavano. Ultimamente, invece, ho cominciato a pensare che non siano poi così male. Leggere un libro ascoltando il rumore della pioggia, stranamente, mi tranquillizza. Nelle giornate di sole finisco per pensare «è uno spreco non uscire», mentre se piove posso starmene tranquillo in casa senza che nessuno abbia niente da ridire. Forse la pioggia è il segnale che ci si può riposare."
+      ],
+      "questions": [
+        {
+          "prompt": "「{私|わたし}」が{最近|さいきん}、{雨|あめ}の{日|ひ}も{悪|わる}くないと{思|おも}うのはなぜか。",
+          "choices": [
+            "{雨|あめ}の{日|ひ}は{外|そと}で{遊|あそ}ばなくてもよくなったから",
+            "{家|いえ}でゆっくりしていても{気|き}にならず、{気持|きも}ちが{落|お}ち{着|つ}くから",
+            "{晴|は}れた{日|ひ}に{出|で}かけるのが{嫌|きら}いになったから",
+            "{服|ふく}や{靴|くつ}がぬれなくなったから"
+          ],
+          "answer": 1,
+          "explanation": "Due ragioni nel testo: la pioggia calma («気持ちが落ち着く») e permette di restare in casa senza sensi di colpa («だれにも何も言われない»). Non dice di non amare più uscire col sole."
+        }
+      ]
+    }
+  ]
+}

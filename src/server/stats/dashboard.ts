@@ -61,7 +61,7 @@ export async function getDashboard(ctx: StudyContext, now = new Date()): Promise
     }),
     prisma.studyActivity.groupBy({
       by: ["localDate"],
-      where: { userId: ctx.userId, localDate: { gte: heatStartKey }, activityType: { in: ["lesson_completed", "review_completed"] } },
+      where: { userId: ctx.userId, localDate: { gte: heatStartKey }, activityType: { in: ["lesson_completed", "review_completed", "reading_completed", "grammar_lesson", "grammar_review"] } },
       _count: { _all: true },
     }),
     prisma.subjectClassification.findMany({

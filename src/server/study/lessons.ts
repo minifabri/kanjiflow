@@ -44,9 +44,12 @@ export interface LessonQueueResult {
 }
 
 export async function getLessonQueue(ctx: StudyContext, now = new Date()): Promise<LessonQueueResult> {
-  const [candidates, progress, collectionOrder] = await Promise.all([
+  const [candidates, progress, priority, collectionOrder] = await Promise.all([
     loadCandidates(),
     loadProgressMap(ctx.userId),
+    prisma.lessonPriority
+      .findMany({ where: { userId: ctx.userId }, orderBy: { createdAt: "asc" }, select: { subjectId: true } })
+      .then((r) => r.map((x) => x.subjectId)),
     ctx.settings.activeCollectionId
       ? prisma.collectionSubject
           .findMany({ where: { collectionId: ctx.settings.activeCollectionId }, orderBy: { position: "asc" }, select: { subjectId: true } })
@@ -57,6 +60,7 @@ export async function getLessonQueue(ctx: StudyContext, now = new Date()): Promi
     path: ctx.settings.studyPath as StudyPath,
     targetBand: ctx.settings.targetJlpt as JlptBand,
     collectionOrder,
+    priority,
   });
   const dayStart = startOfLocalDay(now, ctx.timeZone);
   const [lessonsCompletedToday, apprenticeCount] = await Promise.all([
@@ -102,6 +106,8 @@ export async function completeLessons(ctx: StudyContext, subjectIds: string[], n
       await tx.studyActivity.create({ data: { userId: ctx.userId, subjectId, activityType: "lesson_completed", localDate, timestamp: now } });
       done++;
     }
+    // La priorità ha esaurito il suo compito: il soggetto è entrato nel ciclo di ripasso.
+    await tx.lessonPriority.deleteMany({ where: { userId: ctx.userId, subjectId: { in: unique } } });
     return done;
   });
 }

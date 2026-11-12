@@ -13,6 +13,7 @@ export async function updateSettingsAction(_prev: SettingsState, formData: FormD
   const ctx = await getStudyContext();
   const parsed = settingsSchema.safeParse({
     dailyLessonLimit: formData.get("dailyLessonLimit"),
+    dailyGrammarLessons: formData.get("dailyGrammarLessons"),
     lessonBatchSize: formData.get("lessonBatchSize"),
     maxApprenticeItems: formData.get("maxApprenticeItems"),
     studyPath: formData.get("studyPath"),

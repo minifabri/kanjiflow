@@ -7,6 +7,8 @@
  * - jlpt:   niente radicali obbligatori; i kanji delle fasce selezionate (e di quelle inferiori
  *   non ancora conosciute) sono subito disponibili; i vocaboli richiedono i loro kanji superati.
  * - custom: i soggetti della raccolta attiva, nell'ordine della raccolta, senza prerequisiti.
+ *
+ * In ogni percorso i soggetti con priorità (chiesti dall'utente) precedono il resto della coda.
  */
 import { GURU_STAGE, BURNED_STAGE } from "../srs/stages";
 
@@ -35,6 +37,11 @@ export interface LessonQueueOptions {
   collectionOrder?: readonly string[];
   /** Soggetti esplicitamente esclusi dall'utente ("salta"). */
   skipped?: ReadonlySet<string>;
+  /**
+   * Soggetti chiesti esplicitamente dall'utente (es. i kanji che mancano per leggere un brano), nell'ordine
+   * della richiesta: vanno in cima alla coda in ogni percorso, senza prerequisiti.
+   */
+  priority?: readonly string[];
 }
 
 export function isPassedProgress(p: ProgressInfo | undefined): boolean {
@@ -44,6 +51,21 @@ export function isPassedProgress(p: ProgressInfo | undefined): boolean {
 const bandRank = (b: JlptBand | null) => (b ? JLPT_BANDS.indexOf(b) : JLPT_BANDS.length);
 
 export function buildLessonQueue(
+  subjects: readonly CandidateSubject[],
+  progress: ReadonlyMap<string, ProgressInfo>,
+  opts: LessonQueueOptions,
+): CandidateSubject[] {
+  const regular = buildPathQueue(subjects, progress, opts);
+  if (!opts.priority?.length) return regular;
+  const byId = new Map(subjects.map((s) => [s.id, s]));
+  const first = [...new Set(opts.priority)]
+    .map((id) => byId.get(id))
+    .filter((s): s is CandidateSubject => !!s && !progress.has(s.id) && !opts.skipped?.has(s.id));
+  const firstIds = new Set(first.map((s) => s.id));
+  return [...first, ...regular.filter((s) => !firstIds.has(s.id))];
+}
+
+function buildPathQueue(
   subjects: readonly CandidateSubject[],
   progress: ReadonlyMap<string, ProgressInfo>,
   opts: LessonQueueOptions,

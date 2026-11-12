@@ -9,6 +9,7 @@ import { updateSettingsAction, type SettingsState } from "./actions";
 interface Props {
   settings: {
     dailyLessonLimit: number;
+    dailyGrammarLessons: number;
     lessonBatchSize: number;
     maxApprenticeItems: number;
     studyPath: string;
@@ -75,6 +76,9 @@ export function SettingsForm({ settings: s, intervals }: Props) {
           <Field id="dailyLessonLimit" label="Lezioni nuove al giorno">
             <Input id="dailyLessonLimit" name="dailyLessonLimit" type="number" min={0} max={200} defaultValue={s.dailyLessonLimit} />
           </Field>
+          <Field id="dailyGrammarLessons" label="Punti di grammatica nuovi al giorno" hint="Ogni punto entra nei ripassi di grammatica, in una coda separata dai kanji.">
+            <Input id="dailyGrammarLessons" name="dailyGrammarLessons" type="number" min={0} max={20} defaultValue={s.dailyGrammarLessons} />
+          </Field>
           <Field id="lessonBatchSize" label="Elementi per gruppo di lezioni">
             <Input id="lessonBatchSize" name="lessonBatchSize" type="number" min={1} max={20} defaultValue={s.lessonBatchSize} />
           </Field>
@@ -106,9 +110,9 @@ export function SettingsForm({ settings: s, intervals }: Props) {
           <Check name="showRomajiHints" label="Mostra suggerimenti romaji" defaultChecked={s.showRomajiHints} hint="Ricorda come scrivere ん, っ e le vocali lunghe nelle domande di lettura." />
           <Check
             name="showFurigana"
-            label="Mostra furigana negli esempi"
+            label="Furigana adattivo in lettura e grammatica"
             defaultChecked={s.showFurigana}
-            hint="Per ora le frasi d'esempio non hanno letture verificate: l'opzione si applicherà quando saranno disponibili."
+            hint="Mostra le letture solo sulle parole con kanji che non conosci ancora. Se disattivato, i testi partono senza furigana."
           />
         </CardContent>
       </Card>

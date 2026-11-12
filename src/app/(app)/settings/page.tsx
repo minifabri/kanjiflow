@@ -41,6 +41,7 @@ export default async function SettingsPage() {
       <SettingsForm
         settings={{
           dailyLessonLimit: ctx.settings.dailyLessonLimit,
+          dailyGrammarLessons: ctx.settings.dailyGrammarLessons,
           lessonBatchSize: ctx.settings.lessonBatchSize,
           maxApprenticeItems: ctx.settings.maxApprenticeItems,
           studyPath: ctx.settings.studyPath,

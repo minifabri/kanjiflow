@@ -14,9 +14,9 @@ datasource db {
 }
 
 model User {
-  id                String   @id @default(cuid())
+  id                String    @id @default(cuid())
   displayName       String
-  interfaceLanguage String   @default("it")
+  interfaceLanguage String    @default("it")
   /// Nome di accesso (minuscolo). Null solo per l'utente locale senza autenticazione.
   username          String?   @unique
   passwordHash      String?
@@ -28,35 +28,40 @@ model User {
   createdAt         DateTime  @default(now())
   updatedAt         DateTime  @updatedAt
 
-  settings     UserSettings?
-  progress     UserSubjectProgress[]
-  sessions     ReviewSession[]
-  transitions  ReviewTransition[]
-  notes        UserNote[]
-  activities   StudyActivity[]
-  collections  StudyCollection[]
-  mnemonics    Mnemonic[]
-  userMeanings SubjectMeaning[]
+  settings         UserSettings?
+  progress         UserSubjectProgress[]
+  sessions         ReviewSession[]
+  transitions      ReviewTransition[]
+  notes            UserNote[]
+  activities       StudyActivity[]
+  collections      StudyCollection[]
+  mnemonics        Mnemonic[]
+  userMeanings     SubjectMeaning[]
+  readingAttempts  ReadingAttempt[]
+  grammarProgress  UserGrammarProgress[]
+  grammarAttempts  GrammarAttempt[]
+  lessonPriorities LessonPriority[]
 }
 
 model UserSettings {
-  userId                  String   @id
-  dailyLessonLimit        Int      @default(15)
-  lessonBatchSize         Int      @default(5)
-  maxApprenticeItems      Int      @default(120)
-  studyPath               String   @default("jlpt") // guided | jlpt | custom
-  targetJlpt              String   @default("N3")
-  typoTolerance           String   @default("conservative") // off | conservative | lenient
-  questionPriority        String   @default("balanced") // balanced | meaning_first | reading_first
-  showFurigana            Boolean  @default(true)
-  showRomajiHints         Boolean  @default(false)
-  theme                   String   @default("dark") // dark | light | system
-  timezone                String   @default("Europe/Rome")
-  notificationPreferences String   @default("{}") // JSON
-  srsConfiguration        String   @default("{}") // JSON: intervalli per stadio, arrotondamento
+  userId                  String    @id
+  dailyLessonLimit        Int       @default(15)
+  dailyGrammarLessons     Int       @default(3)
+  lessonBatchSize         Int       @default(5)
+  maxApprenticeItems      Int       @default(120)
+  studyPath               String    @default("jlpt") // guided | jlpt | custom
+  targetJlpt              String    @default("N3")
+  typoTolerance           String    @default("conservative") // off | conservative | lenient
+  questionPriority        String    @default("balanced") // balanced | meaning_first | reading_first
+  showFurigana            Boolean   @default(true)
+  showRomajiHints         Boolean   @default(false)
+  theme                   String    @default("dark") // dark | light | system
+  timezone                String    @default("Europe/Rome")
+  notificationPreferences String    @default("{}") // JSON
+  srsConfiguration        String    @default("{}") // JSON: intervalli per stadio, arrotondamento
   activeCollectionId      String?
   onboardingCompletedAt   DateTime?
-  updatedAt               DateTime @updatedAt
+  updatedAt               DateTime  @updatedAt
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
@@ -92,20 +97,22 @@ model Subject {
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 
-  contentSource   ContentSource           @relation(fields: [contentSourceId], references: [id])
-  meanings        SubjectMeaning[]
-  readings        SubjectReading[]
-  components      SubjectComponent[]      @relation("parent")
-  usedIn          SubjectComponent[]      @relation("component")
-  mnemonics       Mnemonic[]
-  examples        ExampleSentence[]
-  classifications SubjectClassification[]
-  collections     CollectionSubject[]
-  progress        UserSubjectProgress[]
-  attempts        ReviewAttempt[]
-  transitions     ReviewTransition[]
-  notes           UserNote[]
-  activities      StudyActivity[]
+  contentSource    ContentSource           @relation(fields: [contentSourceId], references: [id])
+  meanings         SubjectMeaning[]
+  readings         SubjectReading[]
+  components       SubjectComponent[]      @relation("parent")
+  usedIn           SubjectComponent[]      @relation("component")
+  mnemonics        Mnemonic[]
+  examples         ExampleSentence[]
+  classifications  SubjectClassification[]
+  collections      CollectionSubject[]
+  progress         UserSubjectProgress[]
+  attempts         ReviewAttempt[]
+  transitions      ReviewTransition[]
+  notes            UserNote[]
+  activities       StudyActivity[]
+  passages         ReadingPassageSubject[]
+  lessonPriorities LessonPriority[]
 
   @@index([type, lessonOrder])
   @@index([characters])
@@ -295,16 +302,16 @@ model ReviewAttempt {
 }
 
 model ReviewTransition {
-  id               String   @id @default(cuid())
+  id               String    @id @default(cuid())
   subjectId        String
   userId           String
   sessionId        String
   previousStage    Int
   nextStage        Int
-  meaningIncorrect Int      @default(0)
-  readingIncorrect Int      @default(0)
+  meaningIncorrect Int       @default(0)
+  readingIncorrect Int       @default(0)
   scheduledAt      DateTime? // null se bruciato
-  createdAt        DateTime @default(now())
+  createdAt        DateTime  @default(now())
 
   subject Subject       @relation(fields: [subjectId], references: [id], onDelete: Cascade)
   user    User          @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -332,7 +339,7 @@ model UserNote {
 model StudyActivity {
   id           String   @id @default(cuid())
   userId       String
-  activityType String // lesson_completed | review_completed | marked_known | resurrected | reset | suspended
+  activityType String // lesson_completed | review_completed | marked_known | resurrected | reset | suspended | reading_completed | grammar_lesson | grammar_review
   subjectId    String?
   localDate    String // AAAA-MM-GG nel fuso dell'utente, per heatmap e streak
   timestamp    DateTime @default(now())
@@ -342,4 +349,172 @@ model StudyActivity {
 
   @@index([userId, localDate])
   @@index([userId, activityType, timestamp])
+}
+
+// --- Lettura (読解) -----------------------------------------------------------
+// I brani sono contenuti originali versionati in data/curated/reading/ e importati dal seed.
+// Il testo usa il markup {漢字|かんじ}; all'import ogni parola annotata viene collegata ai soggetti (kanji e vocaboli).
+
+model ReadingPassage {
+  id             String   @id @default(cuid())
+  slug           String   @unique // stabile tra import: "n4-kaimono"
+  level          String // N4 | N3
+  format         String // short | medium | info
+  title          String // markup {漢字|かんじ}
+  titleIt        String
+  content        String // JSON: paragrafi → segmenti con i soggetti collegati (src/domain/reading/markup.ts)
+  translation    String // JSON: traduzione italiana, un elemento per paragrafo
+  position       Int
+  charCount      Int
+  contentVersion String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  questions ReadingQuestion[]
+  subjects  ReadingPassageSubject[]
+  attempts  ReadingAttempt[]
+
+  @@index([level, position])
+}
+
+model ReadingQuestion {
+  id          String @id @default(cuid())
+  passageId   String
+  position    Int
+  prompt      String // JSON: segmenti
+  choices     String // JSON: array di segmenti, una voce per risposta
+  answerIndex Int
+  explanation String // italiano
+
+  passage ReadingPassage @relation(fields: [passageId], references: [id], onDelete: Cascade)
+
+  @@unique([passageId, position])
+}
+
+/// Quali soggetti compaiono in un brano: leggibilità, "compare in questi testi", kanji mancanti.
+model ReadingPassageSubject {
+  passageId   String
+  subjectId   String
+  occurrences Int    @default(1)
+
+  passage ReadingPassage @relation(fields: [passageId], references: [id], onDelete: Cascade)
+  subject Subject        @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+
+  @@id([passageId, subjectId])
+  @@index([subjectId])
+}
+
+model ReadingAttempt {
+  id           String   @id @default(cuid())
+  userId       String
+  passageId    String
+  mode         String // study | exam
+  answers      String // JSON: indice scelto per ogni domanda (null = senza risposta)
+  correctCount Int
+  totalCount   Int
+  lookups      String   @default("[]") // JSON: id dei soggetti consultati durante la lettura
+  durationMs   Int
+  completedAt  DateTime @default(now())
+
+  user    User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  passage ReadingPassage @relation(fields: [passageId], references: [id], onDelete: Cascade)
+
+  @@index([userId, passageId])
+  @@index([userId, completedAt])
+}
+
+/// Soggetti che l'utente ha chiesto di studiare per primi (es. i kanji che mancano per leggere un brano).
+model LessonPriority {
+  userId    String
+  subjectId String
+  createdAt DateTime @default(now())
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  subject Subject @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+
+  @@id([userId, subjectId])
+}
+
+// --- Grammatica (文法) --------------------------------------------------------
+// Punti grammaticali ed esercizi originali versionati in data/curated/grammar/ e importati dal seed.
+// Lo SRS usa lo stesso motore dei kanji ma tabelle proprie: la coda dei ripassi kanji non cambia.
+
+model GrammarPoint {
+  id             String   @id @default(cuid())
+  slug           String   @unique // stabile tra import: "n3-you-ni-suru"
+  level          String // N4 | N3
+  position       Int // ordine di studio
+  title          String // JSON: segmenti, es. 〜ようにする
+  meaning        String // italiano, breve
+  structure      String // JSON: segmenti, come si forma
+  explanation    String // italiano
+  examples       String // JSON: [{ ja: segmenti, it }]
+  contentVersion String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  exercises GrammarExercise[]
+  progress  UserGrammarProgress[]
+  attempts  GrammarAttempt[]
+
+  @@index([level, position])
+}
+
+model GrammarExercise {
+  id          String @id @default(cuid())
+  pointId     String
+  position    Int
+  kind        String // choice (scelta della forma) | order (riordino ★)
+  prompt      String // JSON: segmenti, con lo spazio vuoto o le quattro caselle
+  choices     String // JSON: array di segmenti, una voce per risposta
+  answerIndex Int
+  solution    String // JSON: segmenti della frase completa
+  translation String // italiano, della frase completa
+  explanation String // italiano
+
+  point    GrammarPoint     @relation(fields: [pointId], references: [id], onDelete: Cascade)
+  attempts GrammarAttempt[]
+
+  @@unique([pointId, position])
+}
+
+model UserGrammarProgress {
+  id                String    @id @default(cuid())
+  userId            String
+  pointId           String
+  srsStage          Int // 1-8 apprendimento; 9 = bruciato (stessi stadi dei kanji)
+  lessonCompletedAt DateTime
+  nextReviewAt      DateTime?
+  burnedAt          DateTime?
+  markedKnownAt     DateTime?
+  correctCount      Int       @default(0)
+  incorrectCount    Int       @default(0)
+  updatedAt         DateTime  @updatedAt
+
+  user  User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  point GrammarPoint @relation(fields: [pointId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, pointId])
+  @@index([userId, nextReviewAt])
+}
+
+model GrammarAttempt {
+  id              String   @id @default(cuid())
+  clientAttemptId String   @unique // idempotenza: un doppio invio non vale due risposte
+  userId          String
+  pointId         String
+  exerciseId      String?
+  mode            String // lesson | review | practice
+  chosenIndex     Int
+  isCorrect       Boolean
+  previousStage   Int? // valorizzati solo quando la risposta ha cambiato lo stadio
+  nextStage       Int?
+  attemptedAt     DateTime @default(now())
+
+  user     User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  point    GrammarPoint     @relation(fields: [pointId], references: [id], onDelete: Cascade)
+  exercise GrammarExercise? @relation(fields: [exerciseId], references: [id], onDelete: SetNull)
+
+  @@index([userId, attemptedAt])
+  @@index([userId, pointId])
 }
