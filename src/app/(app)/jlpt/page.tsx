@@ -5,12 +5,14 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Progress } from "@/components/ui/misc";
 import { isPassedProgress } from "@/domain/curriculum/lesson-queue";
 import { ExtraStudyForm } from "@/components/study/extra-study-form";
+import { listPassages, readingOverview } from "@/server/reading/passages";
+import { getGrammarOverview } from "@/server/grammar/points";
 
 export const metadata = { title: "Progressi JLPT" };
 
 export default async function JlptPage() {
   const ctx = await getStudyContext();
-  const [classes, progress] = await Promise.all([
+  const [classes, progress, passages, grammar] = await Promise.all([
     prisma.subjectClassification.findMany({
       where: { classificationSystem: { in: ["jlpt-waller", "jlpt-open-anki"] } },
       select: { subjectId: true, classificationValue: true, subject: { select: { type: true } } },
@@ -19,7 +21,10 @@ export default async function JlptPage() {
       where: { userId: ctx.userId },
       select: { subjectId: true, srsStage: true, markedKnownAt: true, suspendedAt: true },
     }),
+    listPassages(ctx),
+    getGrammarOverview(ctx),
   ]);
+  const reading = readingOverview(passages).byLevel;
   const pmap = new Map(progress.map((p) => [p.subjectId, p]));
   const bands = ["N5", "N4", "N3"].map((band) => {
     const row = (type: string) => {
@@ -64,6 +69,10 @@ export default async function JlptPage() {
             <CardContent className="space-y-4">
               <BandRow label="Kanji" {...b.kanji} />
               <BandRow label="Vocaboli" {...b.vocab} />
+              {grammar.byLevel[b.band] && (
+                <SectionRow href="/grammar" label="Grammatica" done={grammar.byLevel[b.band]!.passed} total={grammar.byLevel[b.band]!.total} unit="punti a Guru o oltre" />
+              )}
+              {reading[b.band] && <SectionRow href={`/reading?level=${b.band}`} label="Lettura" done={reading[b.band]!.read} total={reading[b.band]!.total} unit="brani letti" />}
               <Link href={`/subjects?band=${b.band}&type=kanji&stage=none`} className="block text-xs text-secondary hover:underline">
                 Kanji {b.band} non ancora studiati →
               </Link>
@@ -72,6 +81,23 @@ export default async function JlptPage() {
         ))}
       </div>
       <ExtraStudyForm />
+    </div>
+  );
+}
+
+function SectionRow({ href, label, done, total, unit }: { href: string; label: string; done: number; total: number; unit: string }) {
+  const pct = total ? Math.round((done / total) * 100) : 0;
+  return (
+    <div>
+      <div className="flex items-baseline justify-between text-sm">
+        <Link href={href} className="hover:underline">
+          {label}
+        </Link>
+        <span className="tabular-nums text-muted">
+          {done}/{total} {unit}
+        </span>
+      </div>
+      <Progress value={pct} className="mt-1.5" aria-label={`${label}: ${pct}%`} />
     </div>
   );
 }

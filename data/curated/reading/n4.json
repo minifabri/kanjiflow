@@ -1,0 +1,301 @@
+{
+  "format": "kanjiflow-reading/1",
+  "passages": [
+    {
+      "slug": "n4-kaimono",
+      "level": "N4",
+      "format": "short",
+      "title": "{土曜日|どようび}の{買|か}い{物|もの}",
+      "titleIt": "La spesa del sabato",
+      "body": [
+        "{私|わたし}は{毎週|まいしゅう}{土曜日|どようび}に、{家|いえ}の{近|ちか}くのスーパーへ{買|か}い{物|もの}に{行|い}きます。{土曜日|どようび}は{野菜|やさい}と{魚|さかな}が{安|やす}いからです。でも、{先週|せんしゅう}は{雨|あめ}が{強|つよ}かったので、{行|い}きませんでした。{日曜日|にちようび}に{行|い}きましたが、{魚|さかな}はいつもより{高|たか}かったです。"
+      ],
+      "translation": [
+        "Ogni sabato vado a fare la spesa al supermercato vicino a casa, perché il sabato verdura e pesce costano poco. La settimana scorsa però pioveva forte e non ci sono andato. Ci sono andato domenica, ma il pesce era più caro del solito."
+      ],
+      "questions": [
+        {
+          "prompt": "「{私|わたし}」はどうして{先週|せんしゅう}の{土曜日|どようび}にスーパーへ{行|い}きませんでしたか。",
+          "choices": [
+            "{魚|さかな}が{高|たか}かったから",
+            "{雨|あめ}が{強|つよ}かったから",
+            "{日曜日|にちようび}のほうが{安|やす}いから",
+            "スーパーが{家|いえ}から{遠|とお}いから"
+          ],
+          "answer": 1,
+          "explanation": "«雨が強かったので、行きませんでした»: ので indica la causa. Il pesce caro è ciò che ha trovato la domenica, non il motivo per cui non è andato."
+        }
+      ]
+    },
+    {
+      "slug": "n4-eiga-no-yakusoku",
+      "level": "N4",
+      "format": "short",
+      "title": "{映画|えいが}の{約束|やくそく}",
+      "titleIt": "L'appuntamento per il film",
+      "body": [
+        "リンさん、こんにちは。",
+        "{明日|あした}の{映画|えいが}ですが、{時間|じかん}が{変|か}わりました。{二時|にじ}からではなくて、{四時|よじ}からです。それで、{駅|えき}の{前|まえ}で{三時半|さんじはん}に{会|あ}いませんか。{映画|えいが}の{後|あと}で、いっしょに{晩|ばん}ご{飯|はん}を{食|た}べましょう。",
+        "{都合|つごう}が{悪|わる}かったら、{今晩|こんばん}{電話|でんわ}をください。",
+        "{田中|たなか}"
+      ],
+      "translation": [
+        "Ciao Lin.",
+        "Riguardo al film di domani: l'orario è cambiato. Non comincia alle due ma alle quattro. Quindi, ci vediamo alle tre e mezza davanti alla stazione? Dopo il film ceniamo insieme.",
+        "Se non ti va bene, telefonami stasera.",
+        "Tanaka"
+      ],
+      "questions": [
+        {
+          "prompt": "{二人|ふたり}は{何時|なんじ}に、どこで{会|あ}いますか。",
+          "choices": [
+            "{二時|にじ}に{映画館|えいがかん}の{前|まえ}で",
+            "{四時|よじ}に{駅|えき}の{前|まえ}で",
+            "{三時半|さんじはん}に{駅|えき}の{前|まえ}で",
+            "{三時半|さんじはん}に{映画館|えいがかん}の{中|なか}で"
+          ],
+          "answer": 2,
+          "explanation": "Le quattro sono l'orario d'inizio del film, le due quello vecchio. L'incontro è «駅の前で三時半に»."
+        }
+      ]
+    },
+    {
+      "slug": "n4-toshokan",
+      "level": "N4",
+      "format": "short",
+      "title": "{図書館|としょかん}のきまり",
+      "titleIt": "Le regole della biblioteca",
+      "body": [
+        "この{図書館|としょかん}では、{本|ほん}を{一人|ひとり}{五冊|ごさつ}まで、{二週間|にしゅうかん}{借|か}りることができます。{雑誌|ざっし}と{新聞|しんぶん}は{借|か}りられませんから、{図書館|としょかん}の{中|なか}で{読|よ}んでください。{本|ほん}を{返|かえ}すときは、{入|い}り{口|ぐち}の{横|よこ}の{箱|はこ}に{入|い}れてもいいです。{図書館|としょかん}が{休|やす}みの{日|ひ}でも{返|かえ}せます。"
+      ],
+      "translation": [
+        "In questa biblioteca ognuno può prendere in prestito fino a cinque libri per due settimane. Riviste e giornali non si possono prendere in prestito, quindi vanno letti in biblioteca. Per restituire i libri si può anche usare la cassetta accanto all'ingresso: si possono restituire anche nei giorni di chiusura."
+      ],
+      "questions": [
+        {
+          "prompt": "この{図書館|としょかん}について、{正|ただ}しいものはどれですか。",
+          "choices": [
+            "{新聞|しんぶん}は{図書館|としょかん}の{中|なか}で{読|よ}む。",
+            "{雑誌|ざっし}は{二週間|にしゅうかん}{借|か}りられる。",
+            "{本|ほん}は{休|やす}みの{日|ひ}には{返|かえ}せない。",
+            "{本|ほん}は{何冊|なんさつ}でも{借|か}りられる。"
+          ],
+          "answer": 0,
+          "explanation": "Riviste e giornali «借りられません» e si leggono «図書館の中で». I libri sono al massimo cinque e si possono restituire anche nei giorni di chiusura."
+        }
+      ]
+    },
+    {
+      "slug": "n4-asagohan",
+      "level": "N4",
+      "format": "short",
+      "title": "{朝|あさ}ご{飯|はん}",
+      "titleIt": "La colazione",
+      "body": [
+        "{子|こ}どものとき、{私|わたし}は{朝|あさ}ご{飯|はん}をあまり{食|た}べませんでした。{朝|あさ}は{時間|じかん}がなくて、{牛乳|ぎゅうにゅう}を{飲|の}むだけでした。でも、{会社|かいしゃ}で{働|はたら}くようになってから、{毎朝|まいあさ}{早|はや}く{起|お}きて、ご{飯|はん}と{魚|さかな}を{食|た}べています。{朝|あさ}ご{飯|はん}を{食|た}べると、{昼|ひる}まで{元気|げんき}に{仕事|しごと}ができるからです。"
+      ],
+      "translation": [
+        "Da bambino non facevo quasi mai colazione: la mattina non avevo tempo e bevevo soltanto del latte. Da quando lavoro in azienda, invece, mi alzo presto ogni mattina e mangio riso e pesce, perché facendo colazione riesco a lavorare con energia fino a mezzogiorno."
+      ],
+      "questions": [
+        {
+          "prompt": "「{私|わたし}」は{今|いま}、どうして{朝|あさ}ご{飯|はん}を{食|た}べていますか。",
+          "choices": [
+            "{朝|あさ}、{時間|じかん}がたくさんあるから",
+            "{牛乳|ぎゅうにゅう}が{好|す}きではないから",
+            "{会社|かいしゃ}では{何|なに}も{食|た}べられないから",
+            "{昼|ひる}まで{元気|げんき}に{仕事|しごと}ができるから"
+          ],
+          "answer": 3,
+          "explanation": "L'ultima frase dà il motivo con からです: «昼まで元気に仕事ができるからです»."
+        }
+      ]
+    },
+    {
+      "slug": "n4-ie-made-no-michi",
+      "level": "N4",
+      "format": "short",
+      "title": "{家|いえ}までの{道|みち}",
+      "titleIt": "La strada fino a casa",
+      "body": [
+        "{私|わたし}の{家|いえ}は{駅|えき}から{歩|ある}いて{十分|じゅっぷん}ぐらいです。{駅|えき}の{北口|きたぐち}を{出|で}て、まっすぐ{行|い}くと、{大|おお}きい{銀行|ぎんこう}があります。その{銀行|ぎんこう}の{角|かど}を{右|みぎ}に{曲|ま}がってください。{少|すこ}し{歩|ある}くと、{左|ひだり}に{花屋|はなや}が{見|み}えます。{私|わたし}の{家|いえ}は、その{花屋|はなや}のとなりの{白|しろ}い{建物|たてもの}の{二階|にかい}です。"
+      ],
+      "translation": [
+        "Casa mia è a una decina di minuti a piedi dalla stazione. Uscendo dall'uscita nord e andando dritto c'è una grande banca. Gira a destra all'angolo della banca. Dopo pochi passi vedrai un fioraio sulla sinistra. Casa mia è al primo piano dell'edificio bianco accanto al fioraio."
+      ],
+      "questions": [
+        {
+          "prompt": "「{私|わたし}」の{家|いえ}はどこにありますか。",
+          "choices": [
+            "{銀行|ぎんこう}のとなりの{建物|たてもの}",
+            "{花屋|はなや}のとなりの{建物|たてもの}の{二階|にかい}",
+            "{駅|えき}の{北口|きたぐち}の{前|まえ}",
+            "{花屋|はなや}の{二階|にかい}"
+          ],
+          "answer": 1,
+          "explanation": "«花屋のとなりの白い建物の二階»: la casa è nell'edificio accanto al fioraio, non sopra il fioraio. (二階 è il secondo livello, cioè il primo piano italiano.)"
+        }
+      ]
+    },
+    {
+      "slug": "n4-inu-no-kuro",
+      "level": "N4",
+      "format": "short",
+      "title": "{犬|いぬ}のクロ",
+      "titleIt": "Il cane Kuro",
+      "body": [
+        "うちには「クロ」という{名前|なまえ}の{犬|いぬ}がいます。{三年前|さんねんまえ}、{弟|おとうと}が{公園|こうえん}で{見|み}つけて、{家|いえ}に{連|つ}れて{帰|かえ}ってきました。{母|はは}ははじめ「{犬|いぬ}は{世話|せわ}が{大変|たいへん}だからだめ」と{言|い}いましたが、{今|いま}はクロと{散歩|さんぽ}するのを{一番|いちばん}{楽|たの}しみにしています。{毎朝|まいあさ}クロにご{飯|はん}をあげるのも{母|はは}です。"
+      ],
+      "translation": [
+        "A casa abbiamo un cane che si chiama Kuro. Tre anni fa mio fratello minore lo ha trovato al parco e lo ha portato a casa. All'inizio mia madre ha detto «No, un cane dà troppo da fare», ma adesso è lei quella che aspetta con più gioia la passeggiata con Kuro. Ed è sempre lei a dargli da mangiare ogni mattina."
+      ],
+      "questions": [
+        {
+          "prompt": "{今|いま}、クロの{世話|せわ}を{一番|いちばん}よくしているのはだれですか。",
+          "choices": [
+            "「{私|わたし}」",
+            "{弟|おとうと}",
+            "{父|ちち}",
+            "{母|はは}"
+          ],
+          "answer": 3,
+          "explanation": "Il fratello ha trovato il cane, ma oggi è la madre a portarlo a passeggio e a dargli da mangiare («ご飯をあげるのも母です»)."
+        }
+      ]
+    },
+    {
+      "slug": "n4-nihongo-no-benkyou",
+      "level": "N4",
+      "format": "short",
+      "title": "{日本語|にほんご}の{勉強|べんきょう}",
+      "titleIt": "Lo studio del giapponese",
+      "body": [
+        "{私|わたし}は{去年|きょねん}の{四月|しがつ}に{日本|にほん}へ{来|き|来る}ました。{今|いま}、{日本語|にほんご}の{学校|がっこう}で{勉強|べんきょう}しています。{漢字|かんじ}は{難|むずか}しいですが、{毎日|まいにち}{十|とお}ずつ{書|か}いて{覚|おぼ}えています。{会話|かいわ}はまだ{上手|じょうず}ではありません。それで、{来月|らいげつ}から{近所|きんじょ}の{店|みせ}でアルバイトを{始|はじ}めることにしました。{日本人|にほんじん}とたくさん{話|はな}したいからです。"
+      ],
+      "translation": [
+        "Sono arrivato in Giappone nell'aprile dell'anno scorso e ora studio in una scuola di giapponese. I kanji sono difficili, ma ne scrivo dieci al giorno per memorizzarli. Nella conversazione non sono ancora bravo. Per questo ho deciso di cominciare, dal mese prossimo, un lavoretto in un negozio del quartiere: voglio parlare molto con i giapponesi."
+      ],
+      "questions": [
+        {
+          "prompt": "「{私|わたし}」はどうしてアルバイトを{始|はじ}めますか。",
+          "choices": [
+            "{日本人|にほんじん}とたくさん{話|はな}したいから",
+            "お{金|かね}がほしいから",
+            "{漢字|かんじ}を{覚|おぼ}えたいから",
+            "{学校|がっこう}が{休|やす}みになるから"
+          ],
+          "answer": 0,
+          "explanation": "«それで» collega la decisione alla frase precedente (la conversazione non è ancora buona) e l'ultima frase dà il motivo: «日本人とたくさん話したいからです»."
+        }
+      ]
+    },
+    {
+      "slug": "n4-kaze",
+      "level": "N4",
+      "format": "short",
+      "title": "かぜをひきました",
+      "titleIt": "Ho preso il raffreddore",
+      "body": [
+        "{昨日|きのう}の{夜|よる}から{熱|ねつ}があって、{今朝|けさ}{病院|びょういん}へ{行|い}きました。{医者|いしゃ}は「かぜですね。{薬|くすり}を{出|だ}しますから、{一日|いちにち}に{三回|さんかい}、ご{飯|はん}の{後|あと}で{飲|の}んでください。{今日|きょう}と{明日|あした}はおふろに{入|はい}らないで、{早|はや}く{寝|ね}てください」と{言|い}いました。{熱|ねつ}が{下|さ}がるまで、{学校|がっこう}は{休|やす}むつもりです。"
+      ],
+      "translation": [
+        "Da ieri sera ho la febbre e stamattina sono andato in ospedale. Il medico ha detto: «È un raffreddore. Le do una medicina: la prenda tre volte al giorno dopo i pasti. Oggi e domani non faccia il bagno e vada a letto presto». Finché la febbre non scende ho intenzione di restare a casa da scuola."
+      ],
+      "questions": [
+        {
+          "prompt": "{医者|いしゃ}は{何|なん}と{言|い}いましたか。",
+          "choices": [
+            "{薬|くすり}をご{飯|はん}の{前|まえ}に{飲|の}んでください。",
+            "{今日|きょう}はおふろに{入|はい}って、{早|はや}く{寝|ね}てください。",
+            "{薬|くすり}を{一日|いちにち}に{三回|さんかい}、{食事|しょくじ}の{後|あと}で{飲|の}んでください。",
+            "{熱|ねつ}が{下|さ}がるまで、{毎日|まいにち}{病院|びょういん}へ{来|き|来る}てください。"
+          ],
+          "answer": 2,
+          "explanation": "«一日に三回、ご飯の後で»: tre volte al giorno dopo i pasti. Il bagno è vietato («入らないで») e restare a casa da scuola è una decisione di chi scrive, non del medico."
+        }
+      ]
+    },
+    {
+      "slug": "n4-shimin-puuru",
+      "level": "N4",
+      "format": "info",
+      "title": "{市民|しみん}プールのお{知|し}らせ",
+      "titleIt": "Avviso della piscina comunale",
+      "body": [
+        "{市民|しみん}プールのご{利用|りよう}について",
+        "{時間|じかん}：{午前|ごぜん}{九時|くじ}～{午後|ごご}{八時|はちじ}（{日曜日|にちようび}は{午後|ごご}{五時|ごじ}まで）\n{休|やす}み：{毎週|まいしゅう}{月曜日|げつようび}\n{料金|りょうきん}：{大人|おとな}{四百円|よんひゃくえん}、{子|こ}ども（{中学生|ちゅうがくせい}まで）{二百円|にひゃくえん}\n※{午後|ごご}{六時|ろくじ}からは、{大人|おとな}も{子|こ}どもも{半分|はんぶん}の{料金|りょうきん}になります。",
+        "{小学生|しょうがくせい}は{大人|おとな}といっしょに{来|き|来る}てください。プールの{中|なか}では{食|た}べたり{飲|の}んだりできません。"
+      ],
+      "translation": [
+        "Uso della piscina comunale",
+        "Orario: dalle 9 alle 20 (la domenica fino alle 17)\nChiusura: ogni lunedì\nTariffe: adulti 400 yen, ragazzi (fino alle medie) 200 yen\n※ Dalle 18 la tariffa è dimezzata sia per gli adulti sia per i ragazzi.",
+        "I bambini delle elementari devono venire accompagnati da un adulto. In piscina non si può né mangiare né bere."
+      ],
+      "questions": [
+        {
+          "prompt": "{山田|やまだ}さんは、{中学生|ちゅうがくせい}の{子|こ}ども{一人|ひとり}と、{水曜日|すいようび}の{午後|ごご}{四時|よじ}にプールへ{行|い}きます。{料金|りょうきん}は{二人|ふたり}でいくらですか。",
+          "choices": [
+            "{三百円|さんびゃくえん}",
+            "{四百円|よんひゃくえん}",
+            "{六百円|ろっぴゃくえん}",
+            "{八百円|はっぴゃくえん}"
+          ],
+          "answer": 2,
+          "explanation": "Alle 16 vale la tariffa intera (lo sconto parte dalle 18): adulto 400 + ragazzo delle medie 200 = 600 yen. 300 yen sarebbe il totale a metà prezzo."
+        },
+        {
+          "prompt": "このプールについて、{正|ただ}しいものはどれですか。",
+          "choices": [
+            "{月曜日|げつようび}も{利用|りよう}できる。",
+            "{日曜日|にちようび}は{午後|ごご}{五時|ごじ}に{終|お}わる。",
+            "{小学生|しょうがくせい}は{一人|ひとり}で{入|はい}れる。",
+            "プールの{中|なか}で{飲|の}み{物|もの}を{飲|の}んでもいい。"
+          ],
+          "answer": 1,
+          "explanation": "«日曜日は午後五時まで». Il lunedì è chiuso, i bambini delle elementari devono essere accompagnati e in piscina non si beve."
+        }
+      ]
+    },
+    {
+      "slug": "n4-basu-ryokou",
+      "level": "N4",
+      "format": "info",
+      "title": "バス{旅行|りょこう}のお{知|し}らせ",
+      "titleIt": "Avviso della gita in pullman",
+      "body": [
+        "{日本語|にほんご}{学校|がっこう}のみなさんへ\n{来月|らいげつ}、バスで{海|うみ}へ{行|い}きます。",
+        "{日|ひ}にち：{七月|しちがつ}{十日|とおか}（{土曜日|どようび}）\n{集|あつ}まる{時間|じかん}：{午前|ごぜん}{八時|はちじ}{十五分|じゅうごふん}\n{集|あつ}まる{場所|ばしょ}：{学校|がっこう}の{前|まえ}\nバスは{八時半|はちじはん}に{出|で}ます。{学校|がっこう}には{午後|ごご}{五時|ごじ}ごろ{帰|かえ}ります。\nお{金|かね}：{千五百円|せんごひゃくえん}（{昼|ひる}ご{飯|はん}は{自分|じぶん}で{持|も}ってきてください）",
+        "{行|い}きたい{人|ひと}は、{七月|しちがつ}{三日|みっか}までに、{先生|せんせい}にお{金|かね}を{出|だ}してください。{雨|あめ}の{日|ひ}は{行|い}きません。そのときは、お{金|かね}を{返|かえ}します。"
+      ],
+      "translation": [
+        "Agli studenti della scuola di giapponese\nIl mese prossimo andiamo al mare in pullman.",
+        "Data: 10 luglio (sabato)\nOra di ritrovo: 8:15\nLuogo di ritrovo: davanti alla scuola\nIl pullman parte alle 8:30. Rientro a scuola verso le 17.\nCosto: 1.500 yen (portate il pranzo da casa)",
+        "Chi vuole partecipare consegni i soldi all'insegnante entro il 3 luglio. In caso di pioggia la gita non si fa e i soldi vengono restituiti."
+      ],
+      "questions": [
+        {
+          "prompt": "{旅行|りょこう}に{行|い}きたい{人|ひと}は、どうしなければなりませんか。",
+          "choices": [
+            "{七月|しちがつ}{十日|とおか}に{先生|せんせい}にお{金|かね}を{出|だ}す。",
+            "{七月|しちがつ}{三日|みっか}までに{先生|せんせい}にお{金|かね}を{出|だ}す。",
+            "{七月|しちがつ}{三日|みっか}までに{昼|ひる}ご{飯|はん}を{買|か}う。",
+            "{雨|あめ}の{日|ひ}に{先生|せんせい}に{電話|でんわ}する。"
+          ],
+          "answer": 1,
+          "explanation": "«七月三日までに、先生にお金を出してください»: までに indica la scadenza. Il 10 luglio è il giorno della gita."
+        },
+        {
+          "prompt": "{旅行|りょこう}の{日|ひ}、{何時|なんじ}までに{学校|がっこう}の{前|まえ}へ{行|い}かなければなりませんか。",
+          "choices": [
+            "{八時|はちじ}",
+            "{八時半|はちじはん}",
+            "{午後|ごご}{五時|ごじ}",
+            "{八時|はちじ}{十五分|じゅうごふん}"
+          ],
+          "answer": 3,
+          "explanation": "L'ora di ritrovo («集まる時間») è 8:15; 8:30 è l'ora in cui parte il pullman."
+        }
+      ]
+    }
+  ]
+}

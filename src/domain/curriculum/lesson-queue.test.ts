@@ -58,3 +58,23 @@ describe("lessonAllowance", () => {
     expect(lessonAllowance({ dailyLessonLimit: 15, lessonsCompletedToday: 20, maxApprenticeItems: 100, apprenticeCount: 0 })).toBe(0);
   });
 });
+
+describe("priorità chieste dall'utente", () => {
+  it("precedono la coda del percorso, nell'ordine della richiesta e senza prerequisiti", () => {
+    const q = buildLessonQueue(S, new Map(), { path: "jlpt", targetBand: "N4", priority: ["k3", "v3"] });
+    expect(q.map((s) => s.id)).toEqual(["k3", "v3", "k5", "k4"]);
+  });
+  it("ignorano i soggetti già iniziati, saltati o inesistenti e non creano duplicati", () => {
+    const q = buildLessonQueue(S, new Map([["k3", p(1)]]), {
+      path: "jlpt",
+      targetBand: "N3",
+      priority: ["k3", "k4", "k4", "zz", "k5"],
+      skipped: new Set(["k5"]),
+    });
+    expect(q.map((s) => s.id)).toEqual(["k4"]);
+  });
+  it("valgono anche nel percorso personalizzato", () => {
+    const q = buildLessonQueue(S, new Map(), { path: "custom", targetBand: "N3", collectionOrder: ["k5"], priority: ["k3"] });
+    expect(q.map((s) => s.id)).toEqual(["k3", "k5"]);
+  });
+});

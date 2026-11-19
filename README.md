@@ -1,6 +1,6 @@
 # KanjiFlow
 
-Piattaforma personale di studio dei kanji con ripetizione dilazionata, interfaccia in italiano e focus JLPT N3.
+Piattaforma personale di studio dei kanji con ripetizione dilazionata, interfaccia in italiano e focus JLPT N3. Attorno ai kanji, che restano il centro, ci sono la lettura (読解) e la grammatica (文法) in stile JLPT, collegate ai progressi sui kanji.
 
 ## Avvio rapido (locale, SQLite)
 
@@ -35,11 +35,11 @@ In produzione, senza `APP_PASSWORD_HASH_B64` valido e `SESSION_SECRET` l'app ris
 
 | Comando | Cosa fa |
 |---|---|
-| `npm test` | Test unitari (motore SRS, validatori, coda lezioni, date, auth) |
-| `npm run test:e2e` | Playwright: onboarding → lezioni → ripassi con correzione manuale → mobile |
+| `npm test` | Test unitari (motore SRS, validatori, coda lezioni, lettura, grammatica e testi, date, auth) |
+| `npm run test:e2e` | Playwright: onboarding → lezioni → ripassi con correzione manuale → lettura → grammatica → mobile |
 | `npm run typecheck` / `npm run lint` | Controlli statici |
 | `npm run content:fetch` / `content:build` | Scarica le fonti pinnate e ricostruisce `data/dataset/kanjiflow-n5-n3.json` |
-| `npm run db:seed` | Import idempotente del dataset (non tocca progressi, note, sinonimi e mnemonici personali) |
+| `npm run db:seed` | Import idempotente del dataset, dei brani di lettura e della grammatica (non tocca progressi, tentativi, note, sinonimi e mnemonici personali) |
 
 ## Architettura
 
@@ -48,11 +48,13 @@ src/domain/        logica pura, senza React né database (testata con Vitest)
   srs/             macchina a stati, intervalli configurabili, politica di regressione
   answers/         romaji→kana, normalizzazione, validatori di lettura e significato, feedback
   curriculum/      coda lezioni per i percorsi guidato / JLPT / personalizzato
+  reading/         markup dei brani, collegamento ai soggetti, leggibilità e furigana adattivo
+  grammar/         formato dei punti grammaticali, esercizi e testi con spazi vuoti
 src/server/        accesso ai dati (Prisma), transazioni, servizi di studio e statistiche
 src/app/           route App Router e server action (sottili: validano con Zod e delegano)
 src/components/    UI (componenti stile shadcn/ui scritti a mano, Tailwind v4)
 scripts/content/   pipeline dati riproducibile
-data/              fonti pinnate, traduzioni italiane curate (TSV), dataset versionato
+data/              fonti pinnate, traduzioni italiane curate (TSV), dataset versionato, brani di lettura, grammatica
 ```
 
 ### Motore SRS
@@ -78,6 +80,50 @@ In cima alla dashboard c'è una micro-domanda a scelta multipla (un tocco, o i t
 
 - La scelta privilegia errori recenti negli stimoli, punti deboli, elementi appena imparati o prossimi al ripasso (`src/domain/spark/spark.ts`, puro e testato); è deterministica per fascia, quindi ricaricando la domanda non cambia.
 - Le risposte sono registrate come `StudyActivity` (`spark_correct` / `spark_incorrect`): **non modificano lo SRS**, la serie di studio né la heatmap.
+
+### Lettura (読解)
+
+30 brani originali (10 N4 di riscaldamento, 20 N3) nei tre formati JLPT: brano breve, brano medio, ricerca di informazioni. Ogni brano ha domande a scelta multipla in giapponese, spiegazione e traduzione in italiano.
+
+**Legame con i kanji**
+- *Furigana adattivo*: compare solo sulle parole che contengono un kanji non ancora a Guru (o fuori dal percorso N5–N3). Si può forzare "sempre" o "mai"; l'impostazione "Mostra furigana" decide il valore iniziale.
+- *Scheda al tocco*: ogni parola annotata apre vocabolo e kanji collegati con il loro stadio SRS.
+- *Leggibilità*: ogni brano mostra la percentuale di kanji conosciuti; l'elenco propone prima i brani non letti più leggibili e segnala quelli che contengono kanji sbagliati spesso nei ripassi.
+- *Kanji mancanti*: i kanji del brano non ancora studiati si mettono in cima alla coda delle lezioni con un pulsante (tabella `LessonPriority`, vale in ogni percorso).
+- *Dalla scheda del kanji*: sezione "Compare in questi testi".
+- Leggere **non modifica mai gli stadi SRS**: un kanji noto consultato durante la lettura viene solo segnalato a fine brano.
+
+**Modalità esame** (`?mode=exam`): tempo indicativo per formato, niente furigana né schede fino alla consegna.
+
+**Correzione**: le soluzioni non vengono mai inviate alla pagina; la server action corregge, salva il tentativo (`ReadingAttempt`) e solo allora restituisce soluzioni, spiegazioni e traduzione.
+
+**Scrivere un brano** (`data/curated/reading/*.json`, poi `npm run db:seed`): il testo usa il markup `{漢字|かんじ}`; ogni kanji deve essere annotato (lo verifica un test). Le parole composte vanno in un'unica annotazione (`{図書館|としょかん}`), l'okurigana resta fuori (`{食|た}べる`). All'import ogni annotazione viene collegata ai kanji e, senza analizzatore morfologico, al vocabolo: per corrispondenza esatta o dal tema per verbi e aggettivi (`src/domain/reading/linking.ts`). Per le forme irregolari si dichiara la forma di dizionario: `{来|き|来る}ます`.
+
+I brani sono stati scritti per KanjiFlow, non provengono da prove ufficiali e non sono stati rivisti da un madrelingua.
+
+### Grammatica (文法)
+
+40 punti grammaticali originali (10 N4 di riscaldamento, 30 N3), ognuno con scheda in italiano (significato, formazione, uso, due esempi con audio) e tre esercizi nei formati JLPT: due di scelta della forma (文法形式の判断) e uno di riordino con la ★ (文の組み立て). Il terzo formato, il testo con più spazi vuoti, è descritto sotto.
+
+**SRS in una coda separata**: stessi stadi, intervalli e regola di regressione dei kanji (`src/domain/srs`), ma tabelle proprie (`UserGrammarProgress`, `GrammarAttempt`): il contatore e la coda dei ripassi kanji non cambiano.
+- *Lezione*: scheda, poi un esercizio. Con la risposta corretta il punto entra ad Apprendista 1; con quella sbagliata torna in fondo alla sessione con la scheda e un altro esercizio. Limite giornaliero in Impostazioni (predefinito 3 punti nuovi al giorno); l'ordine è N4, poi N3.
+- *Ripasso*: un esercizio per punto in scadenza, a rotazione (quello visto meno di recente). Giusto = uno stadio in più; sbagliato = regressione del motore SRS con un errore.
+- *Pratica libera* dalla scheda del punto: non modifica lo stadio.
+- *La conosco già*: porta il punto a Maestro con il ripasso distribuito nel mese, come per i kanji noti; *Togli dai ripassi* lo riporta tra i punti nuovi.
+
+**Correzione**: come per la lettura, le soluzioni non sono nella pagina. La server action corregge e aggiorna lo SRS nella stessa transazione; ogni risposta ha un `clientAttemptId`, quindi un doppio invio non conta due volte. Un ripasso vale solo se il punto è davvero in scadenza.
+
+**Legame con i kanji**: esempi ed esercizi usano lo stesso markup dei brani e lo stesso furigana adattivo.
+
+**Scrivere un punto** (`data/curated/grammar/*.json`, poi `npm run db:seed`): negli esercizi a scelta la frase contiene un solo segnaposto `（　）`; in quelli di riordino si scrivono i quattro pezzi nell'ordine giusto e la posizione della ★, e l'import li mescola in modo deterministico. I pezzi devono avere un solo ordine possibile: meglio catene in cui ogni pezzo dipende dal precedente che due complementi scambiabili.
+
+**Testi con spazi vuoti (文章の文法)**: 8 testi (2 N4, 6 N3) di 3–5 paragrafi, ognuno con cinque spazi numerati ［1］–［5］ e quattro risposte per spazio, come al JLPT. Si trovano in Grammatica; ogni spazio verifica un punto grammaticale (o un connettivo, quando `point` è `null`).
+- Nel testo lo spazio si riempie con la risposta scelta; dopo la consegna mostra quella corretta, verde o rossa. Per ogni spazio: spiegazione in italiano, punto verificato con il tuo stadio SRS e link alla sua scheda; in fondo i punti da rivedere e la traduzione.
+- **È pratica: non modifica gli stadi SRS** (e quindi nemmeno la coda dei ripassi). Il tentativo (`GrammarTextAttempt`) conta come attività di studio; la scheda di un punto elenca i testi in cui compare.
+- Correzione sul server come per gli altri esercizi: la pagina non contiene le soluzioni. Furigana adattivo anche qui.
+- *Scrivere un testo* (`data/curated/grammar-texts/*.json`, poi `npm run db:seed`): i segnaposto `［1］`…`［n］` compaiono nel testo una volta sola e in ordine (lo verifica lo schema). Ogni spazio ha le quattro risposte, l'indice di quella giusta, la spiegazione e il punto verificato. Le tre risposte sbagliate devono essere sbagliate *nel contesto*: se due risposte sono accettabili lo spazio va riscritto.
+
+Schede, testi ed esercizi sono stati scritti per KanjiFlow, non provengono da prove ufficiali e non sono stati rivisti da un madrelingua.
 
 ## Stato della prima milestone
 

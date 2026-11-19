@@ -1,0 +1,317 @@
+{
+  "format": "kanjiflow-reading/1",
+  "passages": [
+    {
+      "slug": "n3-kissaten-no-arubaito",
+      "level": "N3",
+      "format": "medium",
+      "title": "{喫茶店|きっさてん}のアルバイト",
+      "titleIt": "Il lavoretto al caffè",
+      "body": [
+        "{大学|だいがく}{二年生|にねんせい}のとき、{駅前|えきまえ}の{喫茶店|きっさてん}でアルバイトを{始|はじ}めた。{最初|さいしょ}の{一|いっ}か{月|げつ}は{失敗|しっぱい}ばかりだった。{注文|ちゅうもん}を{間違|まちが}えたり、コーヒーをこぼしたりして、{店長|てんちょう}に{何度|なんど}も{注意|ちゅうい}された。{自分|じぶん}はこの{仕事|しごと}に{向|む}いていないと{思|おも}い、やめることも{考|かんが}えた。",
+        "そんなある{日|ひ}、よく{来|く}るお{客|きゃく}さんに「いつも{元気|げんき}にあいさつしてくれるから、この{店|みせ}に{来|く}るのが{楽|たの}しみなんだよ」と{言|い}われた。{私|わたし}は{驚|おどろ}いた。コーヒーをうまく{運|はこ}ぶことばかり{考|かんが}えていて、あいさつが{人|ひと}を{喜|よろこ}ばせているとは{思|おも}ってもいなかったからだ。",
+        "それからは、{失敗|しっぱい}を{恐|おそ}れるより、お{客|きゃく}さん{一人一人|ひとりひとり}の{顔|かお}を{見|み}て{話|はな}すことを{大切|たいせつ}にするようになった。{不思議|ふしぎ}なことに、そうすると{失敗|しっぱい}も{減|へ}っていった。{仕事|しごと}で{大切|たいせつ}なのは{技術|ぎじゅつ}だけではない。あの{一言|ひとこと}がなければ、{私|わたし}はそれに{気|き}づかないまま{店|みせ}をやめていただろう。"
+      ],
+      "translation": [
+        "Al secondo anno di università ho cominciato a lavorare part-time in un caffè davanti alla stazione. Il primo mese è stato un errore dopo l'altro: sbagliavo le ordinazioni, rovesciavo il caffè, e il responsabile mi ha ripreso molte volte. Pensavo di non essere portato per quel lavoro e ho anche considerato di lasciarlo.",
+        "Un giorno un cliente abituale mi ha detto: «Mi saluti sempre con tanta energia che venire in questo locale è un piacere». Sono rimasto sorpreso: pensavo solo a portare bene il caffè e non mi era mai passato per la testa che un saluto potesse far piacere a qualcuno.",
+        "Da allora, più che temere gli errori, ho dato importanza al guardare in faccia ogni cliente mentre gli parlavo. Stranamente, così sono diminuiti anche gli errori. Nel lavoro non conta soltanto la tecnica. Senza quella frase avrei lasciato il locale senza accorgermene."
+      ],
+      "questions": [
+        {
+          "prompt": "「{私|わたし}」がアルバイトをやめようと{考|かんが}えたのはなぜか。",
+          "choices": [
+            "{失敗|しっぱい}が{多|おお}く、{仕事|しごと}に{向|む}いていないと{思|おも}ったから",
+            "{店長|てんちょう}にやめるように{言|い}われたから",
+            "お{客|きゃく}さんに{注意|ちゅうい}されたから",
+            "{大学|だいがく}の{勉強|べんきょう}が{忙|いそが}しくなったから"
+          ],
+          "answer": 0,
+          "explanation": "Fine del primo paragrafo: dopo l'elenco degli errori, «自分はこの仕事に向いていないと思い、やめることも考えた». A riprenderlo è il responsabile, non i clienti, e nessuno gli dice di andarsene."
+        },
+        {
+          "prompt": "「{私|わたし}は{驚|おどろ}いた」とあるが、なぜか。",
+          "choices": [
+            "お{客|きゃく}さんが{毎日|まいにち}{店|みせ}に{来|き|来る}ていたから",
+            "コーヒーをうまく{運|はこ}べるようになったと{言|い}われたから",
+            "{自分|じぶん}のあいさつが{人|ひと}を{喜|よろこ}ばせているとは{思|おも}っていなかったから",
+            "お{客|きゃく}さんに{初|はじ}めて{話|はな}しかけられたから"
+          ],
+          "answer": 2,
+          "explanation": "La frase subito dopo spiega il motivo con からだ: «あいさつが人を喜ばせているとは思ってもいなかったからだ»."
+        },
+        {
+          "prompt": "この{文章|ぶんしょう}で「{私|わたし}」が{一番|いちばん}{言|い}いたいことは{何|なに}か。",
+          "choices": [
+            "アルバイトは{一|いっ}か{月|げつ}{以上|いじょう}{続|つづ}けたほうがいい。",
+            "{失敗|しっぱい}をしないように、いつも{注意|ちゅうい}するべきだ。",
+            "お{客|きゃく}さんの{言葉|ことば}は、いつも{正|ただ}しい。",
+            "{仕事|しごと}では{技術|ぎじゅつ}だけでなく、{人|ひと}への{向|む}き{合|あ}い{方|かた}も{大切|たいせつ}だ。"
+          ],
+          "answer": 3,
+          "explanation": "La tesi è nell'ultimo paragrafo: «仕事で大切なのは技術だけではない», dopo aver raccontato che guardare in faccia i clienti ha contato più del temere gli errori."
+        }
+      ]
+    },
+    {
+      "slug": "n3-inaka-no-kurashi",
+      "level": "N3",
+      "format": "medium",
+      "title": "{小|ちい}さな{町|まち}での{暮|く}らし",
+      "titleIt": "La vita in un piccolo paese",
+      "body": [
+        "{三年前|さんねんまえ}、{私|わたし}たち{家族|かぞく}は{東京|とうきょう}から{山|やま}に{囲|かこ}まれた{小|ちい}さな{町|まち}に{引|ひ}っ{越|こ}した。{夫|おっと}の{仕事|しごと}が{家|いえ}でもできるようになったことと、{子|こ}どもを{自然|しぜん}の{中|なか}で{育|そだ}てたいと{思|おも}ったことが{理由|りゆう}だ。",
+        "{引|ひ}っ{越|こ}す{前|まえ}は、{不便|ふべん}な{生活|せいかつ}になるだろうと{心配|しんぱい}していた。{確|たし}かに、スーパーまで{車|くるま}で{二十分|にじゅっぷん}かかるし、{電車|でんしゃ}は{一時間|いちじかん}に{一本|いっぽん}しかない。けれども、{実際|じっさい}に{暮|く}らしてみると、{困|こま}ることは{思|おも}ったより{少|すく}なかった。{必要|ひつよう}な{物|もの}はインターネットで{注文|ちゅうもん}できるし、{野菜|やさい}は{近所|きんじょ}の{人|ひと}が{分|わ}けてくれる。",
+        "むしろ{大変|たいへん}だったのは、{人|ひと}との{付|つ}き{合|あ}いだ。{東京|とうきょう}では{隣|となり}に{住|す}む{人|ひと}の{名前|なまえ}も{知|し}らなかったが、ここでは{町|まち}の{行事|ぎょうじ}に{参加|さんか}するのが{当|あ}たり{前|まえ}で、{最初|さいしょ}は{正直|しょうじき}、{面倒|めんどう}だと{感|かん}じた。しかし、{子|こ}どもが{熱|ねつ}を{出|だ}した{夜|よる}、{近所|きんじょ}の{人|ひと}が{病院|びょういん}まで{車|くるま}を{出|だ}してくれた。そのとき{初|はじ}めて、この{付|つ}き{合|あ}いに{守|まも}られているのだと{分|わ}かった。"
+      ],
+      "translation": [
+        "Tre anni fa la mia famiglia si è trasferita da Tokyo in un piccolo paese circondato dalle montagne. I motivi: mio marito poteva ormai lavorare anche da casa e volevamo crescere nostro figlio in mezzo alla natura.",
+        "Prima del trasloco temevo che la vita sarebbe stata scomoda. In effetti per arrivare al supermercato servono venti minuti di macchina e passa un solo treno all'ora. Vivendoci davvero, però, le difficoltà sono state meno del previsto: quello che serve si ordina su internet e la verdura ce la danno i vicini.",
+        "La parte difficile, semmai, sono stati i rapporti con le persone. A Tokyo non sapevo nemmeno il nome dei vicini di casa; qui partecipare alle attività del paese è la normalità e all'inizio, a dire il vero, mi sembrava una seccatura. Ma la notte in cui a nostro figlio è venuta la febbre, i vicini ci hanno portato in macchina fino all'ospedale. Solo allora ho capito che quei rapporti ci proteggono."
+      ],
+      "questions": [
+        {
+          "prompt": "{家族|かぞく}が{引|ひ}っ{越|こ}した{理由|りゆう}は{何|なに}か。",
+          "choices": [
+            "{東京|とうきょう}の{生活|せいかつ}が{不便|ふべん}だったから",
+            "{近所|きんじょ}の{人|ひと}と{付|つ}き{合|あ}いたかったから",
+            "{夫|おっと}が{家|いえ}で{働|はたら}けるようになり、{子|こ}どもを{自然|しぜん}の{中|なか}で{育|そだ}てたかったから",
+            "{夫|おっと}が{新|あたら}しい{会社|かいしゃ}で{働|はたら}くことになったから"
+          ],
+          "answer": 2,
+          "explanation": "Il primo paragrafo elenca due motivi collegati da «ことと…ことが理由だ»: il lavoro da casa del marito e il desiderio di crescere il figlio nella natura."
+        },
+        {
+          "prompt": "{引|ひ}っ{越|こ}してから、「{私|わたし}」が{一番|いちばん}{大変|たいへん}だと{感|かん}じたことは{何|なに}か。",
+          "choices": [
+            "{買|か}い{物|もの}に{時間|じかん}がかかること",
+            "{近所|きんじょ}の{人|ひと}との{付|つ}き{合|あ}い",
+            "{電車|でんしゃ}が{少|すく}ないこと",
+            "{病院|びょういん}が{遠|とお}いこと"
+          ],
+          "answer": 1,
+          "explanation": "«むしろ» ribalta l'aspettativa: non la scomodità («困ることは思ったより少なかった») ma «人との付き合い» è stata la parte dura."
+        },
+        {
+          "prompt": "「この{付|つ}き{合|あ}いに{守|まも}られている」とは、どういうことか。",
+          "choices": [
+            "{町|まち}の{行事|ぎょうじ}に{参加|さんか}すれば、{野菜|やさい}がもらえる。",
+            "{近所|きんじょ}の{人|ひと}が、いつも{子|こ}どもを{見|み}ていてくれる。",
+            "{付|つ}き{合|あ}いをやめると、{町|まち}に{住|す}めなくなる。",
+            "{普段|ふだん}の{付|つ}き{合|あ}いがあるから、{困|こま}ったときに{助|たす}けてもらえる。"
+          ],
+          "answer": 3,
+          "explanation": "La frase arriva subito dopo l'episodio dei vicini che accompagnano il bambino in ospedale: i rapporti che sembravano una seccatura sono ciò che garantisce aiuto nel momento del bisogno."
+        }
+      ]
+    },
+    {
+      "slug": "n3-shitsumon-suru-chikara",
+      "level": "N3",
+      "format": "medium",
+      "title": "{質問|しつもん}する{力|ちから}",
+      "titleIt": "La capacità di fare domande",
+      "body": [
+        "{日本|にほん}の{会社|かいしゃ}で{働|はたら}き{始|はじ}めたころ、{私|わたし}は{分|わ}からないことがあっても{質問|しつもん}できなかった。こんなことも{知|し}らないのかと{思|おも}われるのが{怖|こわ}かったのだ。その{結果|けっか}、{間違|まちが}ったやり{方|かた}のまま{仕事|しごと}を{進|すす}めてしまい、{全部|ぜんぶ}やり{直|なお}すことになったことがある。",
+        "そのとき、{先輩|せんぱい}は{怒|おこ}らずにこう{言|い}った。「{聞|き}くのは{一分|いっぷん}、やり{直|なお}すのは{一日|いちにち}。どちらがみんなのためになるか{考|かんが}えてごらん。」{私|わたし}は、{質問|しつもん}しないことが{自分|じぶん}を{守|まも}るどころか、{周|まわ}りに{迷惑|めいわく}をかけていたのだと{初|はじ}めて{気|き}がついた。",
+        "{今|いま}は{後輩|こうはい}に{仕事|しごと}を{教|おし}える{立場|たちば}になった。{質問|しつもん}に{来|こ|来る}ない{後輩|こうはい}がいると、{昔|むかし}の{自分|じぶん}を{思|おも}い{出|だ}す。だから{私|わたし}は、できるだけ{自分|じぶん}から{声|こえ}をかけ、{質問|しつもん}しやすい{空気|くうき}を{作|つく}るようにしている。{分|わ}からないと{言|い}えることも、{仕事|しごと}の{力|ちから}の{一|ひと}つだと{思|おも}うからだ。"
+      ],
+      "translation": [
+        "Quando ho cominciato a lavorare in un'azienda giapponese non riuscivo a fare domande nemmeno quando non capivo qualcosa. Avevo paura che pensassero: «Non sa neanche questo?». Il risultato è che una volta ho portato avanti un lavoro con un metodo sbagliato e ho dovuto rifarlo tutto da capo.",
+        "Quella volta un collega più anziano, senza arrabbiarsi, mi ha detto: «Chiedere richiede un minuto, rifare richiede un giorno. Prova a pensare quale delle due cose è meglio per tutti». Per la prima volta mi sono reso conto che non fare domande, altro che proteggermi: creava problemi a chi mi stava intorno.",
+        "Adesso tocca a me insegnare il lavoro ai colleghi più giovani. Quando ce n'è uno che non viene a chiedere, mi torna in mente com'ero io. Per questo cerco il più possibile di rivolgere io la parola per primo e di creare un clima in cui sia facile fare domande: penso che anche saper dire «non ho capito» sia una delle capacità che servono nel lavoro."
+      ],
+      "questions": [
+        {
+          "prompt": "「{私|わたし}」が{質問|しつもん}できなかったのはなぜか。",
+          "choices": [
+            "{先輩|せんぱい}がいつも{怒|おこ}っていたから",
+            "{日本語|にほんご}で{質問|しつもん}するのが{難|むずか}しかったから",
+            "{質問|しつもん}する{時間|じかん}がなかったから",
+            "{何|なに}も{知|し}らないと{思|おも}われるのが{怖|こわ}かったから"
+          ],
+          "answer": 3,
+          "explanation": "«こんなことも知らないのかと思われるのが怖かったのだ»: のだ spiega la frase precedente. Il collega anziano, anzi, non si arrabbia («怒らずに»)."
+        },
+        {
+          "prompt": "{先輩|せんぱい}の{言葉|ことば}は、どういう{意味|いみ}か。",
+          "choices": [
+            "{早|はや}く{聞|き}いたほうが、{結局|けっきょく}みんなの{時間|じかん}を{使|つか}わずにすむ。",
+            "{質問|しつもん}は{一分|いっぷん}{以内|いない}に{終|お}わらせなければならない。",
+            "{仕事|しごと}をやり{直|なお}すのは、いい{勉強|べんきょう}になる。",
+            "{分|わ}からないことは、{一日|いちにち}{考|かんが}えてから{聞|き}くべきだ。"
+          ],
+          "answer": 0,
+          "explanation": "Il confronto «聞くのは一分、やり直すのは一日» mette a paragone i costi: chiedere subito costa poco, sbagliare costa molto a tutti («みんなのため»)."
+        },
+        {
+          "prompt": "{今|いま}の「{私|わたし}」が{後輩|こうはい}に{対|たい}してしていることは{何|なに}か。",
+          "choices": [
+            "{質問|しつもん}に{来|こ|来る}ない{後輩|こうはい}を{注意|ちゅうい}している。",
+            "{自分|じぶん}から{声|こえ}をかけて、{質問|しつもん}しやすくしている。",
+            "{後輩|こうはい}の{仕事|しごと}を{全部|ぜんぶ}やり{直|なお}している。",
+            "{昔|むかし}の{自分|じぶん}の{失敗|しっぱい}について{話|はな}している。"
+          ],
+          "answer": 1,
+          "explanation": "«できるだけ自分から声をかけ、質問しやすい空気を作るようにしている»: ようにしている indica un'abitudine che ci si impegna a mantenere."
+        }
+      ]
+    },
+    {
+      "slug": "n3-netto-no-kaimono",
+      "level": "N3",
+      "format": "medium",
+      "title": "インターネットの{買|か}い{物|もの}",
+      "titleIt": "Gli acquisti su internet",
+      "body": [
+        "インターネットで{買|か}い{物|もの}をする{人|ひと}が{増|ふ}えている。{店|みせ}に{行|い}かなくても{二十四時間|にじゅうよじかん}いつでも{注文|ちゅうもん}でき、{重|おも}い{物|もの}も{家|いえ}まで{届|とど}けてもらえる。{値段|ねだん}を{簡単|かんたん}に{比|くら}べられるのも{便利|べんり}な{点|てん}だ。",
+        "しかし、{問題|もんだい}もある。{一|ひと}つは、{実際|じっさい}に{手|て}に{取|と}って{確|たし}かめられないことだ。{服|ふく}や{靴|くつ}は、{届|とど}いてみたら{大|おお}きさが{合|あ}わなかったり、{色|いろ}が{写真|しゃしん}と{違|ちが}ったりすることが{少|すく}なくない。もう{一|ひと}つは、{簡単|かんたん}に{買|か}えるために、{必要|ひつよう}のない{物|もの}まで{買|か}ってしまいやすいことだ。",
+        "{私|わたし}は{最近|さいきん}、{買|か}う{前|まえ}に{一晩|ひとばん}{待|ま}つことにしている。{次|つぎ}の{朝|あさ}になってもまだ{欲|ほ}しいと{思|おも}う{物|もの}だけを{注文|ちゅうもん}するのだ。すると、{半分|はんぶん}{以上|いじょう}は{買|か}わなくても{困|こま}らない{物|もの}だったことが{分|わ}かった。{便利|べんり}な{道具|どうぐ}ほど、{使|つか}う{側|がわ}が{使|つか}い{方|かた}を{考|かんが}えなければならないのだろう。"
+      ],
+      "translation": [
+        "Sempre più persone fanno acquisti su internet. Si può ordinare a qualsiasi ora, ventiquattr'ore su ventiquattro, senza andare in negozio, e anche gli oggetti pesanti vengono consegnati a casa. Un altro vantaggio è poter confrontare facilmente i prezzi.",
+        "Ci sono però anche dei problemi. Il primo è che non si può prendere in mano la merce per controllarla: con vestiti e scarpe capita non di rado che, una volta arrivati, la taglia non vada bene o il colore sia diverso dalla foto. Il secondo è che, proprio perché comprare è facile, si finisce spesso per comprare anche ciò che non serve.",
+        "Ultimamente, prima di comprare, ho deciso di aspettare una notte. Ordino solo quello che la mattina dopo desidero ancora. Così ho scoperto che più della metà erano cose di cui potevo fare a meno. Probabilmente, più uno strumento è comodo, più chi lo usa deve riflettere su come usarlo."
+      ],
+      "questions": [
+        {
+          "prompt": "インターネットの{買|か}い{物|もの}の{便利|べんり}な{点|てん}として、{文章|ぶんしょう}に{書|か}かれていないものはどれか。",
+          "choices": [
+            "いつでも{注文|ちゅうもん}できる。",
+            "{重|おも}い{物|もの}を{家|いえ}まで{届|とど}けてもらえる。",
+            "{店|みせ}よりいつも{安|やす}く{買|か}える。",
+            "{値段|ねだん}を{簡単|かんたん}に{比|くら}べられる。"
+          ],
+          "answer": 2,
+          "explanation": "Il testo dice che i prezzi si possono confrontare facilmente, non che online costi sempre meno. Gli altri tre vantaggi sono tutti nel primo paragrafo. Attenzione alla domanda: chiede ciò che NON è scritto."
+        },
+        {
+          "prompt": "「{私|わたし}」が{買|か}う{前|まえ}に{一晩|ひとばん}{待|ま}つのはなぜか。",
+          "choices": [
+            "{次|つぎ}の{日|ひ}のほうが{値段|ねだん}が{安|やす}くなるから",
+            "{夜|よる}は{注文|ちゅうもん}できない{店|みせ}が{多|おお}いから",
+            "{写真|しゃしん}と{色|いろ}が{同|おな}じかどうか{調|しら}べるため",
+            "{本当|ほんとう}に{欲|ほ}しい{物|もの}かどうかを{確|たし}かめるため"
+          ],
+          "answer": 3,
+          "explanation": "«次の朝になってもまだ欲しいと思う物だけを注文する»: aspettare serve a distinguere il desiderio del momento da ciò che si vuole davvero, cioè a evitare il secondo problema descritto."
+        },
+        {
+          "prompt": "この{文章|ぶんしょう}を{書|か}いた{人|ひと}の{考|かんが}えに{最|もっと}も{近|ちか}いものはどれか。",
+          "choices": [
+            "インターネットの{買|か}い{物|もの}は{問題|もんだい}が{多|おお}いので、やめたほうがいい。",
+            "{便利|べんり}な{道具|どうぐ}は、{使|つか}う{人|ひと}が{使|つか}い{方|かた}をよく{考|かんが}える{必要|ひつよう}がある。",
+            "{服|ふく}や{靴|くつ}は、{必|かなら}ず{店|みせ}で{買|か}うべきだ。",
+            "{買|か}い{物|もの}は{一日|いちにち}に{一回|いっかい}だけにしたほうがいい。"
+          ],
+          "answer": 1,
+          "explanation": "L'ultima frase generalizza l'esperienza personale: «便利な道具ほど、使う側が使い方を考えなければならない». L'autore continua a comprare online: non lo sconsiglia."
+        }
+      ]
+    },
+    {
+      "slug": "n3-sofu-no-tegami",
+      "level": "N3",
+      "format": "medium",
+      "title": "{祖父|そふ}の{手紙|てがみ}",
+      "titleIt": "Le lettere del nonno",
+      "body": [
+        "{祖父|そふ}の{部屋|へや}を{片付|かたづ}けていたら、{古|ふる}い{箱|はこ}の{中|なか}から{手紙|てがみ}の{束|たば}が{出|で}てきた。{若|わか}いころ{遠|とお}くの{町|まち}で{働|はたら}いていた{祖父|そふ}が、{祖母|そぼ}に{送|おく}ったものだった。",
+        "{祖父|そふ}は{無口|むくち}な{人|ひと}で、{家族|かぞく}に{優|やさ}しい{言葉|ことば}をかけるところを、{私|わたし}は{一度|いちど}も{見|み}たことがない。ところが{手紙|てがみ}の{中|なか}の{祖父|そふ}は{別人|べつじん}のようだった。{仕事|しごと}の{苦労|くろう}、{町|まち}で{見|み}た{祭|まつ}りの{様子|ようす}、そして「{早|はや}く{会|あ}いたい」という{気持|きも}ちが、{丁寧|ていねい}な{字|じ}で{書|か}かれていた。",
+        "{祖母|そぼ}に{見|み}せると、「{口|くち}では{何|なに}も{言|い}わない{人|ひと}だったけど、{手紙|てがみ}だけはよく{書|か}いてくれたのよ」と{笑|わら}った。{私|わたし}は{今|いま}、{連絡|れんらく}はほとんどスマホですませている。{便利|べんり}だが、{五十年後|ごじゅうねんご}にだれかが{読|よ}み{返|かえ}すことはないだろう。{久|ひさ}しぶりに、{離|はな}れて{暮|く}らす{両親|りょうしん}に{手紙|てがみ}を{書|か}いてみようと{思|おも}った。"
+      ],
+      "translation": [
+        "Mentre riordinavo la stanza del nonno, da una vecchia scatola è saltato fuori un pacco di lettere. Le aveva spedite alla nonna quando, da giovane, lavorava in una città lontana.",
+        "Il nonno era un uomo di poche parole e non l'ho mai visto, nemmeno una volta, rivolgere una frase affettuosa ai familiari. Nelle lettere, invece, sembrava un'altra persona: le fatiche del lavoro, la festa vista in città e poi quel «voglio rivederti presto», tutto scritto con una grafia accurata.",
+        "Quando le ho mostrate alla nonna, ha riso: «A voce non diceva mai niente, ma le lettere me le scriveva spesso». Io oggi comunico quasi soltanto con lo smartphone. È comodo, ma tra cinquant'anni nessuno rileggerà quei messaggi. Per la prima volta dopo tanto tempo ho pensato di scrivere una lettera ai miei genitori, che vivono lontano."
+      ],
+      "questions": [
+        {
+          "prompt": "{手紙|てがみ}の{中|なか}の{祖父|そふ}が「{別人|べつじん}のようだった」のはなぜか。",
+          "choices": [
+            "{普段|ふだん}は{無口|むくち}なのに、{手紙|てがみ}では{気持|きも}ちをたくさん{書|か}いていたから",
+            "{手紙|てがみ}の{字|じ}が{祖父|そふ}の{字|じ}と{違|ちが}っていたから",
+            "{若|わか}いころの{祖父|そふ}は{仕事|しごと}をしていなかったから",
+            "{手紙|てがみ}を{書|か}いたのが{祖母|そぼ}だったから"
+          ],
+          "answer": 0,
+          "explanation": "«ところが» contrappone le due immagini: il nonno «無口な人» della vita quotidiana e quello che nelle lettere racconta fatiche, feste e nostalgia."
+        },
+        {
+          "prompt": "{祖母|そぼ}の{話|はなし}から、{祖父|そふ}についてどんなことが{分|わ}かるか。",
+          "choices": [
+            "{祖母|そぼ}とあまり{会|あ}いたくなかった。",
+            "{手紙|てがみ}を{書|か}くのが{苦手|にがて}だった。",
+            "{話|はな}すのは{得意|とくい}ではないが、{手紙|てがみ}はよく{書|か}く{人|ひと}だった。",
+            "{若|わか}いころはよく{話|はな}す{人|ひと}だった。"
+          ],
+          "answer": 2,
+          "explanation": "«口では何も言わない人だったけど、手紙だけはよく書いてくれた»: けど oppone il parlare allo scrivere, e だけは sottolinea l'eccezione."
+        },
+        {
+          "prompt": "「{私|わたし}」が{両親|りょうしん}に{手紙|てがみ}を{書|か}こうと{思|おも}ったのはなぜか。",
+          "choices": [
+            "スマホが{使|つか}えなくなったから",
+            "{祖母|そぼ}に{書|か}くように{言|い}われたから",
+            "{両親|りょうしん}から{長|なが}い{間|あいだ}{連絡|れんらく}がないから",
+            "{手紙|てがみ}は{後|あと}まで{残|のこ}り、{気持|きも}ちが{伝|つた}わると{感|かん}じたから"
+          ],
+          "answer": 3,
+          "explanation": "Il ragionamento è implicito: i messaggi sul telefono sono comodi ma «五十年後にだれかが読み返すことはない», mentre le lettere del nonno hanno trasmesso i suoi sentimenti cinquant'anni dopo."
+        }
+      ]
+    },
+    {
+      "slug": "n3-undou-o-tsuzukeru",
+      "level": "N3",
+      "format": "medium",
+      "title": "{運動|うんどう}を{続|つづ}ける{方法|ほうほう}",
+      "titleIt": "Come continuare a fare movimento",
+      "body": [
+        "{健康|けんこう}のために{運動|うんどう}を{始|はじ}めても、{続|つづ}かない{人|ひと}は{多|おお}い。{私|わたし}もその{一人|ひとり}で、ジムに{入会|にゅうかい}しては{三|さん}か{月|げつ}でやめる、ということを{何度|なんど}も{繰|く}り{返|かえ}してきた。",
+        "{続|つづ}かない{原因|げんいん}は、{目標|もくひょう}が{大|おお}きすぎることにあったようだ。「{毎日|まいにち}{一時間|いちじかん}{走|はし}る」と{決|き}めると、{忙|いそが}しい{日|ひ}や{雨|あめ}の{日|ひ}に{一度|いちど}{休|やす}んだだけで、もうだめだという{気持|きも}ちになってしまう。そこで{去年|きょねん}、{目標|もくひょう}を「{毎日|まいにち}{運動靴|うんどうぐつ}をはいて{外|そと}に{出|で}る」に{変|か}えてみた。{出|で}るだけでいいので、どんなに{疲|つか}れていてもできる。そして{一度|いちど}{外|そと}に{出|で}れば、たいてい{十分|じゅっぷん}ぐらいは{歩|ある}きたくなるものだ。",
+        "この{方法|ほうほう}で、{一年|いちねん}{続|つづ}けることができた。{体重|たいじゅう}はあまり{変|か}わらないが、よく{眠|ねむ}れるようになり、かぜもひかなくなった。{大切|たいせつ}なのは、がんばることではなく、やめないことだ。そのためには、{目標|もくひょう}は{小|ちい}さければ{小|ちい}さいほどいいと、{今|いま}は{考|かんが}えている。"
+      ],
+      "translation": [
+        "Molti cominciano a fare movimento per la salute ma non riescono a continuare. Io sono uno di loro: mi sono iscritto in palestra e ho smesso dopo tre mesi, più e più volte.",
+        "A quanto pare non riuscivo a continuare perché l'obiettivo era troppo grande. Se decidi «correrò un'ora ogni giorno», basta saltare una volta, in una giornata piena o di pioggia, per sentire che ormai è tutto inutile. Così l'anno scorso ho provato a cambiare obiettivo: «ogni giorno mi metto le scarpe da ginnastica ed esco». Basta uscire, quindi ci riesco per quanto sia stanco. E una volta fuori, di solito viene voglia di camminare almeno una decina di minuti.",
+        "Con questo metodo sono riuscito a continuare per un anno. Il peso non è cambiato molto, ma dormo bene e non prendo più raffreddori. L'importante non è sforzarsi, è non smettere. E per questo, oggi penso che l'obiettivo più è piccolo, meglio è."
+      ],
+      "questions": [
+        {
+          "prompt": "「{私|わたし}」は、{運動|うんどう}が{続|つづ}かなかった{原因|げんいん}は{何|なに}だと{考|かんが}えているか。",
+          "choices": [
+            "ジムが{家|いえ}から{遠|とお}かったこと",
+            "{仕事|しごと}が{忙|いそが}しすぎたこと",
+            "{目標|もくひょう}が{大|おお}きすぎたこと",
+            "{走|はし}るのが{好|す}きではなかったこと"
+          ],
+          "answer": 2,
+          "explanation": "«続かない原因は、目標が大きすぎることにあったようだ». I giorni pieni e la pioggia sono solo le occasioni in cui un obiettivo troppo grande salta."
+        },
+        {
+          "prompt": "{新|あたら}しい{目標|もくひょう}のよい{点|てん}は{何|なに}か。",
+          "choices": [
+            "{疲|つか}れている{日|ひ}でもできるほど{簡単|かんたん}なこと",
+            "{毎日|まいにち}{一時間|いちじかん}{歩|ある}けること",
+            "お{金|かね}がかからないこと",
+            "{雨|あめ}の{日|ひ}は{休|やす}んでもいいこと"
+          ],
+          "answer": 0,
+          "explanation": "«出るだけでいいので、どんなに疲れていてもできる»: il vantaggio è che è talmente facile da non poter fallire. Dieci minuti di camminata sono una conseguenza, non l'obiettivo."
+        },
+        {
+          "prompt": "この{文章|ぶんしょう}を{書|か}いた{人|ひと}が{最|もっと}も{言|い}いたいことは{何|なに}か。",
+          "choices": [
+            "{運動|うんどう}をすれば、{体重|たいじゅう}が{減|へ}る。",
+            "{健康|けんこう}のためには、{毎日|まいにち}{走|はし}ったほうがいい。",
+            "ジムに{入会|にゅうかい}しても{意味|いみ}がない。",
+            "{続|つづ}けるためには、{目標|もくひょう}は{小|ちい}さいほうがいい。"
+          ],
+          "answer": 3,
+          "explanation": "Conclusione esplicita: «大切なのは…やめないことだ。そのためには、目標は小さければ小さいほどいい». Il peso, anzi, «あまり変わらない»."
+        }
+      ]
+    }
+  ]
+}

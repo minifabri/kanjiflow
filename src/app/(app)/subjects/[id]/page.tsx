@@ -16,13 +16,15 @@ import {
 } from "@/components/study/subject-sections";
 import { MnemonicEditor, NoteEditor, SubjectActions, SynonymEditor } from "@/components/study/subject-editors";
 import { stageLabel, type SrsStage } from "@/domain/srs";
+import { plainText } from "@/domain/reading/markup";
+import { passagesForSubject } from "@/server/reading/passages";
 
 export default async function SubjectPage({ params }: PageProps<"/subjects/[id]">) {
   const { id } = await params;
   const ctx = await getStudyContext();
   const [card] = await loadSubjectCards([id], ctx.userId, { usedInLimit: 40 });
   if (!card) notFound();
-  const [progress, attempts, transitions, source] = await Promise.all([
+  const [progress, attempts, transitions, source, passages] = await Promise.all([
     prisma.userSubjectProgress.findUnique({ where: { userId_subjectId: { userId: ctx.userId, subjectId: id } } }),
     prisma.reviewAttempt.findMany({
       where: { subjectId: id, session: { userId: ctx.userId } },
@@ -32,6 +34,7 @@ export default async function SubjectPage({ params }: PageProps<"/subjects/[id]"
     }),
     prisma.reviewTransition.findMany({ where: { subjectId: id, userId: ctx.userId }, orderBy: { createdAt: "desc" }, take: 20 }),
     prisma.subject.findUnique({ where: { id }, select: { contentVersion: true, contentSource: { select: { name: true, license: true } } } }),
+    card.type === "radical" ? Promise.resolve([]) : passagesForSubject(ctx, id),
   ]);
   const fmt = new Intl.DateTimeFormat("it-IT", { timeZone: ctx.timeZone, dateStyle: "medium", timeStyle: "short" });
   const userSynonyms = card.meanings.filter((m) => m.origin === "user").map((m) => m.meaning);
@@ -86,6 +89,34 @@ export default async function SubjectPage({ params }: PageProps<"/subjects/[id]"
           <SubjectActions subjectId={card.id} stage={progress?.srsStage ?? null} suspended={!!progress?.suspendedAt} started={!!progress} />
         </CardContent>
       </Card>
+
+      {passages.length > 0 && (
+        <Card id="testi">
+          <CardHeader>
+            <CardTitle>Compare in questi testi</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <ul className="grid gap-2 sm:grid-cols-2">
+              {passages.map((p) => (
+                <li key={p.slug}>
+                  <Link href={`/reading/${p.slug}`} className="flex items-center justify-between gap-3 rounded-md bg-elevated/50 px-3 py-2 hover:bg-elevated">
+                    <span className="min-w-0">
+                      <span className="jp block truncate text-sm" lang="ja">
+                        {plainText(p.title)}
+                      </span>
+                      <span className="block truncate text-[11px] text-muted">
+                        {p.titleIt} · {p.level}
+                        {p.occurrences > 1 && ` · ${p.occurrences} volte`}
+                      </span>
+                    </span>
+                    {p.read && <Badge variant="success">letto</Badge>}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </CardContent>
+        </Card>
+      )}
 
       <Card id="mnemonici">
         <CardHeader>

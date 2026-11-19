@@ -1,0 +1,169 @@
+{
+  "format": "kanjiflow-reading/1",
+  "passages": [
+    {
+      "slug": "n3-haru-no-kyoushitsu",
+      "level": "N3",
+      "format": "info",
+      "title": "{市民|しみん}センター {春|はる}の{教室|きょうしつ}",
+      "titleIt": "Centro civico: i corsi di primavera",
+      "body": [
+        "{四月|しがつ}から{始|はじ}まる{教室|きょうしつ}のご{案内|あんない}です。どの{教室|きょうしつ}も{全部|ぜんぶ}で{八回|はっかい}です。",
+        "① {料理|りょうり}{教室|きょうしつ}　{毎週|まいしゅう}{火曜日|かようび} {午前|ごぜん}{十時|じゅうじ}～{十二時|じゅうにじ}　{八千円|はっせんえん}（{材料費|ざいりょうひ}は{別|べつ}に{毎回|まいかい}{五百円|ごひゃくえん}）\n② {書道|しょどう}{教室|きょうしつ}　{毎週|まいしゅう}{水曜日|すいようび} {午後|ごご}{七時|しちじ}～{八時半|はちじはん}　{六千円|ろくせんえん}（{道具|どうぐ}は{自分|じぶん}で{用意|ようい}してください）\n③ ヨガ{教室|きょうしつ}　{毎週|まいしゅう}{土曜日|どようび} {午前|ごぜん}{九時|くじ}～{十時|じゅうじ}　{五千円|ごせんえん}\n④ {英会話|えいかいわ}{教室|きょうしつ}　{毎週|まいしゅう}{木曜日|もくようび} {午後|ごご}{七時|しちじ}～{八時半|はちじはん}　{九千円|きゅうせんえん}（テキスト{代|だい}{千円|せんえん}が{別|べつ}に{必要|ひつよう}です）",
+        "{申|もう}し{込|こ}みは{三月|さんがつ}{二十日|はつか}までに、{受付|うけつけ}かホームページでお{願|ねが}いします。{申|もう}し{込|こ}みが{五人|ごにん}より{少|すく}ない{教室|きょうしつ}は{中止|ちゅうし}になります。{市内|しない}に{住|す}んでいる{六十五歳|ろくじゅうごさい}{以上|いじょう}の{方|かた}は、{教室|きょうしつ}の{料金|りょうきん}が{半額|はんがく}になります（{材料費|ざいりょうひ}などは{変|か}わりません）。"
+      ],
+      "translation": [
+        "Presentazione dei corsi che iniziano ad aprile. Ogni corso è di otto lezioni in tutto.",
+        "① Cucina: ogni martedì, 10:00–12:00, 8.000 yen (a parte, 500 yen di ingredienti a lezione)\n② Calligrafia: ogni mercoledì, 19:00–20:30, 6.000 yen (il materiale va portato da casa)\n③ Yoga: ogni sabato, 9:00–10:00, 5.000 yen\n④ Conversazione inglese: ogni giovedì, 19:00–20:30, 9.000 yen (a parte, 1.000 yen per il libro di testo)",
+        "Iscrizioni entro il 20 marzo, allo sportello o sul sito. I corsi con meno di cinque iscritti vengono annullati. Per i residenti in città dai 65 anni in su la quota del corso è dimezzata (ingredienti e simili restano invariati)."
+      ],
+      "questions": [
+        {
+          "prompt": "リーさんは{月曜日|げつようび}から{金曜日|きんようび}まで、{午後|ごご}{六時|ろくじ}まで{仕事|しごと}があります。{週末|しゅうまつ}は{家族|かぞく}と{過|す}ごしたいです。リーさんが{参加|さんか}できる{教室|きょうしつ}はどれですか。",
+          "choices": [
+            "①と②",
+            "②と④",
+            "③と④",
+            "②だけ"
+          ],
+          "answer": 1,
+          "explanation": "① è di mattina in un giorno feriale e ③ è di sabato: restano i due corsi serali delle 19, calligrafia (②) e inglese (④)."
+        },
+        {
+          "prompt": "{市内|しない}に{住|す}んでいる{六十七歳|ろくじゅうななさい}の{田中|たなか}さんが{料理|りょうり}{教室|きょうしつ}に{参加|さんか}します。{全部|ぜんぶ}でいくら{払|はら}いますか。",
+          "choices": [
+            "{四千円|よんせんえん}",
+            "{六千円|ろくせんえん}",
+            "{八千円|はっせんえん}",
+            "{一万二千円|いちまんにせんえん}"
+          ],
+          "answer": 2,
+          "explanation": "La quota è dimezzata (8.000 → 4.000 yen) ma gli ingredienti no: 500 yen × 8 lezioni = 4.000 yen. Totale 8.000 yen. 12.000 yen è quanto paga chi non ha lo sconto."
+        }
+      ]
+    },
+    {
+      "slug": "n3-arubaito-boshuu",
+      "level": "N3",
+      "format": "info",
+      "title": "アルバイト{募集|ぼしゅう}",
+      "titleIt": "Offerte di lavoro part-time",
+      "body": [
+        "{駅前|えきまえ}{商店街|しょうてんがい}のアルバイト{情報|じょうほう}です。",
+        "Ａ　パン{屋|や}　{時給|じきゅう}{千百円|せんひゃくえん}　{午前|ごぜん}{六時|ろくじ}～{十時|じゅうじ}　{週|しゅう}{三日|みっか}{以上|いじょう}　{経験|けいけん}のない{方|かた}も{歓迎|かんげい}\nＢ　{本屋|ほんや}　{時給|じきゅう}{千円|せんえん}　{午後|ごご}{五時|ごじ}～{九時|くじ}　{週|しゅう}{二日|ふつか}{以上|いじょう}　{土曜日|どようび}か{日曜日|にちようび}のどちらかは{必|かなら}ず{働|はたら}ける{方|かた}\nＣ　レストラン　{時給|じきゅう}{千二百円|せんにひゃくえん}　{午後|ごご}{六時|ろくじ}～{十一時|じゅういちじ}　{週|しゅう}{四日|よっか}{以上|いじょう}　{経験|けいけん}のある{方|かた}のみ\nＤ　{花屋|はなや}　{時給|じきゅう}{千五十円|せんごじゅうえん}　{午前|ごぜん}{十時|じゅうじ}～{午後|ごご}{三時|さんじ}　{土曜日|どようび}と{日曜日|にちようび}の{両方|りょうほう}{働|はたら}ける{方|かた}",
+        "どの{店|みせ}も{交通費|こうつうひ}が{出|で}ます。{興味|きょうみ}のある{方|かた}は、それぞれの{店|みせ}に{直接|ちょくせつ}お{電話|でんわ}ください。"
+      ],
+      "translation": [
+        "Offerte di lavoro part-time nella via commerciale davanti alla stazione.",
+        "A – Panetteria: 1.100 yen l'ora, 6:00–10:00, almeno tre giorni a settimana, benvenuto anche chi non ha esperienza\nB – Libreria: 1.000 yen l'ora, 17:00–21:00, almeno due giorni a settimana, per chi può lavorare sempre o il sabato o la domenica\nC – Ristorante: 1.200 yen l'ora, 18:00–23:00, almeno quattro giorni a settimana, solo con esperienza\nD – Fioraio: 1.050 yen l'ora, 10:00–15:00, per chi può lavorare sia il sabato sia la domenica",
+        "Tutti i negozi rimborsano il trasporto. Chi è interessato telefoni direttamente al negozio."
+      ],
+      "questions": [
+        {
+          "prompt": "マリアさんは{大学生|だいがくせい}で、{月曜日|げつようび}から{金曜日|きんようび}は{午後|ごご}{四時|よじ}まで{授業|じゅぎょう}があります。アルバイトの{経験|けいけん}はありません。{週|しゅう}に{二日|ふつか}だけ{働|はたら}きたいと{思|おも}っています。{土曜日|どようび}は{働|はたら}けますが、{日曜日|にちようび}は{働|はたら}けません。マリアさんに{合|あ}うのはどれですか。",
+          "choices": [
+            "Ａ",
+            "Ｂ",
+            "Ｃ",
+            "Ｄ"
+          ],
+          "answer": 1,
+          "explanation": "A chiede almeno tre giorni, C esperienza e quattro giorni, D anche la domenica. B comincia alle 17, bastano due giorni e il sabato soddisfa la condizione «土曜日か日曜日のどちらか»."
+        },
+        {
+          "prompt": "{経験|けいけん}がなくても{働|はたら}けて、{時給|じきゅう}が{一番|いちばん}{高|たか}いのはどれですか。",
+          "choices": [
+            "Ａ",
+            "Ｂ",
+            "Ｃ",
+            "Ｄ"
+          ],
+          "answer": 0,
+          "explanation": "C paga di più (1.200 yen) ma richiede esperienza. Tra gli altri, A è il più alto: 1.100 yen contro 1.050 (D) e 1.000 (B)."
+        }
+      ]
+    },
+    {
+      "slug": "n3-higaeri-tsuaa",
+      "level": "N3",
+      "format": "info",
+      "title": "{日帰|ひがえ}りバスツアーのご{案内|あんない}",
+      "titleIt": "Gite in pullman di un giorno",
+      "body": [
+        "{十一月|じゅういちがつ}の{日帰|ひがえ}りツアーです。{料金|りょうきん}には{昼食|ちゅうしょく}{代|だい}が{含|ふく}まれています。",
+        "① {紅葉|こうよう}と{温泉|おんせん}コース　{七千円|ななせんえん}　{毎週|まいしゅう}{土曜日|どようび}　{出発|しゅっぱつ}{八時|はちじ}・{到着|とうちゃく}{十九時|じゅうくじ}\n② {港町|みなとまち}と{市場|いちば}コース　{五千五百円|ごせんごひゃくえん}　{毎週|まいしゅう}{日曜日|にちようび}　{出発|しゅっぱつ}{七時|しちじ}・{到着|とうちゃく}{十六時|じゅうろくじ}\n③ {古|ふる}い{町|まち}を{歩|ある}くコース　{四千円|よんせんえん}　{毎週|まいしゅう}{水曜日|すいようび}・{日曜日|にちようび}　{出発|しゅっぱつ}{九時|くじ}・{到着|とうちゃく}{十五時|じゅうごじ}（{約|やく}{五|ご}キロ{歩|ある}きます）\n④ {美術館|びじゅつかん}めぐりコース　{六千円|ろくせんえん}　{毎週|まいしゅう}{日曜日|にちようび}　{出発|しゅっぱつ}{十時|じゅうじ}・{到着|とうちゃく}{十八時|じゅうはちじ}",
+        "{小学生|しょうがくせい}{以下|いか}のお{子様|こさま}は{半額|はんがく}です。{出発|しゅっぱつ}の{三日前|みっかまえ}までにお{申|もう}し{込|こ}みください。{二日前|ふつかまえ}からのキャンセルは、{料金|りょうきん}の{半分|はんぶん}をいただきます。"
+      ],
+      "translation": [
+        "Gite di un giorno di novembre. Il prezzo comprende il pranzo.",
+        "① Foliage e terme: 7.000 yen, ogni sabato, partenza 8:00, arrivo 19:00\n② Città portuale e mercato: 5.500 yen, ogni domenica, partenza 7:00, arrivo 16:00\n③ A piedi nella città vecchia: 4.000 yen, ogni mercoledì e domenica, partenza 9:00, arrivo 15:00 (si cammina per circa 5 km)\n④ Giro dei musei d'arte: 6.000 yen, ogni domenica, partenza 10:00, arrivo 18:00",
+        "Metà prezzo per i bambini fino alle elementari. Iscrizioni fino a tre giorni prima della partenza. Per le disdette a partire da due giorni prima si trattiene metà della quota."
+      ],
+      "questions": [
+        {
+          "prompt": "{森|もり}さんは{日曜日|にちようび}に{参加|さんか}したいと{思|おも}っています。{午後|ごご}{五時|ごじ}までに{帰|かえ}りたいです。{足|あし}の{悪|わる}い{母|はは}といっしょなので、{長|なが}く{歩|ある}くコースは{選|えら}べません。{森|もり}さんが{選|えら}べるのはどれですか。",
+          "choices": [
+            "①",
+            "②",
+            "③",
+            "④"
+          ],
+          "answer": 1,
+          "explanation": "① è di sabato; ③ è anche di domenica e rientra presto, ma prevede 5 km a piedi; ④ rientra alle 18. Resta ②, domenica con arrivo alle 16."
+        },
+        {
+          "prompt": "{大人|おとな}{二人|ふたり}と{小学生|しょうがくせい}{一人|ひとり}で①のコースに{参加|さんか}します。{料金|りょうきん}は{全部|ぜんぶ}でいくらですか。",
+          "choices": [
+            "{一万四千円|いちまんよんせんえん}",
+            "{一万五百円|いちまんごひゃくえん}",
+            "{二万千円|にまんせんえん}",
+            "{一万七千五百円|いちまんななせんごひゃくえん}"
+          ],
+          "answer": 3,
+          "explanation": "7.000 × 2 adulti = 14.000 yen, più il bambino a metà prezzo (3.500 yen): 17.500 yen."
+        }
+      ]
+    },
+    {
+      "slug": "n3-toshokan-no-annai",
+      "level": "N3",
+      "format": "info",
+      "title": "{中央|ちゅうおう}{図書館|としょかん} ご{利用|りよう}{案内|あんない}",
+      "titleIt": "Biblioteca centrale: guida all'uso",
+      "body": [
+        "{中央|ちゅうおう}{図書館|としょかん}をご{利用|りよう}のみなさまへ",
+        "{開館|かいかん}{時間|じかん}：{火曜日|かようび}～{金曜日|きんようび} {午前|ごぜん}{九時|くじ}～{午後|ごご}{八時|はちじ}／{土曜日|どようび}・{日曜日|にちようび} {午前|ごぜん}{九時|くじ}～{午後|ごご}{五時|ごじ}\n{休館日|きゅうかんび}：{毎週|まいしゅう}{月曜日|げつようび}、{毎月|まいつき}{最後|さいご}の{金曜日|きんようび}\n{貸|か}し{出|だ}し：{本|ほん}・{雑誌|ざっし}は{十冊|じっさつ}まで{二週間|にしゅうかん}、ＣＤ・ＤＶＤは{三点|さんてん}まで{一週間|いっしゅうかん}\n{延長|えんちょう}：{次|つぎ}に{予約|よやく}している{人|ひと}がいなければ、{一回|いっかい}だけ{二週間|にしゅうかん}{延|の}ばせます（ＣＤ・ＤＶＤは{延長|えんちょう}できません）",
+        "{返|かえ}す{日|ひ}を{過|す}ぎた{本|ほん}があると、{全部|ぜんぶ}{返|かえ}すまで{新|あたら}しく{借|か}りることができません。{閉館|へいかん}{後|ご}や{休館日|きゅうかんび}は、{入|い}り{口|ぐち}の{返却|へんきゃく}ポストをご{利用|りよう}ください。ただし、ＣＤ・ＤＶＤは{壊|こわ}れやすいので、{必|かなら}ずカウンターにお{返|かえ}しください。"
+      ],
+      "translation": [
+        "Agli utenti della Biblioteca centrale",
+        "Orario: da martedì a venerdì 9:00–20:00 / sabato e domenica 9:00–17:00\nChiusura: ogni lunedì e l'ultimo venerdì del mese\nPrestito: libri e riviste fino a 10 per due settimane; CD e DVD fino a 3 per una settimana\nProroga: se non ci sono prenotazioni di altri utenti, si può prorogare una sola volta di due settimane (CD e DVD non si possono prorogare)",
+        "Chi ha libri scaduti non può prendere nuovi prestiti finché non li restituisce tutti. Dopo la chiusura e nei giorni di chiusura usate la cassetta delle restituzioni all'ingresso. CD e DVD, però, sono fragili: restituiteli sempre al banco."
+      ],
+      "questions": [
+        {
+          "prompt": "{借|か}りている{本|ほん}をもっと{長|なが}く{読|よ}みたいとき、どうすればよいか。",
+          "choices": [
+            "{一度|いちど}{返|かえ}して、{次|つぎ}の{日|ひ}にもう{一度|いちど}{借|か}りる。",
+            "{何回|なんかい}でも{延長|えんちょう}できるので、カウンターで{頼|たの}む。",
+            "{次|つぎ}に{予約|よやく}している{人|ひと}がいなければ、{一回|いっかい}だけ{延長|えんちょう}できる。",
+            "{本|ほん}は{延長|えんちょう}できないので、{二週間|にしゅうかん}で{返|かえ}す。"
+          ],
+          "answer": 2,
+          "explanation": "Voce «延長»: una sola proroga di due settimane e solo se nessuno ha prenotato. Il divieto di proroga riguarda CD e DVD, non i libri."
+        },
+        {
+          "prompt": "{月曜日|げつようび}にＤＶＤを{返|かえ}したい{人|ひと}は、どうしなければならないか。",
+          "choices": [
+            "{入|い}り{口|ぐち}の{返却|へんきゃく}ポストに{入|い}れる。",
+            "{月曜日|げつようび}の{午前中|ごぜんちゅう}にカウンターへ{持|も}って{行|い}く。",
+            "{電話|でんわ}で{延長|えんちょう}を{頼|たの}む。",
+            "{火曜日|かようび}{以降|いこう}の{開|あ}いている{時間|じかん}に、カウンターへ{持|も}って{行|い}く。"
+          ],
+          "answer": 3,
+          "explanation": "Il lunedì la biblioteca è chiusa e i DVD non possono andare nella cassetta («必ずカウンターにお返しください») né essere prorogati: bisogna portarli al banco quando riapre."
+        }
+      ]
+    }
+  ]
+}

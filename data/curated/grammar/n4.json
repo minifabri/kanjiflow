@@ -1,0 +1,395 @@
+{
+  "format": "kanjiflow-grammar/1",
+  "points": [
+    {
+      "slug": "n4-ta-koto-ga-aru",
+      "level": "N4",
+      "title": "〜たことがある",
+      "meaning": "aver fatto qualcosa (esperienza)",
+      "structure": "verbo (forma in た) + ことがある",
+      "explanation": "Dice che un'esperienza è capitata almeno una volta nella vita. Al negativo (〜たことがない) significa «non ho mai». Non si usa per fatti appena avvenuti o con date precise recenti.",
+      "examples": [
+        { "ja": "{日本|にほん}へ{行|い}ったことがあります。", "it": "Sono stato in Giappone." },
+        { "ja": "まだすしを{食|た}べたことがありません。", "it": "Non ho ancora mai mangiato il sushi." }
+      ],
+      "exercises": [
+        {
+          "kind": "choice",
+          "prompt": "{私|わたし}は{一度|いちど}も{海|うみ}で（　）ことがありません。",
+          "choices": ["{泳|およ}ぐ", "{泳|およ}いだ", "{泳|およ}いで", "{泳|およ}ぎ"],
+          "answer": 1,
+          "it": "Non ho mai nuotato in mare, nemmeno una volta.",
+          "explanation": "L'esperienza vuole la forma in た davanti a ことがある: 泳いだ."
+        },
+        {
+          "kind": "choice",
+          "prompt": "A「この{映画|えいが}を{見|み}ましたか。」B「ええ、{前|まえ}に{一度|いちど}（　）。」",
+          "choices": ["{見|み}ることにします", "{見|み}ているところです", "{見|み}たことがあります", "{見|み}ておきます"],
+          "answer": 2,
+          "it": "A: «Hai visto questo film?» B: «Sì, l'ho visto una volta, tempo fa.»",
+          "explanation": "前に一度 indica un'esperienza passata: 見たことがあります."
+        },
+        {
+          "kind": "order",
+          "before": "{私|わたし}は",
+          "pieces": ["{京都|きょうと}の", "お{寺|てら}を", "{見|み}に{行|い}った", "ことが"],
+          "star": 2,
+          "after": "あります。",
+          "it": "Sono andato a vedere i templi di Kyoto.",
+          "explanation": "京都の qualifica お寺; la forma in た (見に行った) precede ことがあります."
+        }
+      ]
+    },
+    {
+      "slug": "n4-nagara",
+      "level": "N4",
+      "title": "〜ながら",
+      "meaning": "mentre (due azioni insieme)",
+      "structure": "verbo (tema della forma in ます) + ながら",
+      "explanation": "La stessa persona fa due cose contemporaneamente. L'azione principale è quella alla fine della frase; quella con ながら fa da sfondo.",
+      "examples": [
+        { "ja": "{音楽|おんがく}を{聞|き}きながら{勉強|べんきょう}します。", "it": "Studio ascoltando musica." },
+        { "ja": "{歩|ある}きながら{話|はな}しましょう。", "it": "Parliamone camminando." }
+      ],
+      "exercises": [
+        {
+          "kind": "choice",
+          "prompt": "{父|ちち}はいつも{新聞|しんぶん}を（　）ながら、{朝|あさ}ご{飯|はん}を{食|た}べます。",
+          "choices": ["{読|よ}む", "{読|よ}んで", "{読|よ}み", "{読|よ}んだ"],
+          "answer": 2,
+          "it": "Mio padre fa sempre colazione leggendo il giornale.",
+          "explanation": "ながら si attacca al tema della forma in ます: 読みます → 読み."
+        },
+        {
+          "kind": "choice",
+          "prompt": "{危|あぶ}ないですから、スマホを（　）{歩|ある}かないでください。",
+          "choices": ["{見|み}ながら", "{見|み}たら", "{見|み}ても", "{見|み}るのに"],
+          "answer": 0,
+          "it": "È pericoloso: non camminate guardando lo smartphone.",
+          "explanation": "Guardare e camminare avvengono insieme: 見ながら."
+        },
+        {
+          "kind": "order",
+          "before": "{姉|あね}は",
+          "pieces": ["{歌|うた}を", "{歌|うた}い", "ながら", "{料理|りょうり}を"],
+          "star": 2,
+          "after": "しています。",
+          "it": "Mia sorella maggiore cucina cantando.",
+          "explanation": "歌を歌い + ながら; l'azione principale (料理をしています) chiude la frase."
+        }
+      ]
+    },
+    {
+      "slug": "n4-te-shimau",
+      "level": "N4",
+      "title": "〜てしまう",
+      "meaning": "finire del tutto / fare senza volerlo (rammarico)",
+      "structure": "verbo (forma in て) + しまう. Nel parlato: 〜ちゃう／〜じゃう",
+      "explanation": "Ha due usi: un'azione completata fino in fondo, oppure qualcosa che è successo e dispiace (dimenticare, perdere, rompere). Il contesto dice quale dei due.",
+      "examples": [
+        { "ja": "{宿題|しゅくだい}はもうやってしまいました。", "it": "I compiti li ho già finiti tutti." },
+        { "ja": "{大切|たいせつ}な{本|ほん}をなくしてしまいました。", "it": "Ho perso un libro a cui tenevo." }
+      ],
+      "exercises": [
+        {
+          "kind": "choice",
+          "prompt": "{電車|でんしゃ}の{中|なか}にかさを（　）しまいました。",
+          "choices": ["{忘|わす}れ", "{忘|わす}れて", "{忘|わす}れる", "{忘|わす}れた"],
+          "answer": 1,
+          "it": "Ho dimenticato l'ombrello in treno.",
+          "explanation": "しまう segue la forma in て: 忘れて."
+        },
+        {
+          "kind": "choice",
+          "prompt": "ケーキがおいしかったので、{全部|ぜんぶ}（　）。",
+          "choices": ["{食|た}べておきます", "{食|た}べてみます", "{食|た}べてあります", "{食|た}べてしまいました"],
+          "answer": 3,
+          "it": "La torta era buona e l'ho mangiata tutta.",
+          "explanation": "全部 e il passato indicano un'azione completata: 食べてしまいました."
+        },
+        {
+          "kind": "order",
+          "before": "{昨日|きのう}、",
+          "pieces": ["{友達|ともだち}に", "{借|か}りた", "かさを", "なくして"],
+          "star": 1,
+          "after": "しまいました。",
+          "it": "Ieri ho perso l'ombrello che mi aveva prestato un amico.",
+          "explanation": "友達に借りた qualifica かさ; なくして precede しまいました."
+        }
+      ]
+    },
+    {
+      "slug": "n4-te-oku",
+      "level": "N4",
+      "title": "〜ておく",
+      "meaning": "fare in anticipo / lasciare com'è",
+      "structure": "verbo (forma in て) + おく. Nel parlato: 〜とく",
+      "explanation": "Si fa qualcosa adesso perché servirà dopo (prenotare, preparare), oppure si lascia una cosa nello stato in cui è.",
+      "examples": [
+        { "ja": "{旅行|りょこう}の{前|まえ}に、ホテルを{予約|よやく}しておきます。", "it": "Prima del viaggio prenoto l'albergo." },
+        { "ja": "{窓|まど}は{開|あ}けておいてください。", "it": "Lasci pure la finestra aperta." }
+      ],
+      "exercises": [
+        {
+          "kind": "choice",
+          "prompt": "{友達|ともだち}が{来|く}る{前|まえ}に、{部屋|へや}をそうじ（　）。",
+          "choices": ["してあります", "してみます", "しています", "しておきます"],
+          "answer": 3,
+          "it": "Prima che arrivino gli amici pulisco la stanza.",
+          "explanation": "Una preparazione fatta in vista di qualcosa: しておきます."
+        },
+        {
+          "kind": "choice",
+          "prompt": "A「このはさみ、かたづけましょうか。」B「まだ{使|つか}いますから、そこに（　）ください。」",
+          "choices": ["{置|お}いてしまって", "{置|お}いておいて", "{置|お}いてみて", "{置|お}いてあって"],
+          "answer": 1,
+          "it": "A: «Metto via queste forbici?» B: «Le uso ancora, le lasci lì.»",
+          "explanation": "Lasciare una cosa com'è: 置いておいてください."
+        },
+        {
+          "kind": "order",
+          "before": "{会議|かいぎ}の",
+          "pieces": ["{前|まえ}に", "{資料|しりょう}を", "{読|よ}んで", "おいて"],
+          "star": 2,
+          "after": "ください。",
+          "it": "Legga il materiale prima della riunione.",
+          "explanation": "会議の前に + 資料を読んで + おいてください."
+        }
+      ]
+    },
+    {
+      "slug": "n4-tara",
+      "level": "N4",
+      "title": "〜たら",
+      "meaning": "se / quando (una volta che)",
+      "structure": "forma in た + ら (aggettivi in い: 〜かったら; aggettivi in な e nomi: 〜だったら)",
+      "explanation": "Pone una condizione, oppure indica che un'azione avviene dopo che un'altra si è conclusa. È il condizionale più usato nel parlato e ammette richieste, inviti e intenzioni nella seconda parte.",
+      "examples": [
+        { "ja": "{雨|あめ}が{降|ふ}ったら、{行|い}きません。", "it": "Se piove non ci vado." },
+        { "ja": "{駅|えき}に{着|つ}いたら、{電話|でんわ}してください。", "it": "Quando arrivi alla stazione telefonami." }
+      ],
+      "exercises": [
+        {
+          "kind": "choice",
+          "prompt": "{安|やす}（　）、{買|か}います。",
+          "choices": ["くたら", "いたら", "かったら", "いだったら"],
+          "answer": 2,
+          "it": "Se costa poco lo compro.",
+          "explanation": "Aggettivo in い: 安い → 安かった → 安かったら."
+        },
+        {
+          "kind": "choice",
+          "prompt": "{家|いえ}に（　）、すぐ{手|て}を{洗|あら}いましょう。",
+          "choices": ["{帰|かえ}ったら", "{帰|かえ}りながら", "{帰|かえ}っても", "{帰|かえ}るのに"],
+          "answer": 0,
+          "it": "Appena tornati a casa laviamoci le mani.",
+          "explanation": "Prima si torna, poi ci si lava le mani: 帰ったら."
+        },
+        {
+          "kind": "order",
+          "before": "{明日|あした}",
+          "pieces": ["{天気|てんき}が", "よかったら", "{海|うみ}へ", "{行|い}き"],
+          "star": 1,
+          "after": "ませんか。",
+          "it": "Se domani fa bel tempo, andiamo al mare?",
+          "explanation": "La condizione (天気がよかったら) precede l'invito (海へ行きませんか)."
+        }
+      ]
+    },
+    {
+      "slug": "n4-you-to-omou",
+      "level": "N4",
+      "title": "〜（よ）うと{思|おも}う",
+      "meaning": "pensare di fare, avere intenzione di",
+      "structure": "verbo (forma volitiva) + と{思|おも}う",
+      "explanation": "Esprime un'intenzione di chi parla. Con 〜と思っています l'intenzione dura già da un po'; con 〜と思います è stata presa adesso.",
+      "examples": [
+        { "ja": "{来年|らいねん}、{日本|にほん}へ{行|い}こうと{思|おも}っています。", "it": "L'anno prossimo penso di andare in Giappone." },
+        { "ja": "{今晩|こんばん}は{早|はや}く{寝|ね}ようと{思|おも}います。", "it": "Stasera penso di andare a letto presto." }
+      ],
+      "exercises": [
+        {
+          "kind": "choice",
+          "prompt": "{夏休|なつやす}みに{国|くに}へ（　）と{思|おも}っています。",
+          "choices": ["{帰|かえ}って", "{帰|かえ}ろう", "{帰|かえ}り", "{帰|かえ}れ"],
+          "answer": 1,
+          "it": "Nelle vacanze estive penso di tornare al mio Paese.",
+          "explanation": "Davanti a と思っています l'intenzione vuole la forma volitiva: 帰ろう."
+        },
+        {
+          "kind": "choice",
+          "prompt": "{来月|らいげつ}から、{毎朝|まいあさ}（　）と{思|おも}います。",
+          "choices": ["{走|はし}りよう", "{走|はし}らよう", "{走|はし}るよう", "{走|はし}ろう"],
+          "answer": 3,
+          "it": "Dal mese prossimo penso di correre ogni mattina.",
+          "explanation": "走る è un verbo del primo gruppo: la forma volitiva è 走ろう."
+        },
+        {
+          "kind": "order",
+          "before": "{大学|だいがく}を{出|で}たら、",
+          "pieces": ["{日本|にほん}の", "{会社|かいしゃ}で", "{働|はたら}こう", "と"],
+          "star": 2,
+          "after": "{思|おも}っています。",
+          "it": "Dopo l'università penso di lavorare in un'azienda giapponese.",
+          "explanation": "日本の会社で + 働こう + と思っています."
+        }
+      ]
+    },
+    {
+      "slug": "n4-sou-da-yousu",
+      "level": "N4",
+      "title": "〜そうだ",
+      "meaning": "sembra (a vederlo) / sta per",
+      "structure": "verbo (tema della forma in ます) + そうだ; aggettivo senza い o な + そうだ (いい → よさそう)",
+      "explanation": "Un'impressione basata su ciò che si vede: con gli aggettivi «ha l'aria di essere», con i verbi «sembra sul punto di». Non va confuso con そうだ dopo la forma piana, che riferisce ciò che si è sentito dire.",
+      "examples": [
+        { "ja": "このケーキはおいしそうです。", "it": "Questa torta sembra buona." },
+        { "ja": "{雨|あめ}が{降|ふ}りそうです。", "it": "Sembra che stia per piovere." }
+      ],
+      "exercises": [
+        {
+          "kind": "choice",
+          "prompt": "{空|そら}が{暗|くら}いですね。{雨|あめ}が（　）そうです。",
+          "choices": ["{降|ふ}り", "{降|ふ}って", "{降|ふ}ら", "{降|ふ}れ"],
+          "answer": 0,
+          "it": "Il cielo è scuro. Sembra che stia per piovere.",
+          "explanation": "Per l'impressione visiva si usa il tema della forma in ます: 降り + そうです."
+        },
+        {
+          "kind": "choice",
+          "prompt": "このかばんは{重|おも}（　）ですね。{持|も}ちましょうか。",
+          "choices": ["いそう", "くそう", "そう", "さそう"],
+          "answer": 2,
+          "it": "Questa borsa sembra pesante. Gliela porto?",
+          "explanation": "L'aggettivo in い perde la い: 重い → 重そう."
+        },
+        {
+          "kind": "order",
+          "before": "あの{子|こ}は",
+          "pieces": ["うれし", "そうな", "{顔|かお}を", "して"],
+          "star": 1,
+          "after": "います。",
+          "it": "Quel bambino ha un'aria felice.",
+          "explanation": "うれしそう si comporta come un aggettivo in な: うれしそうな顔."
+        }
+      ]
+    },
+    {
+      "slug": "n4-te-kureru-morau",
+      "level": "N4",
+      "title": "〜てくれる／〜てもらう",
+      "meaning": "qualcuno fa qualcosa per me",
+      "structure": "verbo (forma in て) + くれる: chi fa il favore è il soggetto. Verbo (forma in て) + もらう: chi lo riceve è il soggetto e chi lo fa prende に",
+      "explanation": "Entrambe esprimono gratitudine per un'azione fatta a proprio favore. Cambia il punto di vista: 〜てくれる parte da chi agisce, 〜てもらう da chi riceve.",
+      "examples": [
+        { "ja": "{友達|ともだち}が{駅|えき}まで{送|おく}ってくれました。", "it": "Un amico mi ha accompagnato fino alla stazione." },
+        { "ja": "{私|わたし}は{先生|せんせい}に{作文|さくぶん}を{見|み}てもらいました。", "it": "Mi sono fatto correggere il tema dall'insegnante." }
+      ],
+      "exercises": [
+        {
+          "kind": "choice",
+          "prompt": "{私|わたし}は{田中|たなか}さんに{日本語|にほんご}を{教|おし}えて（　）。",
+          "choices": ["くれました", "もらいました", "あげました", "やりました"],
+          "answer": 1,
+          "it": "Mi sono fatto insegnare il giapponese da Tanaka.",
+          "explanation": "Il soggetto è chi riceve (私は) e chi agisce ha に: もらいました."
+        },
+        {
+          "kind": "choice",
+          "prompt": "{母|はは}が{私|わたし}にセーターを{作|つく}って（　）。",
+          "choices": ["もらいました", "あげました", "くれました", "いただきました"],
+          "answer": 2,
+          "it": "Mia madre mi ha fatto un maglione.",
+          "explanation": "Il soggetto è chi agisce (母が) e il favore è per me: くれました."
+        },
+        {
+          "kind": "order",
+          "before": "{道|みち}が{分|わ}からなかったので、",
+          "pieces": ["{近|ちか}くの", "{人|ひと}に", "{教|おし}えて", "もらい"],
+          "star": 1,
+          "after": "ました。",
+          "it": "Non sapevo la strada e me la sono fatta indicare da una persona lì vicino.",
+          "explanation": "近くの人に + 教えて + もらいました."
+        }
+      ]
+    },
+    {
+      "slug": "n4-ukemi",
+      "level": "N4",
+      "title": "〜（ら）れる",
+      "meaning": "passivo: essere… / subire",
+      "structure": "primo gruppo: 〜aれる ({書|か}く → {書|か}かれる); secondo gruppo: 〜られる; する → される, {来|く}る → {来|こ|来る}られる. Chi compie l'azione prende に",
+      "explanation": "Il soggetto subisce l'azione. In giapponese il passivo si usa spesso anche per dire che un'azione altrui ha dato fastidio a chi parla, e per cose di cui non interessa l'autore.",
+      "examples": [
+        { "ja": "{私|わたし}は{先生|せんせい}にほめられました。", "it": "Sono stato lodato dall'insegnante." },
+        { "ja": "{電車|でんしゃ}の{中|なか}で{足|あし}をふまれました。", "it": "In treno mi hanno pestato un piede." }
+      ],
+      "exercises": [
+        {
+          "kind": "choice",
+          "prompt": "{子|こ}どものとき、よく{母|はは}に（　）。",
+          "choices": ["しかりました", "しかられました", "しからせました", "しかっていました"],
+          "answer": 1,
+          "it": "Da bambino venivo sgridato spesso da mia madre.",
+          "explanation": "母に indica chi compie l'azione: serve il passivo, しかられました."
+        },
+        {
+          "kind": "choice",
+          "prompt": "この{建物|たてもの}は{百年前|ひゃくねんまえ}に（　）。",
+          "choices": ["{建|た}てました", "{建|た}てさせました", "{建|た}ててあげました", "{建|た}てられました"],
+          "answer": 3,
+          "it": "Questo edificio è stato costruito cent'anni fa.",
+          "explanation": "L'edificio non costruisce: subisce l'azione. Passivo: 建てられました."
+        },
+        {
+          "kind": "order",
+          "before": "この{歌|うた}は",
+          "pieces": ["{世界中|せかいじゅう}の", "{人|ひと}に", "{歌|うた}われ", "て"],
+          "star": 2,
+          "after": "います。",
+          "it": "Questa canzone è cantata dalla gente di tutto il mondo.",
+          "explanation": "世界中の人に (agente) + 歌われて (passivo di 歌う) + います."
+        }
+      ]
+    },
+    {
+      "slug": "n4-noni",
+      "level": "N4",
+      "title": "〜のに",
+      "meaning": "nonostante, eppure",
+      "structure": "forma piana + のに (aggettivo in な e nome + なのに)",
+      "explanation": "Il risultato è contrario a ciò che ci si aspettava, e chi parla è sorpreso o deluso. Per questo dopo のに non si mettono richieste, inviti o intenzioni.",
+      "examples": [
+        { "ja": "{薬|くすり}を{飲|の}んだのに、{熱|ねつ}が{下|さ}がりません。", "it": "Ho preso la medicina, eppure la febbre non scende." },
+        { "ja": "{日曜日|にちようび}なのに、{仕事|しごと}があります。", "it": "È domenica, eppure devo lavorare." }
+      ],
+      "exercises": [
+        {
+          "kind": "choice",
+          "prompt": "たくさん{勉強|べんきょう}した（　）、テストの{点|てん}が{悪|わる}かったです。",
+          "choices": ["ので", "から", "のに", "ために"],
+          "answer": 2,
+          "it": "Avevo studiato tanto, eppure il voto del test è stato brutto.",
+          "explanation": "Il risultato contraddice l'attesa: のに. ので, から e ために introducono una causa."
+        },
+        {
+          "kind": "choice",
+          "prompt": "もう{四月|しがつ}（　）、まだ{寒|さむ}いですね。",
+          "choices": ["のに", "なのに", "だのに", "でのに"],
+          "answer": 1,
+          "it": "È già aprile, eppure fa ancora freddo.",
+          "explanation": "Dopo un nome serve な: 四月なのに."
+        },
+        {
+          "kind": "order",
+          "before": "{約束|やくそく}",
+          "pieces": ["した", "のに", "{彼|かれ}は", "{来|き|来る}ません"],
+          "star": 1,
+          "after": "でした。",
+          "it": "Aveva promesso, eppure non è venuto.",
+          "explanation": "約束した + のに, poi il risultato inatteso: 彼は来ませんでした."
+        }
+      ]
+    }
+  ]
+}

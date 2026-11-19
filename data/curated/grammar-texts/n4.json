@@ -1,0 +1,103 @@
+{
+  "format": "kanjiflow-grammar-text/1",
+  "texts": [
+    {
+      "slug": "n4-jitensha",
+      "level": "N4",
+      "title": "{新|あたら}しい{自転車|じてんしゃ}",
+      "titleIt": "La bicicletta nuova",
+      "body": [
+        "{先月|せんげつ}、{新|あたら}しい{自転車|じてんしゃ}を{買|か}いました。{前|まえ}の{自転車|じてんしゃ}は{十年|じゅうねん}も{使|つか}っていたので、あちこちこわれて［1］。{新|あたら}しいのは{赤|あか}くて、とてもきれいです。［2］、{少|すこ}し{高|たか}かったです。",
+        "{今日|きょう}は{雨|あめ}が{降|ふ}り［3］なので、{会社|かいしゃ}へは{電車|でんしゃ}で{行|い}きます。{自転車|じてんしゃ}に{乗|の}り［4］{音楽|おんがく}を{聞|き}くのは、あぶないのでやめました。{今度|こんど}の{休|やす}みは、{友達|ともだち}と{海|うみ}まで{自転車|じてんしゃ}で{行|い}こうと［5］。"
+      ],
+      "translation": [
+        "Il mese scorso ho comprato una bicicletta nuova. La vecchia l'avevo usata per ben dieci anni e si era rotta in vari punti, purtroppo. La nuova è rossa e molto bella. Però costava un po'.",
+        "Oggi sembra che stia per piovere, quindi vado in azienda in treno. Ascoltare musica andando in bicicletta è pericoloso, perciò ho smesso. Nella prossima vacanza penso di andare al mare in bicicletta con gli amici."
+      ],
+      "blanks": [
+        {
+          "point": "n4-te-shimau",
+          "choices": ["あげました", "しまいました", "おきました", "くれました"],
+          "answer": 1,
+          "explanation": "«こわれる» è un evento non voluto: 〜てしまいました esprime il rammarico («si era rotta in vari punti, purtroppo»). おく indica una preparazione voluta; あげる e くれる un favore fatto a qualcuno."
+        },
+        {
+          "point": null,
+          "choices": ["それで", "つまり", "でも", "たとえば"],
+          "answer": 2,
+          "explanation": "La frase dopo contraddice la precedente («bella… ma costava un po'»): serve «でも». それで introduce una conseguenza, つまり una riformulazione, たとえば un esempio."
+        },
+        {
+          "point": "n4-sou-da-yousu",
+          "choices": ["そう", "ながら", "たら", "ほう"],
+          "answer": 0,
+          "explanation": "Un'impressione basata su ciò che si vede (il cielo): 降りそうなので, «sembra che stia per piovere». ながら e たら non possono stare davanti a なので."
+        },
+        {
+          "point": "n4-nagara",
+          "choices": ["たら", "ように", "ほど", "ながら"],
+          "answer": 3,
+          "explanation": "Due azioni contemporanee della stessa persona (andare in bicicletta e ascoltare musica): 乗りながら, tema della forma in ます + ながら."
+        },
+        {
+          "point": "n4-you-to-omou",
+          "choices": ["{思|おも}ってしまいます", "{思|おも}っています", "{思|おも}っておきます", "{思|おも}ってもらいます"],
+          "answer": 1,
+          "explanation": "Un'intenzione che dura da un po': 行こうと思っています. てしまう, ておく e てもらう non si usano con と思う."
+        }
+      ]
+    },
+    {
+      "slug": "n4-tanjoubi",
+      "level": "N4",
+      "title": "{友達|ともだち}の{誕生日|たんじょうび}",
+      "titleIt": "Il compleanno di un'amica",
+      "body": [
+        "{来週|らいしゅう}の{土曜日|どようび}は、{友達|ともだち}のミナさんの{誕生日|たんじょうび}です。ミナさんは、{先月|せんげつ}、{私|わたし}が{病気|びょうき}で{学校|がっこう}を{休|やす}んだとき、ノートをコピーして［1］。だから、お{礼|れい}にプレゼントをあげたいと{思|おも}っています。",
+        "ミナさんは{日本|にほん}のお{菓子|かし}を{食|た}べた［2］がないそうなので、{昨日|きのう}、{有名|ゆうめい}な{店|みせ}でお{菓子|かし}を{買|か}いました。",
+        "{今夜|こんや}、きれいな{紙|かみ}で{包|つつ}むつもりです。もし{紙|かみ}が{足|た}り［3］、{明日|あした}、{店|みせ}で{買|か}います。",
+        "{去年|きょねん}の{誕生日|たんじょうび}には、ミナさんは{友達|ともだち}みんなから「おめでとう」と［4］そうです。{今年|ことし}も、ミナさんがうれしいと{思|おも}うことを、みんなで{考|かんが}えています。",
+        "{今日|きょう}は{日曜日|にちようび}で{時間|じかん}がたくさんある［5］、まだ{何|なに}もしていません。{早|はや}くお{菓子|かし}を{包|つつ}まなければなりません。"
+      ],
+      "translation": [
+        "Sabato prossimo è il compleanno della mia amica Mina. Il mese scorso, quando ero assente da scuola per una malattia, Mina mi ha fotocopiato gli appunti. Per ringraziarla vorrei farle un regalo.",
+        "A quanto pare Mina non ha mai mangiato dolci giapponesi, quindi ieri ho comprato dei dolci in un negozio famoso.",
+        "Stasera penso di incartarli con della bella carta. Se la carta non dovesse bastare, domani ne compro in negozio.",
+        "L'anno scorso, per il compleanno, tutti gli amici le hanno detto «auguri». Anche quest'anno stiamo pensando insieme a qualcosa che la renda felice.",
+        "Oggi è domenica e ho tutto il tempo, eppure non ho ancora fatto niente. Devo incartare presto i dolci."
+      ],
+      "blanks": [
+        {
+          "point": "n4-te-kureru-morau",
+          "choices": ["もらいました", "あげました", "おきました", "くれました"],
+          "answer": 3,
+          "explanation": "Mina ha fatto un favore a chi parla: コピーしてくれました. もらう avrebbe come soggetto chi riceve («私は…にコピーしてもらいました»)."
+        },
+        {
+          "point": "n4-ta-koto-ga-aru",
+          "choices": ["こと", "もの", "ところ", "ばかり"],
+          "answer": 0,
+          "explanation": "«食べたことがない»: l'esperienza che non si è mai fatta si esprime con 〜たこと(が)ない. もの, ところ e ばかり non reggono がない in questo senso."
+        },
+        {
+          "point": "n4-tara",
+          "choices": ["なかったのに", "ないながら", "なかったら", "なくそうに"],
+          "answer": 2,
+          "explanation": "もし chiama un condizionale: 足りなかったら, «se la carta non basta». のに esprime un risultato contrario alle attese e non sta con もし."
+        },
+        {
+          "point": "n4-ukemi",
+          "choices": ["{言|い}った", "{言|い}われた", "{言|い}わせた", "{言|い}って"],
+          "answer": 1,
+          "explanation": "«みんなから» indica chi compie l'azione e Mina la riceve: passivo, 言われた («le è stato detto»). 言った avrebbe Mina come chi parla."
+        },
+        {
+          "point": "n4-noni",
+          "choices": ["のに", "ので", "から", "ために"],
+          "answer": 0,
+          "explanation": "Il risultato è contrario a ciò che ci si aspettava (c'è tempo, eppure non ho fatto niente): のに. ので e から indicano una causa."
+        }
+      ]
+    }
+  ]
+}
