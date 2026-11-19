@@ -12,7 +12,7 @@
  */
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
-import { BUILD_DIR, RAW_DIR, rawJson, readJson } from "./paths";
+import { BUILD_DIR, CURATED_DIR, RAW_DIR, rawJson, readJson } from "./paths";
 import { katakanaToHiragana } from "../../src/domain/answers/kana";
 
 type Jlpt = "N5" | "N4" | "N3";
@@ -118,12 +118,33 @@ function parseCsv(text: string): Array<Record<string, string>> {
   return body.map((r) => Object.fromEntries(header!.map((h, i) => [h, r[i] ?? ""])));
 }
 
+function readJlptOverrides(): Map<string, Jlpt> {
+  const out = new Map<string, Jlpt>();
+  for (const line of readFileSync(path.join(CURATED_DIR, "jlpt-kanji-overrides.tsv"), "utf8").split("\n")) {
+    if (!line.trim() || line.startsWith("#")) continue;
+    const [ch, jlpt, reason] = line.split("\t");
+    if (!ch || [...ch].length !== 1 || !LEVELS.includes(jlpt as Jlpt) || !reason?.trim()) {
+      throw new Error(`jlpt-kanji-overrides.tsv: riga non valida "${line}" (servono kanji, fascia N5/N4/N3 e motivo)`);
+    }
+    if (out.has(ch)) throw new Error(`jlpt-kanji-overrides.tsv: ${ch} ripetuto`);
+    out.set(ch, jlpt as Jlpt);
+  }
+  return out;
+}
+
 function main() {
   // ---- kanji set (solo campo jlpt_new) ----
   const kanjiData = readJson<Record<string, { jlpt_new: number | null }>>(path.join(RAW_DIR, "kanji-data.json"));
   const jlptOf = new Map<string, Jlpt>();
   for (const [ch, v] of Object.entries(kanjiData)) {
     if (v.jlpt_new === 5 || v.jlpt_new === 4 || v.jlpt_new === 3) jlptOf.set(ch, `N${v.jlpt_new}` as Jlpt);
+  }
+  // Correzioni curate per i kanji che la fonte lascia senza fascia (data/curated/jlpt-kanji-overrides.tsv).
+  const overrides = readJlptOverrides();
+  for (const [ch, jlpt] of overrides) {
+    const fromSource = kanjiData[ch]?.jlpt_new;
+    if (fromSource != null) throw new Error(`jlpt-kanji-overrides.tsv: ${ch} ha già la fascia N${fromSource} nella fonte, togliere la correzione`);
+    jlptOf.set(ch, jlpt);
   }
 
   // ---- KANJIDIC2 ----
@@ -237,7 +258,10 @@ function main() {
     const usage = { onyomi: new Map<string, number>(), kunyomi: new Map<string, number>() };
     // Ogni vocabolo conta al massimo una volta per tipo; per il kun si verifica anche l'okurigana scritto.
     const typeVotes = { onyomi: 0, kunyomi: 0 };
-    for (const v of vocab.filter((x) => x.kanji.includes(ch))) {
+    // I vocaboli sbloccati da una correzione di fascia (es. 自分, 十分 per 分) votano solo per il kanji corretto:
+    // la correzione non deve cambiare la lettura principale, e quindi le domande e i mnemonici, degli altri kanji.
+    const voters = vocab.filter((x) => x.kanji.includes(ch) && (overrides.has(ch) || !x.kanji.some((k) => overrides.has(k))));
+    for (const v of voters) {
       const r = v.readings[0]!;
       const onHits = onyomi.filter((on) => on && r.includes(on.replace(/-/g, "")));
       const after = v.written.startsWith(ch) ? v.written.slice(ch.length) : null;
