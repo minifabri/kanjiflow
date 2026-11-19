@@ -352,6 +352,61 @@ test.describe.serial("percorso di studio completo", () => {
     ]);
   });
 
+  test("grammatica: testo con spazi vuoti, correzione sul server e nessun effetto sullo SRS", async ({ page }) => {
+    const srsBefore = await query(`SELECT "pointId", "srsStage", "nextReviewAt", "correctCount", "incorrectCount" FROM "UserGrammarProgress" ORDER BY "pointId"`);
+    expect(srsBefore.length).toBeGreaterThan(0);
+
+    await page.goto("/grammar");
+    await expect(page.getByRole("heading", { name: /Testi con spazi vuoti/ })).toBeVisible();
+    await page.locator('a[href="/grammar/text/n3-zaitaku"]').click();
+    await expect(page).toHaveURL(/grammar\/text\/n3-zaitaku/);
+    // Le soluzioni non sono nella pagina.
+    expect(await page.content()).not.toContain("answerIndex");
+
+    // Cinque spazi vuoti nel testo; il pulsante resta spento finché non si risponde a tutti.
+    for (const n of [1, 2, 3, 4, 5]) await expect(page.getByTestId(`blank-${n}`)).toHaveAttribute("data-state", "empty");
+    const submit = page.getByRole("button", { name: "Controlla le risposte" });
+    await expect(submit).toBeDisabled();
+
+    const answers = await query<{ answerIndex: number }>(
+      `SELECT b."answerIndex" AS "answerIndex" FROM "GrammarTextBlank" b JOIN "GrammarText" t ON t."id" = b."textId" WHERE t."slug" = $1 ORDER BY b."position"`,
+      ["n3-zaitaku"],
+    );
+    expect(answers).toHaveLength(5);
+    const sets = page.locator("fieldset");
+    for (const [i, a] of answers.entries()) {
+      // L'ultimo spazio è volutamente sbagliato.
+      const pick = i === answers.length - 1 ? (Number(a.answerIndex) + 1) % 4 : Number(a.answerIndex);
+      await sets.nth(i).locator("label").nth(pick).click();
+      // La scelta compare subito dentro lo spazio del testo.
+      await expect(page.getByTestId(`blank-${i + 1}`)).toHaveAttribute("data-state", "filled");
+    }
+    await expect(submit).toBeEnabled();
+    await submit.click();
+
+    await expect(page.getByRole("status")).toHaveText("4 su 5 risposte corrette");
+    for (const n of [1, 2, 3, 4]) await expect(page.getByTestId(`blank-${n}`)).toHaveAttribute("data-state", "right");
+    await expect(page.getByTestId("blank-5")).toHaveAttribute("data-state", "wrong");
+    await expect(page.getByText("Punti da rivedere")).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Traduzione" })).toBeVisible();
+    await expect(page.getByText("Non corretto.")).toHaveCount(1);
+
+    // Il tentativo è registrato; gli stadi SRS dei punti sono rimasti identici.
+    const [attempt] = await query<{ correctCount: number; totalCount: number }>(`SELECT "correctCount", "totalCount" FROM "GrammarTextAttempt"`);
+    expect(attempt).toMatchObject({ correctCount: 4, totalCount: 5 });
+    const srsAfter = await query(`SELECT "pointId", "srsStage", "nextReviewAt", "correctCount", "incorrectCount" FROM "UserGrammarProgress" ORDER BY "pointId"`);
+    expect(srsAfter).toEqual(srsBefore);
+    const [activity] = await query<{ n: number | string }>(`SELECT COUNT(*) AS n FROM "StudyActivity" WHERE "activityType" = $1`, ["grammar_text"]);
+    expect(Number(activity!.n)).toBe(1);
+
+    // La scheda del punto sbagliato rimanda al testo, segnato come svolto; l'elenco ne mostra il punteggio.
+    await page.goto("/grammar/n3-wake-dewa-nai");
+    await expect(page.getByRole("heading", { name: "Compare in questi testi" })).toBeVisible();
+    await expect(page.locator('a[href="/grammar/text/n3-zaitaku"]')).toContainText("svolto");
+    await page.goto("/grammar");
+    await expect(page.locator('a[href="/grammar/text/n3-zaitaku"]')).toContainText("4/5");
+  });
+
   test("@mobile la dashboard è utilizzabile su telefono", async ({ page }) => {
     await page.goto("/");
     await expect(page.getByRole("navigation", { name: "Navigazione principale" }).last()).toBeVisible();

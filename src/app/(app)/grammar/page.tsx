@@ -1,12 +1,13 @@
 import Link from "next/link";
 import { BookOpen, RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge, Progress } from "@/components/ui/misc";
 import { GRAMMAR_LEVELS } from "@/domain/grammar/content";
 import { plainText } from "@/domain/reading/markup";
 import { stageGroup, stageLabel, type SrsStage } from "@/domain/srs";
 import { getGrammarOverview, GRAMMAR_REVIEW_BATCH, type GrammarPointSummary } from "@/server/grammar/points";
+import { listGrammarTexts, orderTexts, type GrammarTextSummary } from "@/server/grammar/texts";
 import { getStudyContext } from "@/server/study/context";
 import { cn } from "@/lib/utils";
 
@@ -16,7 +17,7 @@ const pct = (a: number, b: number) => (b === 0 ? 0 : Math.round((a / b) * 100));
 
 export default async function GrammarPage() {
   const ctx = await getStudyContext();
-  const o = await getGrammarOverview(ctx);
+  const [o, texts] = await Promise.all([getGrammarOverview(ctx), listGrammarTexts(ctx)]);
   const lessonBatch = o.nextLessons.length;
 
   return (
@@ -68,6 +69,26 @@ export default async function GrammarPage() {
           </CardContent>
         </Card>
       </section>
+
+      {texts.length > 0 && (
+        <Card>
+          <CardHeader>
+            <CardTitle>Testi con spazi vuoti (文章の文法)</CardTitle>
+            <CardDescription>
+              Un testo breve con più spazi numerati: scegli la forma giusta in ognuno, come al JLPT. È pratica libera e non cambia gli stadi SRS.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ul className="grid gap-2 sm:grid-cols-2">
+              {orderTexts(texts).map((t) => (
+                <li key={t.id}>
+                  <TextRow text={t} />
+                </li>
+              ))}
+            </ul>
+          </CardContent>
+        </Card>
+      )}
 
       {GRAMMAR_LEVELS.map((level) => {
         const points = o.points.filter((p) => p.level === level);
@@ -129,6 +150,31 @@ function PointRow({ point: p }: { point: GrammarPointSummary }) {
           <span className={cn("rounded-full px-2.5 py-0.5 text-xs font-medium", GROUP_STYLE[stageGroup(p.stage as SrsStage)])}>{stageLabel(p.stage as SrsStage)}</span>
         </span>
       )}
+    </Link>
+  );
+}
+
+function TextRow({ text: t }: { text: GrammarTextSummary }) {
+  return (
+    <Link href={`/grammar/text/${t.slug}`} className="flex h-full flex-col gap-2 rounded-md bg-elevated/40 px-3 py-2.5 transition-colors hover:bg-elevated">
+      <span className="flex items-start justify-between gap-3">
+        <span className="min-w-0">
+          <span className="jp block truncate text-[15px] font-medium" lang="ja">
+            {plainText(t.title)}
+          </span>
+          <span className="block truncate text-xs text-muted">{t.titleIt}</span>
+        </span>
+        {t.best && (
+          <Badge variant={t.best.correct === t.best.total ? "success" : "gold"} className="shrink-0">
+            {t.best.correct}/{t.best.total}
+          </Badge>
+        )}
+      </span>
+      <span className="flex flex-wrap gap-1.5">
+        <Badge variant="outline">{t.level}</Badge>
+        <Badge variant="outline">{t.blankCount} spazi</Badge>
+        <Badge variant={t.readability.percent >= 90 ? "success" : "outline"}>kanji conosciuti {t.readability.percent}%</Badge>
+      </span>
     </Link>
   );
 }

@@ -4,6 +4,7 @@ import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { getStudyContext } from "@/server/study/context";
 import { answerGrammar, markGrammarKnown, resetGrammarPoint } from "@/server/grammar/points";
+import { submitGrammarText } from "@/server/grammar/texts";
 
 const answerSchema = z.object({
   clientAttemptId: z.string().min(8).max(64),
@@ -27,4 +28,15 @@ export async function resetGrammarPointAction(pointId: string, slug: string) {
   await resetGrammarPoint(await getStudyContext(), z.string().min(1).parse(pointId));
   revalidatePath(`/grammar/${slug}`);
   revalidatePath("/grammar");
+}
+
+const textSchema = z.object({
+  textId: z.string().min(1),
+  answers: z.array(z.number().int().min(0).max(3).nullable()).max(8),
+  durationMs: z.number().int().min(0),
+});
+
+export async function submitGrammarTextAction(input: z.input<typeof textSchema>) {
+  // Nessun revalidatePath: il riepilogo resta montato; le pagine sono dinamiche.
+  return submitGrammarText(await getStudyContext(), textSchema.parse(input));
 }

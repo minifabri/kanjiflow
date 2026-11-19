@@ -1,5 +1,5 @@
 /**
- * Importa il dataset versionato, i brani di lettura e la grammatica, e garantisce l'esistenza dell'utente unico.
+ * Importa il dataset versionato, i brani di lettura, la grammatica e i testi con spazi vuoti, e garantisce l'esistenza dell'utente unico.
  * Idempotente: può essere rieseguito a ogni aggiornamento del dataset.
  * Uso: npm run db:seed   (KANJIFLOW_FORCE_IMPORT=1 per reimportare anche la stessa versione)
  */
@@ -10,6 +10,7 @@ import { PrismaClient } from "../src/generated/prisma/client";
 import { createAdapter } from "../src/server/db-adapter";
 import { importDataset } from "../src/server/content/import-dataset";
 import { importGrammar } from "../src/server/content/import-grammar";
+import { importGrammarTexts } from "../src/server/content/import-grammar-text";
 import { importReading } from "../src/server/content/import-reading";
 import { ensureOwner } from "../src/server/user";
 
@@ -32,12 +33,14 @@ async function main() {
     };
     const reading = await importReading(prisma, curated("reading"));
     const grammar = await importGrammar(prisma, curated("grammar"));
+    const grammarTexts = await importGrammarTexts(prisma, curated("grammar-texts"));
     const userId = await ensureOwner(prisma);
     console.log(
       `✓ dataset v${report.version}: ${report.created} creati, ${report.updated} aggiornati, ${report.unchanged} invariati (${((Date.now() - started) / 1000).toFixed(1)}s) · utente ${userId}`,
     );
     console.log(`✓ lettura: ${reading.total} brani, ${reading.created} creati, ${reading.updated} aggiornati, ${reading.unchanged} invariati`);
     console.log(`✓ grammatica: ${grammar.total} punti, ${grammar.created} creati, ${grammar.updated} aggiornati, ${grammar.unchanged} invariati`);
+    console.log(`✓ testi di grammatica: ${grammarTexts.total} testi, ${grammarTexts.created} creati, ${grammarTexts.updated} aggiornati, ${grammarTexts.unchanged} invariati`);
   } finally {
     await prisma.$disconnect();
   }

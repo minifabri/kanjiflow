@@ -10,6 +10,7 @@ import { plainText } from "@/domain/reading/markup";
 import { furiganaRule } from "@/domain/reading/readability";
 import { stageLabel, type SrsStage } from "@/domain/srs";
 import { getGrammarPoint } from "@/server/grammar/points";
+import { textsForPoint } from "@/server/grammar/texts";
 import { getStudyContext } from "@/server/study/context";
 
 export async function generateMetadata({ params }: PageProps<"/grammar/[slug]">) {
@@ -26,6 +27,7 @@ export default async function GrammarPointPage({ params }: PageProps<"/grammar/[
   const point = await getGrammarPoint(ctx, slug);
   if (!point) notFound();
   const { sheet, progress } = point;
+  const texts = await textsForPoint(ctx, sheet.id);
   const furigana = furiganaRule(ctx.settings.showFurigana ? "adaptive" : "never", point.kanjiStates);
   const fmt = new Intl.DateTimeFormat("it-IT", { timeZone: ctx.timeZone, dateStyle: "medium", timeStyle: "short" });
 
@@ -82,6 +84,33 @@ export default async function GrammarPointPage({ params }: PageProps<"/grammar/[
           <p className="text-xs text-muted">La pratica libera non modifica lo stadio SRS.</p>
         </CardContent>
       </Card>
+
+      {texts.length > 0 && (
+        <Card id="testi">
+          <CardHeader>
+            <CardTitle>Compare in questi testi</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <ul className="grid gap-2 sm:grid-cols-2">
+              {texts.map((t) => (
+                <li key={t.slug}>
+                  <Link href={`/grammar/text/${t.slug}`} className="flex items-center justify-between gap-3 rounded-md bg-elevated/50 px-3 py-2 hover:bg-elevated">
+                    <span className="min-w-0">
+                      <span className="jp block truncate text-sm" lang="ja">
+                        {plainText(t.title)}
+                      </span>
+                      <span className="block truncate text-[11px] text-muted">
+                        {t.titleIt} · {t.level}
+                      </span>
+                    </span>
+                    {t.read && <Badge variant="success">svolto</Badge>}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </CardContent>
+        </Card>
+      )}
 
       {point.attempts.length > 0 && (
         <Card>

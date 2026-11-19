@@ -35,7 +35,7 @@ In produzione, senza `APP_PASSWORD_HASH_B64` valido e `SESSION_SECRET` l'app ris
 
 | Comando | Cosa fa |
 |---|---|
-| `npm test` | Test unitari (motore SRS, validatori, coda lezioni, lettura, grammatica, date, auth) |
+| `npm test` | Test unitari (motore SRS, validatori, coda lezioni, lettura, grammatica e testi, date, auth) |
 | `npm run test:e2e` | Playwright: onboarding → lezioni → ripassi con correzione manuale → lettura → grammatica → mobile |
 | `npm run typecheck` / `npm run lint` | Controlli statici |
 | `npm run content:fetch` / `content:build` | Scarica le fonti pinnate e ricostruisce `data/dataset/kanjiflow-n5-n3.json` |
@@ -49,7 +49,7 @@ src/domain/        logica pura, senza React né database (testata con Vitest)
   answers/         romaji→kana, normalizzazione, validatori di lettura e significato, feedback
   curriculum/      coda lezioni per i percorsi guidato / JLPT / personalizzato
   reading/         markup dei brani, collegamento ai soggetti, leggibilità e furigana adattivo
-  grammar/         formato dei punti grammaticali e costruzione degli esercizi
+  grammar/         formato dei punti grammaticali, esercizi e testi con spazi vuoti
 src/server/        accesso ai dati (Prisma), transazioni, servizi di studio e statistiche
 src/app/           route App Router e server action (sottili: validano con Zod e delegano)
 src/components/    UI (componenti stile shadcn/ui scritti a mano, Tailwind v4)
@@ -103,7 +103,7 @@ I brani sono stati scritti per KanjiFlow, non provengono da prove ufficiali e no
 
 ### Grammatica (文法)
 
-40 punti grammaticali originali (10 N4 di riscaldamento, 30 N3), ognuno con scheda in italiano (significato, formazione, uso, due esempi con audio) e tre esercizi nei formati JLPT: due di scelta della forma (文法形式の判断) e uno di riordino con la ★ (文の組み立て). Manca ancora il terzo formato, il testo con più spazi vuoti (文章の文法).
+40 punti grammaticali originali (10 N4 di riscaldamento, 30 N3), ognuno con scheda in italiano (significato, formazione, uso, due esempi con audio) e tre esercizi nei formati JLPT: due di scelta della forma (文法形式の判断) e uno di riordino con la ★ (文の組み立て). Il terzo formato, il testo con più spazi vuoti, è descritto sotto.
 
 **SRS in una coda separata**: stessi stadi, intervalli e regola di regressione dei kanji (`src/domain/srs`), ma tabelle proprie (`UserGrammarProgress`, `GrammarAttempt`): il contatore e la coda dei ripassi kanji non cambiano.
 - *Lezione*: scheda, poi un esercizio. Con la risposta corretta il punto entra ad Apprendista 1; con quella sbagliata torna in fondo alla sessione con la scheda e un altro esercizio. Limite giornaliero in Impostazioni (predefinito 3 punti nuovi al giorno); l'ordine è N4, poi N3.
@@ -117,7 +117,13 @@ I brani sono stati scritti per KanjiFlow, non provengono da prove ufficiali e no
 
 **Scrivere un punto** (`data/curated/grammar/*.json`, poi `npm run db:seed`): negli esercizi a scelta la frase contiene un solo segnaposto `（　）`; in quelli di riordino si scrivono i quattro pezzi nell'ordine giusto e la posizione della ★, e l'import li mescola in modo deterministico. I pezzi devono avere un solo ordine possibile: meglio catene in cui ogni pezzo dipende dal precedente che due complementi scambiabili.
 
-Schede ed esercizi sono stati scritti per KanjiFlow, non provengono da prove ufficiali e non sono stati rivisti da un madrelingua.
+**Testi con spazi vuoti (文章の文法)**: 8 testi (2 N4, 6 N3) di 3–5 paragrafi, ognuno con cinque spazi numerati ［1］–［5］ e quattro risposte per spazio, come al JLPT. Si trovano in Grammatica; ogni spazio verifica un punto grammaticale (o un connettivo, quando `point` è `null`).
+- Nel testo lo spazio si riempie con la risposta scelta; dopo la consegna mostra quella corretta, verde o rossa. Per ogni spazio: spiegazione in italiano, punto verificato con il tuo stadio SRS e link alla sua scheda; in fondo i punti da rivedere e la traduzione.
+- **È pratica: non modifica gli stadi SRS** (e quindi nemmeno la coda dei ripassi). Il tentativo (`GrammarTextAttempt`) conta come attività di studio; la scheda di un punto elenca i testi in cui compare.
+- Correzione sul server come per gli altri esercizi: la pagina non contiene le soluzioni. Furigana adattivo anche qui.
+- *Scrivere un testo* (`data/curated/grammar-texts/*.json`, poi `npm run db:seed`): i segnaposto `［1］`…`［n］` compaiono nel testo una volta sola e in ordine (lo verifica lo schema). Ogni spazio ha le quattro risposte, l'indice di quella giusta, la spiegazione e il punto verificato. Le tre risposte sbagliate devono essere sbagliate *nel contesto*: se due risposte sono accettabili lo spazio va riscritto.
+
+Schede, testi ed esercizi sono stati scritti per KanjiFlow, non provengono da prove ufficiali e non sono stati rivisti da un madrelingua.
 
 ## Stato della prima milestone
 
@@ -129,4 +135,4 @@ Mnemonici generati (modificabili, sostituiti da quelli personali):
 - **kanji N4 e N3**: storie originali in italiano per significato e lettura in `data/curated/it/mnemonics-kanji.tsv`, con parole chiave ricorrenti per i suoni (セイ → SEI, カン → CANE…). Un test verifica che ogni lettura mnemonica citi la lettura studiata.
 - **vocaboli**: spiegazione automatica (`src/domain/content/vocab-mnemonic.ts`) dei kanji componenti e di come se ne ricava la pronuncia, con rendaku, っ, h→p e okurigana; se la lettura non deriva dalle letture di dizionario (今日, 大人…) lo dice invece di inventare un legame.
 
-Non ancora: esercizi di grammatica su testo (文章の文法), mnemonici per i kanji N5 e i radicali, pagina statistiche, raccolte personalizzate, import/export e backup, interfaccia in inglese, notifiche. La PWA non funziona offline per lezioni e ripassi: mostra una pagina offline.
+Non ancora: mnemonici per i kanji N5 e i radicali, pagina statistiche, raccolte personalizzate, import/export e backup, interfaccia in inglese, notifiche. La PWA non funziona offline per lezioni e ripassi: mostra una pagina offline.
