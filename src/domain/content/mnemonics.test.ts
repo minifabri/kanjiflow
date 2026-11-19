@@ -18,6 +18,7 @@ const K: Record<string, MnemonicKanji> = {
   物: { onyomi: ["ぶつ", "もつ"], kunyomi: ["もの"], primaryReadings: ["ぶつ"], meaning: "cosa" },
   語: { onyomi: ["ご"], kunyomi: ["かた.る", "かた.らう"], primaryReadings: ["ご"], meaning: "parola" },
   切: { onyomi: ["せつ", "さい"], kunyomi: ["き.る", "き.れる"], primaryReadings: ["き.る"], meaning: "tagliare" },
+  分: { onyomi: ["ぶん", "ふん", "ぶ"], kunyomi: ["わ.ける", "わ.け", "わ.かれる", "わ.かる", "わ.かつ"], primaryReadings: ["ぶん", "ぶ"], meaning: "parte" },
 };
 const map = new Map<string, KanjiReadings & MnemonicKanji>(Object.entries(K));
 const readings = (w: string, r: string) => segmentReading(w, r, map)?.map((s) => s.reading).join("|");
@@ -41,6 +42,15 @@ describe("segmentReading", () => {
     expect(readings("食べる", "たべる")).toBe("た|べ|る");
     expect(segmentReading("物語", "ものがたり", map)![1]).toMatchObject({ base: "かたる", changes: ["okurigana", "rendaku"] });
     expect(segmentReading("切手", "きって", map)![0]).toMatchObject({ reading: "きっ", changes: ["okurigana", "sokuon"] });
+  });
+
+  it("tra kun'yomi con la stessa radice sceglie quella con l'okurigana scritta", () => {
+    expect(segmentReading("分かる", "わかる", map)![0]).toMatchObject({ reading: "わ", base: "わかる", readingType: "kunyomi" });
+    expect(segmentReading("分ける", "わける", map)![0]).toMatchObject({ base: "わける" });
+    // Vince l'okurigana più lunga che coincide: 分かれる è わかれる, non わかる.
+    expect(segmentReading("分かれる", "わかれる", map)![0]).toMatchObject({ base: "わかれる" });
+    // Senza kana scritto dopo il kanji resta la lettura del candidato.
+    expect(segmentReading("切手", "きって", map)![0]).toMatchObject({ base: "きる" });
   });
 
   it("non inventa scomposizioni per letture speciali", () => {

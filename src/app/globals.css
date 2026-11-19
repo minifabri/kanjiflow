@@ -30,6 +30,8 @@
   --kf-ring: #c4b5fd;
   --kf-radical: #7dd3fc;
   --kf-vocab: #f0abfc;
+  /* Colore dei grafici a una serie: verificato per contrasto e luminosità sulla superficie scura. */
+  --kf-chart: #8b6cf0;
   color-scheme: dark;
 }
 
@@ -50,6 +52,7 @@
   --kf-ring: #6d4fd8;
   --kf-radical: #0369a1;
   --kf-vocab: #a21caf;
+  --kf-chart: #6d4fd8;
   color-scheme: light;
 }
 
@@ -70,6 +73,7 @@
   --color-ring: var(--kf-ring);
   --color-radical: var(--kf-radical);
   --color-vocab: var(--kf-vocab);
+  --color-chart: var(--kf-chart);
 
   --font-sans: "Inter Variable", "Noto Sans JP", system-ui, sans-serif;
   --font-jp: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", sans-serif;

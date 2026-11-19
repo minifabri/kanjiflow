@@ -106,6 +106,26 @@ function candidates(k: KanjiReadings, inCompound: boolean): Candidate[] {
 }
 
 /**
+ * Più kun'yomi possono avere la stessa radice (分: わ.ける, わ.かる, わ.かれる): la lettura di dizionario giusta
+ * è quella la cui okurigana coincide con il kana scritto subito dopo il kanji (分かる → わかる, non わける).
+ * Se nessuna coincide, resta quella del candidato.
+ */
+function kunBaseFor(k: KanjiReadings, cand: Candidate, after: string[]): string {
+  let written = "";
+  for (const ch of after) {
+    if (!isKana(ch)) break;
+    written += toHiragana(ch);
+  }
+  if (!written) return cand.base;
+  const matches = k.kunyomi
+    .map((kun) => kun.replace(/-/g, "").split("."))
+    .filter(([stem, okuri]) => stem === cand.reading && !!okuri && written.startsWith(okuri))
+    .map(([stem, okuri]) => stem! + okuri!);
+  // La okurigana più lunga che coincide è la più specifica (分かれる → わかれる, non わかる).
+  return matches.sort((a, b) => b.length - a.length)[0] ?? cand.base;
+}
+
+/**
  * Restituisce la scomposizione o null se le letture di dizionario non bastano a spiegare la parola.
  * I kanji assenti da `readings` accettano 1–4 kana qualsiasi (base null), ma ne basta uno sconosciuto
  * per restare onesti: la spiegazione lo dirà.
@@ -137,7 +157,7 @@ export function segmentReading(written: string, reading: string, readings: Map<s
               kind: "kanji",
               text: c,
               reading: cand.reading,
-              base: cand.base,
+              base: cand.readingType === "kunyomi" && cand.changes.length === 0 ? kunBaseFor(known, cand, chars.slice(i + 1)) : cand.base,
               readingType: cand.readingType,
               changes: cand.changes,
               ...(c === "々" ? { repeat: true } : {}),

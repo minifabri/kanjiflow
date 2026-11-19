@@ -17,6 +17,7 @@ KanjiFlow non contiene contenuti di WaniKani. Tutti i dati provengono da fonti l
 
 Note importanti:
 
+- **Correzioni curate delle fasce**: `data/curated/jlpt-kanji-overrides.tsv` assegna la fascia ai kanji che `kanji-data` lascia senza (oggi solo 分, N5 nelle liste di Waller). Si applicano solo dove la fonte non dà un valore; se la fonte viene corretta la build si ferma e la riga va tolta.
 - **Il JLPT non pubblica elenchi ufficiali** di kanji o vocaboli dal 2010. Le fasce N5/N4/N3 sono liste della community e nel database hanno `confidence = community`.
 - **I significati italiani sono generati** traducendo le glosse inglesi: ogni riga ha `origin = generated` e `verified = false`. Le glosse inglesi originali restano accettate come risposte.
 - **I brani di lettura, la grammatica e i testi con spazi vuoti sono originali**: non provengono da prove JLPT ufficiali (protette da copyright) e non sono stati rivisti da un madrelingua.

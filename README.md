@@ -125,6 +125,14 @@ I brani sono stati scritti per KanjiFlow, non provengono da prove ufficiali e no
 
 Schede, testi ed esercizi sono stati scritti per KanjiFlow, non provengono da prove ufficiali e non sono stati rivisti da un madrelingua.
 
+### Statistiche
+
+Pagina `/statistics`, periodo di 7, 30 o 90 giorni (oltre 30 giorni i grafici raggruppano per settimana). Calcoli puri in `src/domain/stats/aggregate.ts`, testati.
+- Riepilogo: risposte nei ripassi, percentuale corretta, tempo di risposta mediano, serie di studio attuale e record.
+- Grafici: risposte e percentuale corretta nel tempo, distribuzione dei tempi di risposta, carico previsto per i prossimi 14 giorni (grammatica inclusa, gli arretrati contano per oggi). Un solo colore per grafico (`--color-chart`, verificato per contrasto su entrambi i temi), tooltip al passaggio del mouse o con le frecce da tastiera, dati sempre leggibili anche come tabella.
+- Risposte corrette e tempo mediano per tipo di domanda; errori ripetuti (la stessa risposta sbagliata almeno due volte); elementi più difficili; stadi SRS per tipo; riepilogo di lettura e grammatica.
+- Contano solo i ripassi SRS: lezioni e studio extra sono esclusi. I «riprova» non sono mai registrati, quindi non pesano sulla percentuale.
+
 ## Stato della prima milestone
 
 Funzionante: dashboard con dati reali, lezioni con quiz di acquisizione, ripassi da tastiera, onboarding N3 con test di posizionamento e importazione di kanji noti, esplora e scheda soggetto (stato, storico, sospendi/reimposta/ristudia, note, mnemonici e sinonimi personali), progressi per fascia JLPT, studio extra senza effetti sullo SRS, impostazioni (inclusi intervalli SRS), account multipli con gestione da parte dell'amministratore, PWA installabile.
@@ -135,4 +143,4 @@ Mnemonici generati (modificabili, sostituiti da quelli personali):
 - **kanji N4 e N3**: storie originali in italiano per significato e lettura in `data/curated/it/mnemonics-kanji.tsv`, con parole chiave ricorrenti per i suoni (セイ → SEI, カン → CANE…). Un test verifica che ogni lettura mnemonica citi la lettura studiata.
 - **vocaboli**: spiegazione automatica (`src/domain/content/vocab-mnemonic.ts`) dei kanji componenti e di come se ne ricava la pronuncia, con rendaku, っ, h→p e okurigana; se la lettura non deriva dalle letture di dizionario (今日, 大人…) lo dice invece di inventare un legame.
 
-Non ancora: mnemonici per i kanji N5 e i radicali, pagina statistiche, raccolte personalizzate, import/export e backup, interfaccia in inglese, notifiche. La PWA non funziona offline per lezioni e ripassi: mostra una pagina offline.
+Non ancora: mnemonici per i kanji N5 e i radicali, raccolte personalizzate, import/export e backup, interfaccia in inglese, notifiche. La PWA non funziona offline per lezioni e ripassi: mostra una pagina offline.

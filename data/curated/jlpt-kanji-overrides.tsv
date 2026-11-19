@@ -1,0 +1,5 @@
+# Fasce JLPT (non ufficiali, liste di J. Waller) per kanji che la compilazione davidluzgouveia/kanji-data
+# lascia senza fascia (jlpt_new vuoto). Si applicano SOLO quando la fonte non dà un valore: se la fonte
+# viene corretta, la build si ferma e la riga va tolta.
+# Formato: kanji<TAB>fascia<TAB>motivo
+分	N5	Nella lista N5 di Waller (tanos.co.uk) e nei vocaboli N5 (自分, 分かる, 半分); kanji-data ha jlpt_new vuoto ma jlpt_old 4.
