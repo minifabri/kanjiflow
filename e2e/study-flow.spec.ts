@@ -407,6 +407,22 @@ test.describe.serial("percorso di studio completo", () => {
     await expect(page.locator('a[href="/grammar/text/n3-zaitaku"]')).toContainText("4/5");
   });
 
+  test("statistiche: riepilogo, grafici con tooltip e cambio di periodo", async ({ page }) => {
+    await page.goto("/statistics");
+    await expect(page.getByRole("heading", { name: "Statistiche", level: 1 })).toBeVisible();
+    // I ripassi dei test precedenti compaiono nel riepilogo.
+    await expect(page.getByText("Risposte nei ripassi")).toBeVisible();
+    const chart = page.getByRole("img", { name: /Risposte al giorno/ });
+    await expect(chart).toBeVisible();
+    // Con la tastiera il grafico mostra il valore dell'ultimo giorno.
+    await chart.focus();
+    await expect(page.locator("[aria-live=polite]").filter({ hasText: "Risposte" }).first()).toContainText(/Risposte \d+/);
+    await expect(page.getByRole("heading", { name: "Stadi SRS" })).toBeVisible();
+    await page.getByRole("link", { name: "90 giorni" }).click();
+    await expect(page).toHaveURL(/range=90/);
+    await expect(page.getByRole("img", { name: /Risposte per settimana/ })).toBeVisible();
+  });
+
   test("@mobile la dashboard è utilizzabile su telefono", async ({ page }) => {
     await page.goto("/");
     await expect(page.getByRole("navigation", { name: "Navigazione principale" }).last()).toBeVisible();
