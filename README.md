@@ -103,7 +103,7 @@ I brani sono stati scritti per KanjiFlow, non provengono da prove ufficiali e no
 
 ### Grammatica (文法)
 
-40 punti grammaticali originali (10 N4 di riscaldamento, 30 N3), ognuno con scheda in italiano (significato, formazione, uso, due esempi con audio) e tre esercizi nei formati JLPT: due di scelta della forma (文法形式の判断) e uno di riordino con la ★ (文の組み立て). Il terzo formato, il testo con più spazi vuoti, è descritto sotto.
+60 punti grammaticali originali (10 N4 di riscaldamento, 50 N3), ognuno con scheda in italiano (significato, formazione, uso, due esempi con audio) e tre esercizi nei formati JLPT: due di scelta della forma (文法形式の判断) e uno di riordino con la ★ (文の組み立て). Il terzo formato, il testo con più spazi vuoti, è descritto sotto.
 
 **SRS in una coda separata**: stessi stadi, intervalli e regola di regressione dei kanji (`src/domain/srs`), ma tabelle proprie (`UserGrammarProgress`, `GrammarAttempt`): il contatore e la coda dei ripassi kanji non cambiano.
 - *Lezione*: scheda, poi un esercizio. Con la risposta corretta il punto entra ad Apprendista 1; con quella sbagliata torna in fondo alla sessione con la scheda e un altro esercizio. Limite giornaliero in Impostazioni (predefinito 3 punti nuovi al giorno); l'ordine è N4, poi N3.
