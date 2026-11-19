@@ -1,0 +1,785 @@
+{
+  "format": "kanjiflow-grammar/1",
+  "points": [
+    {
+      "slug": "n3-you-da",
+      "level": "N3",
+      "title": "〜ようだ／〜みたいだ",
+      "meaning": "sembra (da indizi) / come",
+      "structure": "forma piana + ようだ (aggettivo in な + な, nome + の); nel parlato forma piana + みたいだ (nome e aggettivo in な senza だ)",
+      "explanation": "Una supposizione basata su ciò che si vede, si sente o si percepisce, meno sicura di はずだ. Esprime anche un paragone, spesso con まるで («proprio come»). みたいだ è la versione colloquiale.",
+      "examples": [
+        { "ja": "{外|そと}は{雨|あめ}が{降|ふ}っているようです。", "it": "Pare che fuori stia piovendo." },
+        { "ja": "{彼女|かのじょ}はまるで{子|こ}どもみたいに{喜|よろこ}んだ。", "it": "Era contenta proprio come una bambina." }
+      ],
+      "exercises": [
+        {
+          "kind": "choice",
+          "prompt": "{電気|でんき}が{消|き}えているから、{田中|たなか}さんはもう{帰|かえ}った（　）。",
+          "choices": ["ようだ", "ようにする", "べきだ", "ことにする"],
+          "answer": 0,
+          "it": "Le luci sono spente: sembra che Tanaka sia già tornato a casa.",
+          "explanation": "Una deduzione da un indizio (le luci spente): 帰ったようだ. べきだ non segue la forma in た; ようにする e ことにする esprimono sforzo e decisione."
+        },
+        {
+          "kind": "choice",
+          "prompt": "この{部屋|へや}は{寒|さむ}くて、まるで{冬|ふゆ}（　）だ。",
+          "choices": ["らしい", "みたい", "はず", "そう"],
+          "answer": 1,
+          "it": "Questa stanza è fredda, sembra proprio inverno.",
+          "explanation": "まるで chiama un paragone: 冬みたいだ (o 冬のようだ). 冬らしい significa «tipico dell'inverno» e non si usa con まるで."
+        },
+        {
+          "kind": "order",
+          "before": "{山田|やまだ}さんは",
+          "pieces": ["{何|なに}か", "{心配|しんぱい}な", "ことが", "ある"],
+          "star": 2,
+          "after": "ようだ。",
+          "it": "Sembra che Yamada abbia qualche preoccupazione.",
+          "explanation": "何か + 心配な (qualifica こと) + ことがある + ようだ."
+        }
+      ]
+    },
+    {
+      "slug": "n3-ppoi",
+      "level": "N3",
+      "title": "〜っぽい",
+      "meaning": "che ha l'aria di / che tende a",
+      "structure": "nome / tema della forma in ます / aggettivo senza い + っぽい",
+      "explanation": "Colloquiale. Con un nome indica che qualcosa ne ha l'aria (子どもっぽい, «infantile»); con un verbo, una tendenza (忘れっぽい, «smemorato»). Si coniuga come un aggettivo in い.",
+      "examples": [
+        { "ja": "{兄|あに}はもう{三十歳|さんじゅっさい}なのに、{子|こ}どもっぽい。", "it": "Mio fratello ha già trent'anni, eppure è infantile." },
+        { "ja": "{最近|さいきん}、{忘|わす}れっぽくなった。", "it": "Ultimamente dimentico tutto." }
+      ],
+      "exercises": [
+        {
+          "kind": "choice",
+          "prompt": "{年|とし}を{取|と}ると、{忘|わす}れ（　）なる。",
+          "choices": ["っぽい", "みたいに", "っぽく", "ように"],
+          "answer": 2,
+          "it": "Con l'età si diventa smemorati.",
+          "explanation": "っぽい si coniuga come un aggettivo in い: davanti a なる diventa っぽく (忘れっぽくなる)."
+        },
+        {
+          "kind": "choice",
+          "prompt": "{彼|かれ}は{話|はな}し{方|かた}が（　）、{本当|ほんとう}の{年|とし}より{若|わか}く{見|み}える。",
+          "choices": ["{子|こ}どもっぽいで", "{子|こ}どもっぽさ", "{子|こ}どもっぽいに", "{子|こ}どもっぽくて"],
+          "answer": 3,
+          "it": "Ha un modo di parlare infantile e sembra più giovane della sua età.",
+          "explanation": "Per collegare due frasi l'aggettivo in い prende la forma in て: 子どもっぽくて."
+        },
+        {
+          "kind": "order",
+          "before": "{弟|おとうと}は",
+          "pieces": ["{怒|おこ}りっぽい", "{性格|せいかく}", "なので", "{友達|ともだち}と"],
+          "star": 1,
+          "after": "よくけんかをする。",
+          "it": "Mio fratello si arrabbia facilmente, quindi litiga spesso con gli amici.",
+          "explanation": "怒りっぽい qualifica 性格; 性格なので dà la causa; poi 友達とよくけんかをする."
+        }
+      ]
+    },
+    {
+      "slug": "n3-gachi",
+      "level": "N3",
+      "title": "〜がち",
+      "meaning": "tendere a (spesso, in senso negativo)",
+      "structure": "tema della forma in ます / nome + がちだ; davanti a un nome: がちな",
+      "explanation": "Qualcosa che succede spesso o facilmente, quasi sempre indesiderato (忘れがち, 病気がち). Si comporta come un aggettivo in な.",
+      "examples": [
+        { "ja": "{冬|ふゆ}はかぜをひきがちだ。", "it": "D'inverno si tende a prendere il raffreddore." },
+        { "ja": "{一人|ひとり}{暮|ぐ}らしだと、{食事|しょくじ}が{不規則|ふきそく}になりがちです。", "it": "Vivendo da soli, i pasti tendono a diventare irregolari." }
+      ],
+      "exercises": [
+        {
+          "kind": "choice",
+          "prompt": "{忙|いそが}しいと、{運動|うんどう}が{不足|ふそく}し（　）だ。",
+          "choices": ["っぽい", "がち", "みたい", "ばかり"],
+          "answer": 1,
+          "it": "Quando si è impegnati, si tende a fare poco movimento.",
+          "explanation": "Tema della forma in ます + がちだ: 不足しがちだ. っぽい, みたい e ばかり non seguono il tema verbale in questo modo."
+        },
+        {
+          "kind": "choice",
+          "prompt": "{祖母|そぼ}は{最近|さいきん}、{病気|びょうき}（　）ので、{心配|しんぱい}だ。",
+          "choices": ["がち", "がちに", "がちな", "がちで"],
+          "answer": 2,
+          "it": "Ultimamente la nonna si ammala spesso e sono in pensiero.",
+          "explanation": "がち si comporta come un aggettivo in な: davanti a ので prende な (病気がちなので)."
+        },
+        {
+          "kind": "order",
+          "before": "{雨|あめ}の{日|ひ}は",
+          "pieces": ["{電車|でんしゃ}が", "{遅|おく}れ", "がち", "なので"],
+          "star": 2,
+          "after": "、{早|はや}めに{家|いえ}を{出|で}る。",
+          "it": "Nei giorni di pioggia i treni tendono a fare ritardo, quindi esco di casa prima.",
+          "explanation": "電車が + 遅れ (tema di 遅れる) + がち + なので."
+        }
+      ]
+    },
+    {
+      "slug": "n3-te-bakari",
+      "level": "N3",
+      "title": "〜てばかりいる",
+      "meaning": "non fare altro che",
+      "structure": "verbo (forma in て) + ばかりいる; nome + ばかり + verbo",
+      "explanation": "Critica chi fa sempre e solo una cosa, spesso con tono di rimprovero. Da non confondere con 〜たばかり, che significa «aver appena».",
+      "examples": [
+        { "ja": "{弟|おとうと}は{毎日|まいにち}ゲームをしてばかりいる。", "it": "Mio fratello non fa altro che giocare ai videogiochi." },
+        { "ja": "{文句|もんく}ばかり{言|い}わないで、{手伝|てつだ}ってよ。", "it": "Smetti di lamentarti e dammi una mano." }
+      ],
+      "exercises": [
+        {
+          "kind": "choice",
+          "prompt": "{遊|あそ}んで（　）いないで、{少|すこ}しは{勉強|べんきょう}しなさい。",
+          "choices": ["だけに", "ほど", "ところ", "ばかり"],
+          "answer": 3,
+          "it": "Smettila di giocare soltanto e studia un po'.",
+          "explanation": "Verbo in て + ばかりいる: 遊んでばかりいないで, «non stare solo a giocare»."
+        },
+        {
+          "kind": "choice",
+          "prompt": "{彼|かれ}は{会議|かいぎ}の{間|あいだ}、ずっと（　）いた。",
+          "choices": ["{寝|ね}てばかり", "{寝|ね}たばかり", "{寝|ね}るばかり", "{寝|ね}ばかり"],
+          "answer": 0,
+          "it": "Durante la riunione non ha fatto altro che dormire.",
+          "explanation": "Davanti a いる serve la forma in て: 寝てばかりいた. 寝たばかり significa «aver appena dormito» e non regge いる."
+        },
+        {
+          "kind": "order",
+          "before": "{母|はは}に",
+          "pieces": ["テレビを", "{見|み}て", "ばかり", "いないで"],
+          "star": 2,
+          "after": "{宿題|しゅくだい}をしなさいと{言|い}われた。",
+          "it": "La mamma mi ha detto di smettere di guardare la TV e di fare i compiti.",
+          "explanation": "テレビを + 見て + ばかり + いないで."
+        }
+      ]
+    },
+    {
+      "slug": "n3-koto-wa-nai",
+      "level": "N3",
+      "title": "〜ことはない",
+      "meaning": "non c'è bisogno di",
+      "structure": "verbo (forma del dizionario) + ことはない",
+      "explanation": "Rassicura o consiglia: non è necessario fare qualcosa. Da non confondere con 〜たことがない (non aver mai fatto).",
+      "examples": [
+        { "ja": "{簡単|かんたん}な{試験|しけん}だから、{心配|しんぱい}することはないよ。", "it": "È un esame facile, non c'è bisogno di preoccuparsi." },
+        { "ja": "{近|ちか}いから、タクシーで{行|い}くことはない。", "it": "È vicino, non serve andarci in taxi." }
+      ],
+      "exercises": [
+        {
+          "kind": "choice",
+          "prompt": "{小|ちい}さなミスだから、そんなに{謝|あやま}る（　）。",
+          "choices": ["ことがない", "ことはない", "わけがない", "はずがない"],
+          "answer": 1,
+          "it": "È un piccolo errore, non c'è bisogno di scusarsi così tanto.",
+          "explanation": "Un consiglio rassicurante, «non serve»: 謝ることはない. ことがない indica che qualcosa non capita mai; わけがない e はずがない negano una possibilità."
+        },
+        {
+          "kind": "choice",
+          "prompt": "まだ{時間|じかん}はたくさんあるから、（　）ことはないよ。",
+          "choices": ["{急|いそ}いだ", "{急|いそ}いで", "{急|いそ}ぐ", "{急|いそ}が"],
+          "answer": 2,
+          "it": "C'è ancora tanto tempo, non c'è bisogno di correre.",
+          "explanation": "ことはない segue la forma del dizionario: 急ぐことはない. 急いだことはない vorrebbe dire «non ho mai avuto fretta»."
+        },
+        {
+          "kind": "order",
+          "before": "{分|わ}からないときは",
+          "pieces": ["{一人|ひとり}で", "{悩|なや}む", "ことは", "ない"],
+          "star": 2,
+          "after": "よ。{何|なん}でも{聞|き}いてね。",
+          "it": "Quando non capisci, non c'è bisogno di tormentarti da solo: chiedi pure qualsiasi cosa.",
+          "explanation": "一人で + 悩む + ことはない."
+        }
+      ]
+    },
+    {
+      "slug": "n3-wake-da",
+      "level": "N3",
+      "title": "〜わけだ",
+      "meaning": "ecco perché, ne consegue che",
+      "structure": "forma piana + わけだ (aggettivo in な + な, nome + の／という)",
+      "explanation": "Trae una conclusione logica da un fatto appena saputo: «allora è naturale che…». Spesso dopo それで o だから. Diverso da わけではない, che nega in parte.",
+      "examples": [
+        { "ja": "{十年|じゅうねん}も{日本|にほん}にいたのか。{日本語|にほんご}が{上手|じょうず}なわけだ。", "it": "È stato dieci anni in Giappone? Ecco perché parla così bene giapponese." },
+        { "ja": "{窓|まど}が{開|あ}いている。{寒|さむ}いわけだ。", "it": "La finestra è aperta. Ecco perché fa freddo." }
+      ],
+      "exercises": [
+        {
+          "kind": "choice",
+          "prompt": "{毎日|まいにち}{練習|れんしゅう}しているのか。それなら{上手|じょうず}な（　）。",
+          "choices": ["わけではない", "べきだ", "ことはない", "わけだ"],
+          "answer": 3,
+          "it": "Ti alleni ogni giorno? Allora è logico che tu sia bravo.",
+          "explanation": "Una conclusione naturale da un fatto appena saputo: 上手なわけだ. わけではない la negherebbe."
+        },
+        {
+          "kind": "choice",
+          "prompt": "{駅|えき}まで{歩|ある}いて{一時間|いちじかん}もかかるのか。みんながバスを{使|つか}う（　）。",
+          "choices": ["ばかりだ", "わけだ", "ところだ", "わけにはいかない"],
+          "answer": 1,
+          "it": "Ci vuole un'ora a piedi fino alla stazione? Ecco perché tutti prendono l'autobus.",
+          "explanation": "«Ecco perché»: バスを使うわけだ. ところだ indicherebbe un'azione che sta per iniziare."
+        },
+        {
+          "kind": "order",
+          "before": "{円|えん}が{安|やす}くなったから、",
+          "pieces": ["{外国|がいこく}からの", "{旅行者|りょこうしゃ}が", "{増|ふ}えた", "わけだ"],
+          "star": 2,
+          "after": "。",
+          "it": "Lo yen si è indebolito: ecco perché sono aumentati i turisti dall'estero.",
+          "explanation": "外国からの qualifica 旅行者; 旅行者が増えた + わけだ."
+        }
+      ]
+    },
+    {
+      "slug": "n3-tatoe-temo",
+      "level": "N3",
+      "title": "たとえ〜ても",
+      "meaning": "anche se, per quanto",
+      "structure": "たとえ + verbo o aggettivo in い (forma in て) + も; aggettivo in な e nome + でも",
+      "explanation": "Un'ipotesi anche estrema che non cambia la conclusione. たとえ rafforza 〜ても e non si usa con altri condizionali.",
+      "examples": [
+        { "ja": "たとえ{雨|あめ}が{降|ふ}っても、{試合|しあい}は{行|おこな}われます。", "it": "Anche se piove, la partita si gioca." },
+        { "ja": "たとえ{高|たか}くても、いい{物|もの}を{買|か}いたい。", "it": "Anche se costa caro, voglio comprare qualcosa di buono." }
+      ],
+      "exercises": [
+        {
+          "kind": "choice",
+          "prompt": "たとえ{家族|かぞく}に{反対|はんたい}（　）、{私|わたし}は{留学|りゅうがく}するつもりだ。",
+          "choices": ["されても", "されたら", "されれば", "されるので"],
+          "answer": 0,
+          "it": "Anche se la mia famiglia fosse contraria, ho intenzione di studiare all'estero.",
+          "explanation": "たとえ si accompagna a 〜ても: 反対されても. たら, ば e ので non vanno con たとえ."
+        },
+        {
+          "kind": "choice",
+          "prompt": "たとえ{簡単|かんたん}（　）、{油断|ゆだん}してはいけない。",
+          "choices": ["くても", "なのに", "だから", "でも"],
+          "answer": 3,
+          "it": "Anche se è facile, non bisogna abbassare la guardia.",
+          "explanation": "簡単 è un aggettivo in な: la forma è 簡単でも. くても vale per gli aggettivi in い."
+        },
+        {
+          "kind": "order",
+          "before": "{夢|ゆめ}をかなえるためなら、",
+          "pieces": ["たとえ", "{何年|なんねん}", "かかっても", "あきらめない"],
+          "star": 2,
+          "after": "つもりだ。",
+          "it": "Per realizzare il mio sogno non ho intenzione di arrendermi, anche se ci vorranno anni.",
+          "explanation": "たとえ + 何年 + かかっても, poi la conclusione: あきらめないつもりだ."
+        }
+      ]
+    },
+    {
+      "slug": "n3-saichuu-ni",
+      "level": "N3",
+      "title": "〜{最中|さいちゅう}に",
+      "meaning": "proprio nel mezzo di",
+      "structure": "verbo (forma in ている) / nome + の + {最中|さいちゅう}に",
+      "explanation": "Qualcosa interrompe un'azione mentre è in pieno svolgimento, spesso in modo inatteso o fastidioso. Più enfatico di 〜ているときに.",
+      "examples": [
+        { "ja": "{会議|かいぎ}の{最中|さいちゅう}に、{電話|でんわ}が{鳴|な}った。", "it": "Proprio nel mezzo della riunione è squillato il telefono." },
+        { "ja": "{料理|りょうり}をしている{最中|さいちゅう}に、{停電|ていでん}した。", "it": "Mentre cucinavo è andata via la corrente." }
+      ],
+      "exercises": [
+        {
+          "kind": "choice",
+          "prompt": "{会議|かいぎ}（　）に、{携帯|けいたい}が{鳴|な}ってしまった。",
+          "choices": ["な{最中|さいちゅう}", "の{最中|さいちゅう}", "で{最中|さいちゅう}", "を{最中|さいちゅう}"],
+          "answer": 1,
+          "it": "Proprio nel mezzo della riunione mi è squillato il cellulare.",
+          "explanation": "Dopo un nome serve の: 会議の最中に."
+        },
+        {
+          "kind": "choice",
+          "prompt": "{人|ひと}が{話|はな}している（　）に{口|くち}をはさまないでください。",
+          "choices": ["ばかり", "とたん", "{最中|さいちゅう}", "ついで"],
+          "answer": 2,
+          "it": "Non interrompete qualcuno mentre sta parlando.",
+          "explanation": "Verbo in ている + 最中に: nel pieno di un'azione. とたん richiede la forma in た; ついで e ばかり non hanno questo senso."
+        },
+        {
+          "kind": "order",
+          "before": "{大事|だいじ}な{試験|しけん}の",
+          "pieces": ["{最中|さいちゅう}に", "おなかが", "{痛|いた}く", "なって"],
+          "star": 0,
+          "after": "{困|こま}った。",
+          "it": "Proprio nel mezzo di un esame importante mi è venuto mal di pancia e sono andato in crisi.",
+          "explanation": "試験の + 最中に, poi おなかが痛くなって."
+        }
+      ]
+    },
+    {
+      "slug": "n3-ta-totan",
+      "level": "N3",
+      "title": "〜たとたん(に)",
+      "meaning": "non appena, appena (e subito)",
+      "structure": "verbo (forma in た) + とたん(に)",
+      "explanation": "Subito dopo un'azione succede qualcosa di inatteso, che chi parla non controlla. Nella seconda parte non si mettono intenzioni, richieste o inviti.",
+      "examples": [
+        { "ja": "{家|いえ}を{出|で}たとたん、{雨|あめ}が{降|ふ}り{出|だ}した。", "it": "Non appena ho messo piede fuori casa, ha cominciato a piovere." },
+        { "ja": "{立|た}ち{上|あ}がったとたんに、めまいがした。", "it": "Nel momento in cui mi sono alzato, mi è girata la testa." }
+      ],
+      "exercises": [
+        {
+          "kind": "choice",
+          "prompt": "ドアを（　）とたん、{猫|ねこ}が{飛|と}び{出|だ}してきた。",
+          "choices": ["{開|あ}ける", "{開|あ}けた", "{開|あ}けて", "{開|あ}けよう"],
+          "answer": 1,
+          "it": "Appena ho aperto la porta, il gatto è schizzato fuori.",
+          "explanation": "とたん segue sempre la forma in た: 開けたとたん."
+        },
+        {
+          "kind": "choice",
+          "prompt": "{電車|でんしゃ}に{乗|の}った（　）、{寝|ね}てしまった。",
+          "choices": ["うちに", "ばかりに", "ついでに", "とたんに"],
+          "answer": 3,
+          "it": "Appena salito sul treno mi sono addormentato.",
+          "explanation": "Un fatto immediato e non voluto dopo un'azione: 乗ったとたんに. うちに non segue la forma in た."
+        },
+        {
+          "kind": "order",
+          "before": "{部屋|へや}に",
+          "pieces": ["{入|はい}った", "とたん", "{電気|でんき}が", "{消|き}えた"],
+          "star": 1,
+          "after": "。",
+          "it": "Non appena sono entrato nella stanza, la luce si è spenta.",
+          "explanation": "入った + とたん, poi l'evento inatteso: 電気が消えた."
+        }
+      ]
+    },
+    {
+      "slug": "n3-tsuide-ni",
+      "level": "N3",
+      "title": "〜ついでに",
+      "meaning": "approfittando di, già che",
+      "structure": "verbo (forma del dizionario / in た) oppure nome + の + ついでに",
+      "explanation": "Si approfitta di un'azione principale per farne un'altra, secondaria, nello stesso momento.",
+      "examples": [
+        { "ja": "{買|か}い{物|もの}のついでに、{郵便局|ゆうびんきょく}に{寄|よ}った。", "it": "Approfittando della spesa, ho fatto un salto all'ufficio postale." },
+        { "ja": "{東京|とうきょう}へ{行|い}ったついでに、{友達|ともだち}に{会|あ}ってきた。", "it": "Già che ero a Tokyo, ho visto un amico." }
+      ],
+      "exercises": [
+        {
+          "kind": "choice",
+          "prompt": "コンビニへ{行|い}く（　）、{牛乳|ぎゅうにゅう}も{買|か}ってきてくれない？",
+          "choices": ["とたんに", "ばかりに", "ついでに", "{最中|さいちゅう}に"],
+          "answer": 2,
+          "it": "Già che vai al konbini, mi prendi anche il latte?",
+          "explanation": "Un'azione secondaria approfittando di quella principale: 行くついでに. とたんに vuole la forma in た, 最中に la forma in ている."
+        },
+        {
+          "kind": "choice",
+          "prompt": "{散歩|さんぽ}（　）ついでに、パン{屋|や}に{寄|よ}った。",
+          "choices": ["の", "な", "に", "を"],
+          "answer": 0,
+          "it": "Approfittando della passeggiata, sono passato dal panettiere.",
+          "explanation": "Tra un nome e ついでに serve の: 散歩のついでに."
+        },
+        {
+          "kind": "order",
+          "before": "{出張|しゅっちょう}で{大阪|おおさか}へ",
+          "pieces": ["{行|い}った", "ついでに", "{古|ふる}い", "{友人|ゆうじん}に"],
+          "star": 1,
+          "after": "{会|あ}った。",
+          "it": "Già che ero a Osaka per lavoro, ho rivisto un vecchio amico.",
+          "explanation": "行った + ついでに, poi 古い友人に会った."
+        }
+      ]
+    },
+    {
+      "slug": "n3-toori-ni",
+      "level": "N3",
+      "title": "〜とおりに",
+      "meaning": "come, esattamente secondo",
+      "structure": "verbo (forma del dizionario / in た) + とおりに; nome + の + とおりに oppure nome + どおりに",
+      "explanation": "Si fa qualcosa esattamente nel modo indicato o previsto. Attaccato direttamente a un nome diventa どおり (予定どおり, «secondo i piani»).",
+      "examples": [
+        { "ja": "{先生|せんせい}が{言|い}ったとおりに{書|か}いてください。", "it": "Scrivete esattamente come ha detto l'insegnante." },
+        { "ja": "{電車|でんしゃ}は{予定|よてい}どおりに{着|つ}いた。", "it": "Il treno è arrivato come previsto." }
+      ],
+      "exercises": [
+        {
+          "kind": "choice",
+          "prompt": "{説明書|せつめいしょ}に{書|か}いてある（　）、{組|く}み{立|た}ててください。",
+          "choices": ["ばかりに", "とおりに", "ために", "うちに"],
+          "answer": 1,
+          "it": "Montatelo esattamente come è scritto nelle istruzioni.",
+          "explanation": "«Come è scritto»: 書いてあるとおりに. ために indica uno scopo, うちに un intervallo di tempo."
+        },
+        {
+          "kind": "choice",
+          "prompt": "{計画|けいかく}（　）に{進|すす}まないことも{多|おお}い。",
+          "choices": ["とおり", "ような", "ばかり", "どおり"],
+          "answer": 3,
+          "it": "Spesso le cose non vanno secondo i piani.",
+          "explanation": "Attaccato direttamente a un nome, とおり diventa どおり: 計画どおりに. Senza の, とおり non può seguire un nome."
+        },
+        {
+          "kind": "order",
+          "before": "",
+          "pieces": ["{地図|ちず}に", "{書|か}いてある", "とおりに", "{行|い}ったら"],
+          "star": 2,
+          "after": "すぐに{着|つ}いた。",
+          "it": "Seguendo esattamente la mappa, sono arrivato subito.",
+          "explanation": "地図に書いてある + とおりに + 行ったら."
+        }
+      ]
+    },
+    {
+      "slug": "n3-ni-yoru-to",
+      "level": "N3",
+      "title": "〜によると",
+      "meaning": "secondo (la fonte)",
+      "structure": "nome + によると／によれば; la frase finisce di solito con そうだ, らしい o ということだ",
+      "explanation": "Indica la fonte di un'informazione: notizie, previsioni, una persona. Da non confondere con によって («a seconda di», «per mezzo di»).",
+      "examples": [
+        { "ja": "{天気予報|てんきよほう}によると、{明日|あした}は{晴|は}れるそうです。", "it": "Secondo le previsioni del tempo, domani sarà sereno." },
+        { "ja": "ニュースによれば、{事故|じこ}の{原因|げんいん}はまだ{分|わ}からないらしい。", "it": "Secondo il notiziario, la causa dell'incidente non è ancora chiara." }
+      ],
+      "exercises": [
+        {
+          "kind": "choice",
+          "prompt": "{新聞|しんぶん}（　）、{来年|らいねん}から{電気代|でんきだい}が{上|あ}がるそうだ。",
+          "choices": ["にとって", "によると", "に{対|たい}して", "として"],
+          "answer": 1,
+          "it": "Secondo il giornale, dall'anno prossimo la bolletta della luce aumenterà.",
+          "explanation": "La fonte dell'informazione, chiusa da そうだ: 新聞によると."
+        },
+        {
+          "kind": "choice",
+          "prompt": "{友達|ともだち}の{話|はなし}によると、あの{店|みせ}は{来月|らいげつ}{閉店|へいてん}する（　）。",
+          "choices": ["ようにする", "ことにする", "そうだ", "べきだ"],
+          "answer": 2,
+          "it": "Secondo un amico, quel negozio chiuderà il mese prossimo.",
+          "explanation": "によると si chiude con un'espressione di riporto: 閉店するそうだ."
+        },
+        {
+          "kind": "order",
+          "before": "{医者|いしゃ}の",
+          "pieces": ["{話|はなし}に", "よると", "{手術|しゅじゅつ}は", "{成功|せいこう}した"],
+          "star": 1,
+          "after": "そうだ。",
+          "it": "Secondo il medico, l'operazione è riuscita.",
+          "explanation": "医者の話に + よると, poi 手術は成功した + そうだ."
+        }
+      ]
+    },
+    {
+      "slug": "n3-you-ni-iu",
+      "level": "N3",
+      "title": "〜ように{言|い}う",
+      "meaning": "dire (chiedere) di fare",
+      "structure": "verbo (forma del dizionario / in ない) + ように + {言|い}う／{頼|たの}む／{注意|ちゅうい}する",
+      "explanation": "Riferisce in modo indiretto un ordine, una richiesta o un consiglio. La persona a cui ci si rivolge prende に; al passivo (〜ように言われた) è chi ha ricevuto l'ordine a parlare.",
+      "examples": [
+        { "ja": "{医者|いしゃ}にお{酒|さけ}を{飲|の}まないように{言|い}われた。", "it": "Il medico mi ha detto di non bere alcolici." },
+        { "ja": "{田中|たなか}さんに、{明日|あした}{早|はや}く{来|く}るように{伝|つた}えてください。", "it": "Dica a Tanaka di venire presto domani." }
+      ],
+      "exercises": [
+        {
+          "kind": "choice",
+          "prompt": "{母|はは}に、{部屋|へや}を{片付|かたづ}ける（　）{言|い}われた。",
+          "choices": ["ように", "ために", "ことに", "ところに"],
+          "answer": 0,
+          "it": "La mamma mi ha detto di mettere in ordine la stanza.",
+          "explanation": "Un ordine riferito: 片付けるように言われた."
+        },
+        {
+          "kind": "choice",
+          "prompt": "{先生|せんせい}は{学生|がくせい}に、{遅刻|ちこく}（　）ように{注意|ちゅうい}した。",
+          "choices": ["しなくて", "しないで", "しなかった", "しない"],
+          "answer": 3,
+          "it": "L'insegnante ha raccomandato agli studenti di non arrivare in ritardo.",
+          "explanation": "Davanti a ように va la forma in ない semplice: 遅刻しないように."
+        },
+        {
+          "kind": "order",
+          "before": "{課長|かちょう}に{明日|あした}までに",
+          "pieces": ["{報告書|ほうこくしょ}を", "{出|だ}す", "ように", "{言|い}われ"],
+          "star": 2,
+          "after": "ました。",
+          "it": "Il capoufficio mi ha detto di consegnare il rapporto entro domani.",
+          "explanation": "報告書を + 出す + ように + 言われました."
+        }
+      ]
+    },
+    {
+      "slug": "n3-shieki",
+      "level": "N3",
+      "title": "〜（さ）せる",
+      "meaning": "causativo: far fare / lasciar fare",
+      "structure": "primo gruppo: 〜aせる ({書|か}く → {書|か}かせる); secondo gruppo: 〜させる; する → させる, {来|く}る → {来|こ|来る}させる. Chi compie l'azione prende に",
+      "explanation": "Qualcuno fa fare, o lascia fare, un'azione a un altro. 〜させてください chiede il permesso di fare qualcosa in prima persona.",
+      "examples": [
+        { "ja": "{母|はは}は{弟|おとうと}に{野菜|やさい}を{食|た}べさせた。", "it": "La mamma ha fatto mangiare la verdura a mio fratello." },
+        { "ja": "{少|すこ}し{考|かんが}えさせてください。", "it": "Mi lasci pensare un po'." }
+      ],
+      "exercises": [
+        {
+          "kind": "choice",
+          "prompt": "{先生|せんせい}は{学生|がくせい}に{作文|さくぶん}を（　）。",
+          "choices": ["{書|か}いた", "{書|か}かせた", "{書|か}かれた", "{書|か}けた"],
+          "answer": 1,
+          "it": "L'insegnante ha fatto scrivere un tema agli studenti.",
+          "explanation": "Chi fa fare è il soggetto (先生は), chi esegue prende に: causativo 書かせた."
+        },
+        {
+          "kind": "choice",
+          "prompt": "その{仕事|しごと}、ぜひ{私|わたし}に（　）ください。",
+          "choices": ["やって", "やられて", "やらせて", "やらせられて"],
+          "answer": 2,
+          "it": "Quel lavoro, la prego, lo lasci fare a me.",
+          "explanation": "Per chiedere il permesso di fare qualcosa: causativo + てください, やらせてください."
+        },
+        {
+          "kind": "order",
+          "before": "{父|ちち}は{息子|むすこ}に",
+          "pieces": ["{自分|じぶん}の", "{車|くるま}を", "{洗|あら}わせて", "いた"],
+          "star": 2,
+          "after": "。",
+          "it": "Il padre faceva lavare la propria auto al figlio.",
+          "explanation": "自分の qualifica 車; 車を + 洗わせて (causativo) + いた."
+        }
+      ]
+    },
+    {
+      "slug": "n3-shieki-ukemi",
+      "level": "N3",
+      "title": "〜（さ）せられる",
+      "meaning": "essere costretti a",
+      "structure": "causativo + passivo: {書|か}かせられる (nel parlato {書|か}かされる), {食|た}べさせられる, させられる, {来|こ|来る}させられる. Chi costringe prende に",
+      "explanation": "Il soggetto fa qualcosa controvoglia perché costretto da qualcun altro. Esprime fastidio o fatica.",
+      "examples": [
+        { "ja": "{子|こ}どものころ、{母|はは}にピアノを{習|なら}わせられた。", "it": "Da bambino mia madre mi costringeva a prendere lezioni di piano." },
+        { "ja": "{上司|じょうし}にお{酒|さけ}を{飲|の}まされた。", "it": "Il capo mi ha fatto bere per forza." }
+      ],
+      "exercises": [
+        {
+          "kind": "choice",
+          "prompt": "{昨日|きのう}は{部長|ぶちょう}に{夜|よる}{十時|じゅうじ}まで（　）。",
+          "choices": ["{働|はたら}かせた", "{働|はたら}いた", "{働|はたら}けた", "{働|はたら}かされた"],
+          "answer": 3,
+          "it": "Ieri il direttore mi ha fatto lavorare fino alle dieci di sera.",
+          "explanation": "Chi parla è costretto da 部長に: causativo passivo, 働かされた."
+        },
+        {
+          "kind": "choice",
+          "prompt": "{子|こ}どものころ、{私|わたし}は{母|はは}に{嫌|きら}いな{野菜|やさい}を{食|た}べ（　）、とてもつらかった。",
+          "choices": ["させられて", "させて", "られて", "させてくれて"],
+          "answer": 0,
+          "it": "Da bambino mia madre mi costringeva a mangiare la verdura che odiavo, ed era durissima.",
+          "explanation": "È chi parla a subire («つらかった»): causativo passivo, 食べさせられて."
+        },
+        {
+          "kind": "order",
+          "before": "{旅行|りょこう}のとき、{兄|あに}に",
+          "pieces": ["{重|おも}い", "{荷物|にもつ}を", "{持|も}た", "された"],
+          "star": 3,
+          "after": "。",
+          "it": "Durante il viaggio mio fratello mi ha fatto portare i bagagli pesanti.",
+          "explanation": "重い荷物を + 持た + された: 持たされた, forma breve di 持たせられた."
+        }
+      ]
+    },
+    {
+      "slug": "n3-ba-yokatta",
+      "level": "N3",
+      "title": "〜ばよかった",
+      "meaning": "avrei dovuto (rammarico)",
+      "structure": "verbo (forma in ば) + よかった; al negativo 〜なければよかった",
+      "explanation": "Rimpianto per qualcosa che non si è fatto (o che si è fatto, con なければよかった). Spesso seguito da のに.",
+      "examples": [
+        { "ja": "もっと{早|はや}く{出|で}かければよかった。", "it": "Avrei dovuto uscire prima." },
+        { "ja": "あんなことを{言|い}わなければよかった。", "it": "Non avrei dovuto dire una cosa del genere." }
+      ],
+      "exercises": [
+        {
+          "kind": "choice",
+          "prompt": "{傘|かさ}を（　）よかった。{雨|あめ}に{降|ふ}られてしまった。",
+          "choices": ["{持|も}ってきて", "{持|も}ってくれば", "{持|も}ってくる", "{持|も}ってきた"],
+          "answer": 1,
+          "it": "Avrei dovuto portare l'ombrello: mi sono preso la pioggia.",
+          "explanation": "Rimpianto: forma in ば + よかった, 持ってくればよかった. 持ってきてよかった significherebbe «per fortuna l'ho portato»."
+        },
+        {
+          "kind": "choice",
+          "prompt": "{食|た}べすぎて、おなかが{痛|いた}い。あんなに（　）よかった。",
+          "choices": ["{食|た}べなければ", "{食|た}べれば", "{食|た}べなくて", "{食|た}べないで"],
+          "answer": 0,
+          "it": "Ho mangiato troppo e mi fa male la pancia. Non avrei dovuto mangiare così tanto.",
+          "explanation": "Rimpianto per qualcosa che si è fatto: 食べなければよかった."
+        },
+        {
+          "kind": "order",
+          "before": "{試験|しけん}の{前|まえ}に、",
+          "pieces": ["もっと", "{勉強|べんきょう}して", "おけば", "よかった"],
+          "star": 2,
+          "after": "。",
+          "it": "Prima dell'esame avrei dovuto studiare di più.",
+          "explanation": "もっと + 勉強して + おけば (ておく in forma in ば) + よかった."
+        }
+      ]
+    },
+    {
+      "slug": "n3-wari-ni",
+      "level": "N3",
+      "title": "〜わりに(は)",
+      "meaning": "per essere, rispetto a quanto ci si aspetterebbe",
+      "structure": "forma piana (aggettivo in な + な, nome + の) + わりに(は)",
+      "explanation": "Il risultato non corrisponde a ciò che ci si aspetterebbe dalla premessa, in meglio o in peggio: «per essere così economico, è buono».",
+      "examples": [
+        { "ja": "この{店|みせ}は{値段|ねだん}が{安|やす}いわりに、おいしい。", "it": "Questo locale, per essere così economico, è buono." },
+        { "ja": "{彼|かれ}は{年|とし}のわりには{若|わか}く{見|み}える。", "it": "Per la sua età sembra giovane." }
+      ],
+      "exercises": [
+        {
+          "kind": "choice",
+          "prompt": "たくさん{勉強|べんきょう}した（　）、{点数|てんすう}がよくなかった。",
+          "choices": ["おかげで", "ために", "わりに", "とおりに"],
+          "answer": 2,
+          "it": "Per quanto avessi studiato, il punteggio non è stato buono.",
+          "explanation": "Il risultato è inferiore a quanto ci si aspetterebbe: 勉強したわりに. おかげで introdurrebbe una causa positiva."
+        },
+        {
+          "kind": "choice",
+          "prompt": "この{仕事|しごと}は{大変|たいへん}な（　）、{給料|きゅうりょう}が{安|やす}い。",
+          "choices": ["わけに", "ように", "ために", "わりに"],
+          "answer": 3,
+          "it": "Questo lavoro, per quanto sia faticoso, è pagato poco.",
+          "explanation": "Lo stipendio non è proporzionato alla fatica: 大変なわりに."
+        },
+        {
+          "kind": "order",
+          "before": "{兄|あに}は",
+          "pieces": ["よく", "{食|た}べる", "わりに", "{太|ふと}らない"],
+          "star": 2,
+          "after": "。",
+          "it": "Mio fratello, per quanto mangi, non ingrassa.",
+          "explanation": "よく食べる + わりに + 太らない."
+        }
+      ]
+    },
+    {
+      "slug": "n3-mama",
+      "level": "N3",
+      "title": "〜まま",
+      "meaning": "così com'è, lasciando lo stato invariato",
+      "structure": "verbo (forma in た / in ない) / aggettivo / nome + の + まま",
+      "explanation": "Uno stato resta invariato mentre succede altro, spesso quando non dovrebbe: con le scarpe ai piedi, con la luce accesa.",
+      "examples": [
+        { "ja": "{靴|くつ}をはいたまま{部屋|へや}に{入|はい}らないでください。", "it": "Non entrate nella stanza con le scarpe ai piedi." },
+        { "ja": "{窓|まど}を{開|あ}けたまま{寝|ね}てしまった。", "it": "Ho dormito con la finestra aperta." }
+      ],
+      "exercises": [
+        {
+          "kind": "choice",
+          "prompt": "{電気|でんき}を（　）まま{出|で}かけてしまった。",
+          "choices": ["つけた", "つける", "つけて", "つけよう"],
+          "answer": 0,
+          "it": "Sono uscito lasciando la luce accesa.",
+          "explanation": "Con un verbo まま segue la forma in た: つけたまま."
+        },
+        {
+          "kind": "choice",
+          "prompt": "この{町|まち}は{昔|むかし}の（　）、{何|なに}も{変|か}わっていない。",
+          "choices": ["たび", "まま", "うち", "ほど"],
+          "answer": 1,
+          "it": "Questa città è rimasta com'era una volta, non è cambiato nulla.",
+          "explanation": "Lo stato invariato: 昔のまま."
+        },
+        {
+          "kind": "order",
+          "before": "{疲|つか}れていたので、",
+          "pieces": ["{服|ふく}を", "{着|き}た", "まま", "{寝|ね}て"],
+          "star": 2,
+          "after": "しまった。",
+          "it": "Ero stanco e mi sono addormentato vestito.",
+          "explanation": "服を着た + まま + 寝てしまった."
+        }
+      ]
+    },
+    {
+      "slug": "n3-zuni",
+      "level": "N3",
+      "title": "〜ずに",
+      "meaning": "senza (fare)",
+      "structure": "verbo (forma in ない senza ない) + ずに; する → せずに",
+      "explanation": "Equivale a 〜ないで ma è più scritto e formale. Attenzione: する diventa せずに, non しずに.",
+      "examples": [
+        { "ja": "{朝|あさ}ご{飯|はん}を{食|た}べずに{学校|がっこう}へ{行|い}った。", "it": "È andato a scuola senza fare colazione." },
+        { "ja": "{辞書|じしょ}を{使|つか}わずに{読|よ}めるようになりたい。", "it": "Vorrei riuscire a leggere senza usare il dizionario." }
+      ],
+      "exercises": [
+        {
+          "kind": "choice",
+          "prompt": "{宿題|しゅくだい}を（　）{遊|あそ}びに{行|い}ってはいけません。",
+          "choices": ["しずに", "さずに", "せずに", "すずに"],
+          "answer": 2,
+          "it": "Non si va a giocare senza aver fatto i compiti.",
+          "explanation": "する è irregolare: せずに."
+        },
+        {
+          "kind": "choice",
+          "prompt": "{誰|だれ}にも（　）、{一人|ひとり}で{旅|たび}に{出|で}た。",
+          "choices": ["{言|い}わないに", "{言|い}わずで", "{言|い}いずに", "{言|い}わずに"],
+          "answer": 3,
+          "it": "È partito in viaggio da solo senza dirlo a nessuno.",
+          "explanation": "Forma in ない senza ない + ずに: 言わない → 言わずに."
+        },
+        {
+          "kind": "order",
+          "before": "{彼|かれ}は",
+          "pieces": ["{何|なに}も", "{言|い}わずに", "{部屋|へや}を", "{出|で}て"],
+          "star": 1,
+          "after": "{行|い}った。",
+          "it": "Se n'è andato dalla stanza senza dire niente.",
+          "explanation": "何も + 言わずに, poi 部屋を出て行った."
+        }
+      ]
+    },
+    {
+      "slug": "n3-you-to-suru",
+      "level": "N3",
+      "title": "〜（よ）うとする",
+      "meaning": "cercare di / stare per",
+      "structure": "verbo (forma volitiva) + とする",
+      "explanation": "Un tentativo, spesso non riuscito, o il momento subito prima di un'azione: 出かけようとしたとき, «proprio mentre stavo per uscire». Al negativo (〜ようとしない) indica che qualcuno non vuole fare qualcosa.",
+      "examples": [
+        { "ja": "{寝|ね}ようとしたとき、{電話|でんわ}が{鳴|な}った。", "it": "Proprio mentre stavo per addormentarmi, è squillato il telefono." },
+        { "ja": "{弟|おとうと}は{何度|なんど}{言|い}っても{野菜|やさい}を{食|た}べようとしない。", "it": "Per quante volte glielo dica, mio fratello non vuole mangiare la verdura." }
+      ],
+      "exercises": [
+        {
+          "kind": "choice",
+          "prompt": "{家|いえ}を{出|で}（　）としたとき、{雨|あめ}が{降|ふ}ってきた。",
+          "choices": ["たい", "よう", "そう", "ろう"],
+          "answer": 1,
+          "it": "Proprio mentre stavo per uscire di casa, ha cominciato a piovere.",
+          "explanation": "Forma volitiva + とする: 出ようとした."
+        },
+        {
+          "kind": "choice",
+          "prompt": "{子|こ}どもは{薬|くすり}を{飲|の}もうと（　）。",
+          "choices": ["ならない", "いかない", "しない", "できない"],
+          "answer": 2,
+          "it": "Il bambino non vuole prendere la medicina.",
+          "explanation": "〜ようとしない: qualcuno si rifiuta di fare qualcosa."
+        },
+        {
+          "kind": "order",
+          "before": "",
+          "pieces": ["ドアを", "{開|あ}けよう", "とした", "とき"],
+          "star": 2,
+          "after": "、{中|なか}から{声|こえ}が{聞|き}こえた。",
+          "it": "Proprio mentre stavo per aprire la porta, ho sentito una voce da dentro.",
+          "explanation": "ドアを + 開けよう + とした + とき."
+        }
+      ]
+    }
+  ]
+}
